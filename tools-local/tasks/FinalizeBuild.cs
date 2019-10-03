@@ -28,8 +28,6 @@ namespace Microsoft.DotNet.Build.Tasks
         [Required]
         public string SharedFrameworkNugetVersion { get; set; }
         [Required]
-        public string SharedHostNugetVersion { get; set; }
-        [Required]
         public string ProductVersion { get; set; }
         [Required]
         public string Version { get; set; }
@@ -116,8 +114,7 @@ namespace Microsoft.DotNet.Build.Tasks
             foreach (string blob in blobs)
             {
                 string targetName = Path.GetFileName(blob)
-                                        .Replace(SharedFrameworkNugetVersion, "latest")
-                                        .Replace(SharedHostNugetVersion, "latest");
+                                        .Replace(SharedFrameworkNugetVersion, "latest");
                 string sourceBlob = blob.Replace($"/{ContainerName}/", "");
                 string destinationBlob = $"{destinationFolder}{targetName}";
                 Log.LogMessage($"Copying blob '{sourceBlob}' to '{destinationBlob}'");

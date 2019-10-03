@@ -1,0 +1,98 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+pr:
+- master
+
+# Use "5" prefix to avoid colliding with Core-Setup builds that still produce WindowsDesktop.
+name: $(Date:yyyyMMdd)$(Rev:.5r)
+
+variables:
+  - name: TeamName
+    value: dotnet-core-acquisition
+  # Skip Running CI tests
+  - name: SkipTests
+    value: false
+  # Set Official Build Id
+  - name: OfficialBuildId
+    value: $(Build.BuildNumber)
+
+  # Set the target blob feed for package publish during official and validation builds.
+  - name: _DotNetArtifactsCategory
+    value: .NETCore
+  - name: _DotNetValidationArtifactsCategory
+    value: .NETCoreValidation
+
+  # Produce test-signed build for PR and Public builds
+  - ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
+    - name: SignType
+      value: test
+
+  # Set up non-PR build from internal project
+  - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+    - name: SignType
+      value: $[ coalesce(variables.OfficialSignType, 'real') ]
+
+stages:
+- stage: Build
+  jobs:
+
+  # Windows x64
+  - template: /eng/jobs/windows-build.yml
+    parameters:
+      name: Windows_x64
+      publishRidAgnosticPackages: true
+      targetArchitecture: x64
+
+  # Windows x86
+  - template: /eng/jobs/windows-build.yml
+    parameters:
+      name: Windows_x86
+      targetArchitecture: x86
+
+- ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+  - stage: PrepareForPublish
+    displayName: Prepare for Publish
+    dependsOn: Build
+    jobs:
+    # Prep artifacts: sign them and upload pipeline artifacts expected by stages-based publishing.
+    - template: /eng/jobs/prepare-signed-artifacts.yml
+      parameters:
+        PublishRidAgnosticPackagesFromJobName: Windows_x64
+    # Publish to Build Asset Registry in order to generate the ReleaseConfigs artifact.
+    - template: /eng/common/templates/job/publish-build-assets.yml
+      parameters:
+        publishUsingPipelines: true
+        dependsOn: PrepareSignedArtifacts
+        pool:
+          name: NetCoreInternal-Pool
+          queue: buildpool.windows.10.amd64.vs2017
+
+  - template: /eng/stages/publish.yml
+    parameters:
+      # Publish channel configuration. The publish template wraps Arcade publishing and adds some
+      # extras that aren't implemented in Arcade yet.
+      #
+      # - dependsOn: <ID of the Arcade stage that finalization should run after>
+      #   channel:
+      #     name: <Name of this channel, for logging and readability>
+      #     bar: <Name of the Arcade variable that contains the ID of this channel in BAR>
+      #     storage: <Name of the Latest channel to publish to in dotnetcli blob storage>
+      dependsOnPublishStages:
+
+      - dependsOn: NetCore_Dev5_Publish
+        channel:
+          name: .NET Core 5 Dev
+          bar: NetCore_5_Dev_Channel_Id
+          storage: master
+          public: true
+
+      - dependsOn: PVR_Publish
+        channel:
+          name: .NET Tools - Validation
+          bar: PublicValidationRelease_30_Channel_Id
+          storage: dev/validation
+          public: true

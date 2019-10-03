@@ -98,7 +98,7 @@
         Include="@(UploadToBlobStorageFile)"
         Exclude="@(NupkgToPublishFile);@(SymbolNupkgToPublishFile)" />
       <ItemsToPush>
-        <RelativeBlobPath>assets/core-setup/$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
+        <RelativeBlobPath>assets/windowsdesktop/$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
       </ItemsToPush>
     </ItemGroup>
 

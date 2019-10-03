@@ -1,8 +1,6 @@
 <Project>
   <PropertyGroup>
     <ProductBrandPrefix>Microsoft Windows Desktop</ProductBrandPrefix>
-
-    <RIDPropsFile>$(MSBuildThisFileDirectory)windowsdesktopRIDs.props</RIDPropsFile>
   </PropertyGroup>
 
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />

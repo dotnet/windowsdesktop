@@ -1,10 +1,22 @@
 <Project>
+
+  <!--
+    Import stubs for compatibility with packaging tools, if not building a pkgproj. Ordinarily,
+    listing them unconditionally before the ../Directory.Build.targets import would be sufficient,
+    and the packaging tools would override for pkgproj. However, the packaging tools targets are
+    already imported before this file, so the import needs to be specific to non-pkgproj.
+  -->
+  <Import Project="packaging.stubs.targets" Condition="'$(MSBuildProjectExtension)' != '.pkgproj'" />
+
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.targets))\Directory.Build.targets" />
 
-  <Import Project="$(PackagingToolsDir)packaging-tools.targets" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" />
 
-  <UsingTask TaskName="CreateFrameworkListFile" AssemblyFile="$(LocalBuildToolsTaskFile)"/>
-  <UsingTask TaskName="GenerateFileVersionProps" AssemblyFile="$(LocalBuildToolsTaskFile)"/>
+  <UsingTask TaskName="CreateFrameworkListFile" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)"/>
+  <UsingTask TaskName="GenerateCurrentVersion" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
+  <UsingTask TaskName="GenerateFileVersionProps" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)"/>
+  <UsingTask TaskName="GenerateGuidFromName" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
+  <UsingTask TaskName="GenerateMsiVersion" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
 
   <PropertyGroup>
     <!--
@@ -13,73 +25,6 @@
     -->
     <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'">$(Version)</StableVersion>
   </PropertyGroup>
-
-  <!--
-    For any Dependency items with a VersionProp, set it to the property by that name given by the
-    version generation target. For any with a VersionFromProject, query the ProductVersion from that
-    project file and use it as the dependency's version.
-  -->
-  <Target Name="SetCustomPackageDependencyVersions"
-          BeforeTargets="GetPackageDependencies"
-          DependsOnTargets="GetProductVersions">
-    <!--
-      Generate a VersionProp name for each dependency with VersionFromProject. The batched MSBuild
-      task then generates the property, which is picked up by the VersionProp implementation.
-
-      Using PropertyName rather than ItemName on the MSBuild task avoids the difficulty in
-      reattaching the separate list of items back into the original Dependency items without any
-      reasonable Join operation available.
-    -->
-    <ItemGroup>
-      <Dependency
-        VersionProp="_VersionProp_$([System.String]::new('%(Dependency.Identity)').Replace('.', '_'))"
-        Condition="'%(Dependency.VersionFromProject)' != ''" />
-    </ItemGroup>
-
-    <MSBuild
-      Condition="'%(Dependency.VersionFromProject)' != ''"
-      Projects="%(Dependency.VersionFromProject)"
-      Targets="ReturnProductVersion">
-      <Output TaskParameter="TargetOutputs" PropertyName="%(Dependency.VersionProp)" />
-    </MSBuild>
-
-    <!-- Use batching to use the value of an arbitrary property as the version. -->
-    <ItemGroup>
-      <Dependency Version="$(%(Dependency.VersionProp))" Condition="'%(Dependency.VersionProp)' != ''" />
-    </ItemGroup>
-  </Target>
-
-  <!--
-    If the project is configured to use a shipped package version, set it. Use a target because we
-    need the versions from GetProductVersions.
-  -->
-  <Target Name="SetSpecificPackageVersion"
-          Condition="'$(VersionProp)' != ''"
-          BeforeTargets="GenerateNuSpec"
-          DependsOnTargets="GetProductVersions">
-    <!-- Use item metadata: $(%(foo)) works, $($(foo)) doesn't. -->
-    <ItemGroup>
-      <VersionPropItem Include="$(VersionProp)" />
-    </ItemGroup>
-    <PropertyGroup>
-      <Version>$(%(VersionPropItem.Identity))</Version>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="SetTargetBasedPackageVersion"
-          Condition="'$(VersionProp)' == ''"
-          BeforeTargets="GenerateNuSpec"
-          DependsOnTargets="GetProductVersions">
-    <PropertyGroup>
-      <Version>$(ProductVersion)</Version>
-      <!--
-        PackageVersion is normally calculated using Version during static property evaluation, but
-        we need some info from GetProductVersions, so it's too late to rely on that. We need to set
-        both in target evaluation, here.
-      -->
-      <PackageVersion>$(ProductVersion)</PackageVersion>
-    </PropertyGroup>
-  </Target>
 
   <!--
     Remove duplicate files returned by restore. The resolve task performs extra detection to pick up
@@ -334,6 +279,58 @@
     <ItemGroup>
       <RuntimeDependency Include="@(_runtimeDependencyIdentity)" />
     </ItemGroup>
+  </Target>
+
+  <!--
+    Get branding names for the installers.
+  -->
+  <Target Name="GetInstallerBrandingNames"
+          DependsOnTargets="GetProductVersions">
+    <PropertyGroup
+      Condition="
+        '$(ReleaseBrandSuffix)' == '' and
+        '$(PreReleaseVersionLabel)' != '' and
+        $(PreReleaseVersionLabel.StartsWith('preview'))">
+      <!-- Convert 'preview7' to 'Preview 7'. -->
+      <ReleaseBrandSuffix>$(PreReleaseVersionLabel.Substring(0,1).ToUpperInvariant())</ReleaseBrandSuffix>
+      <ReleaseBrandSuffix>$(ReleaseBrandSuffix)$(PreReleaseVersionLabel.Substring(1,6))</ReleaseBrandSuffix>
+      <ReleaseBrandSuffix>$(ReleaseBrandSuffix) $(PreReleaseVersionLabel.Substring(7))</ReleaseBrandSuffix>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <ProductBrandPrefix Condition="'$(ProductBrandPrefix)' == ''">Microsoft .NET Core</ProductBrandPrefix>
+      <ProductBrandSuffix>$(ProductionVersion)</ProductBrandSuffix>
+      <ProductBrandSuffix Condition="'$(ReleaseBrandSuffix)'!=''">$(ProductionVersion) $(ReleaseBrandSuffix)</ProductBrandSuffix>
+
+      <TargetingPackBrandName>$(ProductBrandPrefix) Targeting Pack - $(ProductBrandSuffix)</TargetingPackBrandName>
+      <SharedFrameworkBrandName>$(ProductBrandPrefix) Runtime - $(ProductBrandSuffix)</SharedFrameworkBrandName>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="GenerateMsiVersionString">
+    <PropertyGroup>
+      <VersionPadding Condition="'$(VersionPadding)'==''">5</VersionPadding>
+      <!-- Using the following default comparison date will produce versions that align with our internal build system. -->
+      <VersionComparisonDate Condition="'$(VersionComparisonDate)'==''">1996-04-01</VersionComparisonDate>
+    </PropertyGroup>
+
+    <GenerateCurrentVersion
+      SeedDate="$([System.DateTime]::Now.ToString(yyyy-MM-dd))"
+      OfficialBuildId="$(OfficialBuildId)"
+      ComparisonDate="$(VersionComparisonDate)"
+      Padding="$(VersionPadding)">
+      <Output PropertyName="BuildNumberMajor" TaskParameter="GeneratedVersion" />
+      <Output PropertyName="BuildNumberMinor" TaskParameter="GeneratedRevision" />
+    </GenerateCurrentVersion>
+
+    <GenerateMsiVersion
+      Major="$(MajorVersion)"
+      Minor="$(MinorVersion)"
+      Patch="$(PatchVersion)"
+      BuildNumberMajor="$(BuildNumberMajor)"
+      BuildNumberMinor="$(BuildNumberMajor)">
+      <Output TaskParameter="MsiVersion" PropertyName="MsiVersionString" />
+    </GenerateMsiVersion>
   </Target>
 
 </Project>

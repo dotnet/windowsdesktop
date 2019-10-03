@@ -1,5 +1,5 @@
 The files in this directory are the closure of C# code from the BuildTools repo
-that's necessary for the Core-Setup publish tasks. There are no changes except
+that's necessary for the publish tasks. There are no changes except
 automatically removing and sorting the using statements.
 
 Source: https://github.com/dotnet/buildtools/tree/55d43483866c7caeeace96355add3a9b12fa5795

@@ -16,7 +16,15 @@
       WPF/WinForms packages don't declare their transitive dependencies and the depproj has to fill
       it in correctly. Being wrong means dependency failures at runtime.
     -->
-    <SkipValidatePackage>false</SkipValidatePackage>
+    <!-- <SkipValidatePackage>false</SkipValidatePackage> -->
+    <!--
+      Turn off package validation: while in Core-Setup, this depended on extracting the list of
+      NETCoreApp DLLs from netcoreapp.depproj. We need to figure out how to implement this based on
+      a restored package, instead. (Should be somewhat simple: a target that depends on NuGet's
+      content restoration target that filters found assets based on origin package and puts them in
+      the list of ignored references.)
+    -->
+    <SkipValidatePackage>true</SkipValidatePackage>
 
     <IsShipping>false</IsShipping>
   </PropertyGroup>
@@ -39,15 +47,6 @@
     <!-- We don't have a ref assembly for DirectWriteForwarder -->
     <IgnoredReference Condition="'$(PackageTargetRuntime)' == ''" Include="DirectWriteForwarder" />
   </ItemGroup>
-
-  <Target Name="GetNETCoreAppIgnoredReference" BeforeTargets="VerifyClosure">
-    <MSBuild
-      Projects="../../netcoreapp/src/netcoreapp.depproj"
-      Properties="Configuration=netcoreapp"
-      Targets="GetReferenceFilenames">
-      <Output TaskParameter="TargetOutputs" ItemName="IgnoredReference" />
-    </MSBuild>
-  </Target>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 

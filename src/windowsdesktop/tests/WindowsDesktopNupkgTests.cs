@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
 {
-    public class WindowsDesktopTests
+    public class WindowsDesktopNupkgTests
     {
         private readonly RepoDirectoriesProvider dirs = new RepoDirectoriesProvider();
 

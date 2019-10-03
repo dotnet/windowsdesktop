@@ -75,7 +75,7 @@
           Inputs="@(RepoTasksSrc)"
           Outputs="$(RepoTasksOutputFile)">
     <MSBuild
-      Projects="$(RepoTasksDir)core-setup.tasks.csproj"
+      Projects="$(RepoTasksDir)local.tasks.csproj"
       Properties="RepoRoot=$(RepoRoot)"
       Targets="
         Restore;
@@ -91,7 +91,7 @@
   <Target Name="GetRepoTasksSrc">
     <PropertyGroup>
       <RepoTasksDir>$(RepoRoot)tools-local\tasks\</RepoTasksDir>
-      <RepoTasksOutputFile>$(ArtifactsObjDir)core-setup.tasks\$(Configuration)\build-semaphore.txt</RepoTasksOutputFile>
+      <RepoTasksOutputFile>$(ArtifactsObjDir)local.tasks\$(Configuration)\build-semaphore.txt</RepoTasksOutputFile>
     </PropertyGroup>
 
     <ItemGroup>

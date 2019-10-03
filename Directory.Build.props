@@ -1,13 +1,5 @@
 <Project>
 
-  <!--
-    Import the arcade sdk with these requirements.
-    After:
-      Configuration setup
-    Before:
-      DebugType needs to be not be set to embedded at least for facades
-      OutputPath setup
-  -->
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <!--
@@ -36,13 +28,6 @@
     <DisableBuildToolsRoslynVersion>true</DisableBuildToolsRoslynVersion>
   </PropertyGroup>
 
-  <!-- Define vNext UAP Moniker -->
-  <PropertyGroup>
-    <UAPvNextVersion>10.0.16300</UAPvNextVersion>
-    <UAPvNextTFMFull>UAP,Version=v$(UAPvNextVersion)</UAPvNextTFMFull>
-    <UAPvNextTFM>uap$(UAPvNextVersion)</UAPvNextTFM>
-  </PropertyGroup>
-
   <PropertyGroup>
     <!-- ProjectDir needs to be set for build-tools and legacy usages. New usages should use RepoRoot -->
     <ProjectDir>$(RepoRoot)</ProjectDir>
@@ -59,7 +44,7 @@
     <LocalBuildToolsTaskDir>$(LocalBuildToolsDir)netstandard2.0\</LocalBuildToolsTaskDir>
     <LocalBuildToolsTaskDir Condition="'$(MSBuildRuntimeType)' != 'Core'">$(LocalBuildToolsDir)net46\</LocalBuildToolsTaskDir>
 
-    <LocalBuildToolsTaskFile>$(LocalBuildToolsTaskDir)core-setup.tasks.dll</LocalBuildToolsTaskFile>
+    <LocalBuildToolsTaskFile>$(LocalBuildToolsTaskDir)local.tasks.dll</LocalBuildToolsTaskFile>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -71,7 +56,7 @@
       This name is used to create a GIT repository URL https://github.com/dotnet/$(GitHubRepositoryName) used to find source code for debugging
       It is also used to name the build output manifest for orchestrated builds.
     -->
-    <GitHubRepositoryName Condition="'$(GitHubRepositoryName)' == ''">core-setup</GitHubRepositoryName>
+    <GitHubRepositoryName Condition="'$(GitHubRepositoryName)' == ''">windowsdesktop</GitHubRepositoryName>
   </PropertyGroup>
 
   <!-- Build as portable by default -->
@@ -148,7 +133,7 @@
     <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
     <!-- Normally set by sourcelink, and needed by the Pack targets -->
-    <RepositoryUrl>https://github.com/dotnet/core-setup</RepositoryUrl>
+    <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
   </PropertyGroup>
 
   <!-- Set up Default symbol and optimization for Configuration -->
@@ -227,27 +212,6 @@
     <!-- Disable cross-gen on FreeBSD for now. This can be revisited when we have full support. -->
     <DisableCrossgen Condition="'$(OSGroup)'=='FreeBSD'">true</DisableCrossgen>
     <OutputVersionBadge>$(AssetOutputPath)sharedfx_$(OutputRid)_$(ConfigurationGroup)_version_badge.svg</OutputVersionBadge>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <DotnetHostString>dotnet-host-</DotnetHostString>
-    <DotnetHostFxrString>dotnet-hostfxr-</DotnetHostFxrString>
-    <DotnetRuntimeString>dotnet-runtime-</DotnetRuntimeString>
-    <DotnetRuntimeDependenciesPackageString>dotnet-runtime-deps-</DotnetRuntimeDependenciesPackageString>
-
-    <CombinedInstallerStart>$(AssetOutputPath)$(DotnetRuntimeString)</CombinedInstallerStart>
-    <SharedHostInstallerStart>$(AssetOutputPath)$(DotnetHostString)</SharedHostInstallerStart>
-    <HostFxrInstallerStart>$(AssetOutputPath)$(DotnetHostFxrString)</HostFxrInstallerStart>
-    <SharedFrameworkInstallerStart>$(AssetOutputPath)$(DotnetRuntimeString)</SharedFrameworkInstallerStart>
-    <DotnetRuntimeDependenciesPackageInstallerStart>$(AssetOutputPath)$(DotnetRuntimeDependenciesPackageString)</DotnetRuntimeDependenciesPackageInstallerStart>
-
-    <!-- OSX specific intermediate package suffix . OSX specific intermediate packages are suffixed with -internal to avoid name collision for bundle package (dotnet-runtime-*)
-         and runtime ( earlier as dotnet-sharedframework-*)	-->
-    <InstallerStartSuffix Condition="'$(OSGroup)' == 'OSX'">internal</InstallerStartSuffix>
-    <SharedHostInstallerStart Condition="'$(OSGroup)' == 'OSX'">$(SharedHostInstallerStart)$(InstallerStartSuffix)-</SharedHostInstallerStart>
-    <HostFxrInstallerStart Condition="'$(OSGroup)' == 'OSX'">$(HostFxrInstallerStart)$(InstallerStartSuffix)-</HostFxrInstallerStart>
-    <SharedFrameworkInstallerStart Condition="'$(OSGroup)' == 'OSX'">$(SharedFrameworkInstallerStart)$(InstallerStartSuffix)-</SharedFrameworkInstallerStart>
-
   </PropertyGroup>
 
   <!-- Set up handling of build warnings -->

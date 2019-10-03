@@ -1,21 +1,38 @@
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
 
+  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" />
+
+  <PropertyGroup>
+    <PackageLicenseFile>$(ProjectDir)LICENSE.TXT</PackageLicenseFile>
+    <PackageThirdPartyNoticesFile>$(ProjectDir)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
+    <LicenseUrl>https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT</LicenseUrl>
+    <PackageDescriptionFile>$(MSBuildThisFileDirectory)descriptions.json</PackageDescriptionFile>
+    <!-- This link should be updated for each release milestone, currently this points to 1.0.0 -->
+    <ReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799417</ReleaseNotes>
+    <ProjectUrl>https://dot.net</ProjectUrl>
+
+    <!-- this repo doesn't currently use the index so don't force it to be in sync -->
+    <SkipIndexCheck>true</SkipIndexCheck>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageIndex Include="$(MSBuildThisFileDirectory)packageIndex.json" />
+  </ItemGroup>
+
   <PropertyGroup>
     <PackagePlatform>AnyCPU</PackagePlatform>
 
     <SkipPackageFileCheck>true</SkipPackageFileCheck>
     <!-- This property must be set to the same value as $(PackageOutputPath) for the nuspecs and nupkgs to be binplaced to the intended location. -->
     <OutputPath>$(PackageOutputPath)</OutputPath>
-    
+
     <PackageTargetRuntime Condition="'$(PackageTargetRuntime)' == '' AND '$(MSBuildProjectExtension)' == '.depproj'">$(RuntimeIdentifier)</PackageTargetRuntime>
 
-    <IsLineupPackage Condition="'$(PackageTargetRuntime)' == ''">true</IsLineupPackage>
+    <BuildRuntimePackages Condition="'$(BuildRuntimePackages)' == ''">true</BuildRuntimePackages>
+    <BuildLineupPackage Condition="'$(BuildLineupPackage)' == ''">true</BuildLineupPackage>
 
-    <BuildRuntimePackages>true</BuildRuntimePackages>
-    <BuildLineupPackage>true</BuildLineupPackage>
-
-    <PackProjectDependencies>true</PackProjectDependencies>
+    <PackProjectDependencies Condition="'$(PackProjectDependencies)' == ''">true</PackProjectDependencies>
 
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 
@@ -66,17 +83,11 @@
     <BuildPhase>$(MSBuildProjectName)</BuildPhase>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
-    <!-- WindowsDesktop packs currently depend on non-source-built App package. -->
-    <ProjectExclusions Include="windowsdesktop\**\*.*proj" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(PackageTargetRuntime)' == ''">
     <SkipValidatePackage>true</SkipValidatePackage>
-    <IncludeRuntimeJson>true</IncludeRuntimeJson>
+    <IncludeRuntimeJson Condition="'$(IncludeRuntimeJson)' == ''">true</IncludeRuntimeJson>
+    <IsLineupPackage Condition="'$(IsLineupPackage)' == ''">true</IsLineupPackage>
   </PropertyGroup>
-
-  <Import Project="$(PackagingToolsDir)packaging-tools.props" />
 
   <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.depproj'">
     <!--
@@ -111,7 +122,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <RIDPropsFile Condition="'$(RIDPropsFile)' == ''">$(MSBuildThisFileDirectory)\netcoreappRIDs.props</RIDPropsFile>
+    <RIDPropsFile Condition="'$(RIDPropsFile)' == ''">$(MSBuildThisFileDirectory)\windowsdesktopRIDs.props</RIDPropsFile>
   </PropertyGroup>
 
   <Import Project="$(RIDPropsFile)" />

@@ -24,6 +24,8 @@ namespace Microsoft.DotNet.Build.Tasks
         [Required]
         public string ContainerName { get; set; }
         [Required]
+        public string ProductBlobStorageName { get; set; }
+        [Required]
         public string Channel { get; set; }
         [Required]
         public string SharedFrameworkNugetVersion { get; set; }
@@ -85,11 +87,17 @@ namespace Microsoft.DotNet.Build.Tasks
 
                 try
                 {
-                    CopyBlobs($"Runtime/{ProductVersion}/", $"Runtime/{Channel}/");
+                    CopyBlobs(
+                        $"{ProductBlobStorageName}/{ProductVersion}/",
+                        $"{ProductBlobStorageName}/{Channel}/");
 
                     // Generate the latest version text file
                     string sfxVersion = GetSharedFrameworkVersionFileContent();
-                    PublishStringToBlob(ContainerName, $"Runtime/{Channel}/latest.version", sfxVersion, "text/plain");
+                    PublishStringToBlob(
+                        ContainerName,
+                        $"{ProductBlobStorageName}/{Channel}/latest.version",
+                        sfxVersion,
+                        "text/plain");
                 }
                 finally
                 {

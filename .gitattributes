@@ -1,52 +1,49 @@
-*.doc  diff=astextplain
-*.DOC	diff=astextplain
-*.docx	diff=astextplain
-*.DOCX	diff=astextplain
-*.dot	diff=astextplain
-*.DOT	diff=astextplain
-*.pdf	diff=astextplain
-*.PDF	diff=astextplain
-*.rtf	diff=astextplain
-*.RTF	diff=astextplain
+###############################################################################
+# Set default behavior to:
+#   automatically normalize line endings on check-in, and
+#   convert to Windows-style line endings on check-out
+###############################################################################
+* text=auto encoding=UTF-8
+*.sh text eol=lf
 
-*.jpg  	binary
-*.png 	binary
-*.gif 	binary
+###############################################################################
+# Set file behavior to:
+#   treat as text, and
+#   diff as C# source code
+###############################################################################
+*.cs                text        diff=csharp
 
-*.sh eol=lf
+###############################################################################
+# Set file behavior to:
+#   treat as text
+###############################################################################
+*.cmd               text
+*.config            text
+*.csproj            text
+*.groovy            text
+*.json              text
+*.md                text
+*.nuspec            text
+*.pkgdef            text
+*.proj              text
+*.projitems         text
+*.props             text
+*.ps1               text
+*.resx              text
+*.ruleset           text
+*.shproj            text
+*.sln               text
+*.targets           text
+*.vb                text
+*.vbproj            text
+*.vcxproj           text
+*.vcxproj.filters   text
+*.vsct              text
+*.vsixmanifest      text
 
-*.cs text=auto diff=csharp 
-*.vb text=auto
-*.resx text=auto
-*.c text=auto
-*.cpp text=auto
-*.cxx text=auto
-*.h text=auto
-*.hxx text=auto
-*.py text=auto
-*.rb text=auto
-*.java text=auto
-*.html text=auto
-*.htm text=auto
-*.css text=auto
-*.scss text=auto
-*.sass text=auto
-*.less text=auto
-*.js text=auto
-*.lisp text=auto
-*.clj text=auto
-*.sql text=auto
-*.php text=auto
-*.lua text=auto
-*.m text=auto
-*.asm text=auto
-*.erl text=auto
-*.fs text=auto
-*.fsx text=auto
-*.hs text=auto
-
-*.csproj text=auto
-*.vbproj text=auto
-*.fsproj text=auto
-*.dbproj text=auto
-*.sln text=auto eol=crlf
+###############################################################################
+# Set file behavior to:
+#   treat as binary
+###############################################################################
+*.png               binary
+*.snk               binary

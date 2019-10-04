@@ -34,7 +34,7 @@ Program](https://www.microsoft.com/msrc/bounty-dot-net-core).
 
 ### .NET Framework issues
 
-Issues with .NET Framework, including WPF, should be filed on [VS developer
+Issues with .NET Framework should be filed on [VS developer
 community](https://developercommunity.visualstudio.com/spaces/61/index.html), or
 [Product Support](https://support.microsoft.com/en-us/contactus?ws=support).
 They should not be filed on this repo.

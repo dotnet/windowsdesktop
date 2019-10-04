@@ -7,7 +7,7 @@ supported platforms.
 
 * [.NET Core 3.0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 * [Windows Forms repository](https://github.com/dotnet/winforms/issues/new/choose)
-* [WPF repository](https://github.com/dotnet/wpf/issues/new)
+* [WPF repository](https://github.com/dotnet/wpf/issues/new/choose)
 
 ## How to Engage, Contribute and Provide Feedback
 

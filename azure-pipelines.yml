@@ -7,8 +7,7 @@ trigger:
 pr:
 - master
 
-# Use "5" prefix to avoid colliding with Core-Setup builds that still produce WindowsDesktop.
-name: $(Date:yyyyMMdd)$(Rev:.5r)
+name: $(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
   - name: TeamName

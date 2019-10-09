@@ -113,13 +113,13 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>239cbc36fda9dd106ebd41782aeb9172a69f826d</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-alpha1.19509.1" CoherentParentDependency="Microsoft.DotNet.Wpf.DncEng">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-alpha1.19509.2" CoherentParentDependency="Microsoft.DotNet.Wpf.DncEng">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>0166abb3a5e4ed8bbda643af98b7e1a604959c4c</Sha>
+      <Sha>4b513a9d9d155824701ee9779a3677bb5cc0fd31</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.DncEng" Version="5.0.0-alpha1.19509.2">
+    <Dependency Name="Microsoft.DotNet.Wpf.DncEng" Version="5.0.0-alpha1.19509.4">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf-int</Uri>
-      <Sha>99a00c1a1412716d51b95e327d4c078dc6108d10</Sha>
+      <Sha>bac1cfc5b7472459132fe50ffc814a0c7227116c</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>

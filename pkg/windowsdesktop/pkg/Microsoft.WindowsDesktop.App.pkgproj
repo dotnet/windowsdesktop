@@ -16,15 +16,7 @@
       WPF/WinForms packages don't declare their transitive dependencies and the depproj has to fill
       it in correctly. Being wrong means dependency failures at runtime.
     -->
-    <!-- <SkipValidatePackage>false</SkipValidatePackage> -->
-    <!--
-      Turn off package validation: while in Core-Setup, this depended on extracting the list of
-      NETCoreApp DLLs from netcoreapp.depproj. We need to figure out how to implement this based on
-      a restored package, instead. (Should be somewhat simple: a target that depends on NuGet's
-      content restoration target that filters found assets based on origin package and puts them in
-      the list of ignored references.)
-    -->
-    <SkipValidatePackage>true</SkipValidatePackage>
+    <SkipValidatePackage>false</SkipValidatePackage>
 
     <IsShipping>false</IsShipping>
   </PropertyGroup>
@@ -47,6 +39,31 @@
     <!-- We don't have a ref assembly for DirectWriteForwarder -->
     <IgnoredReference Condition="'$(PackageTargetRuntime)' == ''" Include="DirectWriteForwarder" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[$(MicrosoftNETCoreAppRefVersion)]" />
+    <PackageDownload Include="@(RestoreBuildRID -> 'Microsoft.NETCore.App.Runtime.%(Identity)')" Version="[$(MicrosoftNETCoreAppRuntimewinx64Version)]" />
+  </ItemGroup>
+
+  <Target Name="GetNETCoreAppIgnoredReference"
+          BeforeTargets="VerifyClosure">
+    <PropertyGroup>
+      <RefPackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Ref\$(MicrosoftNETCoreAppRefVersion)\</RefPackageDir>
+      <RuntimePackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Runtime.$(PackageTargetRuntime)\$(MicrosoftNETCoreAppRuntimewinx64Version)\</RuntimePackageDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <IgnoredReferenceFile
+        Condition="'$(PackageTargetRuntime)' == ''"
+        Include="$(RefPackageDir)ref\$(NETCoreAppFramework)\*.dll" />
+
+      <IgnoredReferenceFile
+        Condition="'$(PackageTargetRuntime)' != ''"
+        Include="$(RuntimePackageDir)runtimes\$(PackageTargetRuntime)\lib\$(NETCoreAppFramework)\*.dll" />
+
+      <IgnoredReference Include="@(IgnoredReferenceFile -> '%(Filename)')" />
+    </ItemGroup>
+  </Target>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 

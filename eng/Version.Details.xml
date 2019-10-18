@@ -121,6 +121,14 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf-int</Uri>
       <Sha>8db04f8b884947b9e5e3bc2be44bd9c2d46c2bfd</Sha>
     </Dependency>
+    <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-alpha1.19462.5" CoherentParentDependency="Microsoft.Private.Winforms">
+      <Uri>https://github.com/dotnet/core-setup</Uri>
+      <Sha>2718e02209b325d3d188cb529c85a9fba94557d9</Sha>
+    </Dependency>
+    <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="5.0.0-alpha1.19462.5" CoherentParentDependency="Microsoft.Private.Winforms">
+      <Uri>https://github.com/dotnet/core-setup</Uri>
+      <Sha>2718e02209b325d3d188cb529c85a9fba94557d9</Sha>
+    </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
     <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="5.0.0-beta.19517.8">

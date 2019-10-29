@@ -129,6 +129,19 @@
       <Uri>https://github.com/dotnet/core-setup</Uri>
       <Sha>2718e02209b325d3d188cb529c85a9fba94557d9</Sha>
     </Dependency>
+    <!-- TODO: Sort these into the above. These are out of the way at the moment to make it easier to resolve conflicts. -->
+    <Dependency Name="System.IO.FileSystem.AccessControl" Version="5.0.0-alpha.1.19527.5">
+      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Sha>17c14aa2b50cfb5920d03ea8835c9a4932b5359c</Sha>
+    </Dependency>
+    <Dependency Name="System.Diagnostics.PerformanceCounter" Version="5.0.0-alpha.1.19527.5">
+      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Sha>17c14aa2b50cfb5920d03ea8835c9a4932b5359c</Sha>
+    </Dependency>
+    <Dependency Name="System.IO.Pipes.AccessControl" Version="4.5.1">
+      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Sha>7ee84596d92e178bce54c986df31ccc52479e772</Sha>
+    </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
     <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="5.0.0-beta.19528.5">

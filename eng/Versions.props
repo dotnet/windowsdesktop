@@ -79,6 +79,10 @@
     <NugetPackagingPackageVersion>4.9.4</NugetPackagingPackageVersion>
     <MicrosoftTargetingPackPrivateWinRTPackageVersion>1.0.5</MicrosoftTargetingPackPrivateWinRTPackageVersion>
     <MicrosoftDiaSymReaderNativePackageVersion>1.7.0</MicrosoftDiaSymReaderNativePackageVersion>
+    <!-- TODO: Sort these into the above. These are out of the way at the moment to make it easier to resolve conflicts. -->
+    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-alpha.1.19527.5</MicrosoftWin32RegistryAccessControlVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-alpha.1.19527.5</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
   </PropertyGroup>
   <!--Package names-->
   <PropertyGroup>

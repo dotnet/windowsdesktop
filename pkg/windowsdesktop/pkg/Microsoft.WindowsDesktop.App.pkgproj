@@ -46,12 +46,8 @@
   </ItemGroup>
 
   <Target Name="GetNETCoreAppIgnoredReference"
-          BeforeTargets="VerifyClosure">
-    <PropertyGroup>
-      <RefPackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Ref\$(MicrosoftNETCoreAppRefVersion)\</RefPackageDir>
-      <RuntimePackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Runtime.$(PackageTargetRuntime)\$(MicrosoftNETCoreAppRuntimewinx64Version)\</RuntimePackageDir>
-    </PropertyGroup>
-
+          BeforeTargets="VerifyClosure"
+          DependsOnTargets="GetNETCoreAppPackDirs">
     <ItemGroup>
       <IgnoredReferenceFile
         Condition="'$(PackageTargetRuntime)' == ''"

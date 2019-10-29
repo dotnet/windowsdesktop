@@ -37,16 +37,19 @@
     <MicrosoftNETCorePlatformsPackageVersion>5.0.0-alpha.1.19528.12</MicrosoftNETCorePlatformsPackageVersion>
     <MicrosoftNETCoreTargetsPackageVersion>5.0.0-alpha.1.19528.12</MicrosoftNETCoreTargetsPackageVersion>
     <MicrosoftPrivateCoreFxNETCoreAppPackageVersion>5.0.0-alpha.1.19528.12</MicrosoftPrivateCoreFxNETCoreAppPackageVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-alpha.1.19527.5</MicrosoftWin32RegistryAccessControlVersion>
     <MicrosoftWin32RegistryVersion>5.0.0-alpha.1.19528.12</MicrosoftWin32RegistryVersion>
     <MicrosoftWin32SystemEventsVersion>5.0.0-alpha.1.19528.12</MicrosoftWin32SystemEventsVersion>
     <MicrosoftWindowsCompatibilityPackageVersion>5.0.0-alpha.1.19528.12</MicrosoftWindowsCompatibilityPackageVersion>
     <SystemCodeDomVersion>5.0.0-alpha.1.19528.12</SystemCodeDomVersion>
     <SystemConfigurationConfigurationManagerVersion>5.0.0-alpha.1.19528.12</SystemConfigurationConfigurationManagerVersion>
     <SystemDiagnosticsEventLogVersion>5.0.0-alpha.1.19528.12</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-alpha.1.19527.5</SystemDiagnosticsPerformanceCounterVersion>
     <SystemDirectoryServicesVersion>5.0.0-alpha.1.19528.12</SystemDirectoryServicesVersion>
     <SystemDrawingCommonVersion>5.0.0-alpha.1.19528.12</SystemDrawingCommonVersion>
     <SystemIOFileSystemAccessControlVersion>5.0.0-alpha.1.19528.12</SystemIOFileSystemAccessControlVersion>
     <SystemIOPackagingVersion>5.0.0-alpha.1.19528.12</SystemIOPackagingVersion>
+    <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
     <SystemResourcesExtensionsPackageVersion>5.0.0-alpha.1.19528.12</SystemResourcesExtensionsPackageVersion>
     <SystemSecurityAccessControlVersion>5.0.0-alpha.1.19528.12</SystemSecurityAccessControlVersion>
     <SystemSecurityCryptographyCngVersion>5.0.0-alpha.1.19528.12</SystemSecurityCryptographyCngVersion>
@@ -55,8 +58,8 @@
     <SystemSecurityCryptographyXmlVersion>5.0.0-alpha.1.19528.12</SystemSecurityCryptographyXmlVersion>
     <SystemSecurityPermissionsVersion>5.0.0-alpha.1.19528.12</SystemSecurityPermissionsVersion>
     <SystemSecurityPrincipalWindowsVersion>5.0.0-alpha.1.19528.12</SystemSecurityPrincipalWindowsVersion>
-    <SystemTextJsonVersion>5.0.0-alpha.1.19528.12</SystemTextJsonVersion>
     <SystemTextEncodingsWebVersion>5.0.0-alpha.1.19528.12</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>5.0.0-alpha.1.19528.12</SystemTextJsonVersion>
     <SystemThreadingAccessControlVersion>5.0.0-alpha.1.19528.12</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsPackageVersion>5.0.0-alpha.1.19528.12</SystemWindowsExtensionsPackageVersion>
     <!-- standard -->
@@ -79,10 +82,6 @@
     <NugetPackagingPackageVersion>4.9.4</NugetPackagingPackageVersion>
     <MicrosoftTargetingPackPrivateWinRTPackageVersion>1.0.5</MicrosoftTargetingPackPrivateWinRTPackageVersion>
     <MicrosoftDiaSymReaderNativePackageVersion>1.7.0</MicrosoftDiaSymReaderNativePackageVersion>
-    <!-- TODO: Sort these into the above. These are out of the way at the moment to make it easier to resolve conflicts. -->
-    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-alpha.1.19527.5</MicrosoftWin32RegistryAccessControlVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-alpha.1.19527.5</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
   </PropertyGroup>
   <!--Package names-->
   <PropertyGroup>

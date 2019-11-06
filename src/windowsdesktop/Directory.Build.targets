@@ -30,7 +30,7 @@
     <MSBuild
       Projects="$(RepoRoot)pkg\windowsdesktop\pkg\Microsoft.WindowsDesktop.App.Runtime.pkgproj"
       Targets="ReturnProductVersion">
-      <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimePackageVersion" />
+      <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimeVersion" />
     </MSBuild>
 
     <!--
@@ -45,7 +45,7 @@
       <TestContextVariable Include="BUILDRID=$(OutputRid)" />
       <TestContextVariable Include="BUILD_ARCHITECTURE=$(TargetArchitecture)" />
       <TestContextVariable Include="BUILD_CONFIGURATION=$(ConfigurationGroup)" />
-      <TestContextVariable Include="MNA_VERSION=$(WindowsDesktopRuntimePackageVersion)" />
+      <TestContextVariable Include="MNA_VERSION=$(WindowsDesktopRuntimeVersion)" />
       <TestContextVariable Include="MNA_TFM=$(NETCoreAppFramework)" />
       <TestContextVariable Include="DOTNET_SDK_PATH=$(DotNetRoot)" />
     </ItemGroup>

@@ -34,34 +34,34 @@
     <MicrosoftNETCoreAppRefVersion>5.0.0-alpha1.19462.5</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-alpha1.19462.5</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>5.0.0-alpha.1.19557.21</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftNETCoreTargetsVersion>5.0.0-alpha.1.19557.21</MicrosoftNETCoreTargetsVersion>
-    <MicrosoftPrivateCoreFxNETCoreAppVersion>5.0.0-alpha.1.19557.21</MicrosoftPrivateCoreFxNETCoreAppVersion>
+    <MicrosoftNETCorePlatformsVersion>5.0.0-alpha.1.19557.22</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftNETCoreTargetsVersion>5.0.0-alpha.1.19557.22</MicrosoftNETCoreTargetsVersion>
+    <MicrosoftPrivateCoreFxNETCoreAppVersion>5.0.0-alpha.1.19557.22</MicrosoftPrivateCoreFxNETCoreAppVersion>
     <MicrosoftWin32RegistryAccessControlVersion>5.0.0-alpha.1.19527.5</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32RegistryVersion>5.0.0-alpha.1.19557.21</MicrosoftWin32RegistryVersion>
-    <MicrosoftWin32SystemEventsVersion>5.0.0-alpha.1.19557.21</MicrosoftWin32SystemEventsVersion>
-    <MicrosoftWindowsCompatibilityVersion>5.0.0-alpha.1.19557.21</MicrosoftWindowsCompatibilityVersion>
-    <SystemCodeDomVersion>5.0.0-alpha.1.19557.21</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>5.0.0-alpha.1.19557.21</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>5.0.0-alpha.1.19557.21</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-alpha.1.19557.21</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>5.0.0-alpha.1.19557.21</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>5.0.0-alpha.1.19557.21</SystemDrawingCommonVersion>
-    <SystemIOFileSystemAccessControlVersion>5.0.0-alpha.1.19557.21</SystemIOFileSystemAccessControlVersion>
-    <SystemIOPackagingVersion>5.0.0-alpha.1.19557.21</SystemIOPackagingVersion>
+    <MicrosoftWin32RegistryVersion>5.0.0-alpha.1.19557.22</MicrosoftWin32RegistryVersion>
+    <MicrosoftWin32SystemEventsVersion>5.0.0-alpha.1.19557.22</MicrosoftWin32SystemEventsVersion>
+    <MicrosoftWindowsCompatibilityVersion>5.0.0-alpha.1.19557.22</MicrosoftWindowsCompatibilityVersion>
+    <SystemCodeDomVersion>5.0.0-alpha.1.19557.22</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>5.0.0-alpha.1.19557.22</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>5.0.0-alpha.1.19557.22</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-alpha.1.19557.22</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>5.0.0-alpha.1.19557.22</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>5.0.0-alpha.1.19557.22</SystemDrawingCommonVersion>
+    <SystemIOFileSystemAccessControlVersion>5.0.0-alpha.1.19557.22</SystemIOFileSystemAccessControlVersion>
+    <SystemIOPackagingVersion>5.0.0-alpha.1.19557.22</SystemIOPackagingVersion>
     <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
-    <SystemResourcesExtensionsVersion>5.0.0-alpha.1.19557.21</SystemResourcesExtensionsVersion>
-    <SystemSecurityAccessControlVersion>5.0.0-alpha.1.19557.21</SystemSecurityAccessControlVersion>
-    <SystemSecurityCryptographyCngVersion>5.0.0-alpha.1.19557.21</SystemSecurityCryptographyCngVersion>
-    <SystemSecurityCryptographyPkcsVersion>5.0.0-alpha.1.19557.21</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>5.0.0-alpha.1.19557.21</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>5.0.0-alpha.1.19557.21</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>5.0.0-alpha.1.19557.21</SystemSecurityPermissionsVersion>
-    <SystemSecurityPrincipalWindowsVersion>5.0.0-alpha.1.19557.21</SystemSecurityPrincipalWindowsVersion>
-    <SystemTextEncodingsWebVersion>5.0.0-alpha.1.19557.21</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>5.0.0-alpha.1.19557.21</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>5.0.0-alpha.1.19557.21</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>5.0.0-alpha.1.19557.21</SystemWindowsExtensionsVersion>
+    <SystemResourcesExtensionsVersion>5.0.0-alpha.1.19557.22</SystemResourcesExtensionsVersion>
+    <SystemSecurityAccessControlVersion>5.0.0-alpha.1.19557.22</SystemSecurityAccessControlVersion>
+    <SystemSecurityCryptographyCngVersion>5.0.0-alpha.1.19557.22</SystemSecurityCryptographyCngVersion>
+    <SystemSecurityCryptographyPkcsVersion>5.0.0-alpha.1.19557.22</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>5.0.0-alpha.1.19557.22</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>5.0.0-alpha.1.19557.22</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>5.0.0-alpha.1.19557.22</SystemSecurityPermissionsVersion>
+    <SystemSecurityPrincipalWindowsVersion>5.0.0-alpha.1.19557.22</SystemSecurityPrincipalWindowsVersion>
+    <SystemTextEncodingsWebVersion>5.0.0-alpha.1.19557.22</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>5.0.0-alpha.1.19557.22</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>5.0.0-alpha.1.19557.22</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>5.0.0-alpha.1.19557.22</SystemWindowsExtensionsVersion>
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19462.3</NETStandardLibraryVersion>
     <!-- coreclr -->

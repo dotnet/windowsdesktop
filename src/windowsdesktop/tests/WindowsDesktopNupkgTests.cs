@@ -25,7 +25,7 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
             {
                 if (CurrentRidShouldCreateNupkg)
                 {
-                    // Allow no targeting pack for servicing builds.
+                    // Allow no targeting pack for servicing builds. This is a minor test gap: https://github.com/dotnet/core-setup/issues/8830
                     if (tester == null)
                     {
                         return;

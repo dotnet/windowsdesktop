@@ -125,9 +125,9 @@
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>e5f9669daedebcca335a6c47176ce197c7ad1a6b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.DncEng" Version="5.0.0-alpha.1.19566.8">
+    <Dependency Name="Microsoft.DotNet.Wpf.DncEng" Version="5.0.0-alpha.1.19567.2">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf-int</Uri>
-      <Sha>18e4620bd11704f579c46ddcd457a21e7492ae2a</Sha>
+      <Sha>f241f3b0f0ece550c147cabb4bb2a31041b98694</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-alpha1.19514.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/core-setup</Uri>

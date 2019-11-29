@@ -139,25 +139,25 @@
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="5.0.0-beta.19577.4">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="5.0.0-beta.19578.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>e103549927549c5b5b8cf02479f8e3b021037001</Sha>
+      <Sha>7d8af3c802523cd7d9df9f6cb4ce49236851ca0f</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="5.0.0-beta.19577.4">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="5.0.0-beta.19578.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>e103549927549c5b5b8cf02479f8e3b021037001</Sha>
+      <Sha>7d8af3c802523cd7d9df9f6cb4ce49236851ca0f</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Packaging" Version="5.0.0-beta.19577.4">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Packaging" Version="5.0.0-beta.19578.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>e103549927549c5b5b8cf02479f8e3b021037001</Sha>
+      <Sha>7d8af3c802523cd7d9df9f6cb4ce49236851ca0f</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" Version="5.0.0-beta.19577.4">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" Version="5.0.0-beta.19578.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>e103549927549c5b5b8cf02479f8e3b021037001</Sha>
+      <Sha>7d8af3c802523cd7d9df9f6cb4ce49236851ca0f</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.VersionTools.Tasks" Version="5.0.0-beta.19577.4">
+    <Dependency Name="Microsoft.DotNet.VersionTools.Tasks" Version="5.0.0-beta.19578.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>e103549927549c5b5b8cf02479f8e3b021037001</Sha>
+      <Sha>7d8af3c802523cd7d9df9f6cb4ce49236851ca0f</Sha>
     </Dependency>
     <Dependency Name="Microsoft.SourceLink" Version="1.0.0-beta2-19367-01">
       <Uri>https://github.com/dotnet/sourcelink</Uri>

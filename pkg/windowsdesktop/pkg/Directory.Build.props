@@ -20,6 +20,8 @@
 
   <ItemGroup Condition="'$(PackageTargetRuntime)' == ''">
     <FrameworkListFileClass Include="Accessibility.dll" Profile="WindowsForms;WPF" />
+    <FrameworkListFileClass Include="Microsoft.VisualBasic.dll" Profile="WindowsForms" />
+    <FrameworkListFileClass Include="Microsoft.VisualBasic.Forms.dll" Profile="WindowsForms" />
     <FrameworkListFileClass Include="Microsoft.Win32.Registry.AccessControl.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="Microsoft.Win32.Registry.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="Microsoft.Win32.SystemEvents.dll" Profile="WindowsForms;WPF" />
@@ -70,6 +72,7 @@
     <FrameworkListFileClass Include="WindowsBase.dll" Profile="WPF" />
     <FrameworkListFileClass Include="WindowsFormsIntegration.dll" />
   </ItemGroup>
+  
 
   <!-- Redistribute package content from other nuget packages. -->
   <ItemGroup>

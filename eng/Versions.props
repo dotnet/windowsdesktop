@@ -69,9 +69,9 @@
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>5.0.0-alpha1.19617.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.0-alpha.1.19618.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.0-alpha.1.19618.2</MicrosoftDotNetWpfGitHubVersion>
     <!-- wpf-int -->
-    <MicrosoftDotNetWpfDncEngVersion>5.0.0-alpha.1.19618.2</MicrosoftDotNetWpfDncEngVersion>
+    <MicrosoftDotNetWpfDncEngVersion>5.0.0-alpha.1.19618.4</MicrosoftDotNetWpfDncEngVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

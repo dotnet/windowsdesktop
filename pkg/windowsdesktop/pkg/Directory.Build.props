@@ -62,6 +62,7 @@
     <FrameworkListFileClass Include="System.Windows.Forms.Design.dll" Profile="WindowsForms" />
     <FrameworkListFileClass Include="System.Windows.Forms.Design.Editors.dll" Profile="WindowsForms" />
     <FrameworkListFileClass Include="System.Windows.Forms.dll" Profile="WindowsForms" />
+    <FrameworkListFileClass Include="System.Windows.Forms.Primitives.dll" Profile="WindowsForms" />
     <FrameworkListFileClass Include="System.Windows.Input.Manipulations.dll" Profile="WPF" />
     <FrameworkListFileClass Include="System.Windows.Presentation.dll" Profile="WPF" />
     <FrameworkListFileClass Include="System.Xaml.dll" Profile="WPF" />

@@ -16,4 +16,34 @@
     <CandleVariables Include="BundleThmDir" Value="$(MSBuildProjectDirectory)" />
   </ItemGroup>
 
+  <!-- Obtain the .NET Core Runtime installers from the VS insertion packages. -->
+  <ItemGroup>
+    <InsertionPackageRID Include="@(RestoreBuildRID)" Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
+
+    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
+    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />
+    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
+
+    <NETCoreAppInstallerMsiRID
+      Update="@(NETCoreAppInstallerMsiRID)"
+      Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
+      Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
+      MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
+
+    <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+  </ItemGroup>
+
+  <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
+  <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          BeforeTargets="GetBundledMsiFiles">
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID
+        CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
+
+      <BundleMsiFile
+        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)\%(MsiFileName)')"
+        Condition="'$(PackageRID)' == '%(Identity)'" />
+    </ItemGroup>
+  </Target>
+
 </Project>

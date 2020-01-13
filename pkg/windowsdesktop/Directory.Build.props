@@ -28,6 +28,9 @@
       runtimes\win-x86\lib\netcoreapp3.0\System.Printing.dll
     -->
     <PermitDllAndExeFilesLackingFileVersion>true</PermitDllAndExeFilesLackingFileVersion>
+
+    <!-- Generate the runtimeconfig with the correct Microsoft.NETCore.App version. -->
+    <MicrosoftNETCoreAppRuntimeConfigVersion>$(MicrosoftNETCoreAppRuntimewinx64Version)</MicrosoftNETCoreAppRuntimeConfigVersion>
   </PropertyGroup>
 
 </Project>

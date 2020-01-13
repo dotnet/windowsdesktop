@@ -159,10 +159,5 @@
       <Uri>https://github.com/dotnet/arcade</Uri>
       <Sha>250782df013aa8586e21bb225f8efd715372dcf1</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.SourceLink" Version="1.0.0-beta2-19367-01">
-      <Uri>https://github.com/dotnet/sourcelink</Uri>
-      <Sha>
-      </Sha>
-    </Dependency>
   </ToolsetDependencies>
 </Dependencies>

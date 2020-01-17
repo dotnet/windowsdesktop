@@ -89,9 +89,9 @@ stages:
           storage: master
           public: true
 
-      - dependsOn: Net_Eng_Validation_Publish
+      - dependsOn: General_Testing_Publish
         channel:
-          name: .NET Eng - Validation
-          bar: Net_Eng_Validation_Channel_Id
+          name: General Testing
+          bar: GeneralTesting_Channel_Id
           storage: dev/validation
           public: true

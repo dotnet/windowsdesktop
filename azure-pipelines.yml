@@ -89,9 +89,9 @@ stages:
           storage: master
           public: true
 
-      - dependsOn: PVR_Publish
+      - dependsOn: Net_Eng_Validation_Publish
         channel:
-          name: .NET Tools - Validation
-          bar: PublicValidationRelease_30_Channel_Id
+          name: .NET Eng - Validation
+          bar: Net_Eng_Validation_Channel_Id
           storage: dev/validation
           public: true

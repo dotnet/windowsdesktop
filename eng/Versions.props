@@ -19,6 +19,25 @@
     <NETCoreAppFrameworkVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>netcoreapp$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
   </PropertyGroup>
+
+  <!--
+    Servicing build settings for setup packages. Instructions:
+
+    * To enable a package build for the current patch release, set PatchVersion to match the current
+      patch version of that package. ("major.minor.patch".) This is normally the same as
+      PatchVersion above.
+    * When the PatchVersion property above is incremented at the beginning of the next servicing
+      release, all packages listed below automatically stop building because the property no longer
+      matches the metadata. (Do not delete the items!)
+
+    If the PatchVersion below is never changed from '0', the package will build in the 'master'
+    branch, and during a forked RTM release ("X.Y.0"). It will stop building for "X.Y.1" unless
+    manually enabled by updating the metadata.
+  -->
+  <ItemGroup>
+    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <MicrosoftDotNetMaestroTasksVersion>1.0.0-beta.18619.4</MicrosoftDotNetMaestroTasksVersion>
   </PropertyGroup>

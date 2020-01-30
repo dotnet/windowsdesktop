@@ -19,7 +19,6 @@
     <NETCoreAppFrameworkVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>netcoreapp$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
   </PropertyGroup>
-
   <!--
     Servicing build settings for setup packages. Instructions:
 
@@ -37,16 +36,15 @@
   <ItemGroup>
     <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="0" />
   </ItemGroup>
-
   <PropertyGroup>
     <MicrosoftDotNetMaestroTasksVersion>1.0.0-beta.18619.4</MicrosoftDotNetMaestroTasksVersion>
   </PropertyGroup>
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20077.7</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20077.7</MicrosoftDotNetBuildTasksPackagingVersion>
-    <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20077.7</MicrosoftDotNetVersionToolsTasksVersion>
+    <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20079.8</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20079.8</MicrosoftDotNetBuildTasksPackagingVersion>
+    <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20079.8</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0-alpha1.19514.1</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-alpha1.19514.1</MicrosoftNETCoreAppRuntimewinx64Version>

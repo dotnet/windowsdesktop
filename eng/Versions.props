@@ -86,7 +86,7 @@
     <!-- wpf -->
     <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.1.20107.3</MicrosoftDotNetWpfGitHubVersion>
     <!-- wpf-int -->
-    <MicrosoftDotNetWpfDncEngVersion>5.0.0-preview.1.20108.7</MicrosoftDotNetWpfDncEngVersion>
+    <MicrosoftDotNetWpfDncEngVersion>5.0.0-preview.1.20108.9</MicrosoftDotNetWpfDncEngVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

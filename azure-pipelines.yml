@@ -3,9 +3,11 @@ trigger:
   branches:
     include:
     - master
+    - experimental/*
 
 pr:
 - master
+- experimental/*
 
 name: $(Date:yyyyMMdd)$(Rev:.r)
 

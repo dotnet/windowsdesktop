@@ -42,9 +42,9 @@
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20079.8</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20079.8</MicrosoftDotNetBuildTasksPackagingVersion>
-    <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20079.8</MicrosoftDotNetVersionToolsTasksVersion>
+    <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20111.11</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20111.11</MicrosoftDotNetBuildTasksPackagingVersion>
+    <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20111.11</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0-alpha1.19514.1</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-alpha1.19514.1</MicrosoftNETCoreAppRuntimewinx64Version>
@@ -107,5 +107,9 @@
     <MicrosoftBclJsonSourcesPackage>Microsoft.Bcl.Json.Sources</MicrosoftBclJsonSourcesPackage>
     <MicrosoftTargetingPackPrivateWinRTPackage>Microsoft.TargetingPack.Private.WinRT</MicrosoftTargetingPackPrivateWinRTPackage>
     <MicrosoftSymbolUploaderBuildTaskPackage>Microsoft.SymbolUploader.Build.Task</MicrosoftSymbolUploaderBuildTaskPackage>
+  </PropertyGroup>
+  <!-- Base runtime pack name (RID-less) for shared framework tooling. -->
+  <PropertyGroup>
+    <MicrosoftNETCoreAppRuntimePackage>Microsoft.NETCore.App.Runtime</MicrosoftNETCoreAppRuntimePackage>
   </PropertyGroup>
 </Project>

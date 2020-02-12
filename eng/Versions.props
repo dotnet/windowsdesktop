@@ -110,4 +110,8 @@
     <MicrosoftTargetingPackPrivateWinRTPackage>Microsoft.TargetingPack.Private.WinRT</MicrosoftTargetingPackPrivateWinRTPackage>
     <MicrosoftSymbolUploaderBuildTaskPackage>Microsoft.SymbolUploader.Build.Task</MicrosoftSymbolUploaderBuildTaskPackage>
   </PropertyGroup>
+  <!-- Base runtime pack name (RID-less) for shared framework tooling. -->
+  <PropertyGroup>
+    <MicrosoftNETCoreAppRuntimePackage>Microsoft.NETCore.App.Runtime</MicrosoftNETCoreAppRuntimePackage>
+  </PropertyGroup>
 </Project>

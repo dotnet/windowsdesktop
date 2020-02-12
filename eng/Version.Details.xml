@@ -61,10 +61,17 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>673635654c20e5eee329945c58058855bcc24340</Sha>
     </Dependency>
-    <Dependency Name="System.IO.Pipes.AccessControl" Version="4.5.1" CoherentParentDependency="Microsoft.Private.Winforms">
-      <Uri>https://github.com/dotnet/runtime</Uri>
+    
+    <!--
+        Always ships a well-known version of System.IO.Pipes.AccessControl
+            CPD to Microsoft.Private.Winforms not needed
+            New versions are not produced by dotnet/runtime.
+    --> 
+    <Dependency Name="System.IO.Pipes.AccessControl" Version="4.5.1">
+      <Uri>https://github.com/dotnet/corefx</Uri>
       <Sha>7ee84596d92e178bce54c986df31ccc52479e772</Sha>
     </Dependency>
+    
     <Dependency Name="System.Security.AccessControl" Version="5.0.0-alpha.1.20112.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>673635654c20e5eee329945c58058855bcc24340</Sha>

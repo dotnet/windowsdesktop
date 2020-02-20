@@ -29,6 +29,10 @@ variables:
   - name: _DotNetValidationArtifactsCategory
     value: .NETCoreValidation
 
+  # Fill in missing channel name variables.
+  - name: Net_5_Preview1_Channel_Id
+    value: 737
+
   # Produce test-signed build for PR and Public builds
   - ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
     - name: SignType
@@ -91,6 +95,13 @@ stages:
           name: .NET Core 5 Dev
           bar: NetCore_5_Dev_Channel_Id
           storage: master
+          public: true
+
+      - dependsOn: Net5_Preview1_Publish
+        channel:
+          name: .NET 5 Preview 1
+          bar: Net_5_Preview1_Channel_Id
+          storage: release/5.0-preview1
           public: true
 
       - dependsOn: General_Testing_Publish

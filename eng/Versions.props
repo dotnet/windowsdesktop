@@ -82,9 +82,9 @@
     <!-- coreclr -->
     <MicrosoftNETCoreRuntimeCoreCLRVersion>5.0.0-alpha1.19513.3</MicrosoftNETCoreRuntimeCoreCLRVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.0-preview.2.20127.1</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.0-preview.2.20127.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.2.20127.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.2.20128.1</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

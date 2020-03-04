@@ -3,78 +3,78 @@
   <ProductDependencies>
     <!-- <Dependency Name="Microsoft.NETCore.Platforms" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.NETCore.Platforms" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.NETCore.Targets" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.NETCore.Targets" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.Private.CoreFx.NETCoreApp" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.Private.CoreFx.NETCoreApp" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.Win32.Registry" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.Win32.Registry" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.Win32.SystemEvents" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.Win32.SystemEvents" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.Windows.Compatibility" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.Windows.Compatibility" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.CodeDom" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.CodeDom" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Configuration.ConfigurationManager" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Configuration.ConfigurationManager" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Diagnostics.EventLog" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Diagnostics.EventLog" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Diagnostics.PerformanceCounter" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Diagnostics.PerformanceCounter" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.DirectoryServices" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms">
  -->
     <Dependency Name="System.DirectoryServices" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Drawing.Common" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Drawing.Common" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.IO.FileSystem.AccessControl" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.IO.FileSystem.AccessControl" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Resources.Extensions" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Resources.Extensions" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.IO.Packaging" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.IO.Packaging" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!--
@@ -88,59 +88,59 @@
     </Dependency>
     <!-- <Dependency Name="System.Security.AccessControl" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.AccessControl" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Cryptography.Cng" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Cryptography.Cng" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Cryptography.Pkcs" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Cryptography.Pkcs" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Cryptography.ProtectedData" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Cryptography.ProtectedData" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Cryptography.Xml" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Cryptography.Xml" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Permissions" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Permissions" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Security.Principal.Windows" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Security.Principal.Windows" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Text.Encodings.Web" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms">
  -->
     <Dependency Name="System.Text.Encodings.Web" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Text.Json" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms">
  -->
     <Dependency Name="System.Text.Json" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Threading.AccessControl" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Threading.AccessControl" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <!-- <Dependency Name="System.Windows.Extensions" Version="5.0.0-alpha1.19512.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="System.Windows.Extensions" Version="5.0.0-alpha.1.19563.6">
-      <Uri>https://github.com/dotnet/corefx</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>5cee7c97d602f294e27c582d4dab81ec388f1d7b</Sha>
     </Dependency>
     <Dependency Name="NETStandard.Library" Version="2.2.0-prerelease.19564.1">
@@ -150,7 +150,7 @@
     <!-- <Dependency Name="Microsoft.NETCore.Runtime.CoreCLR" Version="5.0.0-alpha1.19513.3" CoherentParentDependency="Microsoft.Private.Winforms">
  -->
     <Dependency Name="Microsoft.NETCore.Runtime.CoreCLR" Version="5.0.0-alpha1.19564.1">
-      <Uri>https://github.com/dotnet/coreclr</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>a9f3fc16483eecfc47fb79c362811d870be02249</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Private.Winforms" Version="5.0.0-preview.2.20154.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
@@ -163,12 +163,12 @@
     </Dependency>
     <!-- <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-alpha1.19514.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-alpha.1.19564.1">
-      <Uri>https://github.com/dotnet/core-setup</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>c77948d92a2f950140f09384f057cb893ec3955a</Sha>
     </Dependency>
     <!-- <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="5.0.0-alpha1.19514.1" CoherentParentDependency="Microsoft.Private.Winforms"> -->
     <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="5.0.0-alpha.1.19564.1">
-      <Uri>https://github.com/dotnet/core-setup</Uri>
+      <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>c77948d92a2f950140f09384f057cb893ec3955a</Sha>
     </Dependency>
   </ProductDependencies>

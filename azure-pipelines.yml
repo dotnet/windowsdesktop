@@ -32,6 +32,10 @@ variables:
   # Fill in missing channel name variables.
   - name: Net_5_Preview1_Channel_Id
     value: 737
+    
+  # Fill in missing channel name variables.
+  - name: Net_5_Preview2_Channel_Id
+    value: 738
 
   # Produce test-signed build for PR and Public builds
   - ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
@@ -102,6 +106,13 @@ stages:
           name: .NET 5 Preview 1
           bar: Net_5_Preview1_Channel_Id
           storage: release/5.0-preview1
+          public: true
+          
+      - dependsOn: Net5_Preview2_Publish
+        channel:
+          name: .NET 5 Preview 2
+          bar: Net_5_Preview2_Channel_Id
+          storage: release/5.0-preview2
           public: true
 
       - dependsOn: General_Testing_Publish

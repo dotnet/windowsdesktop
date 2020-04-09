@@ -92,8 +92,8 @@ stages:
 
       - dependsOn: NetCore_Dev5_Publish
         channel:
-          name: .NET Core 5 Dev
-          bar: NetCore_5_Dev_Channel_Id
+          name: .NET 5 Dev
+          bar: Net_5_Dev_Channel_Id
           storage: master
           public: true
 

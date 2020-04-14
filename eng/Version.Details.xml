@@ -122,13 +122,13 @@
       <Uri>https://github.com/dotnet/coreclr</Uri>
       <Sha>d5bb8bf2437d447750cf0203dd55bb5160ff36b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Private.Winforms" Version="5.0.0-preview.4.20209.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Private.Winforms" Version="5.0.0-preview.4.20213.4" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
-      <Sha>b62e3ae3fef254789cf6ede0a0d5e0543ce392cc</Sha>
+      <Sha>2b98e51ac689ec0b493f4e7304f4725ee8ab8519</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-preview.4.20213.1">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-preview.4.20213.4">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>ab0f1f27a0df87dad7787a9163801c737a53122c</Sha>
+      <Sha>6cd6e3b8cc3bf59eb607b666a0d5f27ff76d8f66</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-preview.4.20205.13" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>

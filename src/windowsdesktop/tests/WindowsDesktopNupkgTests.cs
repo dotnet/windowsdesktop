@@ -94,6 +94,7 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         private bool CurrentRidShouldCreateNupkg =>
             new[]
             {
+                "win-arm64",
                 "win-x64",
                 "win-x86"
             }.Contains(dirs.BuildRID);

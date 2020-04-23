@@ -84,7 +84,7 @@
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>5.0.0-preview.4.20221.5</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.4.20222.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.4.20222.3</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

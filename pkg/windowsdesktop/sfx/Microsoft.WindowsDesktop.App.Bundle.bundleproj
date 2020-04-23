@@ -17,24 +17,29 @@
   </ItemGroup>
 
   <!-- Obtain the .NET Core Runtime installers from the VS insertion packages. -->
-  <ItemGroup>
-    <InsertionPackageRID Include="@(RestoreBuildRID)" Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
+  <Target Name="CollectVSInsertionPackageDownloads"
+          BeforeTargets="CollectPackageReferences">
 
-    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
-    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />
-    <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
+    <ItemGroup>
+      <InsertionPackageRID Include="@(RestoreBuildRID)" Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" Condition="'%(RestoreBuildRID.RuntimeMsiExists)' == 'true'"/>
 
-    <NETCoreAppInstallerMsiRID
-      Update="@(NETCoreAppInstallerMsiRID)"
-      Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
-      Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
-      MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
 
-    <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
-  </ItemGroup>
+      <NETCoreAppInstallerMsiRID
+        Update="@(NETCoreAppInstallerMsiRID)"
+        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
+        Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
+        MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
+
+      <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+    </ItemGroup>
+  </Target>
 
   <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
   <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          DependsOnTargets="CollectVSInsertionPackageDownloads"
           BeforeTargets="GetBundledMsiFiles">
     <ItemGroup>
       <NETCoreAppInstallerMsiRID

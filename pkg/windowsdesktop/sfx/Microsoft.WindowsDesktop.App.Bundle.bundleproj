@@ -21,7 +21,10 @@
           BeforeTargets="CollectPackageReferences">
 
     <ItemGroup>
-      <InsertionPackageRID Include="@(RestoreBuildRID)" Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" Condition="'%(RestoreBuildRID.RuntimeMsiExists)' == 'true'"/>
+      <InsertionPackageRID
+        Include="@(RestoreBuildRID)"
+        Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))"
+        Condition="'%(RestoreBuildRID.RuntimeMsiExists)' == 'true'" />
 
       <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
       <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />

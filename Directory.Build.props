@@ -48,10 +48,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <HostMachineInfoProps>$(ObjDir)HostMachineInfo.props</HostMachineInfoProps>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <!--
       This name is used to create a GIT repository URL https://github.com/dotnet/$(GitHubRepositoryName) used to find source code for debugging
       It is also used to name the build output manifest for orchestrated builds.
@@ -76,6 +72,9 @@
     <RunningOnUnix Condition="'$(OS)'!='Windows_NT'">true</RunningOnUnix>
 
     <RunningOnCore Condition="'$(MSBuildRuntimeType)' == 'core'">true</RunningOnCore>
+
+    <HostRuntimeIdentifier Condition="'$(HostRuntimeIdentifier)' == '' and '$(RunningOnCore)' == 'true'">$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</HostRuntimeIdentifier>
+    <HostRuntimeIdentifier Condition="'$(HostRuntimeIdentifier)' == '' and '$(RunningOnCore)' != 'true'">win-$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</HostRuntimeIdentifier>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -163,11 +162,8 @@
     <ExeSuffix Condition="'$(OSGroup)'=='Windows_NT'">.exe</ExeSuffix>
   </PropertyGroup>
 
-  <Import Project="$(HostMachineInfoProps)"
-          Condition="Exists('$(HostMachineInfoProps)')" />
-
-  <PropertyGroup Condition="'$(OutputRid)' == '' and '$(HostMachineRid)' != ''">
-    <OutputRid>$(HostMachineRid.Remove($(HostMachineRid.LastIndexOf('-'))))-$(TargetArchitecture)</OutputRid>
+  <PropertyGroup Condition="'$(OutputRid)' == '' and '$(HostRuntimeIdentifier)' != ''">
+    <OutputRid>$(HostRuntimeIdentifier.Remove($(HostRuntimeIdentifier.LastIndexOf('-'))))-$(TargetArchitecture)</OutputRid>
   </PropertyGroup>
 
   <!-- Portable -->

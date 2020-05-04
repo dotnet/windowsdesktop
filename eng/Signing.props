@@ -23,6 +23,10 @@
     <FileSignInfo Include="apphost.exe;comhost.dll" CertificateName="None" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(SignBinaries)' == 'true'">
+    <ItemsToSign Include="$(CrossGenRootPath)**/*.dll" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(SignMsiFiles)' == 'true'">
     <ItemsToSign Include="$(ArtifactsPackagesDir)**/*.msi" />
     <ItemsToSign Include="$(ArtifactsPackagesDir)**/*.cab" />

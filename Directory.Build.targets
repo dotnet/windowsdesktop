@@ -6,7 +6,6 @@
   <!-- Provide default targets which can be hooked onto or overridden as necessary -->
   <Target Name="Pack" />
 
-  <UsingTask TaskName="GetTargetMachineInfo" AssemblyFile="$(LocalBuildToolsTaskFile)" />
   <UsingTask TaskName="RegenerateReadmeTable" AssemblyFile="$(LocalBuildToolsTaskFile)" />
 
   <PropertyGroup>

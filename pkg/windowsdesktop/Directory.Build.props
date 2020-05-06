@@ -8,7 +8,7 @@
   <PropertyGroup>
     <ShortFrameworkName>windowsdesktop</ShortFrameworkName>
 
-    <FrameworkPackageName>Microsoft.WindowsDesktop.App</FrameworkPackageName>
+    <FrameworkPackageName>$(SharedFrameworkName)</FrameworkPackageName>
 
     <VSInsertionProductName>WindowsDesktop</VSInsertionProductName>
 

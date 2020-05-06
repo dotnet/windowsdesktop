@@ -65,7 +65,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SharedFrameworkName>Microsoft.NETCore.App</SharedFrameworkName>
+    <SharedFrameworkName>Microsoft.WindowsDesktop.App</SharedFrameworkName>
     <NETCoreAppFrameworkIdentifier>.NETCoreApp</NETCoreAppFrameworkIdentifier>
     <NETCoreAppFrameworkMoniker>$(NETCoreAppFrameworkIdentifier),Version=v$(NETCoreAppFrameworkVersion)</NETCoreAppFrameworkMoniker>
     <NETCoreAppFrameworkBrandName>.NET Core $(NETCoreAppFrameworkVersion)</NETCoreAppFrameworkBrandName>

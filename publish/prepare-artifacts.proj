@@ -1,7 +1,7 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
-	<UsingTask TaskName="GenerateChecksums" AssemblyFile="$(LocalBuildToolsTaskFile)" />
+  <UsingTask TaskName="GenerateChecksums" AssemblyFile="$(LocalBuildToolsTaskFile)" />
 
   <PropertyGroup>
     <SuppressFinalPackageVersion>true</SuppressFinalPackageVersion>
@@ -37,7 +37,7 @@
       <PreparedFileUploadDir>$(ArtifactsObjDir)PreparedFileUpload\</PreparedFileUploadDir>
     </PropertyGroup>
 
-	  <ItemGroup>
+    <ItemGroup>
       <AllFilesToBlobStorage Include="@(UploadToBlobStorageFile);@(UploadToBlobStorageFile)" />
     </ItemGroup>
 
@@ -126,6 +126,7 @@
       <ItemsToPush Include="@(GeneratedChecksumFile)">
         <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
         <Category>Checksum</Category>
+      </ItemsToPush>
     </ItemGroup>
 
     <!-- Push items to AzDO as build artifacts, generating the asset manifest as a side effect. -->

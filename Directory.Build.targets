@@ -47,7 +47,6 @@
 
       <NuGetVersion>$(SharedFrameworkNugetVersion)</NuGetVersion>
 
-      <BinariesRelativePath>WindowsDesktop/$(SharedFrameworkNugetVersion)/</BinariesRelativePath>
       <InstallersRelativePath>WindowsDesktop/$(SharedFrameworkNugetVersion)/</InstallersRelativePath>
     </PropertyGroup>
 

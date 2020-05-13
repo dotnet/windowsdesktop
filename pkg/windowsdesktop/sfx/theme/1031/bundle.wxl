@@ -58,8 +58,8 @@ Bereit? Los geht's!</String>
   <String Id="FilesInUseDontCloseRadioButton">&amp;Anwendungen nicht schließen. Ein Neustart ist erforderlich.</String>
   <String Id="FilesInUseOkButton">&amp;OK</String>
   <String Id="FilesInUseCancelButton">&amp;Abbrechen</String>
-  <String Id="WelcomeHeaderMessage"></String>
-  <String Id="WelcomeDescription"></String>
+  <String Id="WelcomeHeaderMessage">Windows Desktop-Runtime</String>
+  <String Id="WelcomeDescription">Die .NET Windows Desktop-Runtime wird zum Ausführen von Windows Forms- und WPF-Anwendungen auf Ihrem Computer verwendet. .NET ist ein plattformübergreifendes Open-Source-Framework, das von Microsoft unterstützt wird. Wir wünschen Ihnen viel Spaß damit!</String>
   <String Id="LearnMoreTitle">Weitere Informationen zu .NET Core</String>
   <String Id="SuccessInstallLocation">Folgendes wurde unter [DOTNETHOME] installiert.</String>
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
@@ -69,6 +69,7 @@ Bereit? Los geht's!</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Tutorials&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;.NET Core-Telemetrie&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Datenschutzerklärung&lt;/A&gt;</String>
-  <String Id="EulaLink">&lt;A HREF="https://go.microsoft.com/fwlink/?LinkId=329770"&gt;Lizenzbedingungen für die .NET-Bibliothek&lt;/A&gt;</String>
+  <String Id="EulaLink">&lt;A HREF="https://aka.ms/dotnet-license-windows"&gt;Lizenzierungsinformationen für .NET&lt;/A&gt;</String>
+  <String Id="LicenseAssent">Durch Klicken auf "Installieren" stimmen Sie den nachstehenden Bedingungen zu.</String>
   
 </WixLocalization>

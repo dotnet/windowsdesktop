@@ -24,18 +24,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(SignBinaries)' == 'true'">
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/hostfxr.dll" />
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/hostpolicy.dll" />
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/dotnet.exe" />
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/ijwhost.dll" />
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/winrthost.dll" />
-    <ItemsToSign Include="$(BaseOutputRootPath)corehost/**/nethost.dll" />
-
     <ItemsToSign Include="$(CrossGenRootPath)**/*.dll" />
-
-    <ItemsToSign Include="$(ArtifactsBinDir)Microsoft.DotNet.PlatformAbstractions/**/*.dll" />
-    <ItemsToSign Include="$(ArtifactsBinDir)Microsoft.Extensions.DependencyModel/**/*.dll" />
-    <ItemsToSign Include="$(ArtifactsBinDir)Microsoft.NET.HostModel/**/*.dll" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(SignMsiFiles)' == 'true'">

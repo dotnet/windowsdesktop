@@ -79,8 +79,7 @@
       Properties="RepoRoot=$(RepoRoot)"
       Targets="
         Restore;
-        Build;
-        CreateHostMachineInfoFile"/>
+        Build"/>
     
     <WriteLinesToFile
       File="$(RepoTasksOutputFile)"

@@ -133,6 +133,7 @@
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
     <!-- Normally set by sourcelink, and needed by the Pack targets -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
+    <ProjectUrl>https://dot.net</ProjectUrl>
   </PropertyGroup>
 
   <!-- Set up Default symbol and optimization for Configuration -->

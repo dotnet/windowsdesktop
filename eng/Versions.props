@@ -17,7 +17,7 @@
     <!-- Max version of NETCoreApp, used by test projects. -->
     <NETCoreAppMaximumVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppFrameworkVersion>
-    <NETCoreAppFramework>netcoreapp$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
+    <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:

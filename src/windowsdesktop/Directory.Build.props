@@ -9,7 +9,7 @@
     <TestRestoreNuGetConfigFile>$(ObjDir)TestNuGetConfig\NuGet.config</TestRestoreNuGetConfigFile>
     <InternalNupkgCacheDir>$(ObjDir)ExtraNupkgsForTestRestore\</InternalNupkgCacheDir>
     <TestArchitectures>$(TargetArchitecture)</TestArchitectures>
-    <TestInfraTargetFramework>netcoreapp5.0</TestInfraTargetFramework>
+    <TestInfraTargetFramework>net5.0</TestInfraTargetFramework>
   </PropertyGroup>
 
 </Project>

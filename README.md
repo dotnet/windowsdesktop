@@ -5,7 +5,7 @@ supported platforms.
 
 ## Getting started
 
-* [.NET Core 3.0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+* [.NET 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core)
 * [Windows Forms repository](https://github.com/dotnet/winforms)
 * [WPF repository](https://github.com/dotnet/wpf)
 
@@ -16,7 +16,7 @@ design conversations, and fix issues.
 
 * This repo defines [contributing guidelines](CONTRIBUTING.md) and also follows
   the more general [.NET Core contributing
-  guide](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md).
+  guide](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md).
 * If you have a question or have found a bug, [file an
   issue](https://github.com/dotnet/windowsdesktop/issues/new).
 
@@ -53,7 +53,7 @@ conduct@dotnetfoundation.org.
 
 ## Officially Released Builds
 
-Download official .NET Core releases [here](https://www.microsoft.com/net/download#core).
+Download official .NET releases [here](https://www.microsoft.com/net/download#core).
 
 ## Daily Builds
 

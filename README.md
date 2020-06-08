@@ -5,7 +5,7 @@ supported platforms.
 
 ## Getting started
 
-* [.NET 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core)
+* [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core)
 * [Windows Forms repository](https://github.com/dotnet/winforms)
 * [WPF repository](https://github.com/dotnet/wpf)
 

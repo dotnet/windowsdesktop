@@ -20,6 +20,14 @@
     <GeneratePkg>false</GeneratePkg>
   </PropertyGroup>
 
+  <!-- C++/CLI tooling adds an assemblyref to System.Runtime.InteropServices.WindowsRuntime even though it is unused.
+       Ignore validating this reference when we validate the runtime and ref pack closures since we never use the assembly
+       and it was removed in .NET 5.
+  -->
+  <ItemGroup>
+    <IgnoredReference Include="System.Runtime.InteropServices.WindowsRuntime" />
+  </ItemGroup>
+
   <!-- 
     shared concerns, these shouldn't generally change
     for profile information refere to https://github.com/dotnet/cli/issues/10536#issuecomment-488871926

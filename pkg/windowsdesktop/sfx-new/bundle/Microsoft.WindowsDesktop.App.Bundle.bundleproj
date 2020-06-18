@@ -10,6 +10,7 @@
     <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
     <BundleThemeDirectory>$(MSBuildProjectDirectory)</BundleThemeDirectory>
     <SharedFrameworkArchiveName>windowsdesktop-runtime</SharedFrameworkArchiveName>
+    <BundleNameSuffix>Runtime</BundleNameSuffix>
   </PropertyGroup>
 
   <ItemGroup>

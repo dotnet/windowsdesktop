@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
+
+  <PropertyGroup>
+    <!--
+      Name, used to generate the bundle upgrade code. Must stay the same to allow bundles in a given
+      product band to upgrade in place.
+    -->
+    <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <BundleThemeDirectory>$(MSBuildProjectDirectory)</BundleThemeDirectory>
+    <SharedFrameworkArchiveName>windowsdesktop-runtime</SharedFrameworkArchiveName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BundleComponentReference Include="../sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
+  </ItemGroup>
+
+  <!-- Obtain the .NET Core Runtime installers from the VS insertion packages. -->
+  <Target Name="CollectVSInsertionPackageDownloads"
+          BeforeTargets="CollectPackageReferences">
+    <ItemGroup>
+      <_RuntimeIdentifierForNETCoreMsiRestore Include="win-x86;win-x64" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <InsertionPackageRID
+        Include="@(_RuntimeIdentifierForNETCoreMsiRestore)"
+        Condition="'$(InstallerRuntimeIdentifier)' == '%(Identity)'"
+        Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
+
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
+
+      <NETCoreAppInstallerMsiRID
+        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
+        Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
+        MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
+
+      <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
+  <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          DependsOnTargets="CollectVSInsertionPackageDownloads"
+          BeforeTargets="_GetBundledComponentInstallers">
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID
+        CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
+
+      <_BundledComponents
+        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)\%(MsiFileName)')"
+        Condition="'$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+  </Target>
+
+</Project>

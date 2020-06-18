@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
+    <PropertyGroup>
+        <PlatformPackageType>RuntimePack</PlatformPackageType>
+        <SharedFrameworkArchiveName>windowsdesktop-runtime</SharedFrameworkArchiveName>
+        <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <VSInsertionShortComponentName>WindowsDesktop.SharedFramework</VSInsertionShortComponentName>
+    </PropertyGroup>
+</Project>

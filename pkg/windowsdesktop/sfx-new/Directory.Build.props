@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <UsesNewSharedFrameworkSdk>true</UsesNewSharedFrameworkSdk>
+    <DotNetSharedFrameworkTaskDir>D:\source\arcade\artifacts\bin\Microsoft.DotNet.SharedFramework.Sdk\Debug\netcoreapp2.1\publish\</DotNetSharedFrameworkTaskDir>
+    <DotNetSharedFrameworkMSBuildDir>D:\source\arcade\src\Microsoft.DotNet.SharedFramework.Sdk\targets\</DotNetSharedFrameworkMSBuildDir>    
+  </PropertyGroup>
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
+</Project>

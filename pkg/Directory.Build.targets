@@ -10,13 +10,13 @@
 
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.targets))\Directory.Build.targets" />
 
-  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" Condition="'$(UsesNewSharedFrameworkSdk)' != 'true'" />
 
-  <UsingTask TaskName="CreateFrameworkListFile" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)"/>
+  <!-- <UsingTask TaskName="CreateFrameworkListFile" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)"/>
   <UsingTask TaskName="GenerateCurrentVersion" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
   <UsingTask TaskName="GenerateFileVersionProps" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)"/>
   <UsingTask TaskName="GenerateGuidFromName" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
-  <UsingTask TaskName="GenerateMsiVersion" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" />
+  <UsingTask TaskName="GenerateMsiVersion" AssemblyFile="$(DotNetBuildTasksSharedFrameworkTaskFile)" /> -->
 
   <PropertyGroup>
     <!--

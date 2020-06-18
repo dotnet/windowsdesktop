@@ -1,7 +1,7 @@
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
 
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" />
+  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" Condition="'$(UsesNewSharedFrameworkSdk)' != 'true'" />
 
   <PropertyGroup>
     <PackageLicenseFile>$(ProjectDir)LICENSE.TXT</PackageLicenseFile>
@@ -175,13 +175,6 @@
       BaseId="$(MSBuildProjectName).%(BuildRID)"
       AdditionalProperties="%(AdditionalProperties);BaseId=%(BaseId);IdPrefix=" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <!-- During NuGet restore, grab assets for all applicable RIDs. -->
-    <RuntimeIdentifiers Condition="'$(RestoreAllBuildRids)' == 'true'">@(RestoreBuildRID)</RuntimeIdentifiers>
-    <!-- When resolving assets to pack, use the target runtime (if any). -->
-    <RuntimeIdentifier>$(PackageRID)</RuntimeIdentifier>
-  </PropertyGroup>
 
   <Choose>
     <When Condition="$(RuntimeIdentifier.StartsWith('win'))">

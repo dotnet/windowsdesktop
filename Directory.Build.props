@@ -77,10 +77,10 @@
     <HostRuntimeIdentifier Condition="'$(HostRuntimeIdentifier)' == '' and '$(RunningOnCore)' != 'true'">win-$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</HostRuntimeIdentifier>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!-- <PropertyGroup>
     <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
     <Platform Condition="'$(Platform)'==''">$(TargetArchitecture)</Platform>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <!--
   Projects that have no OS-specific implementations just use Debug and Release for $(Configuration).
   Projects that do have OS-specific implementations use OS_Debug and OS_Release, for all OS's we support even

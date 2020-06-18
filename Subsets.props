@@ -39,6 +39,15 @@
 
   <ItemGroup>
     <SubsetName
+      Include="newsfx"
+      Description="The new shared framework sdk-based projects." />
+  </ItemGroup>
+  <ItemGroup Condition="$(SubsetToLower.Contains('newsfx'))">
+    <ProjectToBuild Include="$(RepoRoot)pkg\windowsdesktop\sfx-new\**\*.*proj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SubsetName
       Include="depproj"
       Description="The dependency projects. These gather shared framework files and run crossgen on them to turn them into ready-to-run (R2R) assemblies for the current platform." />
   </ItemGroup>

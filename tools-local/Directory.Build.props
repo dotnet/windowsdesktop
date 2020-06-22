@@ -4,6 +4,8 @@
 
   <PropertyGroup>
     <BuildCustomTasksForDesktop Condition="'$(MSBuildRuntimeType)' != 'Core'">true</BuildCustomTasksForDesktop>
+    <!-- Clear the RID for the tools-local projects since they should be built rid-agnostic. -->
+    <RuntimeIdentifier></RuntimeIdentifier>
   </PropertyGroup>
 
 </Project>

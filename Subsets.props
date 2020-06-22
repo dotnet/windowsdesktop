@@ -39,30 +39,11 @@
 
   <ItemGroup>
     <SubsetName
-      Include="newsfx"
-      Description="The new shared framework sdk-based projects." />
-  </ItemGroup>
-  <ItemGroup Condition="$(SubsetToLower.Contains('newsfx'))">
-    <ProjectToBuild Include="$(RepoRoot)pkg\windowsdesktop\sfx-new\**\*.*proj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SubsetName
-      Include="depproj"
-      Description="The dependency projects. These gather shared framework files and run crossgen on them to turn them into ready-to-run (R2R) assemblies for the current platform." />
-  </ItemGroup>
-  <ItemGroup Condition="'$(SubsetToLower)' == '' or $(SubsetToLower.Contains('depproj'))">
-    <DepprojProjectToBuild Include="$(RepoRoot)pkg\**\*.depproj" SignPhase="Binaries" />
-    <ProjectToBuild Include="@(DepprojProjectToBuild)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SubsetName
-      Include="pkgproj"
+      Include="Packages"
       Description="The packaging projects. These produce NETCoreApp and WindowsDesktop assets: NuGet packages, installers, zips, and Linux packages." />
   </ItemGroup>
-  <ItemGroup Condition="'$(SubsetToLower)' == '' or $(SubsetToLower.Contains('pkgproj'))">
-    <PkgprojProjectToBuild Include="$(RepoRoot)pkg\**\*.pkgproj" SignPhase="MsiFiles" />
+  <ItemGroup Condition="'$(SubsetToLower)' == '' or $(SubsetToLower.Contains('packages'))">
+    <PkgprojProjectToBuild Include="$(RepoRoot)pkg\**\*.sfxproj" SignPhase="MsiFiles" />
     <ProjectToBuild Include="@(PkgprojProjectToBuild)" />
   </ItemGroup>
 
@@ -74,17 +55,6 @@
   <ItemGroup Condition="'$(SubsetToLower)' == '' or $(SubsetToLower.Contains('bundle'))">
     <BundleProjectToBuild Include="$(RepoRoot)pkg\**\*.bundleproj" SignPhase="BundleInstallerFiles" />
     <ProjectToBuild Include="@(BundleProjectToBuild)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SubsetName
-      Include="Installer"
-      Description="Creates final installer files. Signs the burn bundle, including engine, and produces NuGet packages for VS insertion." />
-  </ItemGroup>
-  <ItemGroup Condition="'$(SubsetToLower)' == '' or $(SubsetToLower.Contains('installer'))">
-    <InstallerProjectToBuild Include="$(RepoRoot)pkg\signed-bundle\signed-bundle.proj" />
-    <InstallerProjectToBuild Include="$(RepoRoot)pkg\vs-insertion-packages\vs-insertion-packages.proj" />
-    <ProjectToBuild Include="@(InstallerProjectToBuild)" />
   </ItemGroup>
 
   <ItemGroup>

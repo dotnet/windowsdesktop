@@ -1,8 +1,7 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
-  <Target Name="GenerateVersionBadge"
-          DependsOnTargets="GetProductVersions">
+  <Target Name="GenerateVersionBadge">
     <PropertyGroup>
       <templateSvg>$(MSBuildThisFileDirectory)version_badge.svg</templateSvg>
     </PropertyGroup>
@@ -11,7 +10,7 @@
 
     <WriteLinesToFile
       File="$(OutputVersionBadge)"
-      Lines="$([System.IO.File]::ReadAllText('$(templateSvg)').Replace('ver_number', '$(ProductVersion)'))"
+      Lines="$([System.IO.File]::ReadAllText('$(templateSvg)').Replace('ver_number', '$(Version)'))"
       Overwrite="true" />
 
     <Message Text="$(MSBuildProjectName) -> $(OutputVersionBadge)" Importance="High" />

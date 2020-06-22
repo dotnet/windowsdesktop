@@ -77,10 +77,10 @@
     <HostRuntimeIdentifier Condition="'$(HostRuntimeIdentifier)' == '' and '$(RunningOnCore)' != 'true'">win-$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</HostRuntimeIdentifier>
   </PropertyGroup>
 
-  <!-- <PropertyGroup>
+  <PropertyGroup>
     <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
     <Platform Condition="'$(Platform)'==''">$(TargetArchitecture)</Platform>
-  </PropertyGroup> -->
+  </PropertyGroup>
   <!--
   Projects that have no OS-specific implementations just use Debug and Release for $(Configuration).
   Projects that do have OS-specific implementations use OS_Debug and OS_Release, for all OS's we support even
@@ -162,20 +162,21 @@
     <ExeSuffix Condition="'$(OSGroup)'=='Windows_NT'">.exe</ExeSuffix>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(OutputRid)' == '' and '$(HostRuntimeIdentifier)' != ''">
-    <OutputRid>$(HostRuntimeIdentifier.Remove($(HostRuntimeIdentifier.LastIndexOf('-'))))-$(TargetArchitecture)</OutputRid>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == '' and '$(HostRuntimeIdentifier)' != ''">
+    <RuntimeIdentifier>$(HostRuntimeIdentifier.Remove($(HostRuntimeIdentifier.LastIndexOf('-'))))-$(TargetArchitecture)</RuntimeIdentifier>
   </PropertyGroup>
 
   <!-- Portable -->
   <PropertyGroup Condition="'$(PortableBuild)' == 'true'">
-    <OutputRid Condition="'$(OSGroup)' == 'Windows_NT'">win-$(TargetArchitecture)</OutputRid>
-    <OutputRid Condition="'$(OSGroup)' == 'OSX'">osx-$(TargetArchitecture)</OutputRid>
-    <OutputRid Condition="'$(OSGroup)' == 'Linux' or '$(OSGroup)' == 'Unix'">linux-$(TargetArchitecture)</OutputRid>
-    <OutputRid Condition="'$(OSGroup)' == 'FreeBSD'">freebsd-$(TargetArchitecture)</OutputRid>
+    <RuntimeIdentifier Condition="'$(OSGroup)' == 'Windows_NT'">win-$(TargetArchitecture)</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(OSGroup)' == 'OSX'">osx-$(TargetArchitecture)</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(OSGroup)' == 'Linux' or '$(OSGroup)' == 'Unix'">linux-$(TargetArchitecture)</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(OSGroup)' == 'FreeBSD'">freebsd-$(TargetArchitecture)</RuntimeIdentifier>
   </PropertyGroup>
 
   <PropertyGroup>
-    <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(OutputRid)</TestTargetRid>
+    <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(RuntimeIdentifier)</TestTargetRid>
+    <InstallerRuntimeIdentifier Condition="'$(InstallerRuntimeIdentifier)' == ''">$(RuntimeIdentifier)</InstallerRuntimeIdentifier>
   </PropertyGroup>
 
   <!-- Produce assets into the specified blob feed. -->
@@ -185,7 +186,7 @@
 
   <!-- Set up the default output and intermediate paths -->
   <PropertyGroup>
-    <OSPlatformConfig>$(OutputRid).$(ConfigurationGroup)</OSPlatformConfig>
+    <OSPlatformConfig>$(RuntimeIdentifier).$(ConfigurationGroup)</OSPlatformConfig>
 
     <BaseOutputRootPath>$(BinDir)$(OSPlatformConfig)\</BaseOutputRootPath>
     <CrossGenRootPath>$(BaseOutputRootPath)crossgen\</CrossGenRootPath>
@@ -207,7 +208,7 @@
     <DisableCrossgen>false</DisableCrossgen>
     <!-- Disable cross-gen on FreeBSD for now. This can be revisited when we have full support. -->
     <DisableCrossgen Condition="'$(OSGroup)'=='FreeBSD'">true</DisableCrossgen>
-    <OutputVersionBadge>$(AssetOutputPath)sharedfx_$(OutputRid)_$(ConfigurationGroup)_version_badge.svg</OutputVersionBadge>
+    <OutputVersionBadge>$(AssetOutputPath)sharedfx_$(RuntimeIdentifier)_$(ConfigurationGroup)_version_badge.svg</OutputVersionBadge>
   </PropertyGroup>
 
   <!-- Set up handling of build warnings -->
@@ -232,74 +233,74 @@
     <TargetsSles>false</TargetsSles>
   </PropertyGroup>
   <Choose>
-    <When Condition="$(OutputRid.StartsWith('win'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('win'))">
       <PropertyGroup>
         <TargetsWindows>true</TargetsWindows>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('osx'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('osx'))">
       <PropertyGroup>
         <TargetsOSX>true</TargetsOSX>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('debian'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('debian'))">
       <PropertyGroup>
         <TargetsDebian>true</TargetsDebian>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('ubuntu'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('ubuntu'))">
       <PropertyGroup>
         <TargetsUbuntu>true</TargetsUbuntu>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('linuxmint'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('linuxmint'))">
       <PropertyGroup>
         <TargetsLinuxMint>true</TargetsLinuxMint>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('rhel'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('rhel'))">
       <PropertyGroup>
         <TargetsRhel>true</TargetsRhel>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('centos'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('centos'))">
       <PropertyGroup>
         <TargetsCentos>true</TargetsCentos>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('opensuse'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('opensuse'))">
       <PropertyGroup>
         <TargetsOpensuse>true</TargetsOpensuse>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('fedora'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('fedora'))">
       <PropertyGroup>
         <TargetsFedora>true</TargetsFedora>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('oracle'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('oracle'))">
       <PropertyGroup>
         <TargetsOracle>true</TargetsOracle>
         <TargetsLinux>true</TargetsLinux>
         <TargetsUnix>true</TargetsUnix>
       </PropertyGroup>
     </When>
-    <When Condition="$(OutputRid.StartsWith('sles'))">
+    <When Condition="$(RuntimeIdentifier.StartsWith('sles'))">
       <PropertyGroup>
         <TargetsSles>true</TargetsSles>
         <TargetsLinux>true</TargetsLinux>
@@ -326,10 +327,10 @@
   </PropertyGroup>
 
   <!-- Use actual publishable (non-dummy) package name produced by the build system for this RID -->
-  <PropertyGroup Condition="'$(OutputRid)' != ''">
-    <PackageTargetRid>$(OutputRid)</PackageTargetRid>
-    <PackageTargetRid Condition="'$(OutputRid)' == 'osx.10.11-x64'">osx.10.10-x64</PackageTargetRid>
-    <PackageTargetRid Condition="$(OutputRid.StartsWith('rhel.7.')) and $(OutputRid.EndsWith('-x64'))">rhel.7-x64</PackageTargetRid>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <PackageTargetRid>$(RuntimeIdentifier)</PackageTargetRid>
+    <PackageTargetRid Condition="'$(RuntimeIdentifier)' == 'osx.10.11-x64'">osx.10.10-x64</PackageTargetRid>
+    <PackageTargetRid Condition="$(RuntimeIdentifier.StartsWith('rhel.7.')) and $(RuntimeIdentifier.EndsWith('-x64'))">rhel.7-x64</PackageTargetRid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UsingNETSdkCompiler)' != 'true'">

@@ -8,10 +8,6 @@
   <PropertyGroup>
     <ShortFrameworkName>windowsdesktop</ShortFrameworkName>
 
-    <FrameworkPackageName>$(SharedFrameworkName)</FrameworkPackageName>
-
-    <VSInsertionProductName>WindowsDesktop</VSInsertionProductName>
-
     <!--
       Do not attempt to restore or build WindowsDesktop projects when building from source, because
       WinForms and WPF do not participate.
@@ -28,9 +24,6 @@
       runtimes\win-x86\lib\netcoreapp3.0\System.Printing.dll
     -->
     <PermitDllAndExeFilesLackingFileVersion>true</PermitDllAndExeFilesLackingFileVersion>
-
-    <!-- Generate the runtimeconfig with the correct Microsoft.NETCore.App version. -->
-    <MicrosoftNETCoreAppRuntimeConfigVersion>$(MicrosoftNETCoreAppRuntimewinx64Version)</MicrosoftNETCoreAppRuntimeConfigVersion>
   </PropertyGroup>
 
 </Project>

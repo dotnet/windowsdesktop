@@ -5,7 +5,7 @@
     <WindowsFormsClassificationProps>$(PkgMicrosoft_Private_Winforms)\FrameworkListFiles.props</WindowsFormsClassificationProps>
     <RuntimePackProjectPath>$(MSBuildThisFileDirectory)Microsoft.WindowsDesktop.App.Runtime.sfxproj</RuntimePackProjectPath>
     <SharedFrameworkArchiveName>windowsdesktop-targeting-pack</SharedFrameworkArchiveName>
-    <InstallerRuntimeIdentifiers>win-x64;win-x86</InstallerRuntimeIdentifiers>
+    <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
     <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
   </PropertyGroup>
 

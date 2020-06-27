@@ -64,7 +64,7 @@
     <SystemDrawingCommonVersion>5.0.0-preview.8.20325.1</SystemDrawingCommonVersion>
     <SystemIOFileSystemAccessControlVersion>5.0.0-preview.8.20325.1</SystemIOFileSystemAccessControlVersion>
     <SystemIOPackagingVersion>5.0.0-preview.8.20325.1</SystemIOPackagingVersion>
-    <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
+    <SystemIOPipesAccessControlVersion>5.0.0-preview.8.20325.1</SystemIOPipesAccessControlVersion>
     <SystemResourcesExtensionsVersion>5.0.0-preview.8.20325.1</SystemResourcesExtensionsVersion>
     <SystemSecurityAccessControlVersion>5.0.0-preview.8.20325.1</SystemSecurityAccessControlVersion>
     <SystemSecurityCryptographyCngVersion>5.0.0-preview.8.20325.1</SystemSecurityCryptographyCngVersion>
@@ -84,7 +84,7 @@
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>5.0.0-preview.8.20326.1</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.8.20326.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.0-preview.8.20327.1</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

@@ -61,9 +61,9 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>4a21529178750aab4b194d54918d0676e0e5833a</Sha>
     </Dependency>
-    <Dependency Name="System.IO.Pipes.AccessControl" Version="4.5.1" CoherentParentDependency="Microsoft.Private.Winforms">
-      <Uri>https://github.com/dotnet/corefx</Uri>
-      <Sha>7ee84596d92e178bce54c986df31ccc52479e772</Sha>
+    <Dependency Name="System.IO.Pipes.AccessControl" Version="5.0.0-preview.8.20325.1" CoherentParentDependency="Microsoft.Private.Winforms">
+      <Uri>https://github.com/dotnet/runtime</Uri>
+      <Sha>4a21529178750aab4b194d54918d0676e0e5833a</Sha>
     </Dependency>
     <Dependency Name="System.Security.AccessControl" Version="5.0.0-preview.8.20325.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
@@ -121,9 +121,9 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>d4fca96a433b539fcf780b6af59431e6a8ca120b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-preview.8.20326.2">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-preview.8.20327.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>73334c86c1f46f29b6686f6b104a1bfc1192dbed</Sha>
+      <Sha>91fae7ffaca13cdc5dc2c44a5425f5f223ee87fa</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-preview.8.20325.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>

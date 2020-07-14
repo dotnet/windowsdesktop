@@ -18,6 +18,7 @@
     <NETCoreAppMaximumVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
+    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-preview.8.20361.2</MicrosoftWin32RegistryAccessControlVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -51,11 +52,9 @@
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.0-preview.8.20361.2</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0-preview.8.20361.2</MicrosoftNETCoreTargetsVersion>
-    <MicrosoftPrivateCoreFxNETCoreAppVersion>5.0.0-alpha.1.19563.6</MicrosoftPrivateCoreFxNETCoreAppVersion>
     <MicrosoftWin32RegistryAccessControlVersion>5.0.0-alpha.1.19527.5</MicrosoftWin32RegistryAccessControlVersion>
     <MicrosoftWin32RegistryVersion>5.0.0-preview.8.20361.2</MicrosoftWin32RegistryVersion>
     <MicrosoftWin32SystemEventsVersion>5.0.0-preview.8.20361.2</MicrosoftWin32SystemEventsVersion>
-    <MicrosoftWindowsCompatibilityVersion>5.0.0-preview.8.20361.2</MicrosoftWindowsCompatibilityVersion>
     <SystemCodeDomVersion>5.0.0-preview.8.20361.2</SystemCodeDomVersion>
     <SystemConfigurationConfigurationManagerVersion>5.0.0-preview.8.20361.2</SystemConfigurationConfigurationManagerVersion>
     <SystemDiagnosticsEventLogVersion>5.0.0-preview.8.20361.2</SystemDiagnosticsEventLogVersion>
@@ -79,8 +78,6 @@
     <SystemWindowsExtensionsVersion>5.0.0-preview.8.20361.2</SystemWindowsExtensionsVersion>
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19564.1</NETStandardLibraryVersion>
-    <!-- coreclr -->
-    <MicrosoftNETCoreRuntimeCoreCLRVersion>5.0.0-alpha1.19562.1</MicrosoftNETCoreRuntimeCoreCLRVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>5.0.0-preview.8.20363.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
@@ -98,11 +95,9 @@
   <!--Package names-->
   <PropertyGroup>
     <MicrosoftDotNetBuildTasksFeedPackage>Microsoft.DotNet.Build.Tasks.Feed</MicrosoftDotNetBuildTasksFeedPackage>
-    <MicrosoftPrivateCoreFxNETCoreAppPackage>Microsoft.Private.CoreFx.NETCoreApp</MicrosoftPrivateCoreFxNETCoreAppPackage>
     <MicrosoftNETCorePlatformsPackage>Microsoft.NETCore.Platforms</MicrosoftNETCorePlatformsPackage>
     <MicrosoftNETCoreTargetsPackage>Microsoft.NETCore.Targets</MicrosoftNETCoreTargetsPackage>
     <NETStandardLibraryPackage>NETStandard.Library</NETStandardLibraryPackage>
-    <MicrosoftNETCoreRuntimeCoreCLRPackage>Microsoft.NETCore.Runtime.CoreCLR</MicrosoftNETCoreRuntimeCoreCLRPackage>
     <MicrosoftBclJsonSourcesPackage>Microsoft.Bcl.Json.Sources</MicrosoftBclJsonSourcesPackage>
     <MicrosoftSymbolUploaderBuildTaskPackage>Microsoft.SymbolUploader.Build.Task</MicrosoftSymbolUploaderBuildTaskPackage>
   </PropertyGroup>

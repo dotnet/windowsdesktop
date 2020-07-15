@@ -64,7 +64,7 @@
     <SystemDrawingCommonVersion>5.0.0-preview.7.20326.1</SystemDrawingCommonVersion>
     <SystemIOFileSystemAccessControlVersion>5.0.0-preview.7.20326.1</SystemIOFileSystemAccessControlVersion>
     <SystemIOPackagingVersion>5.0.0-preview.7.20326.1</SystemIOPackagingVersion>
-    <SystemIOPipesAccessControlVersion>4.5.1</SystemIOPipesAccessControlVersion>
+    <SystemIOPipesAccessControlVersion>5.0.0-preview.7.20364.6</SystemIOPipesAccessControlVersion>
     <SystemResourcesExtensionsVersion>5.0.0-preview.7.20326.1</SystemResourcesExtensionsVersion>
     <SystemSecurityAccessControlVersion>5.0.0-preview.7.20326.1</SystemSecurityAccessControlVersion>
     <SystemSecurityCryptographyCngVersion>5.0.0-preview.7.20326.1</SystemSecurityCryptographyCngVersion>

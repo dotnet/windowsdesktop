@@ -121,7 +121,7 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>2d9dbbb538322a7cc05397f5e2e15d445c7d3ff0</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Win32.Registry.AccessControl" Version="5.0.0-preview.8.20363.2">
+    <Dependency Name="Microsoft.Win32.Registry.AccessControl" Version="5.0.0-preview.8.20363.2" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>2d9dbbb538322a7cc05397f5e2e15d445c7d3ff0</Sha>
     </Dependency>

@@ -36,9 +36,6 @@
   <ItemGroup>
     <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="0" />
   </ItemGroup>
-  <PropertyGroup>
-    <MicrosoftDotNetMaestroTasksVersion>1.0.0-beta.18619.4</MicrosoftDotNetMaestroTasksVersion>
-  </PropertyGroup>
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->

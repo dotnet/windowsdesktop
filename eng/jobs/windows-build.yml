@@ -39,11 +39,25 @@ jobs:
         /p:DotNetSignType=$(SignType)
       TargetArchitecture: ${{ parameters.targetArchitecture }}
       DisableVSPublish: ${{ parameters.disableVSPublish }}
+      ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        _InternalRuntimeDownloadArgs: ''
+      ${{ if ne(variables['System.TeamProject'], 'public') }}:
+        _InternalRuntimeDownloadArgs: >-
+            /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
+            /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
 
     steps:
 
-    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+    - ${{ if ne(variables['System.TeamProject'], 'public') }}:
       - task: NuGetAuthenticate@0
+
+      - task: PowerShell@2
+        displayName: Setup Private Feeds Credentials
+        inputs:
+          filePath: $(Build.SourcesDirectory)/eng/common/SetupNugetSources.ps1
+          arguments: -ConfigFile $(Build.SourcesDirectory)/NuGet.config -Password $Env:Token
+        env:
+          Token: $(dn-bot-dnceng-artifact-feeds-rw)
 
       - task: MicroBuildSigningPlugin@2
         displayName: Install MicroBuild plugin for Signing
@@ -63,6 +77,7 @@ jobs:
         build.cmd -ci -test
         $(CommonMSBuildArgs)
         $(MsbuildSigningArguments)
+        $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
     - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:

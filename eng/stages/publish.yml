@@ -18,7 +18,7 @@ stages:
     publishInstallersAndChecksums: true
 
     SDLValidationParameters:
-        enable: true
+        enable: false
         params: ' -SourceToolsList @("policheck","credscan")
         -TsaInstanceURL https://devdiv.visualstudio.com/
         -TsaProjectName DEVDIV

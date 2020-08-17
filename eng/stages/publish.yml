@@ -19,7 +19,8 @@ stages:
 
     SDLValidationParameters:
         enable: false
-        params: ' -SourceToolsList @("policheck","credscan")
+        params: >-
+        -SourceToolsList @("policheck","credscan")
         -TsaInstanceURL https://devdiv.visualstudio.com/
         -TsaProjectName DEVDIV
         -TsaNotificationEmail wffteam@microsoft.com
@@ -29,7 +30,7 @@ stages:
         -TsaRepositoryName WindowsDesktop
         -TsaCodebaseName WindowsDesktop
         -TsaOnboard $True
-        -TsaPublish $True'
+        -TsaPublish $True
 
 # Create extra stage per BAR channel that needs extra publish steps. These run after the Arcade
 # stages because they depend on Arcade's NuGet package publish being complete.

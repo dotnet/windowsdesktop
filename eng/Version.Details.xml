@@ -109,9 +109,9 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>fe3721083cbd7899cc9de2a04d8581a6e293b057</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-alpha.1.20418.3">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-alpha.1.20418.5">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>d4b7d3dedc390e47276cc8277309a00b721a7735</Sha>
+      <Sha>cdd498084d662ec583aab168ab64aad909ba30da</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-rc.1.20416.7" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>

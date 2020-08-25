@@ -109,11 +109,19 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>dd4936c5edb30c78349038737bedcce2539851a2</Sha>
     </Dependency>
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="5.0.0-rc.1.20425.2" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+      <Uri>https://github.com/dotnet/winforms</Uri>
+      <Sha>dd4936c5edb30c78349038737bedcce2539851a2</Sha>
+    </Dependency>
     <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-rc.1.20425.2">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>ff75d520118fa519b558166af462652637649e74</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="5.0.0-rc.1.20425.2">
+      <Uri>https://github.com/dotnet/wpf</Uri>
+      <Sha>ff75d520118fa519b558166af462652637649e74</Sha>
+    </Dependency>
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="5.0.0-rc.1.20425.2">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>ff75d520118fa519b558166af462652637649e74</Sha>
     </Dependency>

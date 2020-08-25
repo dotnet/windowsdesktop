@@ -5,11 +5,9 @@
   <PropertyGroup>
     <TargetFramework>$(NETCoreAppFramework)</TargetFramework>
 
-    <!-- Skip signing steps by default for non-official builds. -->
-    <!-- <SkipSigning Condition="'$(SkipSigning)' == '' and '$(OfficialBuild)' != 'true'">true</SkipSigning> -->
-
-    <!-- Skip signing for validating post-build signing -->
-    <SkipSigning>true</SkipSigning>
+    <!-- Skip signing steps by default for non-official builds or official builds with post-build signing enabled. -->
+    <SkipSigning>$(PostBuildSign)</SkipSigning>
+    <SkipSigning Condition="'$(SkipSigning)' == '' and '$(OfficialBuild)' != 'true'">true</SkipSigning>
   </PropertyGroup>
 
 </Project>

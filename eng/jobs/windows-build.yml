@@ -47,7 +47,29 @@ jobs:
             /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
 
     steps:
+    - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+      - task: NuGetAuthenticate@0
+        condition: ne(variables['PostBuildSign'], 'true')
 
+      - task: PowerShell@2
+        displayName: Setup Private Feeds Credentials
+        inputs:
+          filePath: $(Build.SourcesDirectory)/eng/common/SetupNugetSources.ps1
+          arguments: -ConfigFile $(Build.SourcesDirectory)/NuGet.config -Password $Env:Token
+        env:
+          Token: $(dn-bot-dnceng-artifact-feeds-rw)
+        condition: ne(variables['PostBuildSign'], 'true')
+
+      - task: MicroBuildSigningPlugin@2
+        displayName: Install MicroBuild plugin for Signing
+        inputs:
+          signType: $(SignType)
+          zipSources: false
+          feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
+        continueOnError: false
+        condition: and(succeeded(), 
+                       in(variables['SignType'], 'real', 'test'),
+                       ne(variables['PostBuildSign'], 'true'))
     # NuGet's http cache lasts 30 minutes. If we're on a static machine, this may interfere with
     # auto-update PRs by preventing the CI build from fetching the new version. Delete the cache.
     - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
@@ -59,6 +81,20 @@ jobs:
         $(MsbuildSigningArguments)
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
+
+    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+      - task: NuGetCommand@2
+        displayName: Push Visual Studio NuPkgs
+        inputs:
+          command: push
+          packagesToPush: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)/*/VS.Redist.Common.*.nupkg'
+          nuGetFeedType: external
+          publishFeedCredentials: 'DevDiv - VS package feed'
+        condition: and(
+          succeeded(),
+          eq(variables['_BuildConfig'], 'Release'),
+          ne(variables['DisableVSPublish'], 'true'),
+          ne(variables['PostBuildSign'], 'true'))
 
     - template: steps/upload-job-artifacts.yml
       parameters:

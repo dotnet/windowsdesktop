@@ -18,7 +18,6 @@ jobs:
 
   - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
     - task: NuGetAuthenticate@0
-      condition: ne(variables['PostBuildSign'], 'true')
 
     - task: MicroBuildSigningPlugin@2
       displayName: Install MicroBuild plugin for Signing

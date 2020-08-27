@@ -17,7 +17,7 @@
     <!-- Max version of NETCoreApp, used by test projects. -->
     <NETCoreAppMaximumVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppFrameworkVersion>
-    <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
+    <NETCoreAppFramework>net5.0</NETCoreAppFramework>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -40,7 +40,9 @@
   <PropertyGroup>
     <!-- arcade -->
     <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20411.8</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksArchivesVersion>5.0.0-dev.20426.1</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20411.8</MicrosoftDotNetBuildTasksPackagingVersion>
+    <MicrosoftDotNetBuildTasksInstallersVersion>5.0.0-dev.20426.1</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20411.8</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0-rc.1.20416.7</MicrosoftNETCoreAppRefVersion>

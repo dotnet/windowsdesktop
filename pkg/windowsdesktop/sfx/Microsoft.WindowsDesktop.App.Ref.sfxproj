@@ -4,7 +4,8 @@
     <PlatformPackageType>TargetingPack</PlatformPackageType>
     <WindowsFormsClassificationProps>$(PkgMicrosoft_Private_Winforms)\FrameworkListFiles.props</WindowsFormsClassificationProps>
     <RuntimePackProjectPath>$(MSBuildThisFileDirectory)Microsoft.WindowsDesktop.App.Runtime.sfxproj</RuntimePackProjectPath>
-    <SharedFrameworkArchiveName>windowsdesktop-targeting-pack</SharedFrameworkArchiveName>
+    <ArchiveName>windowsdesktop-targeting-pack</ArchiveName>
+    <InstallerName>windowsdesktop-targeting-pack</InstallerName>
     <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
     <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
   </PropertyGroup>
@@ -67,5 +68,10 @@
     <FrameworkListFileClass Include="UIAutomationProvider.dll" Profile="WPF" />
     <FrameworkListFileClass Include="UIAutomationTypes.dll" Profile="WPF" />
     <FrameworkListFileClass Include="WindowsBase.dll" Profile="WPF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- We don't have a ref assembly for DirectWriteForwarder -->
+    <IgnoredReference Include="DirectWriteForwarder" />
   </ItemGroup>
 </Project>

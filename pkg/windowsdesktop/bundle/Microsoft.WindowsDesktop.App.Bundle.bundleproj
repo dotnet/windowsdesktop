@@ -1,6 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
-
+<Project Sdk="Microsoft.Build.NoTargets">
   <PropertyGroup>
     <!--
       Name, used to generate the bundle upgrade code. Must stay the same to allow bundles in a given
@@ -9,7 +7,7 @@
     <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
     <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
     <BundleThemeDirectory>$(MSBuildProjectDirectory)</BundleThemeDirectory>
-    <SharedFrameworkArchiveName>windowsdesktop-runtime</SharedFrameworkArchiveName>
+    <InstallerName>windowsdesktop-runtime</InstallerName>
     <BundleNameSuffix>Runtime</BundleNameSuffix>
   </PropertyGroup>
 
@@ -35,7 +33,7 @@
       <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
 
       <NETCoreAppInstallerMsiRID
-        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
+        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).5.0"
         Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
         MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
 

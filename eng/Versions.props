@@ -40,9 +40,9 @@
   <PropertyGroup>
     <!-- arcade -->
     <MicrosoftDotNetBuildTasksFeedVersion>5.0.0-beta.20411.8</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksArchivesVersion>5.0.0-dev.20426.1</MicrosoftDotNetBuildTasksArchivesVersion>
+    <MicrosoftDotNetBuildTasksArchivesVersion>5.0.0-dev.20427.1</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20411.8</MicrosoftDotNetBuildTasksPackagingVersion>
-    <MicrosoftDotNetBuildTasksInstallersVersion>5.0.0-dev.20426.1</MicrosoftDotNetBuildTasksInstallersVersion>
+    <MicrosoftDotNetBuildTasksInstallersVersion>5.0.0-dev.20427.1</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20411.8</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0-rc.1.20416.7</MicrosoftNETCoreAppRefVersion>

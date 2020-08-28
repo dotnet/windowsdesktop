@@ -45,6 +45,7 @@
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0-rc.1.20428.3</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-rc.1.20428.3</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppInternalVersion>5.0.0-rc.1.20428.3</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.0-rc.1.20428.3</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0-rc.1.20428.3</MicrosoftNETCoreTargetsVersion>

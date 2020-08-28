@@ -33,7 +33,7 @@
       <NETCoreAppInstallerMsiRID
         Update="@(NETCoreAppInstallerMsiRID)"
         Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).$(MajorVersion).$(MinorVersion)"
-        Version="$(MicrosoftNETCoreAppRuntimewinx64Version)"
+        Version="$(MicrosoftNETCoreAppInternalVersion)"
         MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
 
       <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />

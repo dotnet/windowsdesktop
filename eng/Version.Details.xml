@@ -1,141 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <ProductDependencies>
-    <Dependency Name="Microsoft.NETCore.Platforms" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.Platforms" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.Targets" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.Targets" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Win32.Registry" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.Win32.Registry" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Win32.SystemEvents" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.Win32.SystemEvents" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.CodeDom" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.CodeDom" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Configuration.ConfigurationManager" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Configuration.ConfigurationManager" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Diagnostics.EventLog" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Diagnostics.EventLog" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Diagnostics.PerformanceCounter" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Diagnostics.PerformanceCounter" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.DirectoryServices" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.DirectoryServices" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Drawing.Common" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Drawing.Common" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.IO.FileSystem.AccessControl" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.IO.FileSystem.AccessControl" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Resources.Extensions" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Resources.Extensions" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.IO.Packaging" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.IO.Packaging" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.IO.Pipes.AccessControl" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.IO.Pipes.AccessControl" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.AccessControl" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.AccessControl" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Cryptography.Cng" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Cryptography.Cng" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Cryptography.Pkcs" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Cryptography.Pkcs" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Cryptography.ProtectedData" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Cryptography.ProtectedData" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Cryptography.Xml" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Cryptography.Xml" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Permissions" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Permissions" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Security.Principal.Windows" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Security.Principal.Windows" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Text.Encodings.Web" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Text.Encodings.Web" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Text.Json" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Text.Json" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Threading.AccessControl" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Threading.AccessControl" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="System.Windows.Extensions" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="System.Windows.Extensions" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
     <Dependency Name="NETStandard.Library" Version="2.2.0-prerelease.19564.1">
       <Uri>https://github.com/dotnet/standard</Uri>
       <Sha>cfe95a23647c7de1fe1a349343115bd7720d6949</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Private.Winforms" Version="5.0.0-rc.1.20429.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Private.Winforms" Version="5.0.0-rc.1.20429.2" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
-      <Sha>d3adc2abdff9b926c02cbe6afd3a8a38cbebdbbc</Sha>
+      <Sha>6186819240e9556694415444e117e148ccf17a8b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="5.0.0-rc.1.20429.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="5.0.0-rc.1.20429.2" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
-      <Sha>d3adc2abdff9b926c02cbe6afd3a8a38cbebdbbc</Sha>
+      <Sha>6186819240e9556694415444e117e148ccf17a8b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-rc.1.20429.5">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.0-rc.1.20429.6">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>71db08396f33db3ef6d4eff3b92b220df652afbd</Sha>
+      <Sha>5d292c5f6bfd9c64ac20816f42309213871a0ff4</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="5.0.0-rc.1.20429.5">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="5.0.0-rc.1.20429.6">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>71db08396f33db3ef6d4eff3b92b220df652afbd</Sha>
+      <Sha>5d292c5f6bfd9c64ac20816f42309213871a0ff4</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="5.0.0-rc.1.20429.5">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="5.0.0-rc.1.20429.6">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>71db08396f33db3ef6d4eff3b92b220df652afbd</Sha>
+      <Sha>5d292c5f6bfd9c64ac20816f42309213871a0ff4</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Win32.Registry.AccessControl" Version="5.0.0-rc.1.20428.9" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.Win32.Registry.AccessControl" Version="5.0.0-rc.1.20429.3" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>10068f4363ab3681de9ca3bb8a88428c74ff37fa</Sha>
+      <Sha>ef47b653d657edc4235e79a16a21dd8302e195b8</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>

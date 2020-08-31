@@ -88,33 +88,4 @@ stages:
 
   - template: /eng/stages/publish.yml
     parameters:
-      # Publish channel configuration. The publish template wraps Arcade publishing and adds some
-      # extras that aren't implemented in Arcade yet.
-      #
-      # - dependsOn: <ID of the Arcade stage that finalization should run after>
-      #   channel:
-      #     name: <Name of this channel, for logging and readability>
-      #     bar: <Name of the Arcade variable that contains the ID of this channel in BAR>
-      #     storage: <Name of the Latest channel to publish to in dotnetcli blob storage>
-      dependsOnPublishStages:
-
-      - dependsOn: NetCore_Dev5_Publish
-        channel:
-          name: .NET 5 Dev
-          bar: Net_5_Dev_Channel_Id
-          storage: master
-          public: true
-
-      - dependsOn: Net5_Preview8_Publish
-        channel:
-          name: .NET 5 Preview 5
-          bar: Net_5_Preview8_Channel_Id
-          storage: release/5.0-preview8
-          public: false
-
-      - dependsOn: General_Testing_Publish
-        channel:
-          name: General Testing
-          bar: GeneralTesting_Channel_Id
-          storage: dev/validation
-          public: true
+      publishingInfraVersion: 3

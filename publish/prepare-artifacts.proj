@@ -54,10 +54,8 @@
 
   <Target Name="PreparePublishToAzureBlobFeed"
           DependsOnTargets="GetProductVersions;FindDownloadedArtifacts">
-    <Error Condition="'$(PackagesUrl)'==''" Text="Missing property PackagesUrl" />
 
     <PropertyGroup>
-      <ExpectedFeedUrl>$(PackagesUrl)</ExpectedFeedUrl>
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
       <AssetManifestFile>$(ArtifactsLogDir)AssetManifest/$(AssetManifestFilename)</AssetManifestFile>
 
@@ -89,6 +87,21 @@
                    Condition="'$(PostBuildSign)' != 'true'" />
     </ItemGroup>
 
+    <!--
+      The new Maestro/BAR build model keeps separate Azure DevOps and GitHub build information.
+      The GitHub information will be extracted based on the Azure DevOps repository.
+    -->
+    <ItemGroup>
+      <ManifestBuildData Include="InitialAssetsLocation=$(SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$(SYSTEM_TEAMPROJECT)/_apis/build/builds/$(BUILD_BUILDID)/artifacts" />
+      <ManifestBuildData Include="AzureDevOpsBuildId=$(BUILD_BUILDID)" />
+      <ManifestBuildData Include="AzureDevOpsBuildDefinitionId=$(SYSTEM_DEFINITIONID)" />
+      <ManifestBuildData Include="AzureDevOpsAccount=$(AzureDevOpsAccount)" />
+      <ManifestBuildData Include="AzureDevOpsProject=$(SYSTEM_TEAMPROJECT)" />
+      <ManifestBuildData Include="AzureDevOpsBuildNumber=$(BUILD_BUILDNUMBER)" />
+      <ManifestBuildData Include="AzureDevOpsRepository=$(BUILD_REPOSITORY_URI)" />
+      <ManifestBuildData Include="AzureDevOpsBranch=$(BUILD_SOURCEBRANCH)" />
+    </ItemGroup>
+
     <!-- Push items to AzDO as build artifacts, generating the asset manifest as a side effect. -->
     <PushToAzureDevOpsArtifacts
       AzureDevOpsCollectionUri="$(SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)"
@@ -99,7 +112,7 @@
       FileSignInfo="@(FileSignInfo)"
       FileExtensionSignInfo="@(FileExtensionSignInfo)"
       ItemsToPush="@(ItemsToPush)"
-      ManifestBuildData="Location=$(ExpectedFeedUrl)"
+      ManifestBuildData="@(ManifestBuildData)"
       ManifestRepoUri="$(BUILD_REPOSITORY_URI)"
       ManifestBranch="$(BUILD_SOURCEBRANCH)"
       ManifestBuildId="$(BUILD_BUILDNUMBER)"

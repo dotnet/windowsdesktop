@@ -90,6 +90,7 @@
     </ItemGroup>
 
     <!-- Push items to AzDO as build artifacts, generating the asset manifest as a side effect. -->
+    <!-- TODO: remove "PublishingVersion" see https://github.com/dotnet/arcade/issues/6082 -->
     <PushToAzureDevOpsArtifacts
       AzureDevOpsCollectionUri="$(SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)"
       AzureDevOpsProject="$(SYSTEM_TEAMPROJECT)"

@@ -111,6 +111,7 @@
     </ItemGroup>
 
     <!-- Push items to AzDO as build artifacts, generating the asset manifest as a side effect. -->
+    <!-- TODO: remove "PublishingVersion" see https://github.com/dotnet/arcade/issues/6082 -->
     <PushToAzureDevOpsArtifacts
       AzureDevOpsCollectionUri="$(SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)"
       AzureDevOpsProject="$(SYSTEM_TEAMPROJECT)"
@@ -126,7 +127,8 @@
       ManifestBuildId="$(BUILD_BUILDNUMBER)"
       ManifestCommit="$(BUILD_SOURCEVERSION)"
       IsStableBuild="$(IsStableBuild)"
-      AssetManifestPath="$(AssetManifestFile)" />
+      AssetManifestPath="$(AssetManifestFile)"
+      PublishingVersion="3" />
 
     <!-- Copy the generated manifest to the build's artifacts -->
     <Copy SourceFiles="$(AssetManifestFile)" DestinationFolder="$(TempWorkingDir)" />

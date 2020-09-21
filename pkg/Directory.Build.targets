@@ -26,7 +26,7 @@
     <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'">$(Version)</StableVersion>
   </PropertyGroup>
 
-  <!-- Workaround can be removed after repo picks up Arcade sdk 5.0.0-bata.20468.7 or newer -->
+  <!-- Workaround can be removed after repo picks up Arcade sdk 5.0.0-beta.20468.7 or newer -->
   <Target Name="CreateWixOutputFolder"
           BeforeTargets="RunLightLinker">
       <MakeDir Directories="$(ArtifactsNonShippingPackagesDir)"

@@ -35,6 +35,8 @@
     <IgnoredReference Include="PresentationFramework" />
     <IgnoredReference Include="ReachFramework" />
     <IgnoredReference Include="System.Printing" />
+    <IgnoredReference Include="System.IO.Pipelines" />
+    <IgnoredReference Include="System.Net.Connections" />
 
     <!-- We don't have a ref assembly for DirectWriteForwarder -->
     <IgnoredReference Condition="'$(PackageTargetRuntime)' == ''" Include="DirectWriteForwarder" />

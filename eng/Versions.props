@@ -43,42 +43,42 @@
     <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.20467.6</MicrosoftDotNetBuildTasksPackagingVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20467.6</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>5.0.0-rc.2.20466.8</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-rc.2.20466.8</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftNETCoreAppInternalVersion>5.0.0-rc.2.20466.8</MicrosoftNETCoreAppInternalVersion>
+    <MicrosoftNETCoreAppRefVersion>5.0.0-rc.2.20471.13</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.0-rc.2.20471.13</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppInternalVersion>5.0.0-rc.2.20471.13</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>5.0.0-rc.2.20466.8</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftNETCoreTargetsVersion>5.0.0-rc.2.20466.8</MicrosoftNETCoreTargetsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-rc.2.20466.8</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32RegistryVersion>5.0.0-rc.2.20466.8</MicrosoftWin32RegistryVersion>
-    <MicrosoftWin32SystemEventsVersion>5.0.0-rc.2.20466.8</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>5.0.0-rc.2.20466.8</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>5.0.0-rc.2.20466.8</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>5.0.0-rc.2.20466.8</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-rc.2.20466.8</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>5.0.0-rc.2.20466.8</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>5.0.0-rc.2.20466.8</SystemDrawingCommonVersion>
-    <SystemIOFileSystemAccessControlVersion>5.0.0-rc.2.20466.8</SystemIOFileSystemAccessControlVersion>
-    <SystemIOPackagingVersion>5.0.0-rc.2.20466.8</SystemIOPackagingVersion>
-    <SystemIOPipesAccessControlVersion>5.0.0-rc.2.20466.8</SystemIOPipesAccessControlVersion>
-    <SystemResourcesExtensionsVersion>5.0.0-rc.2.20466.8</SystemResourcesExtensionsVersion>
-    <SystemSecurityAccessControlVersion>5.0.0-rc.2.20466.8</SystemSecurityAccessControlVersion>
-    <SystemSecurityCryptographyCngVersion>5.0.0-rc.2.20466.8</SystemSecurityCryptographyCngVersion>
-    <SystemSecurityCryptographyPkcsVersion>5.0.0-rc.2.20466.8</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>5.0.0-rc.2.20466.8</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>5.0.0-rc.2.20466.8</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>5.0.0-rc.2.20466.8</SystemSecurityPermissionsVersion>
-    <SystemSecurityPrincipalWindowsVersion>5.0.0-rc.2.20466.8</SystemSecurityPrincipalWindowsVersion>
-    <SystemTextEncodingsWebVersion>5.0.0-rc.2.20466.8</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>5.0.0-rc.2.20466.8</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>5.0.0-rc.2.20466.8</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>5.0.0-rc.2.20466.8</SystemWindowsExtensionsVersion>
+    <MicrosoftNETCorePlatformsVersion>5.0.0-rc.2.20471.13</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftNETCoreTargetsVersion>5.0.0-rc.2.20471.13</MicrosoftNETCoreTargetsVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>5.0.0-rc.2.20471.13</MicrosoftWin32RegistryAccessControlVersion>
+    <MicrosoftWin32RegistryVersion>5.0.0-rc.2.20471.13</MicrosoftWin32RegistryVersion>
+    <MicrosoftWin32SystemEventsVersion>5.0.0-rc.2.20471.13</MicrosoftWin32SystemEventsVersion>
+    <SystemCodeDomVersion>5.0.0-rc.2.20471.13</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>5.0.0-rc.2.20471.13</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>5.0.0-rc.2.20471.13</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>5.0.0-rc.2.20471.13</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>5.0.0-rc.2.20471.13</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>5.0.0-rc.2.20471.13</SystemDrawingCommonVersion>
+    <SystemIOFileSystemAccessControlVersion>5.0.0-rc.2.20471.13</SystemIOFileSystemAccessControlVersion>
+    <SystemIOPackagingVersion>5.0.0-rc.2.20471.13</SystemIOPackagingVersion>
+    <SystemIOPipesAccessControlVersion>5.0.0-rc.2.20471.13</SystemIOPipesAccessControlVersion>
+    <SystemResourcesExtensionsVersion>5.0.0-rc.2.20471.13</SystemResourcesExtensionsVersion>
+    <SystemSecurityAccessControlVersion>5.0.0-rc.2.20471.13</SystemSecurityAccessControlVersion>
+    <SystemSecurityCryptographyCngVersion>5.0.0-rc.2.20471.13</SystemSecurityCryptographyCngVersion>
+    <SystemSecurityCryptographyPkcsVersion>5.0.0-rc.2.20471.13</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>5.0.0-rc.2.20471.13</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>5.0.0-rc.2.20471.13</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>5.0.0-rc.2.20471.13</SystemSecurityPermissionsVersion>
+    <SystemSecurityPrincipalWindowsVersion>5.0.0-rc.2.20471.13</SystemSecurityPrincipalWindowsVersion>
+    <SystemTextEncodingsWebVersion>5.0.0-rc.2.20471.13</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>5.0.0-rc.2.20471.13</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>5.0.0-rc.2.20471.13</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>5.0.0-rc.2.20471.13</SystemWindowsExtensionsVersion>
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19564.1</NETStandardLibraryVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.0-rc.2.20466.6</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.0-rc.2.20472.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.0-rc.2.20466.8</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.0-rc.2.20472.6</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

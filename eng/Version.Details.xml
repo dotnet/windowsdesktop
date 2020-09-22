@@ -53,15 +53,7 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>c4c136670f568ffcb73b40d836982825548ed6bc</Sha>
     </Dependency>
-    <Dependency Name="System.IO.Pipelines" Version="5.0.0-rc.2.20471.13" CoherentParentDependency="Microsoft.Private.Winforms">
-      <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>c4c136670f568ffcb73b40d836982825548ed6bc</Sha>
-    </Dependency>
     <Dependency Name="System.IO.Pipes.AccessControl" Version="5.0.0-rc.2.20471.13" CoherentParentDependency="Microsoft.Private.Winforms">
-      <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>c4c136670f568ffcb73b40d836982825548ed6bc</Sha>
-    </Dependency>
-    <Dependency Name="System.Net.Connections" Version="5.0.0-rc.2.20471.13" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>c4c136670f568ffcb73b40d836982825548ed6bc</Sha>
     </Dependency>

@@ -60,7 +60,9 @@
     <SystemDrawingCommonVersion>5.0.0-rc.2.20471.13</SystemDrawingCommonVersion>
     <SystemIOFileSystemAccessControlVersion>5.0.0-rc.2.20471.13</SystemIOFileSystemAccessControlVersion>
     <SystemIOPackagingVersion>5.0.0-rc.2.20471.13</SystemIOPackagingVersion>
+    <SystemIOPipelinesVersion>5.0.0-rc.2.20471.13</SystemIOPipelinesVersion>
     <SystemIOPipesAccessControlVersion>5.0.0-rc.2.20471.13</SystemIOPipesAccessControlVersion>
+    <SystemNetConnectionsVersion>5.0.0-rc.2.20471.13</SystemNetConnectionsVersion>
     <SystemResourcesExtensionsVersion>5.0.0-rc.2.20471.13</SystemResourcesExtensionsVersion>
     <SystemSecurityAccessControlVersion>5.0.0-rc.2.20471.13</SystemSecurityAccessControlVersion>
     <SystemSecurityCryptographyCngVersion>5.0.0-rc.2.20471.13</SystemSecurityCryptographyCngVersion>

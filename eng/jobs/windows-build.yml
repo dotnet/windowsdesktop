@@ -15,10 +15,10 @@ jobs:
       # Use a hosted pool when possible.
       ${{ if eq(variables['System.TeamProject'], 'public') }}:
         name: NetCorePublic-Pool
-        queue: buildpool.windows.10.amd64.vs2017.open
+        queue: buildpool.windows.10.amd64.vs2019.open
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
         name: NetCoreInternal-Pool
-        queue: buildpool.windows.10.amd64.vs2017
+        queue: buildpool.windows.10.amd64.vs2019
     strategy:
       matrix: 
         debug:
@@ -80,7 +80,7 @@ jobs:
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
-    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest'), ne(variables['PostBuildSign'], 'true')) }}:
       - task: NuGetCommand@2
         displayName: Push Visual Studio NuPkgs
         inputs:

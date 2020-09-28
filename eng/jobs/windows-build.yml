@@ -35,7 +35,6 @@ jobs:
         /p:PortableBuild=true
         /p:SkipTests=${{ parameters.skipTests }}
       MsbuildSigningArguments: >-
-        /p:CertificateId=400
         /p:DotNetSignType=$(SignType)
       TargetArchitecture: ${{ parameters.targetArchitecture }}
       DisableVSPublish: ${{ parameters.disableVSPublish }}
@@ -66,8 +65,7 @@ jobs:
           feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
         continueOnError: false
         condition: and(succeeded(), 
-                       in(variables['SignType'], 'real', 'test'),
-                       ne(variables['PostBuildSign'], 'true'))
+                       in(variables['SignType'], 'real', 'test'))
     # NuGet's http cache lasts 30 minutes. If we're on a static machine, this may interfere with
     # auto-update PRs by preventing the CI build from fetching the new version. Delete the cache.
     - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
@@ -80,7 +78,7 @@ jobs:
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
-    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest'), ne(variables['PostBuildSign'], 'true')) }}:
+    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
       - task: NuGetCommand@2
         displayName: Push Visual Studio NuPkgs
         inputs:

@@ -73,10 +73,6 @@
       <NonShippingNupkgToPublishFile
         Include="@(NupkgToPublishFile)"
         Exclude="@(ShippingNupkgToPublishFile)" />
-
-      <ItemsToSign Remove="@(ItemsToSign)" />
-      <ItemsToSign Include="@(DownloadedArtifactFile)"
-                   Exclude="@(DownloadedSymbolNupkgFile)" />
     </ItemGroup>
 
     <Error

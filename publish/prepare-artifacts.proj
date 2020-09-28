@@ -1,5 +1,8 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <PrepareArtifacts>true</PrepareArtifacts>
+  </PropertyGroup>
   <Import Project="../tools/Sign.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <UsingTask TaskName="GenerateChecksums" AssemblyFile="$(LocalBuildToolsTaskFile)" />
@@ -82,9 +85,6 @@
         <Category>Checksum</Category>
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
-
-      <ItemsToSign Remove="@(ItemsToSign)"
-                   Condition="'$(PostBuildSign)' != 'true'" />
     </ItemGroup>
 
     <!--
@@ -116,7 +116,7 @@
       AzureDevOpsCollectionUri="$(SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)"
       AzureDevOpsProject="$(SYSTEM_TEAMPROJECT)"
       AzureDevOpsBuildId="$(BUILD_BUILDID)"
-      ItemsToSign="@(ItemsToSign)"
+      ItemsToSign="@(ItemsToSignPostBuild)"
       StrongNameSignInfo="@(StrongNameSignInfo)"
       FileSignInfo="@(FileSignInfo)"
       FileExtensionSignInfo="@(FileExtensionSignInfo)"

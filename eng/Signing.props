@@ -10,8 +10,7 @@
 
   <ItemGroup>
     <!--
-      Replace the default items to sign with the specific set we want. This allows the build to call
-      Arcade's Sign.proj multiple times for different sets of files as the build progresses.
+      Replace the default items to sign with the specific set we want.
     -->
     <ItemsToSign Remove="@(ItemsToSign)" />
     <ItemsToSignPostBuild Remove="@(ItemsToSignPostBuild)" />

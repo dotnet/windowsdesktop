@@ -15,10 +15,10 @@ jobs:
       # Use a hosted pool when possible.
       ${{ if eq(variables['System.TeamProject'], 'public') }}:
         name: NetCorePublic-Pool
-        queue: buildpool.windows.10.amd64.vs2017.open
+        queue: buildpool.windows.10.amd64.vs2019.open
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
         name: NetCoreInternal-Pool
-        queue: buildpool.windows.10.amd64.vs2017
+        queue: buildpool.windows.10.amd64.vs2019
     strategy:
       matrix: 
         debug:
@@ -35,7 +35,6 @@ jobs:
         /p:PortableBuild=true
         /p:SkipTests=${{ parameters.skipTests }}
       MsbuildSigningArguments: >-
-        /p:CertificateId=400
         /p:DotNetSignType=$(SignType)
       TargetArchitecture: ${{ parameters.targetArchitecture }}
       DisableVSPublish: ${{ parameters.disableVSPublish }}
@@ -47,7 +46,6 @@ jobs:
             /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
 
     steps:
-
     - ${{ if ne(variables['System.TeamProject'], 'public') }}:
       - task: NuGetAuthenticate@0
 
@@ -66,8 +64,8 @@ jobs:
           zipSources: false
           feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
         continueOnError: false
-        condition: and(succeeded(), in(variables['SignType'], 'real', 'test'))
-
+        condition: and(succeeded(), 
+                       in(variables['SignType'], 'real', 'test'))
     # NuGet's http cache lasts 30 minutes. If we're on a static machine, this may interfere with
     # auto-update PRs by preventing the CI build from fetching the new version. Delete the cache.
     - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
@@ -91,7 +89,8 @@ jobs:
         condition: and(
           succeeded(),
           eq(variables['_BuildConfig'], 'Release'),
-          ne(variables['DisableVSPublish'], 'true'))
+          ne(variables['DisableVSPublish'], 'true'),
+          ne(variables['PostBuildSign'], 'true'))
 
     - template: steps/upload-job-artifacts.yml
       parameters:

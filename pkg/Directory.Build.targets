@@ -262,6 +262,11 @@
     </ItemGroup>
   </Target>
 
+  <Target Name=IncludeIntellisenseFiles
+          DependsOnTargets="GetDepprojDependencyDataFiles;GetDependencyDataFileInclusionDefaults"
+          BeforeTargets="GetFiles">
+  </Target>
+
   <!--
     Create RuntimeDependencies just before they're needed. Use MSBuild to get their identities, like
     GetPkgProjPackageDependencies: this finds package id and version without any guesswork.

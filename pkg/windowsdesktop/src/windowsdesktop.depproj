@@ -3,6 +3,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Wpf.GitHub" Version="$(MicrosoftDotNetWpfGitHubVersion)" />
     <PackageReference Include="Microsoft.Private.Winforms" Version="$(MicrosoftPrivateWinformsVersion)" />
+    <PackageReference Include="Microsoft.Private.Intellisense" Version="$(MicrosoftPrivateIntellisenseVersion)" />
 
     <PackageReference Include="Microsoft.Win32.Registry.AccessControl" Version="$(MicrosoftWin32RegistryAccessControlVersion)" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />

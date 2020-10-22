@@ -262,7 +262,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name=IncludeIntellisenseFiles
+  <Target Name="IncludeIntellisenseFiles"
           DependsOnTargets="GetDepprojDependencyDataFiles;GetDependencyDataFileInclusionDefaults"
           BeforeTargets="GetFiles">
   </Target>

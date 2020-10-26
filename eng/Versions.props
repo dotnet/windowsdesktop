@@ -15,8 +15,8 @@
     <ContainerName>dotnet</ContainerName>
     <ChecksumContainerName>$(ContainerName)</ChecksumContainerName>
     <!-- Max version of NETCoreApp, used by test projects. -->
-    <NETCoreAppMaximumVersion>5.0</NETCoreAppMaximumVersion>
-    <NETCoreAppFrameworkVersion>5.0</NETCoreAppFrameworkVersion>
+    <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
+    <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
   </PropertyGroup>
   <!--

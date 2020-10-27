@@ -43,41 +43,41 @@
     <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.20525.1</MicrosoftDotNetBuildTasksPackagingVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.20525.1</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>6.0.0-alpha.1.20525.3</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-alpha.1.20525.3</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppRefVersion>6.0.0-alpha.1.20527.3</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-alpha.1.20527.3</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>6.0.0-alpha.1.20525.3</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftNETCoreTargetsVersion>6.0.0-alpha.1.20525.3</MicrosoftNETCoreTargetsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-alpha.1.20525.3</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32RegistryVersion>6.0.0-alpha.1.20525.3</MicrosoftWin32RegistryVersion>
-    <MicrosoftWin32SystemEventsVersion>6.0.0-alpha.1.20525.3</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>6.0.0-alpha.1.20525.3</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>6.0.0-alpha.1.20525.3</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>6.0.0-alpha.1.20525.3</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-alpha.1.20525.3</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>6.0.0-alpha.1.20525.3</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>6.0.0-alpha.1.20525.3</SystemDrawingCommonVersion>
-    <SystemIOFileSystemAccessControlVersion>6.0.0-alpha.1.20525.3</SystemIOFileSystemAccessControlVersion>
-    <SystemIOPackagingVersion>6.0.0-alpha.1.20525.3</SystemIOPackagingVersion>
-    <SystemIOPipesAccessControlVersion>6.0.0-alpha.1.20525.3</SystemIOPipesAccessControlVersion>
-    <SystemResourcesExtensionsVersion>6.0.0-alpha.1.20525.3</SystemResourcesExtensionsVersion>
-    <SystemSecurityAccessControlVersion>6.0.0-alpha.1.20525.3</SystemSecurityAccessControlVersion>
-    <SystemSecurityCryptographyCngVersion>6.0.0-alpha.1.20525.3</SystemSecurityCryptographyCngVersion>
-    <SystemSecurityCryptographyPkcsVersion>6.0.0-alpha.1.20525.3</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-alpha.1.20525.3</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.0-alpha.1.20525.3</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>6.0.0-alpha.1.20525.3</SystemSecurityPermissionsVersion>
-    <SystemSecurityPrincipalWindowsVersion>6.0.0-alpha.1.20525.3</SystemSecurityPrincipalWindowsVersion>
-    <SystemTextEncodingsWebVersion>6.0.0-alpha.1.20525.3</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>6.0.0-alpha.1.20525.3</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>6.0.0-alpha.1.20525.3</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>6.0.0-alpha.1.20525.3</SystemWindowsExtensionsVersion>
+    <MicrosoftNETCorePlatformsVersion>6.0.0-alpha.1.20527.3</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftNETCoreTargetsVersion>6.0.0-alpha.1.20527.3</MicrosoftNETCoreTargetsVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-alpha.1.20527.3</MicrosoftWin32RegistryAccessControlVersion>
+    <MicrosoftWin32RegistryVersion>6.0.0-alpha.1.20527.3</MicrosoftWin32RegistryVersion>
+    <MicrosoftWin32SystemEventsVersion>6.0.0-alpha.1.20527.3</MicrosoftWin32SystemEventsVersion>
+    <SystemCodeDomVersion>6.0.0-alpha.1.20527.3</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>6.0.0-alpha.1.20527.3</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>6.0.0-alpha.1.20527.3</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-alpha.1.20527.3</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>6.0.0-alpha.1.20527.3</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>6.0.0-alpha.1.20527.3</SystemDrawingCommonVersion>
+    <SystemIOFileSystemAccessControlVersion>6.0.0-alpha.1.20527.3</SystemIOFileSystemAccessControlVersion>
+    <SystemIOPackagingVersion>6.0.0-alpha.1.20527.3</SystemIOPackagingVersion>
+    <SystemIOPipesAccessControlVersion>6.0.0-alpha.1.20527.3</SystemIOPipesAccessControlVersion>
+    <SystemResourcesExtensionsVersion>6.0.0-alpha.1.20527.3</SystemResourcesExtensionsVersion>
+    <SystemSecurityAccessControlVersion>6.0.0-alpha.1.20527.3</SystemSecurityAccessControlVersion>
+    <SystemSecurityCryptographyCngVersion>6.0.0-alpha.1.20527.3</SystemSecurityCryptographyCngVersion>
+    <SystemSecurityCryptographyPkcsVersion>6.0.0-alpha.1.20527.3</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-alpha.1.20527.3</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>6.0.0-alpha.1.20527.3</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>6.0.0-alpha.1.20527.3</SystemSecurityPermissionsVersion>
+    <SystemSecurityPrincipalWindowsVersion>6.0.0-alpha.1.20527.3</SystemSecurityPrincipalWindowsVersion>
+    <SystemTextEncodingsWebVersion>6.0.0-alpha.1.20527.3</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>6.0.0-alpha.1.20527.3</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>6.0.0-alpha.1.20527.3</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>6.0.0-alpha.1.20527.3</SystemWindowsExtensionsVersion>
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19564.1</NETStandardLibraryVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-alpha.1.20527.3</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-alpha.1.20527.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.0-alpha.1.20527.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.0-alpha.1.20527.6</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

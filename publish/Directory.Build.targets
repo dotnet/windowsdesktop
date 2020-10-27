@@ -64,6 +64,15 @@
         Condition="Exists('%(Identity)')" />
 
       <UploadToBlobStorageFile Include="@(SymbolNupkgToPublishFile)" />
+
+      <!-- Split nupkgs into shipping/nonshipping for BAR categorization. -->
+      <ShippingNupkgToPublishFile
+        Include="@(NupkgToPublishFile)"
+        Condition="$([System.String]::new('%(Identity)').Contains('\Shipping\'))" />
+
+      <NonShippingNupkgToPublishFile
+        Include="@(NupkgToPublishFile)"
+        Exclude="@(ShippingNupkgToPublishFile)" />
     </ItemGroup>
 
     <Error

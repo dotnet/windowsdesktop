@@ -1,11 +1,13 @@
 parameters:
   dependsOnPublishStages: []
+  publishingInfraVersion: 3
 
 stages:
 
 # Stages-based publishing entry point
 - template: /eng/common/templates/post-build/post-build.yml
   parameters:
+    publishingInfraVersion: ${{ parameters.publishingInfraVersion }}
     validateDependsOn:
     - PrepareForPublish
     enableSymbolValidation: false

@@ -1,20 +1,19 @@
 parameters:
   dependsOnPublishStages: []
+  publishingInfraVersion: 3
 
 stages:
 
 # Stages-based publishing entry point
 - template: /eng/common/templates/post-build/post-build.yml
   parameters:
+    publishingInfraVersion: ${{ parameters.publishingInfraVersion }}
     validateDependsOn:
     - PrepareForPublish
     enableSymbolValidation: false
     enableSigningValidation: false
     enableNugetValidation: false
     enableSourceLinkValidation: false
-    # Allow symbol publish to emit expected warnings without failing the build. Include single
-    # quotes inside the string so that it passes through to MSBuild without script interference.
-    symbolPublishingAdditionalParameters: "'-warnAsError:$false'"
     publishInstallersAndChecksums: true
 
     SDLValidationParameters:

@@ -44,7 +44,7 @@
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>5.0.1</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftNETCoreAppInternalVersion>5.0.1-servicing.20575.16</MicrosoftNETCoreAppInternalVersion>
+    <MicrosoftNETCoreAppInternalVersion>5.0.1-servicing.20610.7</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.0</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0</MicrosoftNETCoreTargetsVersion>
@@ -75,9 +75,9 @@
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19564.1</NETStandardLibraryVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.2-servicing.20610.3</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.2-servicing.20610.5</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.2-servicing.20610.7</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.2-servicing.20610.10</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

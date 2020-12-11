@@ -43,8 +43,8 @@
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.20580.4</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.1</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftNETCoreAppInternalVersion>5.0.1-servicing.20610.11</MicrosoftNETCoreAppInternalVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.2</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppInternalVersion>5.0.2-servicing.20610.15</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.0</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0</MicrosoftNETCoreTargetsVersion>
@@ -69,15 +69,15 @@
     <SystemSecurityPermissionsVersion>5.0.0</SystemSecurityPermissionsVersion>
     <SystemSecurityPrincipalWindowsVersion>5.0.0</SystemSecurityPrincipalWindowsVersion>
     <SystemTextEncodingsWebVersion>5.0.0</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>5.0.0</SystemTextJsonVersion>
+    <SystemTextJsonVersion>5.0.1</SystemTextJsonVersion>
     <SystemThreadingAccessControlVersion>5.0.0</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsVersion>5.0.0</SystemWindowsExtensionsVersion>
     <!-- standard -->
     <NETStandardLibraryVersion>2.2.0-prerelease.19564.1</NETStandardLibraryVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.2-servicing.20610.8</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.2-servicing.20611.5</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.2-servicing.20611.4</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.2-servicing.20611.6</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

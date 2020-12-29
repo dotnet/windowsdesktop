@@ -39,9 +39,9 @@
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksFeedVersion>6.0.0-beta.20621.12</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.20621.12</MicrosoftDotNetBuildTasksPackagingVersion>
-    <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.20621.12</MicrosoftDotNetVersionToolsTasksVersion>
+    <MicrosoftDotNetBuildTasksFeedVersion>6.0.0-beta.20623.1</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.20623.1</MicrosoftDotNetBuildTasksPackagingVersion>
+    <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.20623.1</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>6.0.0-alpha.1.20561.11</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppInternalVersion>6.0.0-alpha.1.20561.11</MicrosoftNETCoreAppInternalVersion>

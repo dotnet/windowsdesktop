@@ -9,6 +9,7 @@
     <BundleThemeDirectory>$(MSBuildProjectDirectory)</BundleThemeDirectory>
     <InstallerName>windowsdesktop-runtime</InstallerName>
     <BundleNameSuffix>Runtime</BundleNameSuffix>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>

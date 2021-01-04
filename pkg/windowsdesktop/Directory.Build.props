@@ -24,9 +24,6 @@
       runtimes\win-x86\lib\netcoreapp3.0\System.Printing.dll
     -->
     <PermitDllAndExeFilesLackingFileVersion>true</PermitDllAndExeFilesLackingFileVersion>
-
-    <!-- Workaround until https://github.com/dotnet/arcade/pull/6566 is merged and consumed. -->
-    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
 
 </Project>

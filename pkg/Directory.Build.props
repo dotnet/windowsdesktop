@@ -23,9 +23,9 @@
   </PropertyGroup>
   
   <!--
-    SDK currently does not know about net6.0 TargetFramework.
-    We need to manually add these to correctly resolve the targeting packs.
-    https://github.com/dotnet/sdk/issues/13950  
+    5.0 SDK currently does not know about net6.0 TargetFramework.
+    We need to manually add these to correctly resolve the targeting packs until
+    we update the build to reference a 6.0 SDK.
   -->
   <ItemGroup>
     <KnownFrameworkReference Include="Microsoft.NETCore.App"

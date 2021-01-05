@@ -46,7 +46,7 @@
   </Target>
 
   <Target Name="PreparePublishToAzureBlobFeed"
-          DependsOnTargets="FindDownloadedArtifacts">
+          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts">
 
     <PropertyGroup>
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>

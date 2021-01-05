@@ -2,7 +2,6 @@
 
   <Target Name="SetupTestContextVariables"
           DependsOnTargets="
-            GetProductVersions;
             DetermineTestOutputDirectory"
           BeforeTargets="Build">
     <PropertyGroup>
@@ -28,7 +27,7 @@
       the same as the package's version. Fetch this directly from the project to avoid guesswork.
     -->
     <MSBuild
-      Projects="$(RepoRoot)pkg\windowsdesktop\pkg\Microsoft.WindowsDesktop.App.Runtime.pkgproj"
+      Projects="$(RepoRoot)pkg\windowsdesktop\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj"
       Targets="ReturnProductVersion">
       <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimeVersion" />
     </MSBuild>

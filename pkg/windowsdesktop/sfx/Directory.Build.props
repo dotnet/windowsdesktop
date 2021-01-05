@@ -1,9 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
 
+  <PropertyGroup>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SharedFrameworkName>Microsoft.WindowsDesktop.App</SharedFrameworkName>
+    <SharedFrameworkFriendlyName>Windows Desktop</SharedFrameworkFriendlyName>
+    <TargetFramework>$(NETCoreAppFramework)</TargetFramework>
+    <RuntimeFrameworkVersion>$(MicrosoftNETCoreAppRefVersion)</RuntimeFrameworkVersion>
+    <LicenseFile>$(RepoRoot)LICENSE</LicenseFile>
+    <GenerateInstallers>true</GenerateInstallers>
+    <GenerateVSInsertionPackages>true</GenerateVSInsertionPackages>
+  </PropertyGroup>
+
+  <!-- Redistribute package content from other nuget packages. -->
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Wpf.GitHub" Version="$(MicrosoftDotNetWpfGitHubVersion)" />
-    <PackageReference Include="Microsoft.Private.Winforms" Version="$(MicrosoftPrivateWinformsVersion)" />
-
+    <PackageReference Include="Microsoft.Private.Winforms" Version="$(MicrosoftPrivateWinformsVersion)" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.Win32.Registry.AccessControl" Version="$(MicrosoftWin32RegistryAccessControlVersion)" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
     <PackageReference Include="Microsoft.Win32.SystemEvents" Version="$(MicrosoftWin32SystemEventsVersion)" />
@@ -27,11 +42,4 @@
     <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
     <PackageReference Include="System.Windows.Extensions" Version="$(SystemWindowsExtensionsVersion)" />
   </ItemGroup>
-
-  <!--
-    Version.txt files aren't provided in some packages. However, they're not necessary anymore:
-    dependency information is now in Version.Details.xml and BAR. Stub the target to ignore.
-  -->
-  <Target Name="GetDependencyVersionFiles" />
-
 </Project>

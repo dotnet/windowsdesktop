@@ -1,12 +1,7 @@
 <Project>
-
-  <Target Name="GetNETCoreAppPackDirs">
-    <PropertyGroup>
-      <RefPackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Ref\$(MicrosoftNETCoreAppRefVersion)\</RefPackageDir>
-      <RuntimePackageDir>$(NuGetPackageRoot)Microsoft.NETCore.App.Runtime.$(PackageTargetRuntime)\$(MicrosoftNETCoreAppRuntimewinx64Version)\</RuntimePackageDir>
-    </PropertyGroup>
-  </Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Installers" Version="$(MicrosoftDotNetBuildTasksInstallersVersion)" />
+  </ItemGroup>
 
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.targets))\Directory.Build.targets" />
-
 </Project>

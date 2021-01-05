@@ -35,29 +35,17 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         {
             id = id ?? project;
 
-            string nuspecPath = Path.Combine(
-                dirs.BaseArtifactsFolder,
-                "packages",
-                dirs.Configuration,
-                "specs",
-                $"{id}.nuspec");
-
-            if (!File.Exists(nuspecPath))
-            {
-                return null;
-            }
-
-            PackageIdentity builtIdentity = new NuspecReader(nuspecPath).GetIdentity();
-
             string nupkgPath = Path.Combine(
                 dirs.BaseArtifactsFolder,
                 "packages",
                 dirs.Configuration,
                 "Shipping",
-                $"{builtIdentity}.nupkg");
+                $"{id}.${dirs.MicrosoftNETCoreAppVersion}.nupkg");
 
-            // If the nuspec exists, the nupkg should exist.
-            Assert.True(File.Exists(nupkgPath));
+            if (!File.Exists(nupkgPath))
+            {
+                return null;
+            }
 
             return new NuGetArtifactTester(nupkgPath);
         }

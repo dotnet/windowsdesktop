@@ -1,38 +1,20 @@
-<Project>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
   <PropertyGroup>
-    <IsFrameworkPackage>true</IsFrameworkPackage>
+    <PlatformPackageType>TargetingPack</PlatformPackageType>
+    <WindowsFormsClassificationProps>$(PkgMicrosoft_Private_Winforms)\FrameworkListFiles.props</WindowsFormsClassificationProps>
+    <RuntimePackProjectPath>$(MSBuildThisFileDirectory)Microsoft.WindowsDesktop.App.Runtime.sfxproj</RuntimePackProjectPath>
+    <ArchiveName>windowsdesktop-targeting-pack</ArchiveName>
+    <InstallerName>windowsdesktop-targeting-pack</InstallerName>
+    <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
+    <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
   </PropertyGroup>
-
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
-
-  <PropertyGroup>
-    <FrameworkListName>Windows Desktop $(NETCoreAppFrameworkVersion)</FrameworkListName>
-    <FrameworkListTargetFrameworkIdentifier>$(NETCoreAppFrameworkIdentifier)</FrameworkListTargetFrameworkIdentifier>
-    <FrameworkListTargetFrameworkVersion>$(NETCoreAppFrameworkVersion)</FrameworkListTargetFrameworkVersion>
-    <FrameworkListFrameworkName>$(FrameworkPackageName)</FrameworkListFrameworkName>
-    
-    <WindowsFormsClassificationProps>$(NUGET_PACKAGES)\Microsoft.Private.Winforms\$(MicrosoftPrivateWinformsVersion)\FrameworkListFiles.props</WindowsFormsClassificationProps>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <BuildDebPackage>false</BuildDebPackage>
-    <BuildRpmPackage>false</BuildRpmPackage>
-    <GeneratePkg>false</GeneratePkg>
-  </PropertyGroup>
-
-  <!-- C++/CLI tooling adds an assemblyref to System.Runtime.InteropServices.WindowsRuntime even though it is unused.
-       Ignore validating this reference when we validate the runtime and ref pack closures since we never use the assembly
-       and it was removed in .NET 5.
-  -->
-  <ItemGroup>
-    <IgnoredReference Include="System.Runtime.InteropServices.WindowsRuntime" />
-  </ItemGroup>
 
   <!-- 
     shared concerns, these shouldn't generally change
     for profile information refere to https://github.com/dotnet/cli/issues/10536#issuecomment-488871926
     -->
-  <ItemGroup Condition="'$(PackageTargetRuntime)' == ''">
+  <ItemGroup>
     <FrameworkListFileClass Include="Accessibility.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="Microsoft.Win32.Registry.AccessControl.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="Microsoft.Win32.Registry.dll" Profile="WindowsForms;WPF" />
@@ -65,7 +47,7 @@
   <Import Project="$(WindowsFormsClassificationProps)" Condition="Exists('$(WindowsFormsClassificationProps)')" />
 
   <!-- WPF specific references -->
-  <ItemGroup Condition="'$(PackageTargetRuntime)' == ''">
+  <ItemGroup>
     <FrameworkListFileClass Include="PresentationCore.dll" Profile="WPF" />
     <FrameworkListFileClass Include="PresentationFramework.Aero.dll" Profile="WPF" />
     <FrameworkListFileClass Include="PresentationFramework.Aero2.dll" Profile="WPF" />
@@ -88,10 +70,8 @@
     <FrameworkListFileClass Include="WindowsBase.dll" Profile="WPF" />
   </ItemGroup>
 
-  <!-- Redistribute package content from other nuget packages. -->
   <ItemGroup>
-    <ProjectReference Include="..\src\windowsdesktop.depproj">
-      <AdditionalProperties Condition="'$(PackageTargetRuntime)' != ''">RuntimeIdentifier=$(PackageTargetRuntime)</AdditionalProperties>
-    </ProjectReference>
+    <!-- We don't have a ref assembly for DirectWriteForwarder -->
+    <IgnoredReference Include="DirectWriteForwarder" />
   </ItemGroup>
 </Project>

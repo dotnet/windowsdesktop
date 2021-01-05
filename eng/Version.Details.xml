@@ -121,7 +121,7 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>f56a56f90ff9124c85e4d889faeeca0824d2d437</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.App.Internal" Version="6.0.0-alpha.1.20561.11" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="VS.Redist.Common.NetCore.SharedFramework.x64.6.0" Version="6.0.0-alpha.1.20561.11" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>f56a56f90ff9124c85e4d889faeeca0824d2d437</Sha>
     </Dependency>
@@ -143,11 +143,19 @@
       <Uri>https://github.com/dotnet/arcade</Uri>
       <Sha>4c8515c18ebe0071c32fed467ee3890fbd488898</Sha>
     </Dependency>
+    <Dependency Name="Microsoft.DotNet.SharedFramework" Version="6.0.0-beta.20630.2">
+      <Uri>https://github.com/dotnet/arcade</Uri>
+      <Sha>4c8515c18ebe0071c32fed467ee3890fbd488898</Sha>
+    </Dependency>
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Archives" Version="6.0.0-beta.20630.2">
+      <Uri>https://github.com/dotnet/arcade</Uri>
+      <Sha>4c8515c18ebe0071c32fed467ee3890fbd488898</Sha>
+    </Dependency>
     <Dependency Name="Microsoft.DotNet.Build.Tasks.Packaging" Version="6.0.0-beta.20630.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
       <Sha>4c8515c18ebe0071c32fed467ee3890fbd488898</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.SharedFramework.Sdk" Version="6.0.0-beta.20630.2">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="6.0.0-beta.20630.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
       <Sha>4c8515c18ebe0071c32fed467ee3890fbd488898</Sha>
     </Dependency>

@@ -35,9 +35,7 @@
       -->
       <RuntimeNupkgFile
         Include="
-          $(DownloadDirectory)**\runtime.*.nupkg;
           $(DownloadDirectory)**\*.Runtime.*.nupkg;
-          $(DownloadDirectory)**\*.App.Host.*.nupkg;
           $(DownloadDirectory)**\VS.Redist.Common.*.nupkg"
         Exclude="@(DownloadedSymbolNupkgFile)" />
 

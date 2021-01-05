@@ -23,19 +23,9 @@
     <GenerateChecksums Items="@(ArtifactsForGeneratingChecksums)" />
   </Target>
 
-  <Target Name="SignPackages"
-          Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'public'">
-    <Message Importance="High" Text="Signing final packages" />
-    <MSBuild
-      Projects="$(RepoRoot)signing\SignFinalPackages.proj"
-      Targets="Build"
-      Properties="DownloadDirectory=$(DownloadDirectory)" />
-  </Target>
-
   <Target Name="UploadPreparedArtifactsToPipeline"
           DependsOnTargets="
             FindDownloadedArtifacts;
-            SignPackages;
             CreateChecksums">
     <PropertyGroup>
       <PreparedFileUploadDir>$(ArtifactsObjDir)PreparedFileUpload\</PreparedFileUploadDir>

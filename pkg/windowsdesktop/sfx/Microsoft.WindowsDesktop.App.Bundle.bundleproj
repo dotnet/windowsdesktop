@@ -6,6 +6,11 @@
       product band to upgrade in place.
     -->
     <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm64</RuntimeIdentifiers>
+    <BundleThemeDirectory>$(MSBuildProjectDirectory)</BundleThemeDirectory>
+    <InstallerName>windowsdesktop-runtime</InstallerName>
+    <BundleNameSuffix>Runtime</BundleNameSuffix>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +24,9 @@
   <!-- Obtain the .NET Core Runtime installers from the VS insertion packages. -->
   <Target Name="CollectVSInsertionPackageDownloads"
           BeforeTargets="CollectPackageReferences">
+    <ItemGroup>
+      <_RuntimeIdentifierForNETCoreMsiRestore Include="win-x86;win-x64;win-arm64" />
+    </ItemGroup>
 
     <ItemGroup>
       <InsertionPackageRID

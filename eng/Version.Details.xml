@@ -105,11 +105,11 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>5acaf3b4ded7529d9e022ddf081f4253f0e3f1c1</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-alpha.1.21076.3">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-alpha.1.21076.5">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>de3b395f43e8c6167cb32e3246852a52e847ca8d</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="6.0.0-alpha.1.21076.3">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="6.0.0-alpha.1.21076.5">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>de3b395f43e8c6167cb32e3246852a52e847ca8d</Sha>
     </Dependency>

@@ -129,6 +129,14 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>2f1def8c556403ca85d1de50609492fef664b638</Sha>
     </Dependency>
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="6.0.0-alpha.1.21077.3">
+      <Uri>https://github.com/dotnet/wpf</Uri>
+      <Sha>f43eb18c59ea6642ef022ec5d66bfaa09fc5d2a7</Sha>
+    </Dependency>
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="6.0.0-preview.2.21076.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+      <Uri>https://github.com/dotnet/winforms</Uri>
+      <Sha>5acaf3b4ded7529d9e022ddf081f4253f0e3f1c1</Sha>
+    </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
     <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="6.0.0-beta.21072.6">

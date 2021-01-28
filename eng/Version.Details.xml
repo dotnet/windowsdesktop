@@ -129,7 +129,7 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>82bf84c67949ab91f248e940428cfbd5c09a9e2f</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="6.0.0-preview.2.21078.2">
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="6.0.0-preview.2.21078.2" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>e30fb869359ec7a381d891a19c7d759f27af255c</Sha>
     </Dependency>

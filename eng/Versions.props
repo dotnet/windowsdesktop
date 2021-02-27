@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.3.21126.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-preview.3.21127.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.3.21127.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-preview.3.21127.2</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -47,40 +47,40 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21125.5</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21125.5</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>6.0.0-preview.3.21125.3</MicrosoftNETCoreAppRefVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-preview.3.21125.3</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-preview.3.21125.3</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppRefVersion>6.0.0-preview.3.21126.16</MicrosoftNETCoreAppRefVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-preview.3.21126.16</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-preview.3.21126.16</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>6.0.0-preview.3.21125.3</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftNETCoreTargetsVersion>6.0.0-preview.3.21125.3</MicrosoftNETCoreTargetsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-preview.3.21125.3</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32RegistryVersion>6.0.0-preview.3.21125.3</MicrosoftWin32RegistryVersion>
-    <MicrosoftWin32SystemEventsVersion>6.0.0-preview.3.21125.3</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>6.0.0-preview.3.21125.3</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>6.0.0-preview.3.21125.3</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>6.0.0-preview.3.21125.3</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-preview.3.21125.3</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>6.0.0-preview.3.21125.3</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>6.0.0-preview.3.21125.3</SystemDrawingCommonVersion>
-    <SystemIOFileSystemAccessControlVersion>6.0.0-preview.3.21125.3</SystemIOFileSystemAccessControlVersion>
-    <SystemIOPackagingVersion>6.0.0-preview.3.21125.3</SystemIOPackagingVersion>
-    <SystemIOPipesAccessControlVersion>6.0.0-preview.3.21125.3</SystemIOPipesAccessControlVersion>
-    <SystemResourcesExtensionsVersion>6.0.0-preview.3.21125.3</SystemResourcesExtensionsVersion>
-    <SystemSecurityAccessControlVersion>6.0.0-preview.3.21125.3</SystemSecurityAccessControlVersion>
-    <SystemSecurityCryptographyCngVersion>6.0.0-preview.3.21125.3</SystemSecurityCryptographyCngVersion>
-    <SystemSecurityCryptographyPkcsVersion>6.0.0-preview.3.21125.3</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-preview.3.21125.3</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.0-preview.3.21125.3</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>6.0.0-preview.3.21125.3</SystemSecurityPermissionsVersion>
-    <SystemSecurityPrincipalWindowsVersion>6.0.0-preview.3.21125.3</SystemSecurityPrincipalWindowsVersion>
-    <SystemTextEncodingsWebVersion>6.0.0-preview.3.21125.3</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>6.0.0-preview.3.21125.3</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>6.0.0-preview.3.21125.3</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>6.0.0-preview.3.21125.3</SystemWindowsExtensionsVersion>
+    <MicrosoftNETCorePlatformsVersion>6.0.0-preview.3.21126.16</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftNETCoreTargetsVersion>6.0.0-preview.3.21126.16</MicrosoftNETCoreTargetsVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-preview.3.21126.16</MicrosoftWin32RegistryAccessControlVersion>
+    <MicrosoftWin32RegistryVersion>6.0.0-preview.3.21126.16</MicrosoftWin32RegistryVersion>
+    <MicrosoftWin32SystemEventsVersion>6.0.0-preview.3.21126.16</MicrosoftWin32SystemEventsVersion>
+    <SystemCodeDomVersion>6.0.0-preview.3.21126.16</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>6.0.0-preview.3.21126.16</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>6.0.0-preview.3.21126.16</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-preview.3.21126.16</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>6.0.0-preview.3.21126.16</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>6.0.0-preview.3.21126.16</SystemDrawingCommonVersion>
+    <SystemIOFileSystemAccessControlVersion>6.0.0-preview.3.21126.16</SystemIOFileSystemAccessControlVersion>
+    <SystemIOPackagingVersion>6.0.0-preview.3.21126.16</SystemIOPackagingVersion>
+    <SystemIOPipesAccessControlVersion>6.0.0-preview.3.21126.16</SystemIOPipesAccessControlVersion>
+    <SystemResourcesExtensionsVersion>6.0.0-preview.3.21126.16</SystemResourcesExtensionsVersion>
+    <SystemSecurityAccessControlVersion>6.0.0-preview.3.21126.16</SystemSecurityAccessControlVersion>
+    <SystemSecurityCryptographyCngVersion>6.0.0-preview.3.21126.16</SystemSecurityCryptographyCngVersion>
+    <SystemSecurityCryptographyPkcsVersion>6.0.0-preview.3.21126.16</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-preview.3.21126.16</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>6.0.0-preview.3.21126.16</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>6.0.0-preview.3.21126.16</SystemSecurityPermissionsVersion>
+    <SystemSecurityPrincipalWindowsVersion>6.0.0-preview.3.21126.16</SystemSecurityPrincipalWindowsVersion>
+    <SystemTextEncodingsWebVersion>6.0.0-preview.3.21126.16</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>6.0.0-preview.3.21126.16</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>6.0.0-preview.3.21126.16</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>6.0.0-preview.3.21126.16</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-preview.3.21126.1</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-preview.3.21127.1</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.0-preview.3.21127.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.0-preview.3.21127.2</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

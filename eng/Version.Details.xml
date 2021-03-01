@@ -109,17 +109,17 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
       <Sha>9cf29dcb054d2728abf5a32889d29c26ed013037</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.4-servicing.21124.6">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="5.0.5-servicing.21151.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>fff7800b70f62e6f4cb6fb66088745ea11960a96</Sha>
+      <Sha>77d19b7802186fcc983588603de0cf926fec04e1</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="5.0.4-servicing.21124.6">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="5.0.5-servicing.21151.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>fff7800b70f62e6f4cb6fb66088745ea11960a96</Sha>
+      <Sha>77d19b7802186fcc983588603de0cf926fec04e1</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="5.0.4-servicing.21124.6">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="5.0.5-servicing.21151.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>fff7800b70f62e6f4cb6fb66088745ea11960a96</Sha>
+      <Sha>77d19b7802186fcc983588603de0cf926fec04e1</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="5.0.0" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>

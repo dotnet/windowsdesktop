@@ -9,7 +9,7 @@
     <TestRestoreNuGetConfigFile>$(ObjDir)TestNuGetConfig\NuGet.config</TestRestoreNuGetConfigFile>
     <InternalNupkgCacheDir>$(ObjDir)ExtraNupkgsForTestRestore\</InternalNupkgCacheDir>
     <TestArchitectures>$(TargetArchitecture)</TestArchitectures>
-    <TestInfraTargetFramework>net5.0</TestInfraTargetFramework>
+    <TestInfraTargetFramework>net6.0</TestInfraTargetFramework>
     <!-- Clear the RID for test projects since they should be built rid-agnostic. -->
     <RuntimeIdentifier></RuntimeIdentifier>
   </PropertyGroup>

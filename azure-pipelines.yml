@@ -2,11 +2,13 @@ trigger:
   batch: true
   branches:
     include:
+    - main
     - release/*
     - internal/release/*
     - experimental/*
 
 pr:
+- main
 - release/*
 - experimental/*
 

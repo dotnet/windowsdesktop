@@ -41,11 +41,11 @@
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksFeedVersion>6.0.0-beta.21214.5</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksArchivesVersion>6.0.0-beta.21214.5</MicrosoftDotNetBuildTasksArchivesVersion>
-    <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.21214.5</MicrosoftDotNetBuildTasksPackagingVersion>
-    <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21214.5</MicrosoftDotNetBuildTasksInstallersVersion>
-    <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21214.5</MicrosoftDotNetVersionToolsTasksVersion>
+    <MicrosoftDotNetBuildTasksFeedVersion>6.0.0-beta.21215.5</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksArchivesVersion>6.0.0-beta.21215.5</MicrosoftDotNetBuildTasksArchivesVersion>
+    <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.21215.5</MicrosoftDotNetBuildTasksPackagingVersion>
+    <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21215.5</MicrosoftDotNetBuildTasksInstallersVersion>
+    <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21215.5</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>6.0.0-preview.4.21214.9</MicrosoftNETCoreAppRefVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-preview.4.21214.9</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>

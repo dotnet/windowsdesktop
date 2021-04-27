@@ -29,7 +29,6 @@
     <FrameworkListFileClass Include="System.IO.Pipes.AccessControl.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Resources.Extensions.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Security.AccessControl.dll" Profile="WindowsForms;WPF" />
-    <FrameworkListFileClass Include="System.Security.Cryptography.Cng.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Security.Cryptography.Pkcs.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Security.Cryptography.ProtectedData.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Security.Cryptography.Xml.dll" Profile="WindowsForms;WPF" />

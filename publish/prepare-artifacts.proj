@@ -15,6 +15,7 @@
     <ItemGroup>
       <ArtifactsForGeneratingChecksums
         Include="@(UploadToBlobStorageFile)"
+        Exclude="@(SymbolNupkgToPublishFile)"
         DestinationPath="%(FullPath)$(ChecksumExtension)" />
 
       <GeneratedChecksumFile Include="@(ArtifactsForGeneratingChecksums -> '%(DestinationPath)')" />

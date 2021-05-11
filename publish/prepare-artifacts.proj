@@ -5,6 +5,13 @@
   </PropertyGroup>
   <Import Project="../tools/Sign.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
+  <!-- Since this repo doesn't use publish.proj, update the incoming arcade defaults to use MicrosoftDotNet500 -->
+  <ItemGroup>
+    <FileExtensionSignInfo Update="@(FileExtensionSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="$(DotNetCertificateName)" />
+    <StrongNameSignInfo Update="@(StrongNameSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="$(DotNetCertificateName)" />
+    <FileSignInfo Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="$(DotNetCertificateName)" />
+  </ItemGroup>
+
   <UsingTask TaskName="GenerateChecksums" AssemblyFile="$(LocalBuildToolsTaskFile)" />
 
   <PropertyGroup>

@@ -52,7 +52,6 @@
     <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-preview.5.21270.12</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>6.0.0-preview.5.21270.12</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftNETCoreTargetsVersion>6.0.0-preview.5.21254.12</MicrosoftNETCoreTargetsVersion>
     <MicrosoftWin32RegistryAccessControlVersion>6.0.0-preview.5.21270.12</MicrosoftWin32RegistryAccessControlVersion>
     <MicrosoftWin32RegistryVersion>6.0.0-preview.5.21270.12</MicrosoftWin32RegistryVersion>
     <MicrosoftWin32SystemEventsVersion>6.0.0-preview.5.21270.12</MicrosoftWin32SystemEventsVersion>
@@ -67,7 +66,6 @@
     <SystemIOPipesAccessControlVersion>6.0.0-preview.5.21270.12</SystemIOPipesAccessControlVersion>
     <SystemResourcesExtensionsVersion>6.0.0-preview.5.21270.12</SystemResourcesExtensionsVersion>
     <SystemSecurityAccessControlVersion>6.0.0-preview.5.21270.12</SystemSecurityAccessControlVersion>
-    <SystemSecurityCryptographyCngVersion>6.0.0-preview.5.21224.4</SystemSecurityCryptographyCngVersion>
     <SystemSecurityCryptographyPkcsVersion>6.0.0-preview.5.21270.12</SystemSecurityCryptographyPkcsVersion>
     <SystemSecurityCryptographyProtectedDataVersion>6.0.0-preview.5.21270.12</SystemSecurityCryptographyProtectedDataVersion>
     <SystemSecurityCryptographyXmlVersion>6.0.0-preview.5.21270.12</SystemSecurityCryptographyXmlVersion>

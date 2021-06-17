@@ -19,8 +19,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Wpf.GitHub" Version="$(MicrosoftDotNetWpfGitHubVersion)" />
     <PackageReference Include="Microsoft.Private.Winforms" Version="$(MicrosoftPrivateWinformsVersion)" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.Win32.Registry.AccessControl" Version="$(MicrosoftWin32RegistryAccessControlVersion)" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
     <PackageReference Include="Microsoft.Win32.SystemEvents" Version="$(MicrosoftWin32SystemEventsVersion)" />
     <PackageReference Include="System.CodeDom" Version="$(SystemCodeDomVersion)" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="$(SystemConfigurationConfigurationManagerVersion)" />
@@ -28,16 +26,12 @@
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="$(SystemDiagnosticsPerformanceCounterVersion)" />
     <PackageReference Include="System.DirectoryServices" Version="$(SystemDirectoryServicesVersion)" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
-    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="$(SystemIOFileSystemAccessControlVersion)" />
     <PackageReference Include="System.IO.Packaging" Version="$(SystemIOPackagingVersion)" />
-    <PackageReference Include="System.IO.Pipes.AccessControl" Version="$(SystemIOPipesAccessControlVersion)" />
     <PackageReference Include="System.Resources.Extensions" Version="$(SystemResourcesExtensionsVersion)" />
-    <PackageReference Include="System.Security.AccessControl" Version="$(SystemSecurityAccessControlVersion)" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="$(SystemSecurityCryptographyPkcsVersion)" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="$(SystemSecurityCryptographyProtectedDataVersion)" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="$(SystemSecurityCryptographyXmlVersion)" />
     <PackageReference Include="System.Security.Permissions" Version="$(SystemSecurityPermissionsVersion)" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" />
     <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
     <PackageReference Include="System.Windows.Extensions" Version="$(SystemWindowsExtensionsVersion)" />
   </ItemGroup>

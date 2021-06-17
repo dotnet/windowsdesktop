@@ -18,7 +18,7 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.7.21315.5</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.7.21316.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-preview.7.21316.6</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
@@ -78,7 +78,7 @@
     <SystemThreadingAccessControlVersion>6.0.0-preview.6.21314.2</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsVersion>6.0.0-preview.6.21314.2</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-preview.7.21315.5</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-preview.7.21316.1</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
     <MicrosoftDotNetWpfGitHubVersion>6.0.0-preview.7.21316.6</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->

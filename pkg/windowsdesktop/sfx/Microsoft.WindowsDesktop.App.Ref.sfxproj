@@ -16,6 +16,7 @@
     -->
   <ItemGroup>
     <FrameworkListFileClass Include="Accessibility.dll" Profile="WindowsForms;WPF" />
+    <FrameworkListFileClass Include="Microsoft.Win32.Registry.AccessControl.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="Microsoft.Win32.SystemEvents.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.CodeDom.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="System.Configuration.ConfigurationManager.dll" Profile="WindowsForms;WPF" />

@@ -28,20 +28,26 @@ jobs:
     workspace:
       clean: all
     variables: 
-      CommonMSBuildArgs: >-
-        /p:Configuration=$(_BuildConfig)
-        /p:OfficialBuildId=$(OfficialBuildId)
-        /p:TargetArchitecture=${{ parameters.targetArchitecture }}
-        /p:PortableBuild=true
-        /p:SkipTests=${{ parameters.skipTests }}
-      MsbuildSigningArguments: >-
-        /p:DotNetSignType=$(SignType)
-      TargetArchitecture: ${{ parameters.targetArchitecture }}
-      DisableVSPublish: ${{ parameters.disableVSPublish }}
-      ${{ if eq(variables['System.TeamProject'], 'public') }}:
-        _InternalRuntimeDownloadArgs: ''
-      ${{ if ne(variables['System.TeamProject'], 'public') }}:
-        _InternalRuntimeDownloadArgs: >-
+      - name: CommonMSBuildArgs
+        value: >-
+          /p:Configuration=$(_BuildConfig)
+          /p:OfficialBuildId=$(OfficialBuildId)
+          /p:TargetArchitecture=${{ parameters.targetArchitecture }}
+          /p:PortableBuild=true
+          /p:SkipTests=${{ parameters.skipTests }}
+      - name: MsbuildSigningArguments
+        value: /p:DotNetSignType=$(SignType)
+      - name: TargetArchitecture
+        value: ${{ parameters.targetArchitecture }}
+      - name: DisableVSPublish
+        value: ${{ parameters.disableVSPublish }}
+      - ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        - name: _InternalRuntimeDownloadArgs
+          value: ''
+      - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+        - group: DotNet-MSRC-Storage
+        - name: _InternalRuntimeDownloadArgs
+          value: >-
             /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
             /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
 

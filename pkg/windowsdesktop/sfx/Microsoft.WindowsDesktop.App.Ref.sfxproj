@@ -2,12 +2,15 @@
   <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
   <PropertyGroup>
     <PlatformPackageType>TargetingPack</PlatformPackageType>
-    <WindowsFormsClassificationProps>$(PkgMicrosoft_Private_Winforms)\FrameworkListFiles.props</WindowsFormsClassificationProps>
     <RuntimePackProjectPath>$(MSBuildThisFileDirectory)Microsoft.WindowsDesktop.App.Runtime.sfxproj</RuntimePackProjectPath>
     <ArchiveName>windowsdesktop-targeting-pack</ArchiveName>
     <InstallerName>windowsdesktop-targeting-pack</InstallerName>
     <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
     <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
+
+    <_WinFormsContentPath>$([MSBuild]::NormalizePath($(PkgMicrosoft_Private_Winforms), 'sdk', 'dotnet-windowsdesktop'))</_WinFormsContentPath>
+    <_WindowsFormsContentProps>$(_WinFormsContentPath)\System.Windows.Forms.Analyzers.props</_WindowsFormsContentProps>
+    <_WindowsFormsContentTargets>$(_WinFormsContentPath)\System.Windows.Forms.Analyzers.targets</_WindowsFormsContentTargets>
   </PropertyGroup>
 
   <!-- 
@@ -38,7 +41,7 @@
     Windows Forms specific references
     see: https://github.com/dotnet/winforms/pull/2707/commits/50a5258f7039dc81d99b1c3896a94c578387a3be
     -->
-  <Import Project="$(WindowsFormsClassificationProps)" Condition="Exists('$(WindowsFormsClassificationProps)')" />
+  <Import Project="$(_WindowsFormsContentProps)" Condition="Exists('$(_WindowsFormsContentProps)')" />
 
   <!-- WPF specific references -->
   <ItemGroup>
@@ -68,4 +71,8 @@
     <!-- We don't have a ref assembly for DirectWriteForwarder -->
     <IgnoredReference Include="DirectWriteForwarder" />
   </ItemGroup>
+
+  <!-- Import Windows Forms specific targets -->
+  <Import Project="$(_WindowsFormsContentTargets)" Condition="Exists('$(_WindowsFormsContentTargets)')" />
+
 </Project>

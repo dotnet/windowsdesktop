@@ -37,6 +37,8 @@
         and it was removed in .NET 5.
     -->
     <IgnoredReference Include="System.Runtime.InteropServices.WindowsRuntime" />
+
+    <IgnoredReference Include="Microsoft.CodeAnalysis" />
   </ItemGroup>
 
   <Target Name="ReturnProductVersion" Returns="$(Version)" />

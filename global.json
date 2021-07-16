@@ -3,8 +3,8 @@
     "dotnet": "6.0.100-preview.6.21317.3"
   },
   "msbuild-sdks": {
-    "Microsoft.DotNet.Arcade.Sdk": "6.0.0-beta.21364.3",
-    "Microsoft.DotNet.SharedFramework.Sdk": "6.0.0-beta.21364.3",
+    "Microsoft.DotNet.Arcade.Sdk": "6.0.0-beta.21365.11",
+    "Microsoft.DotNet.SharedFramework.Sdk": "6.0.0-beta.21365.11",
     "Microsoft.Build.NoTargets": "1.0.53"
   }
 }

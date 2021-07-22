@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-rc.1.21371.6</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-rc.1.21371.6</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-rc.1.21372.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-rc.1.21372.1</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -47,33 +47,33 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21370.12</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21370.12</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>6.0.0-rc.1.21371.1</MicrosoftNETCoreAppRefVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21371.1</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-rc.1.21371.1</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppRefVersion>6.0.0-rc.1.21372.1</MicrosoftNETCoreAppRefVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21372.1</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-rc.1.21372.1</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>6.0.0-rc.1.21371.1</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-rc.1.21371.1</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32SystemEventsVersion>6.0.0-rc.1.21371.1</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>6.0.0-rc.1.21371.1</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>6.0.0-rc.1.21371.1</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>6.0.0-rc.1.21371.1</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-rc.1.21371.1</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>6.0.0-rc.1.21371.1</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>6.0.0-rc.1.21371.1</SystemDrawingCommonVersion>
-    <SystemIOPackagingVersion>6.0.0-rc.1.21371.1</SystemIOPackagingVersion>
-    <SystemResourcesExtensionsVersion>6.0.0-rc.1.21371.1</SystemResourcesExtensionsVersion>
-    <SystemSecurityCryptographyPkcsVersion>6.0.0-rc.1.21371.1</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-rc.1.21371.1</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.0-rc.1.21371.1</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>6.0.0-rc.1.21371.1</SystemSecurityPermissionsVersion>
-    <SystemTextEncodingsWebVersion>6.0.0-rc.1.21371.1</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>6.0.0-rc.1.21371.1</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>6.0.0-rc.1.21371.1</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>6.0.0-rc.1.21371.1</SystemWindowsExtensionsVersion>
+    <MicrosoftNETCorePlatformsVersion>6.0.0-rc.1.21372.1</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-rc.1.21372.1</MicrosoftWin32RegistryAccessControlVersion>
+    <MicrosoftWin32SystemEventsVersion>6.0.0-rc.1.21372.1</MicrosoftWin32SystemEventsVersion>
+    <SystemCodeDomVersion>6.0.0-rc.1.21372.1</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>6.0.0-rc.1.21372.1</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>6.0.0-rc.1.21372.1</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-rc.1.21372.1</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>6.0.0-rc.1.21372.1</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>6.0.0-rc.1.21372.1</SystemDrawingCommonVersion>
+    <SystemIOPackagingVersion>6.0.0-rc.1.21372.1</SystemIOPackagingVersion>
+    <SystemResourcesExtensionsVersion>6.0.0-rc.1.21372.1</SystemResourcesExtensionsVersion>
+    <SystemSecurityCryptographyPkcsVersion>6.0.0-rc.1.21372.1</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-rc.1.21372.1</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>6.0.0-rc.1.21372.1</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>6.0.0-rc.1.21372.1</SystemSecurityPermissionsVersion>
+    <SystemTextEncodingsWebVersion>6.0.0-rc.1.21372.1</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>6.0.0-rc.1.21372.1</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>6.0.0-rc.1.21372.1</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>6.0.0-rc.1.21372.1</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21371.6</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21372.1</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.0-rc.1.21371.6</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.0-rc.1.21372.1</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

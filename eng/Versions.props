@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.7.21372.6</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-preview.7.21372.4</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-preview.7.21372.9</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-preview.7.21372.6</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -47,33 +47,33 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21364.3</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21364.3</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>6.0.0-preview.7.21372.9</MicrosoftNETCoreAppRefVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-preview.7.21372.9</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-preview.7.21372.9</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppRefVersion>6.0.0-preview.7.21372.13</MicrosoftNETCoreAppRefVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-preview.7.21372.13</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-preview.7.21372.13</MicrosoftNETCoreAppRuntimewinx64Version>
     <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>6.0.0-preview.7.21372.9</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-preview.7.21372.9</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32SystemEventsVersion>6.0.0-preview.7.21372.9</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>6.0.0-preview.7.21372.9</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>6.0.0-preview.7.21372.9</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>6.0.0-preview.7.21372.9</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-preview.7.21372.9</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>6.0.0-preview.7.21372.9</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>6.0.0-preview.7.21372.9</SystemDrawingCommonVersion>
-    <SystemIOPackagingVersion>6.0.0-preview.7.21372.9</SystemIOPackagingVersion>
-    <SystemResourcesExtensionsVersion>6.0.0-preview.7.21372.9</SystemResourcesExtensionsVersion>
-    <SystemSecurityCryptographyPkcsVersion>6.0.0-preview.7.21372.9</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-preview.7.21372.9</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.0-preview.7.21372.9</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>6.0.0-preview.7.21372.9</SystemSecurityPermissionsVersion>
-    <SystemTextEncodingsWebVersion>6.0.0-preview.7.21372.9</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>6.0.0-preview.7.21372.9</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>6.0.0-preview.7.21372.9</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>6.0.0-preview.7.21372.9</SystemWindowsExtensionsVersion>
+    <MicrosoftNETCorePlatformsVersion>6.0.0-preview.7.21372.13</MicrosoftNETCorePlatformsVersion>
+    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-preview.7.21372.13</MicrosoftWin32RegistryAccessControlVersion>
+    <MicrosoftWin32SystemEventsVersion>6.0.0-preview.7.21372.13</MicrosoftWin32SystemEventsVersion>
+    <SystemCodeDomVersion>6.0.0-preview.7.21372.13</SystemCodeDomVersion>
+    <SystemConfigurationConfigurationManagerVersion>6.0.0-preview.7.21372.13</SystemConfigurationConfigurationManagerVersion>
+    <SystemDiagnosticsEventLogVersion>6.0.0-preview.7.21372.13</SystemDiagnosticsEventLogVersion>
+    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-preview.7.21372.13</SystemDiagnosticsPerformanceCounterVersion>
+    <SystemDirectoryServicesVersion>6.0.0-preview.7.21372.13</SystemDirectoryServicesVersion>
+    <SystemDrawingCommonVersion>6.0.0-preview.7.21372.13</SystemDrawingCommonVersion>
+    <SystemIOPackagingVersion>6.0.0-preview.7.21372.13</SystemIOPackagingVersion>
+    <SystemResourcesExtensionsVersion>6.0.0-preview.7.21372.13</SystemResourcesExtensionsVersion>
+    <SystemSecurityCryptographyPkcsVersion>6.0.0-preview.7.21372.13</SystemSecurityCryptographyPkcsVersion>
+    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-preview.7.21372.13</SystemSecurityCryptographyProtectedDataVersion>
+    <SystemSecurityCryptographyXmlVersion>6.0.0-preview.7.21372.13</SystemSecurityCryptographyXmlVersion>
+    <SystemSecurityPermissionsVersion>6.0.0-preview.7.21372.13</SystemSecurityPermissionsVersion>
+    <SystemTextEncodingsWebVersion>6.0.0-preview.7.21372.13</SystemTextEncodingsWebVersion>
+    <SystemTextJsonVersion>6.0.0-preview.7.21372.13</SystemTextJsonVersion>
+    <SystemThreadingAccessControlVersion>6.0.0-preview.7.21372.13</SystemThreadingAccessControlVersion>
+    <SystemWindowsExtensionsVersion>6.0.0-preview.7.21372.13</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-preview.7.21372.6</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-preview.7.21372.9</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.0-preview.7.21372.4</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.0-preview.7.21372.6</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

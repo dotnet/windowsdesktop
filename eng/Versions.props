@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-rc.1.21372.8</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-rc.1.21372.7</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.0-rc.1.21372.11</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.0-rc.1.21372.8</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -71,9 +71,9 @@
     <SystemThreadingAccessControlVersion>6.0.0-rc.1.21372.1</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsVersion>6.0.0-rc.1.21372.1</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21372.8</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21372.11</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.0-rc.1.21372.7</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.0-rc.1.21372.8</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

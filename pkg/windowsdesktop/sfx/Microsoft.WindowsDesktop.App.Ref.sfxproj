@@ -2,7 +2,6 @@
   <Sdk Name="Microsoft.DotNet.SharedFramework.Sdk" />
   <PropertyGroup>
     <PlatformPackageType>TargetingPack</PlatformPackageType>
-    <WindowsFormsClassificationProps>$(PkgMicrosoft_Private_Winforms)\FrameworkListFiles.props</WindowsFormsClassificationProps>
     <RuntimePackProjectPath>$(MSBuildThisFileDirectory)Microsoft.WindowsDesktop.App.Runtime.sfxproj</RuntimePackProjectPath>
     <ArchiveName>windowsdesktop-targeting-pack</ArchiveName>
     <InstallerName>windowsdesktop-targeting-pack</InstallerName>
@@ -11,8 +10,8 @@
   </PropertyGroup>
 
   <!-- 
-    shared concerns, these shouldn't generally change
-    for profile information refere to https://github.com/dotnet/cli/issues/10536#issuecomment-488871926
+    Shared concerns, these shouldn't generally change
+    For profile information refer to https://github.com/dotnet/cli/issues/10536#issuecomment-488871926
     -->
   <ItemGroup>
     <FrameworkListFileClass Include="Accessibility.dll" Profile="WindowsForms;WPF" />
@@ -36,9 +35,10 @@
 
   <!-- 
     Windows Forms specific references
-    see: https://github.com/dotnet/winforms/pull/2707/commits/50a5258f7039dc81d99b1c3896a94c578387a3be
+    see: https://github.com/dotnet/winforms/tree/main/pkg/Microsoft.Private.Winforms/sdk/dotnet-windowsdesktop
     -->
-  <Import Project="$(WindowsFormsClassificationProps)" Condition="Exists('$(WindowsFormsClassificationProps)')" />
+  <Import Project="$(PkgMicrosoft_Private_Winforms)\sdk\dotnet-windowsdesktop\System.Windows.Forms.FileClassification.props"
+          Condition="Exists('$(PkgMicrosoft_Private_Winforms)')" />
 
   <!-- WPF specific references -->
   <ItemGroup>
@@ -68,4 +68,8 @@
     <!-- We don't have a ref assembly for DirectWriteForwarder -->
     <IgnoredReference Include="DirectWriteForwarder" />
   </ItemGroup>
+
+  <!-- Windows Forms validation and packaging -->
+  <Import Project="WindowsForms.Packaging.targets" />
+
 </Project>

@@ -14,7 +14,7 @@
   <ItemGroup>
     <OfficialBuildRID Include="win-x86" Platform="x86" RuntimeMsiExists="true"/>
     <OfficialBuildRID Include="win-x64" RuntimeMsiExists="true"/>
-    <OfficialBuildRID Include="win-arm64" Platform="arm64" />
+    <OfficialBuildRID Include="win-arm64" Platform="arm64" RuntimeMsiExists="true"/>
   </ItemGroup>
 
 </Project>

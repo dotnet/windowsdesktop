@@ -33,7 +33,7 @@
     manually enabled by updating the metadata.
   -->
   <ItemGroup>
-    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="5.0.8" />
+    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="8" />
   </ItemGroup>
   <!--Package versions-->
   <PropertyGroup>
@@ -43,8 +43,8 @@
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.21409.4</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.8</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftNETCoreAppInternalVersion>5.0.8-servicing.21315.4</MicrosoftNETCoreAppInternalVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.9</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppInternalVersion>5.0.9-servicing.21359.8</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.2</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0</MicrosoftNETCoreTargetsVersion>
@@ -73,9 +73,9 @@
     <SystemThreadingAccessControlVersion>5.0.0</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsVersion>5.0.0</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.8-servicing.21315.4</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.9-servicing.21363.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.8-servicing.21315.6</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.9-servicing.21365.4</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

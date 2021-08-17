@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <ProductDependencies>
-    <Dependency Name="Microsoft.WindowsDesktop.Internal.Transport" Version="6.0.0-rc.1.21413.7">
+    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="6.0.0-rc.1.21416.10">
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>65e50657278f6a3af5ccb7ac6def8d5baa5dd490</Sha>
     </Dependency>

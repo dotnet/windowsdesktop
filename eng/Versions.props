@@ -46,30 +46,11 @@
     <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.21412.1</MicrosoftDotNetBuildTasksPackagingVersion>
     <MicrosoftDotNetBuildTasksInstallersVersion>6.0.0-beta.21412.1</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21412.1</MicrosoftDotNetVersionToolsTasksVersion>
-    <!-- core-setup -->
-    <MicrosoftNETCoreAppRefVersion>6.0.0-rc.1.21415.6</MicrosoftNETCoreAppRefVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21415.6</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-rc.1.21415.6</MicrosoftNETCoreAppRuntimewinx64Version>
-    <!-- corefx -->
-    <MicrosoftNETCorePlatformsVersion>6.0.0-rc.1.21415.6</MicrosoftNETCorePlatformsVersion>
-    <MicrosoftWin32RegistryAccessControlVersion>6.0.0-rc.1.21415.6</MicrosoftWin32RegistryAccessControlVersion>
-    <MicrosoftWin32SystemEventsVersion>6.0.0-rc.1.21415.6</MicrosoftWin32SystemEventsVersion>
-    <SystemCodeDomVersion>6.0.0-rc.1.21415.6</SystemCodeDomVersion>
-    <SystemConfigurationConfigurationManagerVersion>6.0.0-rc.1.21415.6</SystemConfigurationConfigurationManagerVersion>
-    <SystemDiagnosticsEventLogVersion>6.0.0-rc.1.21415.6</SystemDiagnosticsEventLogVersion>
-    <SystemDiagnosticsPerformanceCounterVersion>6.0.0-rc.1.21415.6</SystemDiagnosticsPerformanceCounterVersion>
-    <SystemDirectoryServicesVersion>6.0.0-rc.1.21415.6</SystemDirectoryServicesVersion>
-    <SystemDrawingCommonVersion>6.0.0-rc.1.21415.6</SystemDrawingCommonVersion>
-    <SystemIOPackagingVersion>6.0.0-rc.1.21415.6</SystemIOPackagingVersion>
-    <SystemResourcesExtensionsVersion>6.0.0-rc.1.21415.6</SystemResourcesExtensionsVersion>
-    <SystemSecurityCryptographyPkcsVersion>6.0.0-rc.1.21415.6</SystemSecurityCryptographyPkcsVersion>
-    <SystemSecurityCryptographyProtectedDataVersion>6.0.0-rc.1.21415.6</SystemSecurityCryptographyProtectedDataVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.0-rc.1.21415.6</SystemSecurityCryptographyXmlVersion>
-    <SystemSecurityPermissionsVersion>6.0.0-rc.1.21415.6</SystemSecurityPermissionsVersion>
-    <SystemTextEncodingsWebVersion>6.0.0-rc.1.21415.6</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>6.0.0-rc.1.21415.6</SystemTextJsonVersion>
-    <SystemThreadingAccessControlVersion>6.0.0-rc.1.21415.6</SystemThreadingAccessControlVersion>
-    <SystemWindowsExtensionsVersion>6.0.0-rc.1.21415.6</SystemWindowsExtensionsVersion>
+    <!-- runtime -->
+    <MicrosoftNETCoreAppRefVersion>6.0.0-rc.1.21416.10</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-rc.1.21416.10</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>6.0.0-rc.1.21416.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21416.10</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21416.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
@@ -83,14 +64,6 @@
     <NugetProjectModelVersion>4.9.4</NugetProjectModelVersion>
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
     <MicrosoftDiaSymReaderNativeVersion>1.7.0</MicrosoftDiaSymReaderNativeVersion>
-  </PropertyGroup>
-  <!--Package names-->
-  <PropertyGroup>
-    <MicrosoftDotNetBuildTasksFeedPackage>Microsoft.DotNet.Build.Tasks.Feed</MicrosoftDotNetBuildTasksFeedPackage>
-    <MicrosoftNETCorePlatformsPackage>Microsoft.NETCore.Platforms</MicrosoftNETCorePlatformsPackage>
-    <MicrosoftNETCoreTargetsPackage>Microsoft.NETCore.Targets</MicrosoftNETCoreTargetsPackage>
-    <MicrosoftBclJsonSourcesPackage>Microsoft.Bcl.Json.Sources</MicrosoftBclJsonSourcesPackage>
-    <MicrosoftSymbolUploaderBuildTaskPackage>Microsoft.SymbolUploader.Build.Task</MicrosoftSymbolUploaderBuildTaskPackage>
   </PropertyGroup>
   <!-- Base runtime pack name (RID-less) for shared framework tooling. -->
   <PropertyGroup>

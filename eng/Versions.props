@@ -50,7 +50,7 @@
     <MicrosoftNETCoreAppRefVersion>7.0.0-alpha.1.21419.1</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>7.0.0-alpha.1.21419.1</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>6.0.0-rc.1.21416.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21406.5</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.0-alpha.1.21419.1</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>7.0.0-alpha.1.21419.1</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->

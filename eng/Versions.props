@@ -49,7 +49,7 @@
     <!-- runtime -->
     <MicrosoftNETCoreAppRefVersion>6.0.0-rc.1.21421.1</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>6.0.0-rc.1.21421.1</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>6.0.0-rc.1.21416.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>6.0.0-rc.1.21421.1</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.0-rc.1.21421.1</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>6.0.0-rc.1.21423.1</MicrosoftPrivateWinformsVersion>

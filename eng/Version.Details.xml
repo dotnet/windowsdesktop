@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <ProductDependencies>
-    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="6.0.0-rc.1.21416.10">
+    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="6.0.0-rc.1.21421.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>65e50657278f6a3af5ccb7ac6def8d5baa5dd490</Sha>
+      <Sha>0ab239d53742fd806e7b62da2c1f3a0ca9bfc579</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Private.Winforms" Version="6.0.0-rc.1.21423.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>

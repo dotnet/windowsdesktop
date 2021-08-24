@@ -1,11 +1,5 @@
 <Project>
 
-  <!-- source-built packages -->
-  <ItemGroup>
-    <!-- arcade -->
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Packaging" Version="$(MicrosoftDotNetBuildTasksPackagingVersion)" />
-  </ItemGroup>
-
   <!-- excluded from source build -->
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.Feed" Version="$(MicrosoftDotNetBuildTasksFeedVersion)" />

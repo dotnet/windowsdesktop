@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.0-alpha.1.21458.9</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.0-alpha.1.21458.14</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.0-alpha.1.21458.10</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.0-alpha.1.21458.16</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
     Servicing build settings for setup packages. Instructions:
@@ -51,9 +51,9 @@
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>7.0.0-alpha.1.21457.1</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.0-alpha.1.21457.1</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>7.0.0-alpha.1.21458.9</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>7.0.0-alpha.1.21458.10</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>7.0.0-alpha.1.21458.14</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>7.0.0-alpha.1.21458.16</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

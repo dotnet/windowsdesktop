@@ -229,6 +229,7 @@
     <TargetsOpensuse>false</TargetsOpensuse>
     <TargetsFedora>false</TargetsFedora>
     <TargetsCentos>false</TargetsCentos>
+    <TargetsRocky>false</TargetsRocky>
     <TargetsOracle>false</TargetsOracle>
     <TargetsSles>false</TargetsSles>
   </PropertyGroup>
@@ -321,7 +322,7 @@
     <InstallerExtension Condition="'$(OSGroup)' == 'Windows_NT'">.msi</InstallerExtension>
     <InstallerExtension Condition="'$(OSGroup)' == 'OSX'">.pkg</InstallerExtension>
     <InstallerExtension Condition="'$(TargetsDebian)' == 'true' or '$(TargetsUbuntu)' == 'true' or '$(TargetsLinuxMint)' == 'true'">.deb</InstallerExtension>
-    <InstallerExtension Condition="'$(TargetsRhel)' == 'true' or '$(TargetsCentos)' == 'true' or '$(TargetsOpensuse)' == 'true' or '$(TargetsFedora)' == 'true' or '$(TargetsOracle)' == 'true' or '$(TargetsSles)' == 'true'">.rpm</InstallerExtension>
+    <InstallerExtension Condition="'$(TargetsRhel)' == 'true' or '$(TargetsCentos)' == 'true' or '$(TargetsRocky)' == 'true' or '$(TargetsOpensuse)' == 'true' or '$(TargetsFedora)' == 'true' or '$(TargetsOracle)' == 'true' or '$(TargetsSles)' == 'true'">.rpm</InstallerExtension>
     <CombinedInstallerExtension Condition="'$(OSGroup)' == 'Windows_NT'">.exe</CombinedInstallerExtension>
     <CombinedInstallerExtension Condition="'$(OSGroup)' != 'Windows_NT'">$(InstallerExtension)</CombinedInstallerExtension>
   </PropertyGroup>

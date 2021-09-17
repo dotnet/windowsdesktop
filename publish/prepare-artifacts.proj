@@ -139,7 +139,9 @@
 
     <Target Name="PreparePublishFilesToAzureBlobFeed"
           DependsOnTargets="GetProductVersions">
+    <!--
     <Error Condition="'$(PackagesUrl)'==''" Text="Missing property PackagesUrl" />
+    -->
     <PropertyGroup>
       <!--
       <ExpectedFeedUrl>$(PackagesUrl)</ExpectedFeedUrl>

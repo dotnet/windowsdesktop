@@ -61,7 +61,25 @@
 
       <!-- Create temp dir to store generated asset manifest, per Arcade guidance. -->
       <TempWorkingDir>$(ArtifactsObjDir)TempWorkingDir\$([System.Guid]::NewGuid())\</TempWorkingDir>
+
+      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'=='true'">$(ProductionVersion)</ProductVersionTxtContents>
+      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'!='true'">$(ProductVersion)</ProductVersionTxtContents>
+
     </PropertyGroup>
+
+    <!-- Generate windowsdesktop-productVersion.txt containing the value of $(PackageVersion) -->
+    <WriteLinesToFile
+      File="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt"
+      Lines="$(ProductVersionTxtContents)"
+      Overwrite="true"
+      Encoding="ASCII" />
+
+    <!-- Generate productVersion.txt containing the value of $(PackageVersion) -->
+    <WriteLinesToFile
+      File="$(ArtifactsShippingPackagesDir)productVersion.txt"
+      Lines="$(ProductVersionTxtContents)"
+      Overwrite="true"
+      Encoding="ASCII" />
 
     <ItemGroup>
       <ItemsToPush Remove="@(ItemsToPush)" />
@@ -82,6 +100,15 @@
         <Category>Checksum</Category>
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
+
+      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt">
+        <RelativeBlobPath>$(InstallersRelativePath)windowsdesktop-productVersion.txt</RelativeBlobPath>
+      </ItemsToPush>
+
+      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)productVersion.txt">
+        <RelativeBlobPath>$(InstallersRelativePath)productVersion.txt</RelativeBlobPath>
+      </ItemsToPush>
+      
     </ItemGroup>
 
     <!--
@@ -125,67 +152,13 @@
       ManifestBuildId="$(BUILD_BUILDNUMBER)"
       ManifestCommit="$(BUILD_SOURCEVERSION)"
       IsStableBuild="$(IsStableBuild)"
+      PublishFlatContainer="true"
       AssetManifestPath="$(AssetManifestFile)"
       PublishingVersion="3" />
 
     <!-- Copy the generated manifest to the build's artifacts -->
     <Copy SourceFiles="$(AssetManifestFile)" DestinationFolder="$(TempWorkingDir)" />
 
-    <Message Importance="High" Text="Uploading $(AssetManifestFilename) to pipeline" />
-    <Message
-      Text="##vso[artifact.upload containerfolder=AssetManifests;artifactname=AssetManifests]$(TempWorkingDir)$(AssetManifestFilename)"
-      Importance="High" />
-  </Target>
-
-    <Target Name="PreparePublishFilesToAzureBlobFeed"
-          DependsOnTargets="GetProductVersions">
-    <PropertyGroup>
-
-      <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
-      <AssetManifestFile>$(ArtifactsLogDir)AssetManifest/$(AssetManifestFilename)</AssetManifestFile>
-
-      <!-- Create temp dir to store generated asset manifest, per Arcade guidance. -->
-      <TempWorkingDir>$(ArtifactsObjDir)TempWorkingDir\$([System.Guid]::NewGuid())\</TempWorkingDir>
-
-      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'=='true'">$(ProductionVersion)</ProductVersionTxtContents>
-      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'!='true'">$(ProductVersion)</ProductVersionTxtContents>
-
-    </PropertyGroup>
-
-    <!-- Generate windowsdesktop-productVersion.txt containing the value of $(PackageVersion) -->
-    <WriteLinesToFile
-      File="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt"
-      Lines="$(ProductVersionTxtContents)"
-      Overwrite="true"
-      Encoding="ASCII" />
-
-    <ItemGroup>
-      <ItemsToPush Remove="@(ItemsToPush)" />
-
-      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt">
-        <RelativeBlobPath>$(InstallersRelativePath)windowsdesktop-productVersion.txt</RelativeBlobPath>
-      </ItemsToPush>
-
-    </ItemGroup>
-
-    <!-- Push items to AzDO as build artifacts, generating the asset manifest as a side effect. -->
-    <PushToAzureDevOpsArtifacts
-      ItemsToPush="@(ItemsToPush)"
-      ManifestBuildData="@(ManifestBuildData)"
-      ManifestRepoUri="$(BUILD_REPOSITORY_URI)"
-      ManifestBranch="$(BUILD_SOURCEBRANCH)"
-      ManifestBuildId="$(BUILD_BUILDNUMBER)"
-      ManifestCommit="$(BUILD_SOURCEVERSION)"
-      IsStableBuild="$(IsStableBuild)"
-      PublishFlatContainer="true"
-      AssetManifestPath="$(AssetManifestFile)"
-      AssetsTemporaryDirectory="$(TempWorkingDir)" />
-    <!-- Copy the generated manifest to the build's artifacts -->
-    <Copy SourceFiles="$(AssetManifestFile)" DestinationFolder="$(TempWorkingDir)" />
-    <Message Importance="High" Text="Uploading $(AssetManifestFilename) to pipeline" />
-    <Message
-      Text="##vso[artifact.upload containerfolder=AssetManifests;artifactname=AssetManifests]$(TempWorkingDir)$(AssetManifestFilename)"
-      Importance="High" />
   </Target>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
@@ -197,8 +170,7 @@
   <Target Name="Build"
           DependsOnTargets="
             UploadPreparedArtifactsToPipeline;
-            PreparePublishToAzureBlobFeed;
-            PreparePublishFilesToAzureBlobFeed">
+            PreparePublishToAzureBlobFeed">
     <Message Importance="High" Text="Complete!" />
   </Target>
 

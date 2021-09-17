@@ -139,13 +139,7 @@
 
     <Target Name="PreparePublishFilesToAzureBlobFeed"
           DependsOnTargets="GetProductVersions">
-    <!--
-    <Error Condition="'$(PackagesUrl)'==''" Text="Missing property PackagesUrl" />
-    -->
     <PropertyGroup>
-      <!--
-      <ExpectedFeedUrl>$(PackagesUrl)</ExpectedFeedUrl>
-      -->
 
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
       <AssetManifestFile>$(ArtifactsLogDir)AssetManifest/$(AssetManifestFilename)</AssetManifestFile>
@@ -158,9 +152,9 @@
 
     </PropertyGroup>
 
-    <!-- Generate productVersion.txt containing the value of $(PackageVersion) -->
+    <!-- Generate windowsdesktop-productVersion.txt containing the value of $(PackageVersion) -->
     <WriteLinesToFile
-      File="$(ArtifactsShippingPackagesDir)productVersion.txt"
+      File="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt"
       Lines="$(ProductVersionTxtContents)"
       Overwrite="true"
       Encoding="ASCII" />
@@ -168,20 +162,8 @@
     <ItemGroup>
       <ItemsToPush Remove="@(ItemsToPush)" />
 
-      <!--
-      <ItemsToPush
-        Include="@(UploadToBlobStorageFile)"
-        Exclude="@(NupkgToPublishFile);@(SymbolNupkgToPublishFile)">
-        <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
-      </ItemsToPush>
-      <ItemsToPush Include="@(GeneratedChecksumFile)">
-        <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
-        <Category>Checksum</Category>
-      </ItemsToPush>
-      -->
-
-      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)productVersion.txt">
-        <RelativeBlobPath>$(InstallersRelativePath)productVersion.txt</RelativeBlobPath>
+      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt">
+        <RelativeBlobPath>$(InstallersRelativePath)windowsdesktop-productVersion.txt</RelativeBlobPath>
       </ItemsToPush>
 
     </ItemGroup>

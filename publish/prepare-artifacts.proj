@@ -103,10 +103,12 @@
 
       <ItemsToPush Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt">
         <RelativeBlobPath>$(InstallersRelativePath)windowsdesktop-productVersion.txt</RelativeBlobPath>
+        <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
 
       <ItemsToPush Include="$(ArtifactsShippingPackagesDir)productVersion.txt">
         <RelativeBlobPath>$(InstallersRelativePath)productVersion.txt</RelativeBlobPath>
+        <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
       
     </ItemGroup>
@@ -152,7 +154,6 @@
       ManifestBuildId="$(BUILD_BUILDNUMBER)"
       ManifestCommit="$(BUILD_SOURCEVERSION)"
       IsStableBuild="$(IsStableBuild)"
-      PublishFlatContainer="true"
       AssetManifestPath="$(AssetManifestFile)"
       PublishingVersion="3" />
 

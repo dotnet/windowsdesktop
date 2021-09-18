@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <ProductDependencies>
-    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="6.0.0-rc.2.21467.8" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="6.0.0-rc.2.21467.18" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>5631710f574e430f46391dab87310f6e01974813</Sha>
+      <Sha>3b921ef11a664960eb19e3913f457d622bae907b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Private.Winforms" Version="6.0.0-rc.2.21467.10" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Private.Winforms" Version="6.0.0-rc.2.21467.11" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
-      <Sha>fef40f7a5d223b61435377ef4133e4ec0f07e6da</Sha>
+      <Sha>bf35f0bd3003f9a96fb7afdabdbea85d06b32f61</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-rc.2.21467.16">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="6.0.0-rc.2.21467.18">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>c93995d937a78c8f827031ba8f8cd0200cf76532</Sha>
+      <Sha>bbd9d82945e9ae887d7110063240224170715e49</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="6.0.0-rc.2.21467.16">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="6.0.0-rc.2.21467.18">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>c93995d937a78c8f827031ba8f8cd0200cf76532</Sha>
+      <Sha>bbd9d82945e9ae887d7110063240224170715e49</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.App.Ref" Version="6.0.0-rc.2.21467.8" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.App.Ref" Version="6.0.0-rc.2.21467.18" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>5631710f574e430f46391dab87310f6e01974813</Sha>
+      <Sha>3b921ef11a664960eb19e3913f457d622bae907b</Sha>
     </Dependency>
-    <Dependency Name="VS.Redist.Common.NetCore.SharedFramework.x64.6.0" Version="6.0.0-rc.2.21467.8" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="VS.Redist.Common.NetCore.SharedFramework.x64.6.0" Version="6.0.0-rc.2.21467.18" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>5631710f574e430f46391dab87310f6e01974813</Sha>
+      <Sha>3b921ef11a664960eb19e3913f457d622bae907b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="6.0.0-rc.2.21467.8" CoherentParentDependency="Microsoft.Private.Winforms">
+    <Dependency Name="Microsoft.NETCore.App.Runtime.win-x64" Version="6.0.0-rc.2.21467.18" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
-      <Sha>5631710f574e430f46391dab87310f6e01974813</Sha>
+      <Sha>3b921ef11a664960eb19e3913f457d622bae907b</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="6.0.0-rc.2.21467.10" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="6.0.0-rc.2.21467.11" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://github.com/dotnet/winforms</Uri>
-      <Sha>fef40f7a5d223b61435377ef4133e4ec0f07e6da</Sha>
+      <Sha>bf35f0bd3003f9a96fb7afdabdbea85d06b32f61</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="6.0.0-rc.2.21467.16">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="6.0.0-rc.2.21467.18">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>c93995d937a78c8f827031ba8f8cd0200cf76532</Sha>
+      <Sha>bbd9d82945e9ae887d7110063240224170715e49</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>

@@ -61,7 +61,25 @@
 
       <!-- Create temp dir to store generated asset manifest, per Arcade guidance. -->
       <TempWorkingDir>$(ArtifactsObjDir)TempWorkingDir\$([System.Guid]::NewGuid())\</TempWorkingDir>
+
+      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'=='true'">$(ProductionVersion)</ProductVersionTxtContents>
+      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'!='true'">$(ProductVersion)</ProductVersionTxtContents>
+
     </PropertyGroup>
+
+    <!-- Generate windowsdesktop-productVersion.txt containing the value of $(PackageVersion) -->
+    <WriteLinesToFile
+      File="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt"
+      Lines="$(ProductVersionTxtContents)"
+      Overwrite="true"
+      Encoding="ASCII" />
+
+    <!-- Generate productVersion.txt containing the value of $(PackageVersion) -->
+    <WriteLinesToFile
+      File="$(ArtifactsShippingPackagesDir)productVersion.txt"
+      Lines="$(ProductVersionTxtContents)"
+      Overwrite="true"
+      Encoding="ASCII" />
 
     <ItemGroup>
       <ItemsToPush Remove="@(ItemsToPush)" />
@@ -82,6 +100,17 @@
         <Category>Checksum</Category>
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
+
+      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt">
+        <RelativeBlobPath>$(InstallersRelativePath)windowsdesktop-productVersion.txt</RelativeBlobPath>
+        <PublishFlatContainer>true</PublishFlatContainer>
+      </ItemsToPush>
+
+      <ItemsToPush Include="$(ArtifactsShippingPackagesDir)productVersion.txt">
+        <RelativeBlobPath>$(InstallersRelativePath)productVersion.txt</RelativeBlobPath>
+        <PublishFlatContainer>true</PublishFlatContainer>
+      </ItemsToPush>
+      
     </ItemGroup>
 
     <!--
@@ -131,10 +160,6 @@
     <!-- Copy the generated manifest to the build's artifacts -->
     <Copy SourceFiles="$(AssetManifestFile)" DestinationFolder="$(TempWorkingDir)" />
 
-    <Message Importance="High" Text="Uploading $(AssetManifestFilename) to pipeline" />
-    <Message
-      Text="##vso[artifact.upload containerfolder=AssetManifests;artifactname=AssetManifests]$(TempWorkingDir)$(AssetManifestFilename)"
-      Importance="High" />
   </Target>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />

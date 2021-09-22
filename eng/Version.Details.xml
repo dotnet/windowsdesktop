@@ -9,13 +9,13 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>834d0a0d364c82bf70803706886ff9a40bd3e090</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="7.0.0-alpha.1.21471.6">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="7.0.0-alpha.1.21472.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>7b3be56a1e92b1be0bf06c2d74140d9769ffaeae</Sha>
+      <Sha>36a32345f71076fba0ea65cfda5a60a64fa3eb7d</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="7.0.0-alpha.1.21471.6">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="7.0.0-alpha.1.21472.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>7b3be56a1e92b1be0bf06c2d74140d9769ffaeae</Sha>
+      <Sha>36a32345f71076fba0ea65cfda5a60a64fa3eb7d</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="7.0.0-alpha.1.21471.1" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://github.com/dotnet/runtime</Uri>
@@ -33,9 +33,9 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>834d0a0d364c82bf70803706886ff9a40bd3e090</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="7.0.0-alpha.1.21471.6">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="7.0.0-alpha.1.21472.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
-      <Sha>7b3be56a1e92b1be0bf06c2d74140d9769ffaeae</Sha>
+      <Sha>36a32345f71076fba0ea65cfda5a60a64fa3eb7d</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>

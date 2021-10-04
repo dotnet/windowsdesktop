@@ -15,8 +15,8 @@
     <ContainerName>dotnet</ContainerName>
     <ChecksumContainerName>$(ContainerName)</ChecksumContainerName>
     <!-- Max version of NETCoreApp, used by test projects. -->
-    <NETCoreAppMaximumVersion>7.0</NETCoreAppMaximumVersion>
-    <NETCoreAppFrameworkVersion>7.0</NETCoreAppFrameworkVersion>
+    <NETCoreAppMaximumVersion>6.0</NETCoreAppMaximumVersion>
+    <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.0-alpha.1.21501.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.0-alpha.1.21501.1</MicrosoftDotNetWpfProjectTemplatesVersion>

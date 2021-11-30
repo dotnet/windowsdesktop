@@ -37,7 +37,7 @@
     manually enabled by updating the metadata.
   -->
   <ItemGroup>
-    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="0" />
+    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="$(PatchVersion)" />
   </ItemGroup>
   <!--Package versions-->
   <PropertyGroup>

@@ -1,0 +1,131 @@
+<Project>
+
+  <PropertyGroup>
+    <_BaselineMajorMinorVersion>$(MajorVersion).$(MinorVersion)</_BaselineMajorMinorVersion>
+    <_BaselineFullVersion>$(_BaselineMajorMinorVersion).0</_BaselineFullVersion>
+
+    <_ApiCompatMarkerFile>$(IntermediateOutputPath)marker.txt</_ApiCompatMarkerFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.ApiCompat" Version="$(MicrosoftDotNetApiCompatVersion)" IsImplicitlyDefined="true" />
+
+      <!-- 
+        We can't reference the ref packs, as we'd be introducing circular references and breaking other checks.
+        Instead we have to download these with PackageDownload. Unfortunately doing so, we don't have the convenience of 'GeneratePathProperty'
+        and have to generate path manually.
+      -->
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[$(_BaselineFullVersion)]" />
+    <PackageDownload Include="Microsoft.NETCore.App.Runtime.win-x64" Version="[$(_BaselineFullVersion)]" />
+    <PackageDownload Include="Microsoft.WindowsDesktop.App.Ref" Version="[$(_BaselineFullVersion)]" />
+  </ItemGroup>
+
+  <Target Name="_GetApiCompatInputsAndOutputs">
+    <PropertyGroup>
+      <_PkgMicrosoft_NETCore_App_Ref>$([MSBuild]::NormalizeDirectory('$(NUGET_PACKAGES)', 'microsoft.netcore.app.ref', $(_BaselineFullVersion)))</_PkgMicrosoft_NETCore_App_Ref>
+      <_PkgMicrosoft_NETCore_App_Runtime_win_x64>$([MSBuild]::NormalizeDirectory('$(NUGET_PACKAGES)', 'microsoft.netcore.app.runtime.win-x64', $(_BaselineFullVersion)))</_PkgMicrosoft_NETCore_App_Runtime_win_x64>
+      <_PkgMicrosoft_WindowsDesktop_App_Ref>$([MSBuild]::NormalizeDirectory('$(NUGET_PACKAGES)', 'microsoft.windowsdesktop.app.ref', $(_BaselineFullVersion)))</_PkgMicrosoft_WindowsDesktop_App_Ref>
+
+      <_NETCoreAppRefPath>$([MSBuild]::NormalizeDirectory('$(_PkgMicrosoft_NETCore_App_Ref)', 'ref', 'net$(_BaselineMajorMinorVersion)'))</_NETCoreAppRefPath>
+      <_WindowsDesktopRefPath>$([MSBuild]::NormalizeDirectory('$(_PkgMicrosoft_WindowsDesktop_App_Ref)', 'ref', 'net$(_BaselineMajorMinorVersion)'))</_WindowsDesktopRefPath>
+      <_NETCoreAppRuntimePath>$([MSBuild]::NormalizeDirectory('$(_PkgMicrosoft_NETCore_App_Runtime_win_x64)', 'runtimes', 'win-x64', 'lib', 'net$(_BaselineMajorMinorVersion)'))</_NETCoreAppRuntimePath>
+
+      <_WindowsFormsRefsPath>$([MSBuild]::NormalizeDirectory('$(PkgMicrosoft_Private_Winforms)', 'ref', 'net$(_BaselineMajorMinorVersion)'))</_WindowsFormsRefsPath>
+      <_WindowsFormsApiCompatBaselineIgnoreFile>$(MSBuildThisFileDirectory)baseline.net$(_BaselineMajorMinorVersion).winforms.txt</_WindowsFormsApiCompatBaselineIgnoreFile>
+      <_WpfApiCompatBaselineIgnoreFile>$(MSBuildThisFileDirectory)baseline.net$(_BaselineMajorMinorVersion).wpf.txt</_WpfApiCompatBaselineIgnoreFile>
+    </PropertyGroup>
+
+    <Error Text="Windows Forms ref assemblies cannot be found. Expected under '$(_WindowsFormsRefsPath)'."
+           Condition="!Exists('$(_WindowsFormsRefsPath)')"/>
+    <Error Text="Windows Forms API compat baseline for net$(_BaselineMajorMinorVersion) must be created and stored in '$(_WindowsFormsApiCompatBaselineIgnoreFile)'."
+           Condition="!Exists('$(_WindowsFormsApiCompatBaselineIgnoreFile)') and '$(CreateBaseline)' != 'true'"/>
+    <!-- TODO: WPF team to enable and review
+       <Error Text="WPF API compat baseline for net$(_BaselineMajorMinorVersion) must be created and stored in '$(_WpfApiCompatBaselineIgnoreFile)'."
+           Condition="!Exists('$(_WpfApiCompatBaselineIgnoreFile)') and '$(CreateBaseline)' != 'true'"/> -->
+
+    <ItemGroup>
+      <_DependencyDirectories Include="$(_NETCoreAppRefPath)" />
+      <_DependencyDirectories Include="$(_WindowsDesktopRefPath)" />
+      <_ContractDependencyDirectories Include="$(_NETCoreAppRuntimePath)" />
+
+      <!-- Get the list of Windows Forms ref assemblies shipped in the transport package -->
+      <_WindowsFormsFilePaths Include="$(_WindowsFormsRefsPath)%(FrameworkListFileClass.Identity)"
+                              Condition="'%(FrameworkListFileClass.Profile)' == 'WindowsForms'" />
+      <_WindowsFormsFilePaths Remove="@(_WindowsFormsFilePaths)"
+                              Condition="!Exists(%(Identity))" />
+
+      <!-- Get the list of WPF assemblies that form the Ref surface, i.e. go into <dotnet>\packs\Microsoft.WindowsDesktop.App.Ref\<version>\ref folder -->
+      <_WpfFilePaths Include="$(OutputPath)%(FrameworkListFileClass.Identity)"
+                              Condition="'%(FrameworkListFileClass.Profile)' == 'WPF'" />
+    </ItemGroup>
+
+    <!-- Validate paths for the collected items -->
+    <Error Text="One ofthe required contract dependencies directories is invalid."
+           Condition="!Exists('%(_ContractDependencyDirectories.FullPath)')"/>
+    <Error Text="One ofthe required implementation directories is invalid."
+           Condition="!Exists('%(_DependencyDirectories.FullPath)')"/>
+    <Error Text="Some of Windows Forms assemblies referenced in 'FrameworkListFileClass' group can't be found."
+           Condition="!Exists('%(_WindowsFormsFilePaths.FullPath)')"/>
+
+    <PropertyGroup>
+      <_WindowsFormsApiCompatArgs>"@(_WindowsFormsFilePaths, ',')"</_WindowsFormsApiCompatArgs>
+      <_WindowsFormsApiCompatArgs>$(_WindowsFormsApiCompatArgs) --contract-depends "$(OutputPath),@(_ContractDependencyDirectories, ','),"</_WindowsFormsApiCompatArgs>
+      <_WindowsFormsApiCompatArgs>$(_WindowsFormsApiCompatArgs) --impl-dirs "@(_DependencyDirectories, ','),"</_WindowsFormsApiCompatArgs>
+      <_WindowsFormsApiCompatArgs Condition="'$(CreateBaseline)' != 'true'">$(_WindowsFormsApiCompatArgs) --baseline "$(_WindowsFormsApiCompatBaselineIgnoreFile)"</_WindowsFormsApiCompatArgs>
+      <_WindowsFormsApiCompatArgs>$(_WindowsFormsApiCompatArgs) --ignore-design-time-facades</_WindowsFormsApiCompatArgs>
+
+      <_WindowsFormsCreateBaselineArgs Condition="'$(CreateBaseline)' == 'true'"> &gt; "$(_WindowsFormsApiCompatBaselineIgnoreFile)"</_WindowsFormsCreateBaselineArgs>
+
+      <_WindowsFormsApiCompatResponseFile>$(IntermediateOutputPath)apicompat.winforms.rsp</_WindowsFormsApiCompatResponseFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <_WpfApiCompatArgs>"@(_WpfFilePaths, ',')"</_WpfApiCompatArgs>
+      <_WpfApiCompatArgs>$(_WpfApiCompatArgs) --contract-depends "$(OutputPath),@(_ContractDependencyDirectories, ','),"</_WpfApiCompatArgs>
+      <_WpfApiCompatArgs>$(_WpfApiCompatArgs) --impl-dirs "@(_DependencyDirectories, ','),"</_WpfApiCompatArgs>
+      <_WpfApiCompatArgs Condition="'$(CreateBaseline)' != 'true'">$(_WindowsFormsApiCompatArgs) --baseline "$(_WpfApiCompatBaselineIgnoreFile)"</_WpfApiCompatArgs>
+      <_WpfCreateBaselineArgs Condition="'$(CreateBaseline)' == 'true'"> &gt; "$(_WpfApiCompatBaselineIgnoreFile)"</_WpfCreateBaselineArgs>
+
+      <_WpfApiCompatResponseFile>$(IntermediateOutputPath)apicompat.wpf.rsp</_WpfApiCompatResponseFile>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(IntermediateOutputPath)" />
+    <WriteLinesToFile File="$(_WindowsFormsApiCompatResponseFile)" Lines="$(_WindowsFormsApiCompatArgs)" Overwrite="true" />
+    <WriteLinesToFile File="$(_WpfApiCompatResponseFile)" Lines="$(_WpfApiCompatArgs)" Overwrite="true" />
+  </Target>
+
+  <!--
+    Validate that the current servicing release retains the same public API surface as the first official release.
+  -->
+  <Target Name="EnsureApiCompat"
+          DependsOnTargets="_GetApiCompatInputsAndOutputs"
+          AfterTargets="Build"
+          Inputs="$(_WindowsFormsApiCompatBaselineIgnoreFile);$(_WpfApiCompatBaselineIgnoreFile)"
+          Outputs="$(_ApiCompatMarkerFile)"
+          Condition="'$(RunApiCompat)' == 'true'">
+
+    <Exec Command="$(_ApiCompatCommand) @&quot;$(_WindowsFormsApiCompatResponseFile)&quot; $(_WindowsFormsCreateBaselineArgs)"
+          CustomErrorRegularExpression="^[a-zA-Z]+ :"
+          StandardOutputImportance="Low"
+          IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="WindowsFormsApiCompatExitCode" />
+    </Exec>
+    <Error Condition="'$(WindowsFormsApiCompatExitCode)' != '0'" Text="Windows Forms ApiCompat failed comparing $(_BaselineMajorMinorVersion).$(PatchVersion) to $(_BaselineFullVersion)" />
+
+    <!-- TODO: WPF team to enable and review
+    
+       <Exec Command="$(_ApiCompatCommand) @&quot;$(_WpfApiCompatResponseFile)&quot; $(_WpfCreateBaselineArgs)"
+          CustomErrorRegularExpression="^[a-zA-Z]+ :"
+          StandardOutputImportance="Low"
+          IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="WpfApiCompatExitCode" />
+    </Exec>
+    <Error Condition="'$(WpfApiCompatExitCode)' != '0'" Text="WPF ApiCompat failed comparing $(_BaselineMajorMinorVersion).$(PatchVersion) to $(_BaselineFullVersion)" /> -->
+
+    <!-- Create a marker file which serves as the target's output to enable incremental builds. -->
+    <Touch Files="$(_ApiCompatMarkerFile)"
+           AlwaysCreate="true" />
+ 
+  </Target>
+
+</Project>

@@ -7,7 +7,9 @@
     <InstallerName>windowsdesktop-targeting-pack</InstallerName>
     <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
     <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
+
     <CreatePlatformManifest Condition="'$(PreReleaseVersionLabel)' == 'servicing'">false</CreatePlatformManifest>
+    <RunApiCompat Condition=" '$(PreReleaseVersionLabel)' == 'servicing' and $(PatchVersion) &gt; 0">true</RunApiCompat>
   </PropertyGroup>
 
   <!-- 
@@ -76,4 +78,7 @@
   <ItemGroup Condition="'$(CreatePlatformManifest)' == 'false'">
     <FilesToPackage  Include="PlatformManifest.txt" TargetPath="data" GeneratedBuildFile="true" />
   </ItemGroup>
+
+  <!-- Windows Forms validation and packaging -->
+  <Import Project="$(RepositoryEngineeringDir)ApiCompat\ApiCompat.targets" />
 </Project>

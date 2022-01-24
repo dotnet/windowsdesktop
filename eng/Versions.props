@@ -21,6 +21,9 @@
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.1-servicing.21567.5</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.1-servicing.21567.7</MicrosoftDotNetWpfProjectTemplatesVersion>
+
+    <!-- Run APICompat only for the ref pack and only in servicing releases -->
+    <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>
   <!--
 
@@ -49,6 +52,7 @@
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
+    <MicrosoftDotNetApiCompatVersion>6.0.0-beta.21609.4</MicrosoftDotNetApiCompatVersion>
     <MicrosoftDotNetBuildTasksFeedVersion>6.0.0-beta.21609.4</MicrosoftDotNetBuildTasksFeedVersion>
     <MicrosoftDotNetBuildTasksArchivesVersion>6.0.0-beta.21609.4</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksPackagingVersion>6.0.0-beta.21609.4</MicrosoftDotNetBuildTasksPackagingVersion>
@@ -56,7 +60,7 @@
     <MicrosoftDotNetVersionToolsTasksVersion>6.0.0-beta.21609.4</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- runtime -->
     <MicrosoftNETCoreAppRefVersion>6.0.1</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>6.0.1</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppRuntimewinx64Version>$(MicrosoftNETCoreAppRefVersion)</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>6.0.1-servicing.21567.5</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>6.0.1-servicing.21567.5</VSRedistCommonNetCoreSharedFrameworkx6460PackageVersion>
     <!-- winforms -->

@@ -23,6 +23,10 @@
     <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.2-servicing.22064.8</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
+
+    This property controls "SkipInstallerBuild" property, which in turn controls whether the ref pack is built.
+    Refer to https://github.com/dotnet/arcade/blob/d8aa3672/src/Microsoft.DotNet.Build.Tasks.Installers/build/installer.targets#L42-L48
+
     Servicing build settings for setup packages. Instructions:
 
     * To enable a package build for the current patch release, set PatchVersion to match the current
@@ -35,10 +39,12 @@
     If the PatchVersion below is never changed from '0', the package will build in the 'master'
     branch, and during a forked RTM release ("X.Y.0"). It will stop building for "X.Y.1" unless
     manually enabled by updating the metadata.
+
+    As of Jan 2022 we're always building ref packs. For the background refer to https://github.com/dotnet/aspnetcore/issues/39471.
   -->
   <ItemGroup>
     <!-- Targeting packs are only patched when we need to patch reference assemblies, intellisense, or source generators. -->
-    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="2" />
+    <ProjectServicingConfiguration Include="Microsoft.WindowsDesktop.App.Ref" PatchVersion="$(PatchVersion)" />
   </ItemGroup>
   <!--Package versions-->
   <PropertyGroup>

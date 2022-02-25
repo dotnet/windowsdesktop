@@ -98,6 +98,12 @@ jobs:
           ne(variables['DisableVSPublish'], 'true'),
           ne(variables['PostBuildSign'], 'true'))
 
+    # Generate SBOM for the internal leg only
+    - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+      - template: ..\common\templates\steps\generate-sbom.yml
+        parameters:
+          name: Generate_SBOM_${{ parameters.name }}
+
     - template: steps/upload-job-artifacts.yml
       parameters:
         name: ${{ parameters.name }}

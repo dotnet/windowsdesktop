@@ -71,11 +71,6 @@ stages:
     displayName: Prepare for Publish
     dependsOn: Build
     jobs:
-      steps:
-        # Generate SBOM for the internal leg only
-        - template: /eng/common/templates/steps/generate-sbom.yml
-          parameters:
-            name: Generate_SBOM_PrepareForPublish
     # Prep artifacts: sign them and upload pipeline artifacts expected by stages-based publishing.
     - template: /eng/jobs/prepare-signed-artifacts.yml
       parameters:
@@ -88,6 +83,11 @@ stages:
         pool:
           name: NetCore1ESPool-Internal
           demands: ImageOverride -equals Build.Server.Amd64.VS2019
+    steps:
+      # Generate SBOM for the internal leg only
+      - template: /eng/common/templates/steps/generate-sbom.yml
+        parameters:
+          name: Generate_SBOM_PrepareForPublish
 
   - template: /eng/stages/publish.yml
     parameters:

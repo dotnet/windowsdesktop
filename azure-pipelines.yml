@@ -83,12 +83,6 @@ stages:
         pool:
           name: NetCore1ESPool-Internal
           demands: ImageOverride -equals Build.Server.Amd64.VS2019
-    - job: Generate_SBOM
-      steps:
-        # Generate SBOM for the internal leg only
-        - template: /eng/common/templates/steps/generate-sbom.yml
-          parameters:
-            name: Generate_SBOM_PrepareForPublish
 
   - template: /eng/stages/publish.yml
     parameters:

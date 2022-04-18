@@ -43,8 +43,8 @@
     <MicrosoftDotNetVersionToolsTasksVersion>5.0.0-beta.22159.5</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- core-setup -->
     <MicrosoftNETCoreAppRefVersion>5.0.0</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.16</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftNETCoreAppInternalVersion>5.0.16-servicing.22167.5</MicrosoftNETCoreAppInternalVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>5.0.17</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftNETCoreAppInternalVersion>5.0.17-servicing.22213.14</MicrosoftNETCoreAppInternalVersion>
     <!-- corefx -->
     <MicrosoftNETCorePlatformsVersion>5.0.4</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNETCoreTargetsVersion>5.0.0</MicrosoftNETCoreTargetsVersion>
@@ -73,9 +73,9 @@
     <SystemThreadingAccessControlVersion>5.0.0</SystemThreadingAccessControlVersion>
     <SystemWindowsExtensionsVersion>5.0.0</SystemWindowsExtensionsVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>5.0.16-servicing.22168.5</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>5.0.17-servicing.22215.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>5.0.17-servicing.22215.6</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>5.0.17-servicing.22218.2</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

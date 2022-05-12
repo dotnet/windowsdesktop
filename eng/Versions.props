@@ -20,7 +20,7 @@
     <NETCoreAppFrameworkVersion>6.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>6.0.6-servicing.22255.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.6-servicing.22255.5</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>6.0.6-servicing.22259.7</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--
 
@@ -62,7 +62,7 @@
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>6.0.6-servicing.22255.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>6.0.6-servicing.22255.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>6.0.6-servicing.22259.7</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

@@ -52,8 +52,20 @@
       Importance="High" />
   </Target>
 
+  <!--
+    Run Arcade's signing project directly, since this project doesn't use the arcade SDK.
+  -->
+  <Target Name="SignArtifacts" Condition="'$(PostBuildSign)' != 'true'">
+    <MSBuild
+      Projects="$(ArcadeSdkSignProject)"
+      Targets="Sign"
+      Properties="
+        DownloadDirectory=$(DownloadDirectory);
+        PrepareArtifacts=$(PrepareArtifacts)" />
+  </Target>
+
   <Target Name="PreparePublishToAzureBlobFeed"
-          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts">
+          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts">
 
     <PropertyGroup>
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>

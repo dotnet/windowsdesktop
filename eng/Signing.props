@@ -6,6 +6,7 @@
       here and rely on overall signing validation.
     -->
     <AllowEmptySignList Condition="'$(SignFinalPackages)' != 'true'">true</AllowEmptySignList>
+    <UseDotNetCertificate>true</UseDotNetCertificate>
   </PropertyGroup>
 
   <ItemGroup>

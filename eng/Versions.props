@@ -18,7 +18,7 @@
     <NETCoreAppMaximumVersion>7.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>7.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.0-rc.1.22364.5</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.0-rc.1.22368.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.0-rc.1.22368.4</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--Package versions-->
@@ -29,12 +29,12 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>7.0.0-beta.22367.1</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>7.0.0-beta.22367.1</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- runtime -->
-    <MicrosoftNETCoreAppRefVersion>7.0.0-rc.1.22363.12</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>7.0.0-rc.1.22363.12</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>7.0.0-rc.1.22363.12</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.0-rc.1.22363.12</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
+    <MicrosoftNETCoreAppRefVersion>7.0.0-rc.1.22367.4</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>7.0.0-rc.1.22367.4</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>7.0.0-rc.1.22367.4</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.0-rc.1.22367.4</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>7.0.0-rc.1.22364.5</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>7.0.0-rc.1.22368.2</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
     <MicrosoftDotNetWpfGitHubVersion>7.0.0-rc.1.22368.4</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->

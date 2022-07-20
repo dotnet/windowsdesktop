@@ -6,6 +6,7 @@
       here and rely on overall signing validation.
     -->
     <AllowEmptySignList Condition="'$(SignFinalPackages)' != 'true'">true</AllowEmptySignList>
+    <UseDotNetCertificate>true</UseDotNetCertificate>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +16,6 @@
     <ItemsToSign Remove="@(ItemsToSign)" />
     <ItemsToSignPostBuild Remove="@(ItemsToSignPostBuild)" />
 
-    <!-- Find bundle artifacts, which need multiple stages to fully sign. -->
-    <BundleInstallerEngineArtifact Include="$(ArtifactsPackagesDir)**/*engine.exe" />
-    <BundleInstallerExeArtifact Include="$(ArtifactsPackagesDir)**/*.exe" />
-
     <!-- apphost and comhost template files are not signed, by design. -->
     <FileSignInfo Include="apphost.exe;comhost.dll" CertificateName="None" />
 
@@ -27,56 +24,17 @@
     <FileExtensionSignInfo Include=".deb;.rpm" CertificateName="LinuxSign" />
   </ItemGroup>
 
-  <Choose>
-    <When Condition="'$(PostBuildSign)' != 'true'">
-      <ItemGroup Condition="'$(SignBinaries)' == 'true'">
-        <ItemsToSign Include="$(CrossGenRootPath)**/*.dll" />
-      </ItemGroup>
+  <!-- This repo signs everything, including installers, either right before doing the PushToAzureDevOpsArtifacts,
+       or in post-build. Populate what will get signed the same in both cases -->
+  <ItemGroup Condition="'$(PrepareArtifacts)' == 'true'">
+    <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.msi" />
+    <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.exe" />
+    <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.nupkg" />
+    <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.zip" />
 
-      <ItemGroup Condition="'$(SignMsiFiles)' == 'true'">
-        <ItemsToSign Include="$(ArtifactsPackagesDir)**/*.msi" />
-        <ItemsToSign Include="$(ArtifactsPackagesDir)**/*.cab" />
-      </ItemGroup>
-
-      <ItemGroup Condition="'$(SignBurnEngineFiles)' == 'true'">
-        <ItemsToSign Include="@(BundleInstallerEngineArtifact)" />
-      </ItemGroup>
-
-      <ItemGroup Condition="'$(SignBurnBundleFiles)' == 'true'">
-        <!-- Sign the bundles, now that the engine is reattached. Avoid re-signing the engine. -->
-        <ItemsToSign
-          Include="@(BundleInstallerExeArtifact)"
-          Exclude="@(BundleInstallerEngineArtifact)" />
-        <!-- Note: wixstdba is internal to the engine bundle and does not get signed. -->
-      </ItemGroup>
-
-      <ItemGroup Condition="'$(SignFinalPackages)' == 'true'">
-        <DownloadedSymbolPackages Include="$(DownloadDirectory)**\*.symbols.nupkg" />
-        <ItemsToSign Include="$(DownloadDirectory)**\*.nupkg" Exclude="@(DownloadedSymbolPackages)" />
-
-        <ItemsToSign Include="$(DownloadDirectory)**\*.deb" />
-        <ItemsToSign Include="$(DownloadDirectory)**\*.rpm" />
-      </ItemGroup>
-
-      <ItemGroup>
-        <!-- External files -->
-        <ItemsToSign Remove="@(ItemsToSign->WithMetadataValue('Filename', 'Newtonsoft.Json'))" />
-      </ItemGroup>
-    </When>
-
-    <!-- When doing post build signing, we sign all artifacts we would push.
-         Symbol packages are included too. -->
-    <When Condition="'$(PostBuildSign)' == 'true'">
-      <ItemGroup>
-        <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.msi" Condition="'$(PrepareArtifacts)' == 'true'" />
-        <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.exe" Condition="'$(PrepareArtifacts)' == 'true'" />
-        <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.nupkg" Condition="'$(PrepareArtifacts)' == 'true'" />
-        <ItemsToSignWithPaths Include="$(DownloadDirectory)**/*.zip" Condition="'$(PrepareArtifacts)' == 'true'" />
-
-        <ItemsToSignWithoutPaths Include="@(ItemsToSignWithPaths->'%(Filename)%(Extension)')" />
-        <ItemsToSignPostBuild Include="@(ItemsToSignWithoutPaths->Distinct())" />
-      </ItemGroup>
-    </When>
-  </Choose>
+    <ItemsToSignWithoutPaths Include="@(ItemsToSignWithPaths->'%(Filename)%(Extension)')" />
+    <ItemsToSignPostBuild Include="@(ItemsToSignWithoutPaths->Distinct())" Condition="'$(PostBuildSign)' == 'true'" />
+    <ItemsToSign Include="@(ItemsToSignWithPaths->Distinct())" Condition="'$(PostBuildSign)' != 'true'" />
+  </ItemGroup>
 
 </Project>

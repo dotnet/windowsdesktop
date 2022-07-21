@@ -30,28 +30,6 @@
     <GenerateChecksums Items="@(ArtifactsForGeneratingChecksums)" />
   </Target>
 
-  <Target Name="UploadPreparedArtifactsToPipeline"
-          DependsOnTargets="
-            FindDownloadedArtifacts;
-            CreateChecksums">
-    <PropertyGroup>
-      <PreparedFileUploadDir>$(ArtifactsObjDir)PreparedFileUpload\</PreparedFileUploadDir>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <AllFilesToBlobStorage Include="@(UploadToBlobStorageFile);@(UploadToBlobStorageFile)" />
-    </ItemGroup>
-
-    <Copy SourceFiles="@(AllFilesToBlobStorage)" DestinationFolder="$(PreparedFileUploadDir)">
-      <Output TaskParameter="CopiedFiles" ItemName="CopiedUploadToBlobStorageFile" />
-    </Copy>
-
-    <Message Importance="High" Text="Uploading PreparedArtifacts to pipeline" />
-    <Message
-      Text="##vso[artifact.upload containerfolder=PreparedArtifacts;artifactname=PreparedArtifacts]%(CopiedUploadToBlobStorageFile.Identity)"
-      Importance="High" />
-  </Target>
-
   <!--
     Run Arcade's signing project directly, since this project doesn't use the arcade SDK.
   -->
@@ -65,7 +43,7 @@
   </Target>
 
   <Target Name="PreparePublishToAzureBlobFeed"
-          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts">
+          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts;CreateChecksums">
 
     <PropertyGroup>
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
@@ -181,9 +159,7 @@
     them to the pipeline for Arcade and custom steps to publish.
   -->
   <Target Name="Build"
-          DependsOnTargets="
-            UploadPreparedArtifactsToPipeline;
-            PreparePublishToAzureBlobFeed">
+          DependsOnTargets="PreparePublishToAzureBlobFeed">
     <Message Importance="High" Text="Complete!" />
   </Target>
 

@@ -32,7 +32,7 @@
     <MicrosoftNETCoreAppRefVersion>8.0.0-alpha.1.22429.10</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>8.0.0-alpha.1.22429.10</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-alpha.1.22429.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.0-alpha.1.21576.4</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>7.0.0-rc.1.22415.13</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>8.0.0-alpha.1.22430.6</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->

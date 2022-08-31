@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>7.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>7.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-alpha.1.22430.11</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-alpha.1.22431.2</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-alpha.1.22431.3</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-alpha.1.22431.3</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--Package versions-->
   <PropertyGroup>
@@ -34,9 +34,9 @@
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-alpha.1.22429.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.0-alpha.1.22429.10</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>8.0.0-alpha.1.22430.11</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.0-alpha.1.22431.3</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-alpha.1.22431.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.0-alpha.1.22431.3</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

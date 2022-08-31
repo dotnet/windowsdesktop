@@ -34,9 +34,9 @@
       <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
 
       <NETCoreAppInstallerMsiRID
-        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).7.0"
-        Version="$(VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion)"
-        MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRuntimewinx64Version)-%(Identity).msi" />
+        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).8.0"
+        Version="$(VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion)"
+        MsiFileName="dotnet-%(Name)-$(VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion)-%(Identity).msi" />
 
       <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
     </ItemGroup>

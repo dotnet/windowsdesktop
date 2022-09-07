@@ -17,7 +17,7 @@ jobs:
         name: NetCore-Svc-Public
         demands: ImageOverride -equals build.windows.10.amd64.vs2019.open
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
-        name: NetCore-Svc-Internal
+        name: NetCore1ESPool-Svc-Internal
         demands: ImageOverride -equals build.windows.10.amd64.vs2019
     strategy:
       matrix: 

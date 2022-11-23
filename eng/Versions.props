@@ -43,7 +43,7 @@
     <MicrosoftBuildTasksCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildTasksCoreVersion>
     <MicrosoftBuildUtilitiesCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildUtilitiesCoreVersion>
     <MicrosoftDotNetPlatformAbstractionsVersion>1.1.1</MicrosoftDotNetPlatformAbstractionsVersion>
-    <NugetProjectModelVersion>6.3.0</NugetProjectModelVersion>
+    <NugetProjectModelVersion>6.4.0</NugetProjectModelVersion>
     <MicrosoftExtensionsDependencyModelVersion>6.0.0</MicrosoftExtensionsDependencyModelVersion>
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
     <MicrosoftDiaSymReaderNativeVersion>1.7.0</MicrosoftDiaSymReaderNativeVersion>

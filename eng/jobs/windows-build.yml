@@ -14,8 +14,7 @@ jobs:
     pool:
       # Use a hosted pool when possible.
       ${{ if eq(variables['System.TeamProject'], 'public') }}:
-        name: NetCore-Svc-Public
-        demands: ImageOverride -equals windows.vs2019.amd64.open
+        vmImage: 'windows-2019'
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
         name: NetCore1ESPool-Svc-Internal
         demands: ImageOverride -equals windows.vs2019.amd64

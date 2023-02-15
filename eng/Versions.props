@@ -25,10 +25,10 @@
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksFeedVersion>7.0.0-beta.23060.4</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksArchivesVersion>7.0.0-beta.23060.4</MicrosoftDotNetBuildTasksArchivesVersion>
-    <MicrosoftDotNetBuildTasksInstallersVersion>7.0.0-beta.23060.4</MicrosoftDotNetBuildTasksInstallersVersion>
-    <MicrosoftDotNetVersionToolsTasksVersion>7.0.0-beta.23060.4</MicrosoftDotNetVersionToolsTasksVersion>
+    <MicrosoftDotNetBuildTasksFeedVersion>7.0.0-beta.23114.3</MicrosoftDotNetBuildTasksFeedVersion>
+    <MicrosoftDotNetBuildTasksArchivesVersion>7.0.0-beta.23114.3</MicrosoftDotNetBuildTasksArchivesVersion>
+    <MicrosoftDotNetBuildTasksInstallersVersion>7.0.0-beta.23114.3</MicrosoftDotNetBuildTasksInstallersVersion>
+    <MicrosoftDotNetVersionToolsTasksVersion>7.0.0-beta.23114.3</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- runtime -->
     <MicrosoftNETCoreAppRefVersion>7.0.3</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>7.0.3</MicrosoftNETCoreAppRuntimewinx64Version>

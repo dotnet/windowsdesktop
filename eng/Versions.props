@@ -18,8 +18,8 @@
     <NETCoreAppMaximumVersion>8.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>8.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.3.23128.8</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.3.23151.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.3.23151.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.3.23151.2</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--Package versions-->
   <PropertyGroup>
@@ -29,14 +29,14 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>8.0.0-beta.23128.1</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>8.0.0-beta.23128.1</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- runtime -->
-    <MicrosoftNETCoreAppRefVersion>8.0.0-preview.3.23127.10</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.0-preview.3.23127.10</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-preview.3.23127.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.0-preview.3.23127.10</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
+    <MicrosoftNETCoreAppRefVersion>8.0.0-preview.3.23128.7</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.0-preview.3.23128.7</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-preview.3.23128.7</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.0-preview.3.23128.7</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>8.0.0-preview.3.23128.8</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.0-preview.3.23151.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.3.23151.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.3.23151.2</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

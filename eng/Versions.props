@@ -19,8 +19,8 @@
     <NETCoreAppMaximumVersion>7.0</NETCoreAppMaximumVersion>
     <NETCoreAppFrameworkVersion>7.0</NETCoreAppFrameworkVersion>
     <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.3-servicing.23072.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.3-servicing.23073.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>7.0.4-servicing.23117.7</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>7.0.4-servicing.23117.7</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
   <!--Package versions-->
   <PropertyGroup>
@@ -30,14 +30,14 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>7.0.0-beta.23164.3</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetVersionToolsTasksVersion>7.0.0-beta.23164.3</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- runtime -->
-    <MicrosoftNETCoreAppRefVersion>7.0.3</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>7.0.3</MicrosoftNETCoreAppRuntimewinx64Version>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>7.0.3-servicing.23069.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.3-servicing.23069.10</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
+    <MicrosoftNETCoreAppRefVersion>7.0.4</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>7.0.4</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>7.0.4-servicing.23115.8</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>7.0.4-servicing.23115.8</VSRedistCommonNetCoreSharedFrameworkx6470PackageVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>7.0.3-servicing.23072.1</MicrosoftPrivateWinformsVersion>
+    <MicrosoftPrivateWinformsVersion>7.0.4-servicing.23117.7</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>7.0.3-servicing.23073.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>7.0.4-servicing.23117.7</MicrosoftDotNetWpfGitHubVersion>
     <!-- Not auto-updated. -->
     <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
     <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>

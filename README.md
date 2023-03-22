@@ -5,7 +5,7 @@ supported platforms.
 
 ## Getting started
 
-* [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core)
+* [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
 * [Windows Forms repository](https://github.com/dotnet/winforms)
 * [WPF repository](https://github.com/dotnet/wpf)
 
@@ -49,43 +49,8 @@ conduct@dotnetfoundation.org.
 
 ## License
 
-.NET Core (including the WindowsDesktop repo) is licensed under the [MIT license](LICENSE.TXT).
+.NET (including the WindowsDesktop repo) is licensed under the [MIT license](LICENSE.TXT).
 
 ## Officially Released Builds
 
 Download official .NET releases [here](https://www.microsoft.com/net/download#core).
-
-## Daily Builds
-
-<!--
-  To update this table, run 'build.sh/cmd /p:Subset=RegenerateReadmeTable'. See
-  'tools-local/regenerate-readme-table.proj' to add or remove rows or columns,
-  and add links below to fill out the table's contents.
--->
-<!-- BEGIN generated table -->
-
-| Platform | Master |
-| --- |  :---: |
-| **Windows (x64)** | [![][win-x64-badge-master]][win-x64-version-master]<br>[Installer][win-x64-installer-master] ([Checksum][win-x64-installer-checksum-master])<br>[zip][win-x64-zip-master] ([Checksum][win-x64-zip-checksum-master]) |
-| **Windows (x86)** | [![][win-x86-badge-master]][win-x86-version-master]<br>[Installer][win-x86-installer-master] ([Checksum][win-x86-installer-checksum-master])<br>[zip][win-x86-zip-master] ([Checksum][win-x86-zip-checksum-master]) |
-
-<!-- END generated table -->
-
-<!-- BEGIN links to include in table -->
-
-[win-x64-badge-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/sharedfx_win-x64_Release_version_badge.svg
-[win-x64-version-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/latest.version
-[win-x64-installer-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x64.exe
-[win-x64-installer-checksum-master]: https://dotnetclichecksums.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x64.exe.sha512
-[win-x64-zip-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x64.zip
-[win-x64-zip-checksum-master]: https://dotnetclichecksums.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x64.zip.sha512
-
-
-[win-x86-badge-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/sharedfx_win-x86_Release_version_badge.svg
-[win-x86-version-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/latest.version
-[win-x86-installer-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x86.exe
-[win-x86-installer-checksum-master]: https://dotnetclichecksums.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x86.exe.sha512
-[win-x86-zip-master]: https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x86.zip
-[win-x86-zip-checksum-master]: https://dotnetclichecksums.blob.core.windows.net/dotnet/WindowsDesktop/master/windowsdesktop-runtime-latest-win-x86.zip.sha512
-
-<!-- END links to include in table -->

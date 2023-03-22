@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.Build.Traversal">
+
+  <ItemGroup>
+    <ProjectReference Include="src\windowsdesktop\src\sfx\**\*.sfxproj" />
+    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.bundleproj" />
+    <ProjectReference Include="src\windowsdesktop\tests\**\*.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

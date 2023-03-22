@@ -1,0 +1,10 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props" />
+
+  <PropertyGroup>
+    <GenerateChecksumsTaskDir>$(ArtifactsBinDir)GenerateChecksums\</GenerateChecksumsTaskDir>
+    <GenerateChecksumsTaskAssembly>$(GenerateChecksumsTaskDir)netstandard2.0\GenerateChecksums.dll</GenerateChecksumsTaskAssembly>
+  </PropertyGroup>
+
+</Project>

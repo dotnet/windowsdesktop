@@ -9,11 +9,11 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>1a220e9268d2d38f719d2cd721628fe6e270d2d2</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="8.0.0-preview.3.23170.1">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="8.0.0-preview.3.23172.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>4029c919febd96a0143584a3405fefc44383d9fb</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="8.0.0-preview.3.23170.1">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="8.0.0-preview.3.23172.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>4029c919febd96a0143584a3405fefc44383d9fb</Sha>
     </Dependency>
@@ -33,7 +33,7 @@
       <Uri>https://github.com/dotnet/winforms</Uri>
       <Sha>1a220e9268d2d38f719d2cd721628fe6e270d2d2</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="8.0.0-preview.3.23170.1">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="8.0.0-preview.3.23172.1">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>4029c919febd96a0143584a3405fefc44383d9fb</Sha>
     </Dependency>

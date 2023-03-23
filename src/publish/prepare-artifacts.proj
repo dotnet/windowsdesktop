@@ -5,7 +5,7 @@
     <IsStableBuild>false</IsStableBuild>
     <IsStableBuild Condition="'$(DotNetFinalVersionKind)' == 'release'">true</IsStableBuild>
     <!-- Don't stabilize the package version in order to retrieve the VersionSuffix. -->
-    <SuppressFinalPackageVersion>true</SuppressFinalPackageVersion>
+    <IsShipping>false</IsShipping>
 
     <DownloadDirectory>$(ArtifactsDir)PackageDownload/</DownloadDirectory>
 

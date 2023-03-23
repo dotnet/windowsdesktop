@@ -19,8 +19,12 @@
   <Target Name="CollectVSInsertionPackageDownloads"
           BeforeTargets="CollectPackageReferences">
     <ItemGroup>
+      <_RuntimeIdentifierForNETCoreMsiRestore Include="$(RuntimeIdentifiers)" />
+    </ItemGroup>
+
+    <ItemGroup>
       <InsertionPackageRID
-        Include="$(RuntimeIdentifiers)"
+        Include="@(_RuntimeIdentifierForNETCoreMsiRestore)"
         Condition="'$(RuntimeIdentifier)' == '%(Identity)'"
         Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
 

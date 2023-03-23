@@ -162,7 +162,7 @@
     other types of publishing to use.
     DownloadDirectory is expected to have some directory inside, which then contains a dir for each
     build job name. For example, this nupkg would be found:
-      $(DownloadDirectory)IntermediateUnsignedArtifacts\Windows_x64\Shipping\a.nupkg
+      $(DownloadDirectory)IntermediateUnsignedArtifacts\win-x64\Shipping\a.nupkg
   -->
   <Target Name="FindDownloadedArtifacts"
           BeforeTargets="GenerateChecksums">

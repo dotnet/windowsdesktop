@@ -18,9 +18,9 @@ jobs:
         demands: ImageOverride -equals windows.vs2019.amd64
     strategy:
       matrix: 
-        debug:
+        Debug:
           _BuildConfig: Debug
-        release:
+        Release:
           _BuildConfig: Release
     workspace:
       clean: all

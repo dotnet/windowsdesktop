@@ -25,35 +25,6 @@
 
     <!-- Platform detection -->
     <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
-
-    <!-- Build as portable by default -->
-    <PortableBuild Condition="'$(PortableBuild)' == ''">true</PortableBuild>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <HostOS>linux</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('FREEBSD'))">freebsd</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('NETBSD'))">netbsd</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('ILLUMOS'))">illumos</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('SOLARIS'))">solaris</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">windows</HostOS>
-
-    <HostRuntimeIdentifier Condition="'$(MSBuildRuntimeType)' == 'core'">$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</HostRuntimeIdentifier>
-    <HostRuntimeIdentifier Condition="'$(MSBuildRuntimeType)' != 'core'">win-$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</HostRuntimeIdentifier>
-
-    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(HostRuntimeIdentifier.Remove($(HostRuntimeIdentifier.LastIndexOf('-'))))-$(TargetArchitecture)</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(PortableBuild)' == 'true'">
-    <RuntimeIdentifier Condition="'$(HostOS)' == 'windows'">win-$(TargetArchitecture)</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(HostOS)' == 'osx'">osx-$(TargetArchitecture)</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(HostOS)' == 'linux'">linux-$(TargetArchitecture)</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(HostOS)' == 'freebsd'">freebsd-$(TargetArchitecture)</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <InstallerRuntimeIdentifier Condition="'$(InstallerRuntimeIdentifier)' == ''">$(RuntimeIdentifier)</InstallerRuntimeIdentifier>
   </PropertyGroup>
 
 </Project>

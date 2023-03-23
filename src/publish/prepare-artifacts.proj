@@ -1,21 +1,16 @@
-<Project Sdk="Microsoft.Build.NoTargets">
+<Project Sdk="Microsoft.Build.NoTargets" InitialTargets="FindDownloadedArtifacts">
 
   <PropertyGroup>
     <!-- Set IsStableBuild to mimic https://github.com/dotnet/arcade/blob/694d59f090b743f894779d04a7ffe11cbaf352e7/src/Microsoft.DotNet.Arcade.Sdk/tools/Publish.proj#L30-L31 -->
     <IsStableBuild>false</IsStableBuild>
     <IsStableBuild Condition="'$(DotNetFinalVersionKind)' == 'release'">true</IsStableBuild>
 
-    <ChecksumExtension>.sha512</ChecksumExtension>
     <DownloadDirectory>$(ArtifactsDir)PackageDownload/</DownloadDirectory>
 
     <!-- Construct the path to the sign project, so that signing can be called during prepare-artifacts -->
     <ArcadeSdkMSBuildProjectDir>$([System.IO.Path]::GetDirectoryName('$(ArcadeSdkBuildTasksAssembly)'))\..\</ArcadeSdkMSBuildProjectDir>
     <ArcadeSdkSignProject>$(ArcadeSdkMSBuildProjectDir)Sign.proj</ArcadeSdkSignProject>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="GenerateChecksums\GenerateChecksums.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.Feed" Version="$(MicrosoftDotNetBuildTasksFeedVersion)" />
@@ -39,23 +34,9 @@
     <FileSignInfo Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="$(DotNetCertificateName)" />
   </ItemGroup>
 
-  <UsingTask TaskName="GenerateChecksums" AssemblyFile="$(GenerateChecksumsTaskAssembly)" />
-
   <PropertyGroup>
     <SuppressFinalPackageVersion>true</SuppressFinalPackageVersion>
   </PropertyGroup>
-
-  <Target Name="CreateChecksums">
-    <ItemGroup>
-      <ArtifactsForGeneratingChecksums
-        Include="@(UploadToBlobStorageFile)"
-        DestinationPath="%(FullPath)$(ChecksumExtension)" />
-
-      <GeneratedChecksumFile Include="@(ArtifactsForGeneratingChecksums -> '%(DestinationPath)')" />
-    </ItemGroup>
-
-    <GenerateChecksums Items="@(ArtifactsForGeneratingChecksums)" />
-  </Target>
 
   <!--
     Run Arcade's signing project directly, since this project doesn't use the arcade SDK.
@@ -71,7 +52,7 @@
 
   <Target Name="PreparePublishToAzureBlobFeed"
           AfterTargets="Build"
-          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts;CreateChecksums">
+          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts;GenerateChecksums">
     <PropertyGroup>
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
       <AssetManifestFile>$(ArtifactsLogDir)AssetManifest/$(AssetManifestFilename)</AssetManifestFile>
@@ -111,7 +92,7 @@
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
 
-      <ItemsToPush Include="@(GeneratedChecksumFile)">
+      <ItemsToPush Include="@(GenerateChecksumItems)">
         <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
         <Category>Checksum</Category>
         <PublishFlatContainer>true</PublishFlatContainer>
@@ -183,7 +164,8 @@
     build job name. For example, this nupkg would be found:
       $(DownloadDirectory)IntermediateUnsignedArtifacts\Windows_x64\Shipping\a.nupkg
   -->
-  <Target Name="FindDownloadedArtifacts">
+  <Target Name="FindDownloadedArtifacts"
+          BeforeTargets="GenerateChecksums">
     <ItemGroup>
       <DownloadedArtifactFile Include="$(DownloadDirectory)**" />
 
@@ -232,6 +214,10 @@
 
       <UploadToBlobStorageFile Include="@(SymbolNupkgToPublishFile)" />
 
+      <GenerateChecksumItems
+        Include="@(UploadToBlobStorageFile)"
+        DestinationPath="%(FullPath).sha512" />
+
       <!-- Split nupkgs into shipping/nonshipping for BAR categorization. -->
       <ShippingNupkgToPublishFile
         Include="@(NupkgToPublishFile)"
@@ -257,18 +243,12 @@
       <IncludePreReleaseLabelInPackageVersion Condition="'$(SuppressFinalPackageVersion)' == 'true'">true</IncludePreReleaseLabelInPackageVersion>
       <IncludePreReleaseLabelInPackageVersion Condition="'$(IsShipping)' != 'true'">true</IncludePreReleaseLabelInPackageVersion>
 
-      <IncludeBuildNumberInPackageVersion Condition="'$(StabilizePackageVersion)' != 'true'">true</IncludeBuildNumberInPackageVersion>
-      <IncludeBuildNumberInPackageVersion Condition="'$(SuppressFinalPackageVersion)' == 'true'">true</IncludeBuildNumberInPackageVersion>
-      <IncludeBuildNumberInPackageVersion Condition="'$(IsShipping)' != 'true'">true</IncludeBuildNumberInPackageVersion>
-
       <ProductVersionSuffix Condition="'$(IncludePreReleaseLabelInPackageVersion)' == 'true'">-$(VersionSuffix)</ProductVersionSuffix>
       <ProductBandVersion Condition="'$(ProductBandVersion)' == ''">$(MajorVersion).$(MinorVersion)</ProductBandVersion>
       <ProductionVersion Condition="'$(ProductionVersion)' == ''">$(ProductBandVersion).$(PatchVersion)</ProductionVersion>
       <ProductVersion>$(ProductionVersion)$(ProductVersionSuffix)</ProductVersion>
 
-      <SharedFrameworkNugetVersion>$(ProductVersion)</SharedFrameworkNugetVersion>
-      <NuGetVersion>$(SharedFrameworkNugetVersion)</NuGetVersion>
-      <InstallersRelativePath>WindowsDesktop/$(SharedFrameworkNugetVersion)/</InstallersRelativePath>
+      <InstallersRelativePath>WindowsDesktop/$(ProductVersion)/</InstallersRelativePath>
     </PropertyGroup>
   </Target>
 

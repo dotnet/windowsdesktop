@@ -92,7 +92,9 @@
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
 
-      <ItemsToPush Include="@(GenerateChecksumItems->Metadata('DestinationPath'))">
+      <!-- Must be a different item as otherwise FileName and Extension would refer to the wrong identity. -->
+      <GeneratedChecksumFile Include="@(GenerateChecksumItems->Metadata('DestinationPath'))" />
+      <ItemsToPush Include="@(GeneratedChecksumFile)">
         <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
         <Category>Checksum</Category>
         <PublishFlatContainer>true</PublishFlatContainer>

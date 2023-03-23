@@ -4,6 +4,8 @@
     <!-- Set IsStableBuild to mimic https://github.com/dotnet/arcade/blob/694d59f090b743f894779d04a7ffe11cbaf352e7/src/Microsoft.DotNet.Arcade.Sdk/tools/Publish.proj#L30-L31 -->
     <IsStableBuild>false</IsStableBuild>
     <IsStableBuild Condition="'$(DotNetFinalVersionKind)' == 'release'">true</IsStableBuild>
+    <!-- Don't stabilize the package version in order to retrieve the VersionSuffix. -->
+    <SuppressFinalPackageVersion>true</SuppressFinalPackageVersion>
 
     <DownloadDirectory>$(ArtifactsDir)PackageDownload/</DownloadDirectory>
 
@@ -34,10 +36,6 @@
     <FileSignInfo Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="$(DotNetCertificateName)" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <SuppressFinalPackageVersion>true</SuppressFinalPackageVersion>
-  </PropertyGroup>
-
   <!--
     Run Arcade's signing project directly, since this project doesn't use the arcade SDK.
   -->
@@ -52,16 +50,18 @@
 
   <Target Name="PreparePublishToAzureBlobFeed"
           AfterTargets="Build"
-          DependsOnTargets="GetProductVersions;FindDownloadedArtifacts;SignArtifacts;GenerateChecksums">
+          DependsOnTargets="FindDownloadedArtifacts;SignArtifacts;GenerateChecksums">
     <PropertyGroup>
+      <InstallersRelativePath>WindowsDesktop/$(Version)/</InstallersRelativePath>
+
       <AssetManifestFilename>Manifest.xml</AssetManifestFilename>
       <AssetManifestFile>$(ArtifactsLogDir)AssetManifest/$(AssetManifestFilename)</AssetManifestFile>
 
       <!-- Create temp dir to store generated asset manifest, per Arcade guidance. -->
       <TempWorkingDir>$(ArtifactsObjDir)TempWorkingDir\$([System.Guid]::NewGuid())\</TempWorkingDir>
 
-      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'=='true'">$(ProductionVersion)</ProductVersionTxtContents>
-      <ProductVersionTxtContents Condition="'$(StabilizePackageVersion)'!='true'">$(ProductVersion)</ProductVersionTxtContents>
+      <ProductVersionTxtContents Condition="'$(DotNetFinalVersionKind)' == 'release'">$(VersionPrefix)</ProductVersionTxtContents>
+      <ProductVersionTxtContents Condition="'$(DotNetFinalVersionKind)' != 'release'">$(Version)</ProductVersionTxtContents>
     </PropertyGroup>
 
     <!-- Generate windowsdesktop-productVersion.txt containing the value of $(PackageVersion) -->
@@ -233,25 +233,6 @@
     <Error
       Condition="'@(SymbolNupkgToPublishFile)' == ''"
       Text="No symbol packages found." />
-  </Target>
-
-  <!--
-    Arcade SDK versioning is defined by static properties in a targets file: work around this by
-    moving properties based on versioning into a target.
-  -->
-  <Target Name="GetProductVersions">
-    <PropertyGroup>
-      <IncludePreReleaseLabelInPackageVersion Condition="'$(DotNetFinalVersionKind)' != 'release'">true</IncludePreReleaseLabelInPackageVersion>
-      <IncludePreReleaseLabelInPackageVersion Condition="'$(SuppressFinalPackageVersion)' == 'true'">true</IncludePreReleaseLabelInPackageVersion>
-      <IncludePreReleaseLabelInPackageVersion Condition="'$(IsShipping)' != 'true'">true</IncludePreReleaseLabelInPackageVersion>
-
-      <ProductVersionSuffix Condition="'$(IncludePreReleaseLabelInPackageVersion)' == 'true'">-$(VersionSuffix)</ProductVersionSuffix>
-      <ProductBandVersion Condition="'$(ProductBandVersion)' == ''">$(MajorVersion).$(MinorVersion)</ProductBandVersion>
-      <ProductionVersion Condition="'$(ProductionVersion)' == ''">$(ProductBandVersion).$(PatchVersion)</ProductionVersion>
-      <ProductVersion>$(ProductionVersion)$(ProductVersionSuffix)</ProductVersion>
-
-      <InstallersRelativePath>WindowsDesktop/$(ProductVersion)/</InstallersRelativePath>
-    </PropertyGroup>
   </Target>
 
 </Project>

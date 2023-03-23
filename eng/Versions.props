@@ -30,8 +30,6 @@
     <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23172.2</MicrosoftDotNetWpfGitHubVersion>
     <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23172.2</MicrosoftDotNetWpfProjectTemplatesVersion>
     <!-- Not auto-updated. -->
-    <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
-    <MicrosoftBuildTasksCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildTasksCoreVersion>
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
   </PropertyGroup>
 

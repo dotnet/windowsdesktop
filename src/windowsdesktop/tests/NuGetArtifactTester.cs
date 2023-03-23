@@ -1,22 +1,20 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
-using Microsoft.DotNet.CoreSetup.Test;
-using NuGet.Packaging;
-using NuGet.Packaging.Core;
-using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
+using NuGet.Packaging;
+using NuGet.Packaging.Core;
+using NuGet.Versioning;
 using Xunit;
 
-namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
+namespace Microsoft.DotNet.WindowsDesktop.App.Tests
 {
-    public class NuGetArtifactTester : IDisposable
+    internal class NuGetArtifactTester : IDisposable
     {
         public static NuGetArtifactTester Open(
             RepoDirectoriesProvider dirs,

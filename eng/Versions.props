@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
+
   <PropertyGroup>
     <MajorVersion>8</MajorVersion>
     <MinorVersion>0</MinorVersion>
@@ -9,18 +9,8 @@
     <!-- Enable to remove prerelease label. -->
     <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
-    <!-- Disable SemVer v2 until after 3.0.0. -->
-    <SemanticVersioningV1 Condition="&#xA;      $(MajorVersion) &lt; 3 or&#xA;      '$(MajorVersion).$(MinorVersion).$(PatchVersion)' == '3.0.0'">true</SemanticVersioningV1>
-    <!-- Blob storage container that has the "Latest" channel to publish to. -->
-    <ContainerName>dotnet</ContainerName>
-    <ChecksumContainerName>$(ContainerName)</ChecksumContainerName>
-    <!-- Max version of NETCoreApp, used by test projects. -->
-    <NETCoreAppMaximumVersion>8.0</NETCoreAppMaximumVersion>
-    <NETCoreAppFrameworkVersion>8.0</NETCoreAppFrameworkVersion>
-    <NETCoreAppFramework>net$(NETCoreAppFrameworkVersion)</NETCoreAppFramework>
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.4.23172.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23173.1</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
+
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
@@ -34,22 +24,13 @@
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-preview.4.23172.1</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.0-preview.4.23172.1</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- winforms -->
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.4.23172.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftPrivateWinformsVersion>8.0.0-preview.4.23172.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
     <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23173.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23173.1</MicrosoftDotNetWpfProjectTemplatesVersion>
     <!-- Not auto-updated. -->
-    <MicrosoftBuildVersion>15.7.179</MicrosoftBuildVersion>
-    <MicrosoftBuildFrameworkVersion>$(MicrosoftBuildVersion)</MicrosoftBuildFrameworkVersion>
-    <MicrosoftBuildTasksCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildTasksCoreVersion>
-    <MicrosoftBuildUtilitiesCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildUtilitiesCoreVersion>
-    <MicrosoftDotNetPlatformAbstractionsVersion>1.1.1</MicrosoftDotNetPlatformAbstractionsVersion>
-    <NugetProjectModelVersion>6.4.0</NugetProjectModelVersion>
-    <MicrosoftExtensionsDependencyModelVersion>6.0.0</MicrosoftExtensionsDependencyModelVersion>
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
-    <MicrosoftDiaSymReaderNativeVersion>1.7.0</MicrosoftDiaSymReaderNativeVersion>
   </PropertyGroup>
-  <!-- Base runtime pack name (RID-less) for shared framework tooling. -->
-  <PropertyGroup>
-    <MicrosoftNETCoreAppRuntimePackage>Microsoft.NETCore.App.Runtime</MicrosoftNETCoreAppRuntimePackage>
-  </PropertyGroup>
+
 </Project>

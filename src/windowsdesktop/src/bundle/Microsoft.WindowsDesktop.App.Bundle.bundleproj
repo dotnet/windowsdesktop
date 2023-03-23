@@ -19,13 +19,9 @@
   <Target Name="CollectVSInsertionPackageDownloads"
           BeforeTargets="CollectPackageReferences">
     <ItemGroup>
-      <_RuntimeIdentifierForNETCoreMsiRestore Include="win-x86;win-x64;win-arm64" />
-    </ItemGroup>
-
-    <ItemGroup>
       <InsertionPackageRID
-        Include="@(_RuntimeIdentifierForNETCoreMsiRestore)"
-        Condition="'$(InstallerRuntimeIdentifier)' == '%(Identity)'"
+        Include="$(RuntimeIdentifiers)"
+        Condition="'$(RuntimeIdentifier)' == '%(Identity)'"
         Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
 
       <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
@@ -50,7 +46,7 @@
         CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
 
       <_BundledComponents
-        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)\%(MsiFileName)')"
+        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')"
         Condition="'$(RuntimeIdentifier)' == '%(Identity)'" />
     </ItemGroup>
   </Target>

@@ -53,19 +53,22 @@ stages:
   # Windows x64
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: win-x64
+      name: Windows_x64
+      displayName: win-x64
       targetArchitecture: x64
 
   # Windows x86
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: win-x86
+      name: Windows_x86
+      displayName: win-x86
       targetArchitecture: x86
 
   # Windows arm64
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: win-arm64
+      name: Windows_arm64
+      displayName: win-x64
       targetArchitecture: arm64
 
 - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:

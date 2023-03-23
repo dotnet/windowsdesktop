@@ -7,7 +7,7 @@ parameters:
 
 jobs:
   - job: ${{ parameters.name }}
-    displayName: ${{ parameters.name }}
+    displayName: ${{ parameters.displayName }}
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     pool:
       # Use a hosted pool when possible.

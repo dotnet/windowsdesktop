@@ -16,9 +16,6 @@
     <PackageThirdPartyNoticesFile>$(MSBuildThisFileDirectory)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799421</PackageReleaseNotes>
 
-    <!-- Floating TFM which is defined in Arcade -->
-    <TargetFramework>$(NetCurrent)</TargetFramework>
-
     <!-- Set up handling of build warnings -->
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

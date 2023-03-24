@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFramework>$(NetCurrent)</TargetFramework>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- Ensure the packaging projects build first. Don't do this in VS: the build takes too long and isn't incremental. -->
     <ProjectReference Include="..\src\sfx\Microsoft.WindowsDesktop.App.Ref.sfxproj;

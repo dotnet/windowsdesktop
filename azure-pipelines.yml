@@ -53,22 +53,19 @@ stages:
   # Windows x64
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: Windows_x64
-      displayName: win-x64
+      name: win_x64
       targetArchitecture: x64
 
   # Windows x86
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: Windows_x86
-      displayName: win-x86
+      name: win_x86
       targetArchitecture: x86
 
   # Windows arm64
   - template: /eng/pipelines/jobs/windows-build.yml
     parameters:
-      name: Windows_arm64
-      displayName: win-arm64
+      name: win_arm64
       targetArchitecture: arm64
 
 - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
@@ -79,7 +76,7 @@ stages:
     # Prep artifacts: sign them and upload pipeline artifacts expected by stages-based publishing.
     - template: /eng/pipelines/jobs/prepare-signed-artifacts.yml
       parameters:
-        PublishRidAgnosticPackagesFromJobName: win-x64
+        PublishRidAgnosticPackagesFromJobName: win_x64
     # Publish to Build Asset Registry in order to generate the ReleaseConfigs artifact.
     - template: /eng/common/templates/job/publish-build-assets.yml
       parameters:

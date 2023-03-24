@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <MajorVersion>8</MajorVersion>
     <MinorVersion>0</MinorVersion>
@@ -10,7 +9,6 @@
     <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
   </PropertyGroup>
-
   <!--Package versions-->
   <PropertyGroup>
     <!-- arcade -->
@@ -27,10 +25,9 @@
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.4.23172.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftPrivateWinformsVersion>8.0.0-preview.4.23172.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23173.1</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23173.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23173.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23173.2</MicrosoftDotNetWpfProjectTemplatesVersion>
     <!-- Not auto-updated. -->
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
   </PropertyGroup>
-
 </Project>

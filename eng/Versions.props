@@ -25,8 +25,8 @@
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-preview.4.23172.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftPrivateWinformsVersion>8.0.0-preview.4.23172.4</MicrosoftPrivateWinformsVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23173.2</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23173.2</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23174.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23174.2</MicrosoftDotNetWpfProjectTemplatesVersion>
     <!-- Not auto-updated. -->
     <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
   </PropertyGroup>

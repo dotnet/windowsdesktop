@@ -68,7 +68,7 @@
     <MicrosoftPrivateWinformsVersion>8.0.0-preview.4.23179.1</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>8.0.0-preview.4.23179.1</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23227.3</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23227.3</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.0-preview.4.23227.6</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-preview.4.23227.6</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

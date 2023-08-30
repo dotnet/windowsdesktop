@@ -87,8 +87,16 @@
       <ItemsToPush Include="@(SymbolNupkgToPublishFile)" />
 
       <ItemsToPush
-        Include="@(UploadToBlobStorageFile)"
-        Exclude="@(NupkgToPublishFile);@(SymbolNupkgToPublishFile)">
+        Include="@(DownloadedNonShippingArtifactFile)"
+        Exclude="@(DownloadedSymbolNupkgFile);@(DownloadedNupkgFile)">
+        <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
+        <PublishFlatContainer>true</PublishFlatContainer>
+        <ManifestArtifactData>NonShipping=true</ManifestArtifactData>
+      </ItemsToPush>
+
+      <ItemsToPush
+        Include="@(DownloadedShippingArtifactFile)"
+        Exclude="@(DownloadedSymbolNupkgFile);@(DownloadedNupkgFile)">
         <RelativeBlobPath>$(InstallersRelativePath)%(Filename)%(Extension)</RelativeBlobPath>
         <PublishFlatContainer>true</PublishFlatContainer>
       </ItemsToPush>
@@ -170,17 +178,17 @@
   <Target Name="FindDownloadedArtifacts"
           BeforeTargets="GenerateChecksums">
     <ItemGroup>
-      <DownloadedArtifactFile Include="$(DownloadDirectory)**" />
+      <DefaultArtifactExcludes Include="$(DownloadDirectory)**/*.wixpdb" />
+      <!-- wixpacks are not needed if signing is enabled in-build -->
+      <DefaultArtifactExcludes Include="$(DownloadDirectory)**/*.wixpack.zip" Condition="'$(PostBuildSign)' != 'true'" />
+      
+      <DownloadedNonShippingArtifactFile Include="$(DownloadDirectory)**/NonShipping/**" Exclude="@(DefaultArtifactExcludes)" />
+      <DownloadedShippingArtifactFile Include="$(DownloadDirectory)**/Shipping/**" Exclude="@(DefaultArtifactExcludes)" />
 
       <DownloadedSymbolNupkgFile Include="$(DownloadDirectory)**\*.symbols.nupkg" />
       <DownloadedNupkgFile
         Include="$(DownloadDirectory)**\*.nupkg"
         Exclude="@(DownloadedSymbolNupkgFile)" />
-
-      <!-- Add files that are not affected by filtering. -->
-      <UploadToBlobStorageFile
-        Include="@(DownloadedArtifactFile)"
-        Exclude="@(DownloadedSymbolNupkgFile);@(DownloadedNupkgFile)" />
 
       <!--
         Filter out the RID-specific (Runtime) nupkgs and RID-agnostic nupkgs. RID-specific packages
@@ -199,8 +207,6 @@
 
       <NupkgToPublishFile Include="@(RuntimeNupkgFile);@(RidAgnosticNupkgToPublishFile)" />
 
-      <UploadToBlobStorageFile Include="@(NupkgToPublishFile)" />
-
       <!--
         Assuming all symbol packages ship and can be found by turning .nupkg => .symbols.nupkg, find
         them. Don't check for missing symbol packages here: some nupkgs don't have them for valid
@@ -215,10 +221,9 @@
         Include="@(PotentialSymbolNupkgToPublishFile)"
         Condition="Exists('%(Identity)')" />
 
-      <UploadToBlobStorageFile Include="@(SymbolNupkgToPublishFile)" />
-
       <GenerateChecksumItems
-        Include="@(UploadToBlobStorageFile)"
+        Include="@(DownloadedShippingArtifactFile)"
+        Exclude="@(DownloadedSymbolNupkgFile);@(DownloadedNupkgFile)"
         DestinationPath="%(FullPath).sha512" />
 
       <!-- Split nupkgs into shipping/nonshipping for BAR categorization. -->

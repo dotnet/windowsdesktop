@@ -7,14 +7,14 @@ The Microsoft.Windows.Compatibility package provides Windows-specific APIs to he
 To start using the Microsoft.Windows.Compatibility package, you'll first need to install it via NuGet Package Manager, Package Manager Console, or by editing your project file.
 
 ### NuGet Package Manager
-\```
+```
 Install-Package Microsoft.Windows.Compatibility -Version [your_version_here]
-\```
+```
 
 ### .NET CLI
-\```
+```
 dotnet add package Microsoft.Windows.Compatibility --version [your_version_here]
-\```
+```
 
 ### Prerequisites
 
@@ -29,7 +29,7 @@ After installing the package, you can access Windows-specific APIs just like you
 ### Writing to the Windows Registry
 
 #### C#
-\```csharp
+```csharp
 using Microsoft.Win32;
 
 class Program
@@ -41,10 +41,10 @@ class Program
         key.Close();
     }
 }
-\```
+```
 
 #### VB
-\```vb
+```vb
 Imports Microsoft.Win32
 
 Module Program
@@ -54,12 +54,12 @@ Module Program
         key.Close()
     End Sub
 End Module
-\```
+```
 
 ### Using the Serial Port
 
 #### C#
-\```csharp
+```csharp
 using System.IO.Ports;
 
 class Program
@@ -72,10 +72,10 @@ class Program
         sp.Close();
     }
 }
-\```
+```
 
 #### VB
-\```vb
+```vb
 Imports System.IO.Ports
 
 Module Program
@@ -86,7 +86,7 @@ Module Program
         sp.Close()
     End Sub
 End Module
-\```
+```
 
 ## Additional Documentation
 

@@ -1,9 +1,106 @@
-# Microsoft.Windows.Compatibility package
+# Microsoft.Windows.Compatibility
 
-This Windows Compatibility Pack provides access to APIs that were previously available only for .NET Framework. It can be used from both .NET as well as .NET Standard.
+The Microsoft.Windows.Compatibility package provides Windows-specific APIs to help you port your .NET Framework applications to .NET Core, .NET 5/6/7/8+ or .NET Standard. This package offers a smoother transition for those looking to modernize their applications without losing access to familiar Windows functionalities.
 
-### How to add a new dependency
-1. Add the package version to the repository's Versions.props file.
-2. Add the package dependency to the repository's Version.Details.xml file. If the dependency doesn't come from a repository with a direct subscription to (i.e. winforms and runtime), add the `CoherentParentDependency` attribute to the dependency.
-3. Add the package reference into the Microsoft.Windows.Compatibility.csproj file and use the version just defined in the Versions.props file.
-4. If a `CoherentParentDependency` attribute was required, a dependency must be added to the repository dependency chain as well. I.e. to add a new dependency from runtime, a dependency must also be added in winforms and wpf's Version.Details.xml file.
+## Getting Started
+
+To start using the Microsoft.Windows.Compatibility package, you'll first need to install it via NuGet Package Manager, Package Manager Console, or by editing your project file.
+
+### NuGet Package Manager
+\```
+Install-Package Microsoft.Windows.Compatibility -Version [your_version_here]
+\```
+
+### .NET CLI
+\```
+dotnet add package Microsoft.Windows.Compatibility --version [your_version_here]
+\```
+
+### Prerequisites
+
+- .NET Core 2.0-3.1
+- .NET 5-.NET 8+
+- .NET Standard 2.0 or higher
+
+## Usage
+
+After installing the package, you can access Windows-specific APIs just like you would in a .NET Framework application. Below are some examples in both C# and VB:
+
+### Writing to the Windows Registry
+
+#### C#
+\```csharp
+using Microsoft.Win32;
+
+class Program
+{
+    static void Main()
+    {
+        RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\MyApp");
+        key.SetValue("MySetting", "MyValue");
+        key.Close();
+    }
+}
+\```
+
+#### VB
+\```vb
+Imports Microsoft.Win32
+
+Module Program
+    Sub Main()
+        Dim key As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\MyApp")
+        key.SetValue("MySetting", "MyValue")
+        key.Close()
+    End Sub
+End Module
+\```
+
+### Using the Serial Port
+
+#### C#
+\```csharp
+using System.IO.Ports;
+
+class Program
+{
+    static void Main()
+    {
+        SerialPort sp = new SerialPort("COM1", 9600);
+        sp.Open();
+        sp.WriteLine("Hello, world!");
+        sp.Close();
+    }
+}
+\```
+
+#### VB
+\```vb
+Imports System.IO.Ports
+
+Module Program
+    Sub Main()
+        Dim sp As New SerialPort("COM1", 9600)
+        sp.Open()
+        sp.WriteLine("Hello, world!")
+        sp.Close()
+    End Sub
+End Module
+\```
+
+## Additional Documentation
+
+For more in-depth tutorials and API references, you can check the following resources:
+
+- [NuGet Gallery | Microsoft.Windows.Compatibility](https://nuget.org/packages/Microsoft.Windows.Compatibility/)
+- [Use the Windows Compatibility Pack to port code - .NET](https://learn.microsoft.com/en-us/dotnet/core/porting/windows-compat-pack)
+- [Announcing the Windows Compatibility Pack for .NET Core](https://devblogs.microsoft.com/dotnet/announcing-the-windows-compatibility-pack-for-net-core/)
+- [Installing NuGet client tools | Microsoft Learn](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-nuget-cli)
+
+## Feedback
+
+We value your feedback! Here are ways to get in touch with us:
+
+- Open an issue on our [GitHub repository](https://github.com/dotnet/runtime/issues)
+- Reach out on Twitter with the hashtag #dotnet
+- Join our Discord channel: [dotnet/Discord](https://discord.com/invite/dotnet)

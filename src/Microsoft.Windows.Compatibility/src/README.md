@@ -6,22 +6,6 @@ The `Microsoft.Windows.Compatibility` package provides Windows-specific APIs to 
 
 To start using the `Microsoft.Windows.Compatibility` package, you'll first need to install it via NuGet Package Manager, Package Manager Console, or by editing your project file.
 
-### NuGet Package Manager
-```
-Install-Package Microsoft.Windows.Compatibility -Version [your_version_here]
-```
-
-### .NET CLI
-```
-dotnet add package Microsoft.Windows.Compatibility --version [your_version_here]
-```
-
-### Prerequisites
-
-- .NET Core 2.0+
-- .NET 5+
-- .NET Standard 2.0 or higher
-
 ## Usage
 
 After installing the package, you can access Windows-specific APIs just like you would in a .NET Framework application. Below are some examples in both C# and VB:

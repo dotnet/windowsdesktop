@@ -1,92 +1,56 @@
-# Microsoft.Windows.Compatibility
+# .NET Windows Desktop Runtime
 
-The `Microsoft.Windows.Compatibility` package provides Windows-specific APIs to help you port your .NET Framework applications to .NET Core 2.0+, .NET 5+ or .NET Standard. This package offers a smoother transition for those looking to modernize their applications without losing access to familiar Windows functionalities.
+This repo contains the code to build the .NET Windows Desktop Runtime for all
+supported platforms.
 
-## Getting Started
+## Getting started
 
-To start using the `Microsoft.Windows.Compatibility` package, you'll first need to install it via NuGet Package Manager, Package Manager Console, or by editing your project file.
+* [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
+* [Windows Forms repository](https://github.com/dotnet/winforms)
+* [WPF repository](https://github.com/dotnet/wpf)
 
-## Usage
+## How to Engage, Contribute and Provide Feedback
 
-After installing the package, you can access Windows-specific APIs just like you would in a .NET Framework application. Below are some examples in both C# and VB:
+Some of the best ways to contribute are to try things out, file bugs, join in
+design conversations, and fix issues.
 
-### Writing to the Windows Registry
+* This repo defines [contributing guidelines](CONTRIBUTING.md) and also follows
+  the more general [.NET Core contributing
+  guide](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md).
+* If you have a question or have found a bug, [file an
+  issue](https://github.com/dotnet/windowsdesktop/issues/new).
 
-#### C#
-```csharp
-using Microsoft.Win32;
+### Reporting security issues and security bugs
 
-class Program
-{
-    static void Main()
-    {
-        using (RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\MyApp"))
-        {
-            key.SetValue("MySetting", "MyValue");
-        }
-    }
-}
-```
+Security issues and bugs should be reported privately, via email, to the
+Microsoft Security Response Center (MSRC) <secure@microsoft.com>. You should
+receive a response within 24 hours. If for some reason you do not, please follow
+up via email to ensure we received your original message. Further information,
+including the MSRC PGP key, can be found in the [Security
+TechCenter](https://www.microsoft.com/msrc/faqs-report-an-issue).
 
-#### VB
-```vb
-Imports Microsoft.Win32
+Also see info about related [Microsoft .NET Core and ASP.NET Core Bug Bounty
+Program](https://www.microsoft.com/msrc/bounty-dot-net-core).
 
-Module Program
-    Sub Main()
-        Using key As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\MyApp")
-            key.SetValue("MySetting", "MyValue")
-        End Using
-    End Sub
-End Module
-```
+### .NET Framework issues
 
-### Using the Serial Port
+Issues with .NET Framework should be filed on [VS developer
+community](https://developercommunity.visualstudio.com/spaces/61/index.html), or
+[Product Support](https://support.microsoft.com/en-us/contactus?ws=support).
+They should not be filed on this repo.
 
-#### C#
-```csharp
-using System.IO.Ports;
+## Code of Conduct
 
-class Program
-{
-    static void Main()
-    {
-        using (SerialPort port = new SerialPort("COM1", 9600))
-        {
-            port.Open();
-            port.WriteLine("Hello, world!");
-        }
-    }
-}
-```
+This project uses the [.NET Foundation Code of
+Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected
+conduct in our community. Instances of abusive, harassing, or otherwise
+unacceptable behavior may be reported by contacting a project maintainer at
+conduct@dotnetfoundation.org.
 
-#### VB
-```vb
-Imports System.IO.Ports
+## License
 
-Module Program
-    Sub Main()
-        Using port As New SerialPort("COM1", 9600)
-            port.Open()
-            port.WriteLine("Hello, world!")
-        End Using
-    End Sub
-End Module
-```
+.NET (including the WindowsDesktop repo) is licensed under the [MIT license](LICENSE.TXT).
 
-## Additional Documentation
+## Officially Released Builds
 
-For more in-depth tutorials and API references, you can check the following resources:
 
-- [NuGet Gallery | Microsoft.Windows.Compatibility](https://nuget.org/packages/Microsoft.Windows.Compatibility/)
-- [Use the Windows Compatibility Pack to port code - .NET](https://learn.microsoft.com/dotnet/core/porting/windows-compat-pack)
-- [Announcing the Windows Compatibility Pack for .NET Core](https://devblogs.microsoft.com/dotnet/announcing-the-windows-compatibility-pack-for-net-core/)
-- [Installing NuGet client tools | Microsoft Learn](https://learn.microsoft.com/nuget/consume-packages/install-use-packages-nuget-cli)
-
-## Feedback
-
-We value your feedback! Here are ways to get in touch with us:
-
-- Open an issue on our [GitHub repository](https://github.com/dotnet/runtime/issues)
-- Reach out on Twitter with the hashtag #dotnet
-- Join our Discord channel: [dotnet/Discord](https://discord.com/invite/dotnet)

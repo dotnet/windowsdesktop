@@ -5,7 +5,7 @@ supported platforms.
 
 ## Getting started
 
-* [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
+* [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet)
 * [Windows Forms repository](https://github.com/dotnet/winforms)
 * [WPF repository](https://github.com/dotnet/wpf)
 
@@ -14,7 +14,7 @@ supported platforms.
 Some of the best ways to contribute are to try things out, file bugs, join in
 design conversations, and fix issues.
 
-* This repo defines [contributing guidelines](CONTRIBUTING.md) and also follows
+* This repo defines [contributing guidelines](https://github.com/dotnet/windowsdesktop/blob/main/CONTRIBUTING.md) and also follows
   the more general [.NET Core contributing
   guide](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md).
 * If you have a question or have found a bug, [file an
@@ -49,8 +49,4 @@ conduct@dotnetfoundation.org.
 
 ## License
 
-.NET (including the WindowsDesktop repo) is licensed under the [MIT license](LICENSE.TXT).
-
-## Officially Released Builds
-
-
+.NET (including the WindowsDesktop repo) is licensed under the [MIT license](https://github.com/dotnet/windowsdesktop/blob/main/LICENSE.TXT).

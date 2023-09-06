@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <None Include="PACKAGE.md" Pack="true" PackagePath="" />
+    <None Include="PACKAGE.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

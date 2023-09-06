@@ -78,7 +78,6 @@ End Module
 
 For more in-depth tutorials and API references, you can check the following resources:
 
-- [NuGet Gallery | Microsoft.Windows.Compatibility](https://nuget.org/packages/Microsoft.Windows.Compatibility/)
 - [Use the Windows Compatibility Pack to port code - .NET](https://learn.microsoft.com/dotnet/core/porting/windows-compat-pack)
 - [Announcing the Windows Compatibility Pack for .NET Core](https://devblogs.microsoft.com/dotnet/announcing-the-windows-compatibility-pack-for-net-core/)
 - [Installing NuGet client tools | Microsoft Learn](https://learn.microsoft.com/nuget/consume-packages/install-use-packages-nuget-cli)
@@ -88,5 +87,5 @@ For more in-depth tutorials and API references, you can check the following reso
 We value your feedback! Here are ways to get in touch with us:
 
 - Open an issue on our [GitHub repository](https://github.com/dotnet/runtime/issues)
-- Reach out on Twitter with the hashtag #dotnet
+- Reach out on Twitter with the [hashtag #dotnet](https://twitter.com/search?q=%23dotnet)
 - Join our Discord channel: [dotnet/Discord](https://discord.com/invite/dotnet)

@@ -68,7 +68,7 @@
     <MicrosoftPrivateWinformsVersion>9.0.0-alpha.1.23504.12</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.0-alpha.1.23504.12</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.0-alpha.1.23504.6</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>9.0.0-alpha.1.23504.6</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.0-alpha.1.23505.1</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>9.0.0-alpha.1.23505.1</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

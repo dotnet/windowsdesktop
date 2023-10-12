@@ -27,5 +27,6 @@
     <NetCurrent>net9.0</NetCurrent>
     <NetMinimum>net8.0</NetMinimum>
     <NetPrevious />
+  </PropertyGroup>
 
 </Project>

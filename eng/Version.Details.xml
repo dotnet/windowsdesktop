@@ -12,6 +12,7 @@
     <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="9.0.0-alpha.1.23558.9">
       <Uri>https://github.com/dotnet/wpf</Uri>
       <Sha>3f0ca7775c73eaa5486616b897caf103e46be9a7</Sha>
+      <SourceBuildTarball RepoName="wpf" ManagedOnly="true" />
     </Dependency>
     <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="9.0.0-alpha.1.23558.9">
       <Uri>https://github.com/dotnet/wpf</Uri>

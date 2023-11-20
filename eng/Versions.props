@@ -25,9 +25,9 @@
     <!-- nuget -->
     <NugetPackagingVersion>6.2.4</NugetPackagingVersion>
     <!-- runtime -->
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.0-rtm.23531.3</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <MicrosoftNETCoreAppRefVersion>8.0.0</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.0</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.1-servicing.23567.5</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <MicrosoftNETCoreAppRefVersion>8.0.1</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.1</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftWin32RegistryAccessControlVersion>8.0.0</MicrosoftWin32RegistryAccessControlVersion>
     <MicrosoftWin32RegistryVersion>5.0.0</MicrosoftWin32RegistryVersion>
     <MicrosoftWin32SystemEventsVersion>8.0.0</MicrosoftWin32SystemEventsVersion>
@@ -61,15 +61,15 @@
     <SystemSpeechVersion>8.0.0</SystemSpeechVersion>
     <SystemTextEncodingCodePagesVersion>8.0.0</SystemTextEncodingCodePagesVersion>
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.0-rtm.23531.3</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.1-servicing.23567.5</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.0-rtm.23531.5</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftPrivateWinformsVersion>8.0.0-rtm.23531.5</MicrosoftPrivateWinformsVersion>
-    <SystemDrawingCommonVersion>8.0.0</SystemDrawingCommonVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.1-servicing.23567.3</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.1-servicing.23567.3</MicrosoftPrivateWinformsVersion>
+    <SystemDrawingCommonVersion>8.0.1</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.0-rtm.23531.4</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.0-rtm.23531.4</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.1-servicing.23570.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.1-servicing.23570.2</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

@@ -25,7 +25,7 @@
     <!-- nuget -->
     <NugetPackagingVersion>6.2.4</NugetPackagingVersion>
     <!-- runtime -->
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.1-servicing.23572.22</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.1-servicing.23578.5</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <MicrosoftNETCoreAppRefVersion>8.0.1</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>8.0.1</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftWin32RegistryAccessControlVersion>8.0.0</MicrosoftWin32RegistryAccessControlVersion>
@@ -61,15 +61,15 @@
     <SystemSpeechVersion>8.0.0</SystemSpeechVersion>
     <SystemTextEncodingCodePagesVersion>8.0.0</SystemTextEncodingCodePagesVersion>
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.1-servicing.23572.22</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.1-servicing.23578.5</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.1-servicing.23574.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftPrivateWinformsVersion>8.0.1-servicing.23574.2</MicrosoftPrivateWinformsVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.1-servicing.23578.7</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.1-servicing.23578.7</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>8.0.1</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.1-servicing.23577.1</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.1-servicing.23577.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.1-servicing.23578.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.1-servicing.23578.5</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

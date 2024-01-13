@@ -40,6 +40,12 @@
     -->
   <Import Project="$(PkgMicrosoft_Private_Winforms)\sdk\dotnet-windowsdesktop\System.Windows.Forms.FileClassification.props"
           Condition="Exists('$(PkgMicrosoft_Private_Winforms)')" />
+  <!-- 
+    Windows Forms specific private references to ignore
+    see: https://github.com/dotnet/winforms/tree/main/pkg/Microsoft.Private.Winforms/sdk/dotnet-windowsdesktop
+    -->
+  <Import Project="$(PkgMicrosoft_Private_Winforms)\sdk\dotnet-windowsdesktop\System.Windows.Forms.IgnoredReferences.props"
+          Condition="Exists('$(PkgMicrosoft_Private_Winforms)')" />
 
   <!-- WPF specific references -->
   <ItemGroup>

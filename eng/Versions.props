@@ -64,11 +64,11 @@
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>9.0.0-preview.3.24129.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftPrivateWinformsVersion>9.0.0-preview.3.24129.2</MicrosoftPrivateWinformsVersion>
-    <SystemDrawingCommonVersion>9.0.0-preview.3.24129.2</SystemDrawingCommonVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>9.0.0-preview.3.24151.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftPrivateWinformsVersion>9.0.0-preview.3.24151.1</MicrosoftPrivateWinformsVersion>
+    <SystemDrawingCommonVersion>9.0.0-preview.3.24151.1</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.0-preview.3.24129.1</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>9.0.0-preview.3.24129.1</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.0-preview.3.24151.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>9.0.0-preview.3.24151.2</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

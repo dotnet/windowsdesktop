@@ -1,89 +1,89 @@
+# This Yaml Document has been converted by ESAI Yaml Pipeline Conversion Tool.
+# Please make sure to check all the converted content, it is your team's responsibility to make sure that the pipeline is still valid and functions as expected.
+# Output added to job "${{ parameters.name }}" with YAML conditionals extracted using AI. Review this expression against the originating file for correctness.
+# Outputs were added with YAML Conditional expressions generated using AI in a best attempt to preserve the boolean logic that would have lead to the tasks producing outputs executing before conversion. You may need to review the generated expressions for correctness of the execution logic, and you will need to manually translate any cross-template parameters.
+# Output from "eng\pipelines\steps\upload-job-artifacts.yml" added to job "${{ parameters.displayName }}" with conditionals extracted using AI from the following files: "eng\pipelines\steps\upload-job-artifacts.yml".
+
 parameters:
   additionalMSBuildArguments: ''
   displayName: ''
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
-
 jobs:
-  - job: ${{ parameters.name }}
-    displayName: ${{ parameters.displayName }}
-    timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
-    pool:
-      # Use a hosted pool when possible.
-      ${{ if eq(variables['System.TeamProject'], 'public') }}:
-        vmImage: 'windows-2019'
+- job: ${{ parameters.name }}
+  displayName: ${{ parameters.displayName }}
+  timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
+  pool:
+    ${{ if eq(variables['System.TeamProject'], 'public') }}:
+      vmImage: 'windows-2019'
+    ${{ if ne(variables['System.TeamProject'], 'public') }}:
+      name: NetCore1ESPool-Internal
+      demands: ImageOverride -equals windows.vs2019.amd64
+  strategy:
+    matrix:
+      Debug:
+        _BuildConfig: Debug
+      Release:
+        _BuildConfig: Release
+  workspace:
+    clean: all
+  variables:
+  - name: CommonMSBuildArgs
+    value: >-
+      -c $(_BuildConfig) /p:OfficialBuildId=$(OfficialBuildId) /p:TargetArchitecture=${{ parameters.targetArchitecture }} /p:SkipTests=${{ parameters.skipTests }}
+  - name: MsbuildSigningArguments
+    value: /p:DotNetSignType=$(SignType)
+  - name: TargetArchitecture
+    value: ${{ parameters.targetArchitecture }}
+  - ${{ if eq(variables['System.TeamProject'], 'public') }}:
+    - name: _InternalRuntimeDownloadArgs
+      value: ''
+  - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+    - group: DotNet-MSRC-Storage
+    - name: _InternalRuntimeDownloadArgs
+      value: >-
+        /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
+  templateContext:
+    mb:
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
-        name: NetCore1ESPool-Internal
-        demands: ImageOverride -equals windows.vs2019.amd64
-    strategy:
-      matrix: 
-        Debug:
-          _BuildConfig: Debug
-        Release:
-          _BuildConfig: Release
-    workspace:
-      clean: all
-    variables: 
-      - name: CommonMSBuildArgs
-        value: >-
-          -c $(_BuildConfig)
-          /p:OfficialBuildId=$(OfficialBuildId)
-          /p:TargetArchitecture=${{ parameters.targetArchitecture }}
-          /p:SkipTests=${{ parameters.skipTests }}
-      - name: MsbuildSigningArguments
-        value: /p:DotNetSignType=$(SignType)
-      - name: TargetArchitecture
-        value: ${{ parameters.targetArchitecture }}
-      - ${{ if eq(variables['System.TeamProject'], 'public') }}:
-        - name: _InternalRuntimeDownloadArgs
-          value: ''
-      - ${{ if ne(variables['System.TeamProject'], 'public') }}:
-        - group: DotNet-MSRC-Storage
-        - name: _InternalRuntimeDownloadArgs
-          value: >-
-            /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
-            /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
-
-    steps:
-    - ${{ if ne(variables['System.TeamProject'], 'public') }}:
-      - task: NuGetAuthenticate@1
-
-      - task: PowerShell@2
-        displayName: Setup Private Feeds Credentials
-        inputs:
-          filePath: $(Build.SourcesDirectory)/eng/common/SetupNugetSources.ps1
-          arguments: -ConfigFile $(Build.SourcesDirectory)/NuGet.config -Password $Env:Token
-        env:
-          Token: $(dn-bot-dnceng-artifact-feeds-rw)
-
-      - task: MicroBuildSigningPlugin@2
-        displayName: Install MicroBuild plugin for Signing
-        inputs:
+      - signing:
+          enabled: true
+          feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
           signType: $(SignType)
           zipSources: false
-          feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
-        continueOnError: false
-        condition: and(succeeded(), 
-                       in(variables['SignType'], 'real', 'test'))
-    # NuGet's http cache lasts 30 minutes. If we're on a static machine, this may interfere with
-    # auto-update PRs by preventing the CI build from fetching the new version. Delete the cache.
-    - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
-      displayName: Clear NuGet http cache (if exists)
-
-    - script: >-
-        build.cmd -ci -test
-        $(CommonMSBuildArgs)
-        $(MsbuildSigningArguments)
-        $(_InternalRuntimeDownloadArgs)
-      displayName: Build
-
-    # Generate SBOM for the internal leg only
+    outputs:
     - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-      - template: ..\..\common\templates\steps\generate-sbom.yml
-        parameters:
-          name: Generate_SBOM_${{ parameters.name }}
-
-    - template: /eng/pipelines/steps/upload-job-artifacts.yml
+      - output: pipelineArtifact
+        displayName: 'Publish Artifacts'
+        condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
+        targetPath: '$(Build.StagingDirectory)/Artifacts'
+        artifactName: IntermediateUnsignedArtifacts
+        artifactType: container
+    - output: pipelineArtifact
+      displayName: 'Publish BuildLogs'
+      condition: succeededOrFailed()
+      targetPath: '$(Build.StagingDirectory)/BuildLogs'
+      artifactName: Logs-${{ parameters.name }}-$(_BuildConfig)
+  steps:
+  - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+    - task: NuGetAuthenticate@1
+    - task: PowerShell@2
+      displayName: Setup Private Feeds Credentials
+      inputs:
+        filePath: $(Build.SourcesDirectory)/eng/common/SetupNugetSources.ps1
+        arguments: -ConfigFile $(Build.SourcesDirectory)/NuGet.config -Password $Env:Token
+      env:
+        Token: $(dn-bot-dnceng-artifact-feeds-rw)
+  - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
+    displayName: Clear NuGet http cache (if exists)
+  - script: >-
+      build.cmd -ci -test $(CommonMSBuildArgs) $(MsbuildSigningArguments) $(_InternalRuntimeDownloadArgs)
+    displayName: Build
+  - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+    - template: /eng/common/templates/steps/generate-sbom.yml@self
       parameters:
-        name: ${{ parameters.name }}
+        name: Generate_SBOM_${{ parameters.name }}
+  - template: /eng/pipelines/steps/upload-job-artifacts.yml@self
+    parameters:
+      name: ${{ parameters.name }}

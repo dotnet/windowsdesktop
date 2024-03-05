@@ -50,7 +50,7 @@ extends:
       sourceAnalysisPool:
         name: $(DncEngInternalBuildPool)
         image: 1es-windows-2022-pt
-      os: windows
+        os: windows
     customBuildTags:
     - ES365AIMigrationTooling
     stages:

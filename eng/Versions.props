@@ -45,7 +45,7 @@
     <MicrosoftBuildUtilitiesCoreVersion>$(MicrosoftBuildVersion)</MicrosoftBuildUtilitiesCoreVersion>
     <MicrosoftDotNetPlatformAbstractionsVersion>1.1.1</MicrosoftDotNetPlatformAbstractionsVersion>
     <NugetProjectModelVersion>4.9.4</NugetProjectModelVersion>
-    <NugetPackagingVersion>6.2.4</NugetPackagingVersion>
+    <NugetPackagingVersion>4.9.4</NugetPackagingVersion>
     <MicrosoftDiaSymReaderNativeVersion>1.7.0</MicrosoftDiaSymReaderNativeVersion>
   </PropertyGroup>
   <!-- Base runtime pack name (RID-less) for shared framework tooling. -->

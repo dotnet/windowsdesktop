@@ -40,12 +40,12 @@ jobs:
   templateContext:
     outputs:
     - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-      - output: pipelineArtifact
+      - output: buildArtifacts
         displayName: 'Publish Artifacts'
         condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
-        targetPath: '$(Build.StagingDirectory)/Artifacts'
-        artifactName: IntermediateUnsignedArtifacts
-        artifactType: container
+        PathtoPublish: '$(Build.StagingDirectory)/Artifacts'
+        ArtifactName: IntermediateUnsignedArtifacts
+        ArtifactType: container
     - output: pipelineArtifact
       displayName: 'Publish BuildLogs'
       condition: succeededOrFailed()

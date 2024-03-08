@@ -4,7 +4,9 @@
 # The Task 'PublishBuildArtifacts@1' has been converted to an output named 'Publish BuildLogs' in the templateContext section.
 parameters:
   name: ''
+
 steps:
+# Upload build outputs as build artifacts only if internal and not PR, to save storage space.
 - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
   - task: CopyFiles@2
     displayName: Prepare job-specific Artifacts subdirectory
@@ -16,6 +18,8 @@ steps:
       TargetFolder: '$(Build.StagingDirectory)/Artifacts/${{ parameters.name }}'
       CleanTargetFolder: true
     condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
+
+# Always upload test outputs and build logs.
 - task: PublishTestResults@2
   displayName: Publish Test Results
   inputs:
@@ -26,6 +30,7 @@ steps:
     testRunTitle: ${{ parameters.name }}-$(_BuildConfig)
   continueOnError: true
   condition: always()
+
 - task: CopyFiles@2
   displayName: Prepare BuildLogs staging directory
   inputs:

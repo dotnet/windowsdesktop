@@ -9,6 +9,7 @@ parameters:
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
+
 jobs:
 - job: ${{ parameters.name }}
   displayName: ${{ parameters.displayName }}
@@ -24,7 +25,10 @@ jobs:
   variables:
   - name: CommonMSBuildArgs
     value: >-
-      -c $(_BuildConfig) /p:OfficialBuildId=$(OfficialBuildId) /p:TargetArchitecture=${{ parameters.targetArchitecture }} /p:SkipTests=${{ parameters.skipTests }}
+      -c $(_BuildConfig)
+      /p:OfficialBuildId=$(OfficialBuildId)
+      /p:TargetArchitecture=${{ parameters.targetArchitecture }}
+      /p:SkipTests=${{ parameters.skipTests }}
   - name: MsbuildSigningArguments
     value: /p:DotNetSignType=$(SignType)
   - name: TargetArchitecture
@@ -36,7 +40,9 @@ jobs:
     - group: DotNet-MSRC-Storage
     - name: _InternalRuntimeDownloadArgs
       value: >-
-        /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
+        /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
+        /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
+
   templateContext:
     outputs:
     - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
@@ -54,6 +60,7 @@ jobs:
   steps:
   - ${{ if ne(variables['System.TeamProject'], 'public') }}:
     - task: NuGetAuthenticate@1
+
     - task: PowerShell@2
       displayName: Setup Private Feeds Credentials
       inputs:
@@ -61,6 +68,7 @@ jobs:
         arguments: -ConfigFile $(Build.SourcesDirectory)/NuGet.config -Password $Env:Token
       env:
         Token: $(dn-bot-dnceng-artifact-feeds-rw)
+
     - task: MicroBuildSigningPlugin@2
       displayName: Install MicroBuild plugin for Signing
       inputs:
@@ -69,15 +77,24 @@ jobs:
         feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
       continueOnError: false
       condition: and(succeeded(), in(variables['SignType'], 'real', 'test'))
+    # NuGet's http cache lasts 30 minutes. If we're on a static machine, this may interfere with
+    # auto-update PRs by preventing the CI build from fetching the new version. Delete the cache.
   - powershell: Remove-Item -Recurse -ErrorAction Ignore "$env:LocalAppData\NuGet\v3-cache"
     displayName: Clear NuGet http cache (if exists)
+
   - script: >-
-      build.cmd -ci -test $(CommonMSBuildArgs) $(MsbuildSigningArguments) $(_InternalRuntimeDownloadArgs)
+      build.cmd -ci -test
+      $(CommonMSBuildArgs)
+      $(MsbuildSigningArguments)
+      $(_InternalRuntimeDownloadArgs)
     displayName: Build
+
+    # Generate SBOM for the internal leg only
   - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
     - template: /eng/common/templates-official/steps/generate-sbom.yml@self
       parameters:
         name: Generate_SBOM_${{ parameters.name }}
+
   - template: /eng/pipelines/steps/upload-job-artifacts.yml@self
     parameters:
       name: ${{ parameters.name }}

@@ -75,7 +75,7 @@ jobs:
       build.cmd -ci -test $(CommonMSBuildArgs) $(MsbuildSigningArguments) $(_InternalRuntimeDownloadArgs)
     displayName: Build
   - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-    - template: /eng/common/templates/steps/generate-sbom.yml@self
+    - template: /eng/common/templates-official/steps/generate-sbom.yml@self
       parameters:
         name: Generate_SBOM_${{ parameters.name }}
   - template: /eng/pipelines/steps/upload-job-artifacts.yml@self

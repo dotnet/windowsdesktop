@@ -40,11 +40,11 @@
     <FrameworkListFileClass Include="UIAutomationTypes.resources.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="WindowsBase.resources.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="WindowsFormsIntegration.resources.dll" Profile="WindowsForms;WPF" />
-    <FrameworkListFileClass Include="D3DCompiler_47_cor3.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="PenImc_cor3.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="PresentationNative_cor3.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="vcruntime140_cor3.dll" Profile="WindowsForms;WPF" />
     <FrameworkListFileClass Include="wpfgfx_cor3.dll" Profile="WindowsForms;WPF" />
+    <FrameworkListFileClass Condition="'$(PlatformTarget)' != 'ARM64'" Include="D3DCompiler_47_cor3.dll" Profile="WindowsForms;WPF" />
   </ItemGroup>
 
   <!-- Windows Forms specific references -->

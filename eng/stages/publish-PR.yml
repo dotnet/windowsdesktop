@@ -1,0 +1,47 @@
+parameters:
+  dependsOnPublishStages: []
+  publishingInfraVersion: 3
+
+stages:
+
+# Stages-based publishing entry point
+- template: /eng/common/templates/post-build/post-build.yml
+  parameters:
+    publishingInfraVersion: ${{ parameters.publishingInfraVersion }}
+    validateDependsOn:
+    - PrepareForPublish
+    enableSymbolValidation: false
+    enableSigningValidation: false
+    enableNugetValidation: false
+    enableSourceLinkValidation: false
+    publishInstallersAndChecksums: true
+
+    SDLValidationParameters:
+      enable: false
+      params: >-
+        -SourceToolsList @("policheck","credscan")
+        -TsaInstanceURL https://devdiv.visualstudio.com/
+        -TsaProjectName DEVDIV
+        -TsaNotificationEmail wffteam@microsoft.com
+        -TsaCodebaseAdmin REDMOND\advolker
+        -TsaBugAreaPath "DevDiv\NET Fundamentals\WindowsDesktop"
+        -TsaIterationPath DevDiv
+        -TsaRepositoryName WindowsDesktop
+        -TsaCodebaseName WindowsDesktop
+        -TsaOnboard $True
+        -TsaPublish $True
+
+# Create extra stage per BAR channel that needs extra publish steps. These run after the Arcade
+# stages because they depend on Arcade's NuGet package publish being complete.
+- ${{ each dependency in parameters.dependsOnPublishStages }}:
+  - stage: PublishFinal_${{ dependency.dependsOn }}
+    displayName: '${{ dependency.channel.name }} Finalize'
+    dependsOn:
+    - ${{ dependency.dependsOn }}
+    variables:
+    - template: /eng/common/templates/post-build/common-variables.yml
+    jobs:
+    - template: /eng/jobs/run-publish-project-PR.yml
+      parameters:
+        projectName: publish-final
+        dependency: ${{ dependency }}

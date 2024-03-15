@@ -13,14 +13,15 @@
     <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"
              Targets="ReturnProductVersion"
              Properties="IsShipping=false">
-      <Output TaskParameter="TargetOutputs" ItemName="WindowsDesktopRuntimePackProductVersion" />
+      <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimePackProductVersion" />
     </MSBuild>
 
     <ItemGroup>
-      <ItemsToPushToBlobFeed Include="$(ArtifactsPackagesDir)**\*.zip;
-                                      $(ArtifactsPackagesDir)**\*.exe;
-                                      $(ArtifactsPackagesDir)**\*.msi"
-                             ManifestArtifactData="NonShipping=false"
+      <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
+                                   $(ArtifactsPackagesDir)**\*.exe;
+                                   $(ArtifactsPackagesDir)**\*.msi" />
+      <ItemsToPushToBlobFeed Include="@(InstallerToPublish)"
+                             IsShipping="true"
                              PublishFlatContainer="true"
                              RelativeBlobPath="WindowsDesktop/$(WindowsDesktopRuntimePackProductVersion)/%(Filename)%(Extension)" />
     </ItemGroup>

@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <ProducesDotNetReleaseShippingAssets>true</ProducesDotNetReleaseShippingAssets>
-    <PublishDependsOnTargets Condition="'$(DotNetBuildRepo)' == 'true'">$(PublishDependsOnTargets);PublishWindowsDesktopInstallers</PublishDependsOnTargets>
   </PropertyGroup>
 
   <!-- Include installer archives and packages which aren't globbed by default. -->
-  <Target Name="PublishWindowsDesktopInstallers">
+  <Target Name="PublishWindowsDesktopInstallers"
+          BeforeTargets="BeforePublish;PublishToAzureDevOpsArtifacts"
+          Condition="'$(DotNetBuildRepo)' == 'true'">
     <!-- Retrieve windows desktop runtime pack product version.
          Don't stabilize the package version in order to retrieve the VersionSuffix. -->
     <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"

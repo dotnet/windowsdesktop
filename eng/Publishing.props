@@ -2,20 +2,24 @@
 
   <PropertyGroup>
     <ProducesDotNetReleaseShippingAssets>true</ProducesDotNetReleaseShippingAssets>
+    <PublishDependsOnTargets Condition="'$(DotNetBuildRepo)' == 'true'">$(PublishDependsOnTargets);PublishWindowsDesktopInstallers</PublishDependsOnTargets>
   </PropertyGroup>
 
   <!-- Include installer archives and packages which aren't globbed by default. -->
-  <ItemGroup Condition="'$(DotNetBuildRepo)' == 'true'">
-    <!--
-       MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion is x64 version - there is no Rid-specific property.
-       TODO: This will need to be updated to support arm64.
-    -->
-    <ItemsToPushToBlobFeed Include="$(ArtifactsPackagesDir)**\*.zip;
-                                    $(ArtifactsPackagesDir)**\*.exe;
-                                    $(ArtifactsPackagesDir)**\*.msi"
-                           ManifestArtifactData="NonShipping=false"
-                           PublishFlatContainer="true"
-                           RelativeBlobPath="WindowsDesktop/$(MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion)/%(Filename)%(Extension)" />
-  </ItemGroup>
+  <Target Name="PublishWindowsDesktopInstallers">
+    <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"
+             Targets="ReturnProductVersion">
+      <Output TaskParameter="TargetOutputs" ItemName="WindowsDesktopRuntimePackProductVersion" />
+    </MSBuild>
+
+    <ItemGroup>
+      <ItemsToPushToBlobFeed Include="$(ArtifactsPackagesDir)**\*.zip;
+                                      $(ArtifactsPackagesDir)**\*.exe;
+                                      $(ArtifactsPackagesDir)**\*.msi"
+                             ManifestArtifactData="NonShipping=false"
+                             PublishFlatContainer="true"
+                             RelativeBlobPath="WindowsDesktop/$(WindowsDesktopRuntimePackProductVersion)/%(Filename)%(Extension)" />
+    </ItemGroup>
+  </Target>
 
 </Project>

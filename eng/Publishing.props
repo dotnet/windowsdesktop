@@ -11,8 +11,8 @@
        TODO: This will need to be updated to support arm64.
     -->
     <ItemsToPushToBlobFeed Include="$(ArtifactsPackagesDir)**\*.zip;
-                                   $(ArtifactsPackagesDir)**\*.exe;
-                                   $(ArtifactsPackagesDir)**\*.msi"
+                                    $(ArtifactsPackagesDir)**\*.exe;
+                                    $(ArtifactsPackagesDir)**\*.msi"
                            ManifestArtifactData="NonShipping=false"
                            PublishFlatContainer="true"
                            RelativeBlobPath="WindowsDesktop/$(MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion)/%(Filename)%(Extension)" />

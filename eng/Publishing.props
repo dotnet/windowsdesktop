@@ -6,15 +6,13 @@
 
   <!-- Include installer archives and packages which aren't globbed by default. -->
   <ItemGroup Condition="'$(DotNetBuildRepo)' == 'true'">
-    <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
-                                 $(ArtifactsPackagesDir)**\*.exe;
-                                 $(ArtifactsPackagesDir)**\*.msi" />
-
     <!--
        MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion is x64 version - there is no Rid-specific property.
        TODO: This will need to be updated to support arm64.
     -->
-    <ItemsToPushToBlobFeed Include="@(_InstallersToPublish)"
+    <ItemsToPushToBlobFeed Include="$(ArtifactsPackagesDir)**\*.zip;
+                                   $(ArtifactsPackagesDir)**\*.exe;
+                                   $(ArtifactsPackagesDir)**\*.msi"
                            ManifestArtifactData="NonShipping=false"
                            PublishFlatContainer="true"
                            RelativeBlobPath="WindowsDesktop/$(MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion)/%(Filename)%(Extension)" />

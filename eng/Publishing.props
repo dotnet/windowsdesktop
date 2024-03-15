@@ -16,7 +16,6 @@
                            ManifestArtifactData="NonShipping=false"
                            PublishFlatContainer="true"
                            RelativeBlobPath="WindowsDesktop/$(MicrosoftWindowsDesktopAppRuntimewinx64PackageVersion)/%(Filename)%(Extension)" />
-    </ItemsToPushToBlobFeed>
   </ItemGroup>
 
 </Project>

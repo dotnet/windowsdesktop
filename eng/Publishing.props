@@ -20,9 +20,9 @@
       <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
                                    $(ArtifactsPackagesDir)**\*.exe;
                                    $(ArtifactsPackagesDir)**\*.msi" />
+
       <ItemsToPushToBlobFeed Include="@(InstallerToPublish)"
-                             IsShipping="true"
-                             ManifestArtifactData="DotNetReleaseShipping=true"
+                             IsShipping="$([System.String]::Copy('%(RecursiveDir)').StartsWith('Shipping'))"
                              PublishFlatContainer="true"
                              RelativeBlobPath="WindowsDesktop/$(WindowsDesktopRuntimePackProductVersion)/%(Filename)%(Extension)" />
     </ItemGroup>

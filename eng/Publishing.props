@@ -7,6 +7,7 @@
 
   <!-- Include installer archives and packages which aren't globbed by default. -->
   <Target Name="PublishWindowsDesktopInstallers">
+    <!-- Retrieve windows desktop runtime pack product version. -->
     <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"
              Targets="ReturnProductVersion">
       <Output TaskParameter="TargetOutputs" ItemName="WindowsDesktopRuntimePackProductVersion" />

@@ -72,7 +72,7 @@ jobs:
     displayName: Clear NuGet http cache (if exists)
 
   - script: >-
-      build.cmd -ci -test
+      eng/common/cibuild.cmd
       $(CommonMSBuildArgs)
       $(MsbuildSigningArguments)
       $(_InternalRuntimeDownloadArgs)

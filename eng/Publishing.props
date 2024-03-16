@@ -2,20 +2,39 @@
 
   <PropertyGroup>
     <ProducesDotNetReleaseShippingAssets>true</ProducesDotNetReleaseShippingAssets>
+    <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
   </PropertyGroup>
 
-  <!-- Include installer archives and packages which aren't globbed by default. -->
-  <Target Name="PublishWindowsDesktopInstallers"
-          BeforeTargets="BeforePublish"
-          Condition="'$(DotNetBuildRepo)' == 'true'">
-    <!-- Retrieve windows desktop runtime pack product version.
-         Don't stabilize the package version in order to retrieve the VersionSuffix. -->
+  <!-- Do not push .nupkg files from other builds than win-x64 and not building from the VMR. -->
+  <Target Name="ClearNugetPackagePublishList"
+          Condition="'$(TargetArchitecture)' != 'x64' and '$(DotNetBuildRepo)' != 'true'"
+          AfterTargets="BeforePublish"
+          BeforeTargets="PublishToAzureDevOpsArtifacts;PublishSymbols">
+    <ItemGroup>
+      <ItemsToPushToBlobFeed Remove="@(PackagesToPublish);@(ExistingSymbolPackages);@(SymbolPackagesToGenerate)" />
+
+      <ExistingSymbolPackages Remove="@(ExistingSymbolPackages)" />
+      <PackagesToPublish Remove="@(PackagesToPublish)" />
+      <SymbolPackagesToGenerate Remove="@(SymbolPackagesToGenerate)" />
+
+      <ItemsToSignPostBuild Remove="@(ItemsToSignPostBuild)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Retrieve the runtime pack product version.
+       Don't stabilize the package version in order to retrieve the VersionSuffix. -->
+  <Target Name="GetProductVersion">
     <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"
              Targets="ReturnProductVersion"
              Properties="IsShipping=false">
-      <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimePackProductVersion" />
+      <Output TaskParameter="TargetOutputs" PropertyName="RuntimePackProductVersion" />
     </MSBuild>
+  </Target>
 
+  <!-- Include installer archives and packages which aren't globbed by default. -->
+  <Target Name="PublishInstallers"
+          DependsOnTargets="GetProductVersion"
+          BeforeTargets="BeforePublish">
     <ItemGroup>
       <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
                                    $(ArtifactsPackagesDir)**\*.exe;
@@ -24,7 +43,36 @@
       <ItemsToPushToBlobFeed Include="@(InstallerToPublish)"
                              IsShipping="$([System.String]::Copy('%(RecursiveDir)').StartsWith('Shipping'))"
                              PublishFlatContainer="true"
-                             RelativeBlobPath="WindowsDesktop/$(WindowsDesktopRuntimePackProductVersion)/%(Filename)%(Extension)" />
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
+
+      <!-- Include checksums -->
+      <ChecksumToPublish Include="$(ArtifactsPackagesDir)**\*.sha512" />
+      <ItemsToPushToBlobFeed Include="@(ChecksumToPublish)"
+                             IsShipping="false"
+                             PublishFlatContainer="true"
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="GenerateAndPublishProductVersionFiles"
+          DependsOnTargets="GetProductVersion"
+          BeforeTargets="BeforePublish">
+    <ItemGroup>
+      <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)productVersion.txt" />
+      <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt" />
+    </ItemGroup>
+
+    <!-- Generate productVersion.txt file containing the product version. -->
+    <WriteLinesToFile File="%(ProductVersionFile.Identity)"
+                      Lines="$(RuntimePackProductVersion)"
+                      Overwrite="true"
+                      Encoding="ASCII" />
+    
+    <ItemGroup>
+      <ItemsToPushToBlobFeed Include="@(ProductVersionFile)"
+                             IsShipping="false"
+                             PublishFlatContainer="true"
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
     </ItemGroup>
   </Target>
 

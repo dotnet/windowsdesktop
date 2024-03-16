@@ -24,7 +24,6 @@ jobs:
       - name: CommonMSBuildArgs
         value: >-
           -c $(_BuildConfig)
-          /p:OfficialBuildId=$(OfficialBuildId)
           /p:TargetArchitecture=${{ parameters.targetArchitecture }}
           /p:SkipTests=${{ parameters.skipTests }}
       - name: MsbuildSigningArguments

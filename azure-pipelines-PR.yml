@@ -39,16 +39,19 @@ stages:
   - template: /eng/pipelines/jobs/windows-build-PR.yml
     parameters:
       name: win_x64
+      displayName: win-x64
       targetArchitecture: x64
 
   # Windows x86
   - template: /eng/pipelines/jobs/windows-build-PR.yml
     parameters:
       name: win_x86
+      displayName: win-x86
       targetArchitecture: x86
 
   # Windows arm64
   - template: /eng/pipelines/jobs/windows-build-PR.yml
     parameters:
       name: win_arm64
+      displayName: win-arm64
       targetArchitecture: arm64

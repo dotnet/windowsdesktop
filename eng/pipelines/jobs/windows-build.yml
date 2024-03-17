@@ -11,8 +11,6 @@ jobs:
   timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
   strategy:
     matrix:
-      Debug:
-        _BuildConfig: Debug
       Release:
         _BuildConfig: Release
   workspace:
@@ -22,6 +20,7 @@ jobs:
     value: >-
       -c $(_BuildConfig)
       /p:OfficialBuildId=$(OfficialBuildId)
+      /p:DotNetPublishUsingPipelines=true
       /p:TargetArchitecture=${{ parameters.targetArchitecture }}
       /p:SkipTests=${{ parameters.skipTests }}
   - name: MsbuildSigningArguments
@@ -36,12 +35,6 @@ jobs:
 
   templateContext:
     outputs:
-    - output: buildArtifacts
-      displayName: 'Publish Artifacts'
-      condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
-      PathtoPublish: '$(Build.StagingDirectory)/Artifacts'
-      ArtifactName: IntermediateUnsignedArtifacts
-      ArtifactType: container
     - output: pipelineArtifact
       displayName: 'Publish BuildLogs'
       condition: succeededOrFailed()

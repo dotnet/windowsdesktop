@@ -46,7 +46,7 @@ jobs:
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
-    ${{ if ne(parameters.skipTests, 'true') }}:
+    - ${{ if ne(parameters.skipTests, 'true') }}:
       - task: PublishTestResults@2
         displayName: Publish Test Results
         inputs:

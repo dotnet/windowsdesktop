@@ -11,7 +11,7 @@ jobs:
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     pool:
       # Use a hosted pool when possible.
-      vmImage: 'windows-2019'
+      vmImage: 'windows-2022'
     strategy:
       matrix: 
         Debug:

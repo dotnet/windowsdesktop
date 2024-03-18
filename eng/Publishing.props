@@ -2,20 +2,44 @@
 
   <PropertyGroup>
     <ProducesDotNetReleaseShippingAssets>true</ProducesDotNetReleaseShippingAssets>
+    <!-- Don't push rid agnostic nuget packages from other builds than win-x64 when not building inside the VMR. -->
+    <EnableDefaultPublishItems Condition="'$(DotNetBuildRepo)' != 'true' and
+                                          '$(TargetArchitecture)' != 'x64' and
+                                          '$(TargetArchitecture)' != ''">false</EnableDefaultPublishItems>
+    <!-- This avoids creating VS.*.symbols.nupkg packages that are identical to the original package. -->
+    <AutoGenerateSymbolPackages>false</AutoGenerateSymbolPackages>
   </PropertyGroup>
 
-  <!-- Include installer archives and packages which aren't globbed by default. -->
-  <Target Name="PublishWindowsDesktopInstallers"
+  <Target Name="SetPackageToInclude"
           BeforeTargets="BeforePublish"
-          Condition="'$(DotNetBuildRepo)' == 'true'">
-    <!-- Retrieve windows desktop runtime pack product version.
-         Don't stabilize the package version in order to retrieve the VersionSuffix. -->
+          Condition="'$(EnableDefaultPublishItems)' != 'true'">
+    <ItemGroup>
+      <!-- Only include RID specific packages -->
+      <PackageToInclude Include="Microsoft.WindowsDesktop.App.Runtime" />
+      <PackageToInclude Include="VS.Redist.Common.WindowsDesktop" />
+
+      <ExistingSymbolPackages Include="$(ArtifactsShippingPackagesDir)**/%(PackageToInclude.Identity)*.symbols.nupkg" IsShipping="true" />
+      <ExistingSymbolPackages Include="$(ArtifactsNonShippingPackagesDir)**/%(PackageToInclude.Identity)*.symbols.nupkg" IsShipping="false" />
+
+      <PackagesToPublish Include="$(ArtifactsShippingPackagesDir)**/%(PackageToInclude.Identity)*.nupkg" IsShipping="true" />
+      <PackagesToPublish Include="$(ArtifactsNonShippingPackagesDir)**/%(PackageToInclude.Identity)*.nupkg" IsShipping="false" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Retrieve the runtime pack product version.
+       Don't stabilize the package version in order to retrieve the VersionSuffix. -->
+  <Target Name="GetProductVersion">
     <MSBuild Projects="$(RepoRoot)src/windowsdesktop/src/sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj"
              Targets="ReturnProductVersion"
              Properties="IsShipping=false">
-      <Output TaskParameter="TargetOutputs" PropertyName="WindowsDesktopRuntimePackProductVersion" />
+      <Output TaskParameter="TargetOutputs" PropertyName="RuntimePackProductVersion" />
     </MSBuild>
+  </Target>
 
+  <!-- Include installer archives and packages which aren't globbed by default. -->
+  <Target Name="PublishInstallers"
+          DependsOnTargets="GetProductVersion"
+          BeforeTargets="PublishToAzureDevOpsArtifacts">
     <ItemGroup>
       <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
                                    $(ArtifactsPackagesDir)**\*.exe;
@@ -24,7 +48,36 @@
       <ItemsToPushToBlobFeed Include="@(InstallerToPublish)"
                              IsShipping="$([System.String]::Copy('%(RecursiveDir)').StartsWith('Shipping'))"
                              PublishFlatContainer="true"
-                             RelativeBlobPath="WindowsDesktop/$(WindowsDesktopRuntimePackProductVersion)/%(Filename)%(Extension)" />
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
+
+      <!-- Include checksums -->
+      <ChecksumToPublish Include="$(ArtifactsPackagesDir)**\*.sha512" />
+      <ItemsToPushToBlobFeed Include="@(ChecksumToPublish)"
+                             IsShipping="false"
+                             PublishFlatContainer="true"
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="GenerateAndPublishProductVersionFiles"
+          DependsOnTargets="GetProductVersion"
+          BeforeTargets="PublishToAzureDevOpsArtifacts">
+    <ItemGroup>
+      <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)productVersion.txt" />
+      <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt" />
+    </ItemGroup>
+
+    <!-- Generate productVersion.txt file containing the product version. -->
+    <WriteLinesToFile File="%(ProductVersionFile.Identity)"
+                      Lines="$(RuntimePackProductVersion)"
+                      Overwrite="true"
+                      Encoding="ASCII" />
+    
+    <ItemGroup>
+      <ItemsToPushToBlobFeed Include="@(ProductVersionFile)"
+                             IsShipping="false"
+                             PublishFlatContainer="true"
+                             RelativeBlobPath="WindowsDesktop/$(RuntimePackProductVersion)/%(Filename)%(Extension)" />
     </ItemGroup>
   </Target>
 

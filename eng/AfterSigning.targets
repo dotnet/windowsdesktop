@@ -1,0 +1,19 @@
+<Project>
+
+  <PropertyGroup>
+    <_SuppressSdkImports>false</_SuppressSdkImports>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InstallerFile Include="$(ArtifactsShippingPackagesDir)**\*.msi;
+                            $(ArtifactsShippingPackagesDir)**\*.exe;
+                            $(ArtifactsShippingPackagesDir)**\*.zip"
+                   Exclude="$(ArtifactsShippingPackagesDir)**\*.wixpack.zip" />
+
+    <GenerateChecksumItems Include="@(InstallerFile)"
+                           DestinationPath="%(FullPath).sha512" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+
+</Project>

@@ -5,19 +5,33 @@
     <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
   </PropertyGroup>
 
-  <!-- Do not push .nupkg files from other builds than win-x64 and not building from the VMR. -->
+  <!-- For official builds outside of the VMR, do not push a set of .nupkg files from other builds than win-x64. -->
   <Target Name="ClearNugetPackagePublishList"
-          Condition="'$(TargetArchitecture)' != 'x64' and '$(DotNetBuildRepo)' != 'true'"
+          Condition="'$(OfficialBuild)' == 'true' and '$(TargetArchitecture)' != 'x64' and '$(DotNetBuildRepo)' != 'true'"
           AfterTargets="BeforePublish"
+          Condition="'$(OfficialBuild)' == 'true'"
           BeforeTargets="PublishToAzureDevOpsArtifacts;PublishSymbols">
     <ItemGroup>
-      <ItemsToPushToBlobFeed Remove="@(PackagesToPublish);@(ExistingSymbolPackages);@(SymbolPackagesToGenerate)" />
+      <!-- Remove RID agnostic packages -->
+      <PackagesToNotPublish Include="@(PackagesToPublish)"
+        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
+                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
+      <ExistingSymbolPackagesToNotPublish Include="@(ExistingSymbolPackages)"
+        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
+                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
+      <SymbolPackagesToNotPublish Include="@(SymbolPackagesToGenerate)"
+        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
+                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
+      <ItemsToNotSignPostBuild Include="@(ItemsToSignPostBuild)"
+        Condition="'$(PostBuildSign)' == 'true' and
+                   !$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
+                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
 
-      <ExistingSymbolPackages Remove="@(ExistingSymbolPackages)" />
-      <PackagesToPublish Remove="@(PackagesToPublish)" />
-      <SymbolPackagesToGenerate Remove="@(SymbolPackagesToGenerate)" />
-
-      <ItemsToSignPostBuild Remove="@(ItemsToSignPostBuild)" />
+      <PackagesToPublish Remove="@(PackagesToNotPublish)" />
+      <ExistingSymbolPackages Remove="@(ExistingSymbolPackagesToNotPublish)" />
+      <SymbolPackagesToGenerate Remove="@(SymbolPackagesToNotPublish)" />
+      <ItemsToSignPostBuild Remove="@(ItemsToNotSignPostBuild)" Condition="'$(PostBuildSign)' == 'true'" />
+      <ItemsToPushToBlobFeed Remove="@(PackagesToNotPublish);@(ExistingSymbolPackagesToNotPublish);@(SymbolPackagesToNotPublish)" />
     </ItemGroup>
   </Target>
 

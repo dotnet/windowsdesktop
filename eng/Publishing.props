@@ -9,7 +9,6 @@
   <Target Name="ClearNugetPackagePublishList"
           Condition="'$(OfficialBuild)' == 'true' and '$(TargetArchitecture)' != 'x64' and '$(DotNetBuildRepo)' != 'true'"
           AfterTargets="BeforePublish"
-          Condition="'$(OfficialBuild)' == 'true'"
           BeforeTargets="PublishToAzureDevOpsArtifacts;PublishSymbols">
     <ItemGroup>
       <!-- Remove RID agnostic packages -->

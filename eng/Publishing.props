@@ -2,35 +2,27 @@
 
   <PropertyGroup>
     <ProducesDotNetReleaseShippingAssets>true</ProducesDotNetReleaseShippingAssets>
-    <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
+    <!-- For official builds outside of the VMR, do not push a set of .nupkg files from other builds than win-x64. -->
+    <EnableDefaultPublishItems Condition="'$(DotNetBuildRepo)' != 'true' and
+                                          '$(TargetArchitecture)' != 'x64' and
+                                          '$(TargetArchitecture)' != ''">false</EnableDefaultPublishItems>
+    <!-- This avoids creating VS.*.symbols.nupkg packages that are identical to the original package. -->
+    <AutoGenerateSymbolPackages>false</AutoGenerateSymbolPackages>
   </PropertyGroup>
 
-  <!-- For official builds outside of the VMR, do not push a set of .nupkg files from other builds than win-x64. -->
-  <Target Name="ClearNugetPackagePublishList"
-          Condition="'$(OfficialBuild)' == 'true' and '$(TargetArchitecture)' != 'x64' and '$(DotNetBuildRepo)' != 'true'"
-          AfterTargets="BeforePublish"
-          BeforeTargets="PublishToAzureDevOpsArtifacts;PublishSymbols">
+  <Target Name="SetPackageToInclude"
+          BeforeTargets="BeforePublish"
+          Condition="'$(EnableDefaultPublishItems)' != 'true'">
     <ItemGroup>
-      <!-- Remove RID agnostic packages -->
-      <PackagesToNotPublish Include="@(PackagesToPublish)"
-        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
-                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
-      <ExistingSymbolPackagesToNotPublish Include="@(ExistingSymbolPackages)"
-        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
-                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
-      <SymbolPackagesToNotPublish Include="@(SymbolPackagesToGenerate)"
-        Condition="!$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
-                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
-      <ItemsToNotSignPostBuild Include="@(ItemsToSignPostBuild)"
-        Condition="'$(PostBuildSign)' == 'true' and
-                   !$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.WindowsDesktop.App.Runtime')) and
-                   !$([System.String]::Copy('%(Filename)').StartsWith('VS.Redist.Common.WindowsDesktop'))" />
+      <!-- Only include RID specific packages -->
+      <PackageToInclude Include="Microsoft.WindowsDesktop.App.Runtime" />
+      <PackageToInclude Include="VS.Redist.Common.WindowsDesktop" />
 
-      <PackagesToPublish Remove="@(PackagesToNotPublish)" />
-      <ExistingSymbolPackages Remove="@(ExistingSymbolPackagesToNotPublish)" />
-      <SymbolPackagesToGenerate Remove="@(SymbolPackagesToNotPublish)" />
-      <ItemsToSignPostBuild Remove="@(ItemsToNotSignPostBuild)" Condition="'$(PostBuildSign)' == 'true'" />
-      <ItemsToPushToBlobFeed Remove="@(PackagesToNotPublish);@(ExistingSymbolPackagesToNotPublish);@(SymbolPackagesToNotPublish)" />
+      <ExistingSymbolPackages Include="$(ArtifactsShippingPackagesDir)**/%(PackageToInclude.Identity)*.symbols.nupkg" IsShipping="true" />
+      <ExistingSymbolPackages Include="$(ArtifactsNonShippingPackagesDir)**/%(PackageToInclude.Identity)*.symbols.nupkg" IsShipping="false" />
+
+      <PackagesToPublish Include="$(ArtifactsShippingPackagesDir)**/%(PackageToInclude.Identity)*.nupkg" IsShipping="true" />
+      <PackagesToPublish Include="$(ArtifactsNonShippingPackagesDir)**/%(PackageToInclude.Identity)*.nupkg" IsShipping="false" />
     </ItemGroup>
   </Target>
 
@@ -47,7 +39,7 @@
   <!-- Include installer archives and packages which aren't globbed by default. -->
   <Target Name="PublishInstallers"
           DependsOnTargets="GetProductVersion"
-          BeforeTargets="BeforePublish">
+          BeforeTargets="PublishToAzureDevOpsArtifacts">
     <ItemGroup>
       <InstallerToPublish Include="$(ArtifactsPackagesDir)**\*.zip;
                                    $(ArtifactsPackagesDir)**\*.exe;
@@ -69,7 +61,7 @@
 
   <Target Name="GenerateAndPublishProductVersionFiles"
           DependsOnTargets="GetProductVersion"
-          BeforeTargets="BeforePublish">
+          BeforeTargets="PublishToAzureDevOpsArtifacts">
     <ItemGroup>
       <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)productVersion.txt" />
       <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt" />

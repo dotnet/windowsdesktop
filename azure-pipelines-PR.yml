@@ -30,12 +30,6 @@ variables:
     - name: PostBuildSign
       value: true
 
-  # Set the target blob feed for package publish during official and validation builds.
-  - name: _DotNetArtifactsCategory
-    value: .NETCore
-  - name: _DotNetValidationArtifactsCategory
-    value: .NETCoreValidation
-
   # Produce test-signed build for PR and Public builds
   - name: SignType
     value: test

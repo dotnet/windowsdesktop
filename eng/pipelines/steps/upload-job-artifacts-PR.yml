@@ -2,6 +2,27 @@ parameters:
   name: ''
 
 steps:
+# Upload build outputs as build artifacts only if internal and not PR, to save storage space.
+- ${{ if ne(variables['System.TeamProject'], 'public') }}:
+  - task: CopyFiles@2
+    displayName: Prepare job-specific Artifacts subdirectory
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)'
+      Contents: |
+        Shipping/**/*
+        NonShipping/**/*
+      TargetFolder: '$(Build.StagingDirectory)/Artifacts/${{ parameters.name }}'
+      CleanTargetFolder: true
+    condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifacts
+    inputs:
+      pathToPublish: '$(Build.StagingDirectory)/Artifacts'
+      artifactName: IntermediateUnsignedArtifacts
+      artifactType: container
+    condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
+
 # Always upload test outputs and build logs.
 - task: PublishTestResults@2
   displayName: Publish Test Results

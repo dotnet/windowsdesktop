@@ -61,6 +61,7 @@
 
   <Target Name="GenerateAndPublishProductVersionFiles"
           DependsOnTargets="GetProductVersion"
+          Condition="'$(EnableDefaultPublishItems)' == 'true'"
           BeforeTargets="PublishToAzureDevOpsArtifacts">
     <ItemGroup>
       <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)productVersion.txt" />

@@ -78,12 +78,6 @@ jobs:
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
-    # Generate SBOM for the internal leg only
-    - ${{ if ne(variables['System.TeamProject'], 'public') }}:
-      - template: ..\..\common\templates\steps\generate-sbom.yml
-        parameters:
-          name: Generate_SBOM_${{ parameters.name }}
-
     - template: /eng/pipelines/steps/upload-job-artifacts-PR.yml
       parameters:
         name: ${{ parameters.name }}

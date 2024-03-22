@@ -32,7 +32,8 @@
   <!-- This target only runs when EnableDefaultArtifacts=true which is a single build leg in CI. -->
   <Target Name="GenerateProductVersionFiles"
           Condition="'$(EnableDefaultArtifacts)' == 'true'"
-          BeforeTargets="AddRelativeBlobPathToArtifacts">
+          BeforeTargets="PublishToAzureDevOpsArtifacts"
+          AfterTargets="AddRelativeBlobPathToArtifacts">
     <ItemGroup>
       <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)productVersion.txt" />
       <ProductVersionFile Include="$(ArtifactsShippingPackagesDir)windowsdesktop-productVersion.txt" />
@@ -45,7 +46,9 @@
                       Encoding="ASCII" />
 
     <ItemGroup>
-      <Artifact Include="@(ProductVersionFile)" PublishFlatContainer="true" />
+      <Artifact Include="@(ProductVersionFile)"
+                PublishFlatContainer="true"
+                RelativeBlobPath="$(RelativeBlobPathParent)%(Filename)%(Extension)" />
     </ItemGroup>
   </Target>
 

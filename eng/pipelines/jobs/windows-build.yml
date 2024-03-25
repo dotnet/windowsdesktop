@@ -11,6 +11,8 @@ jobs:
   timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
   strategy:
     matrix:
+      Debug:
+        _BuildConfig: Debug
       Release:
         _BuildConfig: Release
   workspace:
@@ -20,7 +22,6 @@ jobs:
     value: >-
       -c $(_BuildConfig)
       /p:OfficialBuildId=$(OfficialBuildId)
-      /p:DotNetPublishUsingPipelines=true
       /p:TargetArchitecture=${{ parameters.targetArchitecture }}
       /p:SkipTests=${{ parameters.skipTests }}
   - name: MsbuildSigningArguments
@@ -35,6 +36,12 @@ jobs:
 
   templateContext:
     outputs:
+    - output: buildArtifacts
+      displayName: 'Publish Artifacts'
+      condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
+      PathtoPublish: '$(Build.StagingDirectory)/Artifacts'
+      ArtifactName: IntermediateUnsignedArtifacts
+      ArtifactType: container
     - output: pipelineArtifact
       displayName: 'Publish BuildLogs'
       condition: succeededOrFailed()
@@ -65,7 +72,7 @@ jobs:
     displayName: Clear NuGet http cache (if exists)
 
   - script: >-
-      eng/common/cibuild.cmd
+      build.cmd -ci -test
       $(CommonMSBuildArgs)
       $(MsbuildSigningArguments)
       $(_InternalRuntimeDownloadArgs)
@@ -76,37 +83,6 @@ jobs:
     parameters:
       name: Generate_SBOM_${{ parameters.name }}
 
-  # Upload build outputs as build artifacts.
-  - task: CopyFiles@2
-    displayName: Prepare job-specific Artifacts subdirectory
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)'
-      Contents: |
-        Shipping/**/*
-        NonShipping/**/*
-      TargetFolder: '$(Build.StagingDirectory)/Artifacts/${{ parameters.name }}'
-      CleanTargetFolder: true
-    condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))
-
-  - ${{ if ne(parameters.skipTests, 'true') }}:
-    - task: PublishTestResults@2
-      displayName: Publish Test Results
-      inputs:
-        testResultsFormat: 'xUnit'
-        testResultsFiles: '*.xml'
-        searchFolder: '$(Build.SourcesDirectory)/artifacts/TestResults/$(_BuildConfig)'
-        mergeTestResults: true
-        testRunTitle: ${{ parameters.name }}-$(_BuildConfig)
-      continueOnError: true
-
-  - task: CopyFiles@2
-    displayName: Prepare BuildLogs staging directory
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
-      Contents: |
-        **/*.log
-        **/*.binlog
-      TargetFolder: '$(Build.StagingDirectory)/BuildLogs'
-      CleanTargetFolder: true
-    continueOnError: true
-    condition: succeededOrFailed()
+  - template: /eng/pipelines/steps/upload-job-artifacts.yml@self
+    parameters:
+      name: ${{ parameters.name }}

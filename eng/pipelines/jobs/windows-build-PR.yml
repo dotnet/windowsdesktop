@@ -11,7 +11,7 @@ jobs:
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     pool:
       # Use a hosted pool when possible.
-      vmImage: 'windows-2022'
+      vmImage: 'windows-2019'
     strategy:
       matrix: 
         Debug:
@@ -24,6 +24,7 @@ jobs:
       - name: CommonMSBuildArgs
         value: >-
           -c $(_BuildConfig)
+          /p:OfficialBuildId=$(OfficialBuildId)
           /p:TargetArchitecture=${{ parameters.targetArchitecture }}
           /p:SkipTests=${{ parameters.skipTests }}
       - name: MsbuildSigningArguments
@@ -40,40 +41,12 @@ jobs:
       displayName: Clear NuGet http cache (if exists)
 
     - script: >-
-        eng/common/cibuild.cmd
+        build.cmd -ci -test
         $(CommonMSBuildArgs)
         $(MsbuildSigningArguments)
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
-    - ${{ if ne(parameters.skipTests, 'true') }}:
-      - task: PublishTestResults@2
-        displayName: Publish Test Results
-        inputs:
-          testResultsFormat: 'xUnit'
-          testResultsFiles: '*.xml'
-          searchFolder: '$(Build.SourcesDirectory)/artifacts/TestResults/$(_BuildConfig)'
-          mergeTestResults: true
-          testRunTitle: ${{ parameters.name }}-$(_BuildConfig)
-        continueOnError: true
-        condition: always()
-
-    - task: CopyFiles@2
-      displayName: Prepare BuildLogs staging directory
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)'
-        Contents: |
-          **/*.log
-          **/*.binlog
-        TargetFolder: '$(Build.StagingDirectory)/BuildLogs'
-        CleanTargetFolder: true
-      continueOnError: true
-      condition: succeededOrFailed()
-
-    - task: PublishBuildArtifacts@1
-      displayName: Publish BuildLogs
-      inputs:
-        PathtoPublish: '$(Build.StagingDirectory)/BuildLogs'
-        ArtifactName: Logs-${{ parameters.name }}-$(_BuildConfig)
-      continueOnError: true
-      condition: succeededOrFailed()
+    - template: /eng/pipelines/steps/upload-job-artifacts-PR.yml
+      parameters:
+        name: ${{ parameters.name }}

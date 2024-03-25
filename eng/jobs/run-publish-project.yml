@@ -3,9 +3,7 @@ parameters:
   dependency: null
 
 jobs:
-
-- template: /eng/common/templates/post-build/setup-maestro-vars.yml
-
+- template: /eng/common/templates-official/post-build/setup-maestro-vars.yml@self
 - job: CustomPublish
   displayName: Custom Publish
   dependsOn: setupMaestroVars
@@ -14,8 +12,6 @@ jobs:
   condition: contains(
     dependencies.setupMaestroVars.outputs['setReleaseVars.InitialChannels'],
     format('[{0}]', variables['${{ parameters.dependency.channel.bar }}']))
-  pool:
-    name: Hosted VS2017
   # Double the default timeout.
   timeoutInMinutes: 120
   workspace:
@@ -103,12 +99,15 @@ jobs:
       /p:ChecksumAzureAccountName=$(_ChecksumAzureAccountName)
       /p:ChecksumContainerName=$(_ChecksumContainerName)
       /p:ChecksumAzureAccessToken=$(_ChecksumAzureAccessToken)
-
+  templateContext:
+    outputs:
+    - output: pipelineArtifact
+      displayName: 'Publish Artifact BuildLogs'
+      condition: succeededOrFailed()
+      targetPath: '$(Build.StagingDirectory)\BuildLogs'
+      artifactName: Logs-CustomPublish-${{ parameters.dependency.dependsOn }}-${{ parameters.projectName }}
   steps:
-
-  - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-    - task: NuGetAuthenticate@0
-
+  - task: NuGetAuthenticate@1
   - task: DownloadBuildArtifacts@0
     displayName: Download Artifacts
     inputs:
@@ -146,11 +145,4 @@ jobs:
         **/*.binlog
       TargetFolder: '$(Build.StagingDirectory)\BuildLogs'
     continueOnError: true
-    condition: succeededOrFailed()
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Artifact BuildLogs
-    inputs:
-      PathtoPublish: '$(Build.StagingDirectory)\BuildLogs'
-      ArtifactName: Logs-CustomPublish-${{ parameters.dependency.dependsOn }}-${{ parameters.projectName }}
     condition: succeededOrFailed()

@@ -23,6 +23,7 @@ jobs:
       /p:DotNetPublishUsingPipelines=true
       /p:TargetArchitecture=${{ parameters.targetArchitecture }}
       /p:SkipTests=${{ parameters.skipTests }}
+      /p:AssetManifestOS=${{ parameters.name }}
   - name: MsbuildSigningArguments
     value: /p:DotNetSignType=$(SignType)
   - name: TargetArchitecture

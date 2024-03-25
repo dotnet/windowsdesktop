@@ -31,14 +31,8 @@ variables:
       value: true
 
   # Produce test-signed build for PR and Public builds
-  - ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
-    - name: SignType
-      value: test
-
-  # Set up non-PR build from internal project
-  - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-    - name: SignType
-      value: $[ coalesce(variables.OfficialSignType, 'real') ]
+  - name: SignType
+    value: test
 
 stages:
 - stage: Build
@@ -63,24 +57,3 @@ stages:
       name: Windows_arm64
       targetArchitecture: arm64
       disableVSPublish: true
-
-- ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-  - stage: PrepareForPublish
-    displayName: Prepare for Publish
-    dependsOn: Build
-    jobs:
-    # Prep artifacts: sign them and upload pipeline artifacts expected by stages-based publishing.
-    - template: /eng/jobs/prepare-signed-artifacts-PR.yml
-      parameters:
-        PublishRidAgnosticPackagesFromJobName: Windows_x64
-    # Publish to Build Asset Registry in order to generate the ReleaseConfigs artifact.
-    - template: /eng/common/templates/job/publish-build-assets.yml
-      parameters:
-        publishUsingPipelines: true
-        dependsOn: PrepareSignedArtifacts
-        pool:
-          name: NetCore1ESPool-Svc-Internal
-          demands: ImageOverride -equals windows.vs2022preview.amd64
-  - template: /eng/stages/publish-PR.yml
-    parameters:
-      publishingInfraVersion: 3

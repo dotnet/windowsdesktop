@@ -33,9 +33,13 @@ jobs:
       - name: TargetArchitecture
         value: ${{ parameters.targetArchitecture }}
       - ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        - name: MsbuildSigningArguments
+          value: /p:DotNetSignType=$(SignType)
         - name: _InternalRuntimeDownloadArgs
           value: ''
       - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+        - name: MsbuildSigningArguments
+          value: /p:DotNetSignType=Real
         - group: DotNet-MSRC-Storage
         - name: _InternalRuntimeDownloadArgs
           value: >-
@@ -71,6 +75,7 @@ jobs:
     - script: >-
         eng/common/cibuild.cmd
         $(CommonMSBuildArgs)
+        $(MsbuildSigningArguments)
         $(_InternalRuntimeDownloadArgs)
       displayName: Build
 

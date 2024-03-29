@@ -40,7 +40,6 @@ jobs:
       - ${{ if ne(variables['System.TeamProject'], 'public') }}:
         - name: MsbuildSigningArguments
           value: /p:DotNetSignType=Real
-        - group: DotNet-MSRC-Storage
         - name: _InternalRuntimeDownloadArgs
           value: >-
             /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet

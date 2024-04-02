@@ -5,7 +5,7 @@ parameters:
 stages:
 
 # Stages-based publishing entry point
-- template: /eng/common/templates/post-build/post-build.yml
+- template: /eng/common/templates-official/post-build/post-build.yml@self
   parameters:
     publishingInfraVersion: ${{ parameters.publishingInfraVersion }}
     validateDependsOn:
@@ -39,9 +39,9 @@ stages:
     dependsOn:
     - ${{ dependency.dependsOn }}
     variables:
-    - template: /eng/common/templates/post-build/common-variables.yml
+    - template: /eng/common/templates-official/post-build/common-variables.yml@self
     jobs:
-    - template: /eng/jobs/run-publish-project.yml
+    - template: /eng/jobs/run-publish-project.yml@self
       parameters:
         projectName: publish-final
         dependency: ${{ dependency }}

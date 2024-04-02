@@ -5,7 +5,7 @@ parameters:
 stages:
 
 # Stages-based publishing entry point
-- template: /eng/common/templates/post-build/post-build.yml
+- template: /eng/common/templates-official/post-build/post-build.yml@self
   parameters:
     publishingInfraVersion: ${{ parameters.publishingInfraVersion }}
     validateDependsOn:

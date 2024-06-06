@@ -5,7 +5,6 @@ parameters:
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
-  disableVSPublish: false
 
 jobs:
 - job: ${{ parameters.name }}
@@ -33,13 +32,6 @@ jobs:
     value: ${{ parameters.targetArchitecture }}
   templateContext:
     outputs:
-    - output: nuget
-      displayName: 'Push Visual Studio NuPkgs'
-      condition: and( succeeded(), eq(variables['_BuildConfig'], 'Release'), ne(variables['DisableVSPublish'], 'true'), ne(variables['PostBuildSign'], 'true'))
-      packageParentPath: '$(Build.ArtifactStagingDirectory)'
-      packagesToPush: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)/*/VS.Redist.Common.*.nupkg'
-      nuGetFeedType: external
-      publishFeedCredentials: 'DevDiv - VS package feed'
     - output: buildArtifacts
       displayName: 'Publish Artifacts'
       condition: and(succeeded(), eq(variables._BuildConfig, 'Release'))

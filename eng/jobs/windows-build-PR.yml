@@ -5,7 +5,6 @@ parameters:
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
-  disableVSPublish: false
 
 jobs:
   - job: ${{ parameters.name }}

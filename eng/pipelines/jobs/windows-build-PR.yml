@@ -35,15 +35,6 @@ jobs:
         value: /p:DotNetSignType=$(SignType)
       - name: TargetArchitecture
         value: ${{ parameters.targetArchitecture }}
-      - ${{ if eq(variables['System.TeamProject'], 'public') }}:
-        - name: _InternalRuntimeDownloadArgs
-          value: ''
-      - ${{ if ne(variables['System.TeamProject'], 'public') }}:
-        - group: DotNet-MSRC-Storage
-        - name: _InternalRuntimeDownloadArgs
-          value: >-
-            /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
-            /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
 
     steps:
     - ${{ if ne(variables['System.TeamProject'], 'public') }}:
@@ -75,7 +66,6 @@ jobs:
         build.cmd -ci -test
         $(CommonMSBuildArgs)
         $(MsbuildSigningArguments)
-        $(_InternalRuntimeDownloadArgs)
       displayName: Build
 
     - template: /eng/pipelines/steps/upload-job-artifacts-PR.yml

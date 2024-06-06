@@ -58,4 +58,3 @@ stages:
     parameters:
       name: Windows_arm64
       targetArchitecture: arm64
-      disableVSPublish: true

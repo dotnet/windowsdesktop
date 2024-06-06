@@ -61,7 +61,6 @@ extends:
         parameters:
           name: Windows_arm64
           targetArchitecture: arm64
-          disableVSPublish: true
     - stage: PrepareForPublish
       displayName: Prepare for Publish
       dependsOn: Build

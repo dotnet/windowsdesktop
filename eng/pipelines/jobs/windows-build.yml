@@ -28,11 +28,6 @@ jobs:
     value: /p:DotNetSignType=$(SignType)
   - name: TargetArchitecture
     value: ${{ parameters.targetArchitecture }}
-  - group: DotNet-MSRC-Storage
-  - name: _InternalRuntimeDownloadArgs
-    value: >-
-      /p:DotNetRuntimeSourceFeed=https://dotnetclimsrc.blob.core.windows.net/dotnet
-      /p:DotNetRuntimeSourceFeedKey=$(dotnetclimsrc-read-sas-token-base64)
   templateContext:
     outputs:
     - output: buildArtifacts
@@ -74,7 +69,6 @@ jobs:
       build.cmd -ci -test
       $(CommonMSBuildArgs)
       $(MsbuildSigningArguments)
-      $(_InternalRuntimeDownloadArgs)
     displayName: Build
 
     # Generate SBOM

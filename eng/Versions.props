@@ -65,6 +65,6 @@
     <MicrosoftPrivateWinformsVersion>9.0.0-preview.6.24317.4</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.0-preview.6.24317.4</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.0-preview.6.24317.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.0-preview.6.24318.1</MicrosoftDotNetWpfGitHubVersion>
   </PropertyGroup>
 </Project>

@@ -9,6 +9,7 @@
     <VSInsertionShortComponentName>WindowsDesktop.TargetingPack</VSInsertionShortComponentName>
     <CreatePlatformManifest Condition="'$(PreReleaseVersionLabel)' == 'servicing'">false</CreatePlatformManifest>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
   </PropertyGroup>
 
   <!-- 

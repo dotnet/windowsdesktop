@@ -4,7 +4,7 @@ Microsoft.WindowsDesktop.App.Ref is a packaging of the Windows Desktop runtimes 
 
 ## How to Use
 
- When developing a WinForms or WPF application, you do not need to install the Microsoft.WindowsDesktop.App.Ref package separately. This package is automatically included as part of the .NET SDK for WinForms and WPF apps, which means you can start using WinForms or WPF namespaces right away in your WinForms or WPF projects.
+When developing a WinForms or WPF application, you do not need to install the Microsoft.WindowsDesktop.App.Ref package separately. This package is automatically included as part of the .NET SDK for WinForms and WPF apps, which means you can start using WinForms or WPF namespaces right away in your WinForms or WPF projects.
 
 ## Addtional Documentation
 

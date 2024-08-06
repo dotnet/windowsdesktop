@@ -11,6 +11,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="PACKAGE.md" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <!-- 
     Windows Forms specific references

@@ -62,9 +62,9 @@
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftPrivateWinformsVersion>10.0.0-alpha.1.24423.5</MicrosoftPrivateWinformsVersion>
-    <SystemDrawingCommonVersion>10.0.0-alpha.1.24423.5</SystemDrawingCommonVersion>
+    <MicrosoftPrivateWinformsVersion>10.0.0-alpha.1.24424.2</MicrosoftPrivateWinformsVersion>
+    <SystemDrawingCommonVersion>10.0.0-alpha.1.24424.2</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>10.0.0-alpha.1.24424.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>10.0.0-alpha.1.24425.1</MicrosoftDotNetWpfGitHubVersion>
   </PropertyGroup>
 </Project>

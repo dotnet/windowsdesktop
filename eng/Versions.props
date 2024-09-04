@@ -58,7 +58,7 @@
     <SystemSpeechVersion>9.0.0-rc.1.24414.5</SystemSpeechVersion>
     <SystemTextEncodingCodePagesVersion>9.0.0-rc.1.24414.5</SystemTextEncodingCodePagesVersion>
     <SystemThreadingAccessControlVersion>9.0.0-rc.1.24414.5</SystemThreadingAccessControlVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6490PackageVersion>9.0.0-rc.1.24414.5</VSRedistCommonNetCoreSharedFrameworkx6490PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion>10.0.0-alpha.1.24426.6</VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
     <!-- winforms -->

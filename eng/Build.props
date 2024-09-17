@@ -4,8 +4,8 @@
     <ProjectToBuild Include="$(RepoRoot)Build.proj" />
   </ItemGroup>
 
-  <!-- Build M.W.C in pass 2 since it needs all of system.io.ports packages from other OSs" -->
-  <ItemGroup Condition="'$(DotNetBuild)' == 'true'">
+  <!-- Build M.W.C in pass 2 since it needs all of system.io.ports packages from other OSs. Avoid setting this unless explicitly doing a non-default pass. -->
+  <ItemGroup Condition="'$(DotNetBuildPass)' != ''">
     <ProjectToBuild Include="$(RepoRoot)src\Microsoft.Windows.Compatibility\src\Microsoft.Windows.Compatibility.csproj" DotNetBuildPass="2" />
   </ItemGroup>
 </Project>

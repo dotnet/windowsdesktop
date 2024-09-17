@@ -11,6 +11,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageDescription>This Windows Compatibility Pack provides access to APIs that were previously available only for .NET Framework. It can be used from both .NET as well as .NET Standard.</PackageDescription>
     <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
+    <!-- This project ends up restoring all of the runtime.system.io.ports.RID packages. -->
+    <ExcludeFromDotNetBuild Condition="'$(DotNetBuildPass)' != '2'">true</ExcludeFromDotNetBuild>
   </PropertyGroup>
 
   <ItemGroup>

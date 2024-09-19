@@ -66,6 +66,6 @@
     <MicrosoftPrivateWinformsVersion>9.0.0-rtm.24467.7</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.0-rtm.24467.7</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.0-rtm.24467.12</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.0-rtm.24468.5</MicrosoftDotNetWpfGitHubVersion>
   </PropertyGroup>
 </Project>

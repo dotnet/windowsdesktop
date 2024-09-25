@@ -11,8 +11,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageDescription>This Windows Compatibility Pack provides access to APIs that were previously available only for .NET Framework. It can be used from both .NET as well as .NET Standard.</PackageDescription>
     <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
-    <!-- This project ends up restoring all of the runtime.system.io.ports.RID packages. -->
-    <ExcludeFromDotNetBuild Condition="'$(DotNetBuildPass)' != '2'">true</ExcludeFromDotNetBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +34,10 @@
     <PackageReference Include="System.Drawing.Common" />
     <PackageReference Include="System.IO.Packaging" />
     <PackageReference Include="System.IO.Ports" />
+    <!-- Use an empty project to replace the runtime.native.System.IO.Ports dependency and avoid 
+         downloading native packages from other runtimes.  Mark it private to avoid it showing up
+         in the final package. -->
+    <ProjectReference Include="..\package\runtime.native.System.IO.Ports.csproj" PrivateAssets="All"/>
     <PackageReference Include="System.Management" />
     <PackageReference Include="System.Reflection.Context" />
     <PackageReference Include="System.Runtime.Caching" />

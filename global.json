@@ -1,6 +1,11 @@
 {
   "tools": {
-    "dotnet": "9.0.100-rc.1.24452.12"
+    "dotnet": "9.0.100-rc.1.24452.12",
+    "runtimes": {
+      "dotnet": [
+        "$(VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion)"
+      ]
+    }
   },
   "msbuild-sdks": {
     "Microsoft.DotNet.Arcade.Sdk": "10.0.0-beta.24476.2",

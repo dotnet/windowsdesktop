@@ -152,29 +152,29 @@
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.SharedFramework.Sdk" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.SharedFramework.Sdk" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Archives" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Archives" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.VersionTools.Tasks" Version="10.0.0-beta.24557.1">
+    <Dependency Name="Microsoft.DotNet.VersionTools.Tasks" Version="10.0.0-beta.24558.2">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>39290b60a9015b444a1762d67e26f0f187eb5cc2</Sha>
+      <Sha>74ee04447a9882906e02bb135787ce2eca67ee67</Sha>
     </Dependency>
   </ToolsetDependencies>
 </Dependencies>

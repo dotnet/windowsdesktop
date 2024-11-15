@@ -53,6 +53,7 @@
     <FrameworkListFileClass Include="PresentationUI.resources.dll" Profile="WPF" />
     <FrameworkListFileClass Include="ReachFramework.resources.dll" Profile="WPF" />
     <FrameworkListFileClass Include="System.Windows.Controls.Ribbon.resources.dll" Profile="WPF" />
+    <FrameworkListFileClass Include="System.Windows.Primitives.dll" Profile="WPF" />
     <FrameworkListFileClass Include="DirectWriteForwarder.dll" Profile="WPF" />
     <FrameworkListFileClass Include="PresentationFramework-SystemCore.dll" Profile="WPF" />
     <FrameworkListFileClass Include="PresentationFramework-SystemData.dll" Profile="WPF" />

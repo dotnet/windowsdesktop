@@ -28,8 +28,6 @@
     <RuntimeFrameworkVersion>$(MicrosoftNETCoreAppRefVersion)</RuntimeFrameworkVersion>
     <GenerateInstallers>true</GenerateInstallers>
     <GenerateVSInsertionPackages>true</GenerateVSInsertionPackages>
-    <!-- Builds are portable by default -->
-    <PortableBuild Condition="'$(PortableBuild)' != 'false'">true</PortableBuild>
   </PropertyGroup>
 
   <!-- Redistribute package content from other nuget packages. -->

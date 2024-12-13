@@ -5,13 +5,19 @@
   <ItemGroup>
     <KnownFrameworkReference
       Update="Microsoft.NETCore.App"
+      Condition="'%(TargetFramework)' == '$(TargetFramework)'"
       DefaultRuntimeFrameworkVersion="$(MicrosoftNETCoreAppRefVersion)"
       LatestRuntimeFrameworkVersion="$(MicrosoftNETCoreAppRefVersion)"
       TargetingPackVersion="$(MicrosoftNETCoreAppRefVersion)" />
+    <KnownCrossgen2Pack
+      Update="Microsoft.NETCore.App.Crossgen2"
+      Condition="'%(TargetFramework)' == '$(TargetFramework)'"
+      Crossgen2PackVersion="$(MicrosoftNETCoreAppRefVersion)" />
     <KnownFrameworkReference Remove="Microsoft.AspNetCore.App" />
     <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App" />
     <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App.WindowsForms" />
     <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App.WPF" />
+
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,11 @@
     <MicrosoftDotNetBuildTasksInstallersVersion>10.0.0-beta.25079.2</MicrosoftDotNetBuildTasksInstallersVersion>
     <!-- corefx -->
     <SystemDataDataSetExtensionsVersion>4.5.0</SystemDataDataSetExtensionsVersion>
-    <SystemDataSqlClientVersion>4.8.6</SystemDataSqlClientVersion>
+    <!-- The SQL team had deprecated System.Data.SqlClient package and replaced it with Microsoft.Data.SqlClient.
+     However, windows compatibility package should not include Microsoft.Data.SqlClient since that's not part of .NETFramework surface area.
+     The purpose of Microsoft.Windows.Compatibility is to bring assemblies that implement the actual types from .NETFramework
+     that aren't inbox on .NET. It is not meant to "advertise" new types/packages that were not part of .NETFramework. -->
+    <SystemDataSqlClientVersion>4.9.0</SystemDataSqlClientVersion>
     <SystemReflectionEmitVersion>4.7.0</SystemReflectionEmitVersion>
     <SystemReflectionEmitILGenerationVersion>4.7.0</SystemReflectionEmitILGenerationVersion>
     <SystemReflectionEmitLightweightVersion>4.7.0</SystemReflectionEmitLightweightVersion>
@@ -60,7 +64,7 @@
     <SystemThreadingAccessControlVersion>10.0.0-preview.2.25078.10</SystemThreadingAccessControlVersion>
     <VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion>10.0.0-preview.2.25078.10</VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion>
     <!-- wcf -->
-    <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
+    <SystemServiceModelVersion>8.1.1</SystemServiceModelVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>10.0.0-preview.2.25079.2</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>10.0.0-preview.2.25079.2</SystemDrawingCommonVersion>

@@ -20,16 +20,6 @@ variables:
   # Skip Running CI tests
   - name: SkipTests
     value: false
-  # Set Official Build Id
-  - name: OfficialBuildId
-    value: $(Build.BuildNumber)
-  - ${{ if or(startswith(variables['Build.SourceBranch'], 'refs/heads/release/'), startswith(variables['Build.SourceBranch'], 'refs/heads/internal/release/'), eq(variables['Build.Reason'], 'Manual')) }}:
-    - name: PostBuildSign
-      value: false
-  - ${{ else }}:
-    - name: PostBuildSign
-      value: true
-
   # Produce test-signed build for PR and Public builds
   - name: SignType
     value: test

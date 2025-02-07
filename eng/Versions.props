@@ -24,7 +24,7 @@
     <SystemReflectionEmitILGenerationVersion>4.7.0</SystemReflectionEmitILGenerationVersion>
     <SystemReflectionEmitLightweightVersion>4.7.0</SystemReflectionEmitLightweightVersion>
     <!-- nuget -->
-    <NuGetPackagingVersion>6.8.1</NuGetPackagingVersion>
+    <NuGetPackagingVersion>6.12.1</NuGetPackagingVersion>
     <!-- runtime -->
     <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>10.0.0-preview.2.25104.8</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <MicrosoftNETCoreAppRefVersion>10.0.0-preview.2.25104.8</MicrosoftNETCoreAppRefVersion>

@@ -46,11 +46,9 @@
     <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
     <PackageReference Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />  
-    <PackageReference Include="System.ServiceModel.Duplex;
-                               System.ServiceModel.Http;
+    <PackageReference Include="System.ServiceModel.Http;
                                System.ServiceModel.NetTcp;
                                System.ServiceModel.Primitives;
-                               System.ServiceModel.Security;
                                System.Web.Services.Description"
                       Version="$(SystemServiceModelVersion)" />
   </ItemGroup>

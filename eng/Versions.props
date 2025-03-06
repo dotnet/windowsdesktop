@@ -61,7 +61,7 @@
     <SystemThreadingAccessControlVersion>9.0.1</SystemThreadingAccessControlVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6490PackageVersion>9.0.1-servicing.24610.10</VSRedistCommonNetCoreSharedFrameworkx6490PackageVersion>
     <!-- wcf -->
-    <SystemServiceModelVersion>8.1.1</SystemServiceModelVersion>
+    <SystemServiceModelVersion>8.1.2</SystemServiceModelVersion>
     <!-- winforms -->
     <MicrosoftPrivateWinformsVersion>9.0.1-servicing.24610.6</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.1</SystemDrawingCommonVersion>

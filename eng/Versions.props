@@ -63,7 +63,7 @@
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.12-servicing.24603.5</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
-    <SystemServiceModelVersion>8.1.1</SystemServiceModelVersion>
+    <SystemServiceModelVersion>8.1.2</SystemServiceModelVersion>
     <!-- winforms -->
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.12-servicing.24603.6</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftPrivateWinformsVersion>8.0.12-servicing.24603.6</MicrosoftPrivateWinformsVersion>

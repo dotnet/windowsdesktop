@@ -14,13 +14,9 @@
     This ensures that we don't produce these files in the "Repo source build" builds,
     but we do produce them in both the VMR and the runtime official build.
   -->
-  <PropertyGroup Condition="'$(DotNetBuildOrchestrator)' == 'true'">
-    <ShouldGenerateProductVersionFiles Condition="'$(EnableDefaultRidSpecificArtifacts)' != 'true' and ('$(DotNetBuildPass)' == '' or '$(DotNetBuildPass)' == '1')">true</ShouldGenerateProductVersionFiles>
-    <ShouldGenerateProductVersionFiles Condition="'$(DotNetBuildSourceOnly)' == 'true'">true</ShouldGenerateProductVersionFiles>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(DotNetBuildOrchestrator)' != 'true'">
-    <ShouldGenerateProductVersionFiles Condition="'$(EnableDefaultArtifacts)' == 'true'">true</ShouldGenerateProductVersionFiles>
+  <PropertyGroup>
+    <ShouldGenerateProductVersionFiles Condition="'$(DotNetBuildOrchestrator)' == 'true' and '$(EnableDefaultRidSpecificArtifacts)' != 'true' and ('$(DotNetBuildPass)' == '' or '$(DotNetBuildPass)' == '1')">true</ShouldGenerateProductVersionFiles>
+    <ShouldGenerateProductVersionFiles Condition="'$(DotNetBuildOrchestrator)' != 'true' and '$(EnableDefaultArtifacts)' == 'true'">true</ShouldGenerateProductVersionFiles>
   </PropertyGroup>
 
   <Target Name="GetNonStableProductVersion">

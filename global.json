@@ -1,6 +1,6 @@
 {
   "tools": {
-    "dotnet": "10.0.100-preview.3.25201.16",
+    "dotnet": "10.0.100-preview.5.25227.101",
     "runtimes": {
       "dotnet": [
         "$(VSRedistCommonNetCoreSharedFrameworkx64100PackageVersion)"

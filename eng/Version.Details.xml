@@ -9,12 +9,12 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
       <Sha>711ee9fe3398d64b89f2ae70b94c66d9d495cf72</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="9.0.5-rtm.25222.11">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="9.0.5-rtm.25227.4">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
       <Sha>aded4c09d9f59a6fb5fcdfca54fa324becddcb4f</Sha>
       <SourceBuildTarball RepoName="wpf" ManagedOnly="true" />
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="9.0.5-rtm.25222.11">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="9.0.5-rtm.25227.4">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
       <Sha>aded4c09d9f59a6fb5fcdfca54fa324becddcb4f</Sha>
     </Dependency>
@@ -34,7 +34,7 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
       <Sha>711ee9fe3398d64b89f2ae70b94c66d9d495cf72</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="9.0.5-rtm.25222.11">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="9.0.5-rtm.25227.4">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
       <Sha>aded4c09d9f59a6fb5fcdfca54fa324becddcb4f</Sha>
     </Dependency>

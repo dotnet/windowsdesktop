@@ -18,7 +18,7 @@
     <MicrosoftDotNetVersionToolsTasksVersion>8.0.0-beta.25208.7</MicrosoftDotNetVersionToolsTasksVersion>
     <!-- corefx -->
     <SystemDataDataSetExtensionsVersion>4.5.0</SystemDataDataSetExtensionsVersion>
-    <SystemDataSqlClientVersion>4.8.6</SystemDataSqlClientVersion>
+    <SystemDataSqlClientVersion>4.9.0</SystemDataSqlClientVersion>
     <SystemReflectionEmitVersion>4.7.0</SystemReflectionEmitVersion>
     <SystemReflectionEmitILGenerationVersion>4.7.0</SystemReflectionEmitILGenerationVersion>
     <SystemReflectionEmitLightweightVersion>4.7.0</SystemReflectionEmitLightweightVersion>
@@ -63,7 +63,7 @@
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
     <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.15-servicing.25164.13</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
-    <SystemServiceModelVersion>4.10.0</SystemServiceModelVersion>
+    <SystemServiceModelVersion>4.10.3</SystemServiceModelVersion>
     <!-- winforms -->
     <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.15-servicing.25165.1</MicrosoftDotnetWinFormsProjectTemplatesVersion>
     <MicrosoftPrivateWinformsVersion>8.0.15-servicing.25165.1</MicrosoftPrivateWinformsVersion>

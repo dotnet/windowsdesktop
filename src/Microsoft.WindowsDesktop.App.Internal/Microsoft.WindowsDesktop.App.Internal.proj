@@ -2,14 +2,12 @@
 
   <!-- A sentinel package only used for communicating non-shipping versions. -->
   <PropertyGroup>
+    <TargetFramework>$(NetCurrent)</TargetFramework>
     <IsShippingPackage>false</IsShippingPackage>
     <IsPackable>true</IsPackable>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
     <IncludeSymbols>false</IncludeSymbols>
-    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 
 </Project>

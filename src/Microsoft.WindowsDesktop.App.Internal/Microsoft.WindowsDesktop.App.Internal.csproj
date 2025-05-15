@@ -4,7 +4,7 @@
   <PropertyGroup>
     <IsShippingPackage>false</IsShippingPackage>
     <IsPackable>true</IsPackable>
-    <TargetFramework>$(NetCurrent)</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>

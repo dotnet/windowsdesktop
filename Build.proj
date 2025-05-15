@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.Build.NoTargets">
+<Project Sdk="Microsoft.Build.Traversal">
 
   <ItemGroup>
     <!-- Microsoft.WindowsDesktop.App shared framework and sentinel project -->
@@ -8,6 +8,8 @@
 
     <!-- Microsoft.Windows.Compatibility nuget meta package -->
     <ProjectReference Include="src\Microsoft.Windows.Compatibility\src\Microsoft.Windows.Compatibility.csproj" />
+
+    <!-- Internal package for transport a non-stable version. -->
     <ProjectReference Include="src\Microsoft.WindowsDesktop.App.Internal\Microsoft.WindowsDesktop.App.Internal.csproj" />
 
   </ItemGroup>

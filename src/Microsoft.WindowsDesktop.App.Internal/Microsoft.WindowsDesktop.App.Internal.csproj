@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.Build.NoTargets">
 
   <!-- A sentinel package only used for communicating non-shipping versions. -->
   <PropertyGroup>
     <IsShippingPackage>false</IsShippingPackage>
     <IsPackable>true</IsPackable>
+    <TargetFramework>$(NetCurrent)</TargetFramework>
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>

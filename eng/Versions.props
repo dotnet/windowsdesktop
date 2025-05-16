@@ -69,7 +69,7 @@
     <MicrosoftPrivateWinformsVersion>8.0.16-servicing.25217.2</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>8.0.16</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.16-servicing.25222.9</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.16-servicing.25222.9</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.17-servicing.25265.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.17-servicing.25265.5</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

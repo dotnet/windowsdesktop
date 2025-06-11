@@ -2,7 +2,7 @@
   <PropertyGroup>
     <MajorVersion>9</MajorVersion>
     <MinorVersion>0</MinorVersion>
-    <PatchVersion>6</PatchVersion>
+    <PatchVersion>7</PatchVersion>
     <PreReleaseVersionLabel>servicing</PreReleaseVersionLabel>
     <PreReleaseVersionIteration>
     </PreReleaseVersionIteration>
@@ -12,8 +12,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- arcade -->
-    <MicrosoftDotNetBuildTasksArchivesVersion>9.0.0-beta.25271.1</MicrosoftDotNetBuildTasksArchivesVersion>
-    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25271.1</MicrosoftDotNetBuildTasksInstallersVersion>
+    <MicrosoftDotNetBuildTasksArchivesVersion>9.0.0-beta.25302.2</MicrosoftDotNetBuildTasksArchivesVersion>
+    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25302.2</MicrosoftDotNetBuildTasksInstallersVersion>
     <!-- corefx -->
     <SystemDataDataSetExtensionsVersion>4.5.0</SystemDataDataSetExtensionsVersion>
     <SystemDataSqlClientVersion>4.9.0</SystemDataSqlClientVersion>

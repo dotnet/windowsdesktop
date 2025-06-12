@@ -108,7 +108,7 @@ stages:
         # If it's not devdiv, it's dnceng
         ${{ else }}:
           name: $(DncEngInternalBuildPool)
-          demands: ImageOverride -equals windows.vs2022.amd64
+          demands: ImageOverride -equals windows.vs2019.amd64
 
       steps:
         - template: setup-maestro-vars.yml
@@ -145,7 +145,7 @@ stages:
         # If it's not devdiv, it's dnceng
         ${{ else }}:
           name: $(DncEngInternalBuildPool)
-          demands: ImageOverride -equals windows.vs2022.amd64
+          demands: ImageOverride -equals windows.vs2019.amd64
       steps:
         - template: setup-maestro-vars.yml
           parameters:
@@ -199,7 +199,7 @@ stages:
         # If it's not devdiv, it's dnceng
         ${{ else }}:
           name: $(DncEngInternalBuildPool)
-          demands: ImageOverride -equals windows.vs2022.amd64
+          demands: ImageOverride -equals windows.vs2019.amd64
       steps:
         - template: setup-maestro-vars.yml
           parameters:
@@ -259,7 +259,7 @@ stages:
         # If it's not devdiv, it's dnceng
         ${{ else }}:
           name: NetCore1ESPool-Publishing-Internal
-          demands: ImageOverride -equals windows.vs2022.amd64
+          demands: ImageOverride -equals windows.vs2019.amd64
       steps:
         - template: setup-maestro-vars.yml
           parameters:

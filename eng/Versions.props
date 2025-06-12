@@ -25,9 +25,9 @@
     <!-- nuget -->
     <NugetPackagingVersion>6.2.4</NugetPackagingVersion>
     <!-- runtime -->
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.16-servicing.25215.6</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
-    <MicrosoftNETCoreAppRefVersion>8.0.16</MicrosoftNETCoreAppRefVersion>
-    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.16</MicrosoftNETCoreAppRuntimewinx64Version>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.17-servicing.25266.2</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <MicrosoftNETCoreAppRefVersion>8.0.17</MicrosoftNETCoreAppRefVersion>
+    <MicrosoftNETCoreAppRuntimewinx64Version>8.0.17</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftWin32RegistryAccessControlVersion>8.0.0</MicrosoftWin32RegistryAccessControlVersion>
     <MicrosoftWin32RegistryVersion>5.0.0</MicrosoftWin32RegistryVersion>
     <MicrosoftWin32SystemEventsVersion>8.0.0</MicrosoftWin32SystemEventsVersion>
@@ -40,7 +40,7 @@
     <SystemDiagnosticsEventLogVersion>8.0.2</SystemDiagnosticsEventLogVersion>
     <SystemDiagnosticsPerformanceCounterVersion>8.0.1</SystemDiagnosticsPerformanceCounterVersion>
     <SystemDirectoryServicesAccountManagementVersion>8.0.1</SystemDirectoryServicesAccountManagementVersion>
-    <SystemDirectoryServicesProtocolsVersion>8.0.1</SystemDirectoryServicesProtocolsVersion>
+    <SystemDirectoryServicesProtocolsVersion>8.0.2</SystemDirectoryServicesProtocolsVersion>
     <SystemDirectoryServicesVersion>8.0.0</SystemDirectoryServicesVersion>
     <SystemIOFileSystemAccessControlVersion>5.0.0</SystemIOFileSystemAccessControlVersion>
     <SystemIOPackagingVersion>8.0.1</SystemIOPackagingVersion>
@@ -61,15 +61,15 @@
     <SystemSpeechVersion>8.0.0</SystemSpeechVersion>
     <SystemTextEncodingCodePagesVersion>8.0.0</SystemTextEncodingCodePagesVersion>
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.16-servicing.25215.6</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.17-servicing.25266.2</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.3</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.16-servicing.25217.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftPrivateWinformsVersion>8.0.16-servicing.25217.2</MicrosoftPrivateWinformsVersion>
-    <SystemDrawingCommonVersion>8.0.16</SystemDrawingCommonVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.17-servicing.25266.4</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.17-servicing.25266.4</MicrosoftPrivateWinformsVersion>
+    <SystemDrawingCommonVersion>8.0.17</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.16-servicing.25217.3</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.16-servicing.25217.3</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.17-servicing.25266.9</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.17-servicing.25266.9</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

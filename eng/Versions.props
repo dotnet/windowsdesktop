@@ -18,6 +18,11 @@
     <MicrosoftDotNetBuildTasksArchivesVersion>10.0.0-beta.25323.102</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksInstallersVersion>10.0.0-beta.25323.102</MicrosoftDotNetBuildTasksInstallersVersion>
     <MicrosoftDotNetBuildTasksTemplatingVersion>10.0.0-beta.25323.102</MicrosoftDotNetBuildTasksTemplatingVersion>
+    <MicrosoftWixVersion>5.0.2-dotnet.2737382</MicrosoftWixVersion>
+    <MicrosoftWixToolsetUIWixextVersion>5.0.2-dotnet.2737382</MicrosoftWixToolsetUIWixextVersion>
+    <MicrosoftWixToolsetDependencyWixextVersion>5.0.2-dotnet.2737382</MicrosoftWixToolsetDependencyWixextVersion>
+    <MicrosoftWixToolsetUtilWixextVersion>5.0.2-dotnet.2737382</MicrosoftWixToolsetUtilWixextVersion>
+    <MicrosoftWixToolsetHeatVersion>5.0.2-dotnet.2737382</MicrosoftWixToolsetHeatVersion>
     <!-- corefx -->
     <SystemDataDataSetExtensionsVersion>4.5.0</SystemDataDataSetExtensionsVersion>
     <!-- The SQL team had deprecated System.Data.SqlClient package and replaced it with Microsoft.Data.SqlClient.

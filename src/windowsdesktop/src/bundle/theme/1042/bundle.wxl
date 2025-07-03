@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="Caption">[WixBundleName] 설치 관리자</String>
-  <String Id="Title">[BUNDLEMONIKER]</String>
-  <String Id="Motto">셸, 텍스트 편집기, 10분의 시간만 있으면 됩니다.
-
-준비되셨나요? 시작합니다!</String>
-  <String Id="ConfirmCancelMessage">취소하시겠습니까?</String>
+<WixLocalization Culture="ko-KR" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+  <String Id="Caption" Value="[WixBundleName] 설치 관리자"/>
+  <String Id="Title" Value="[BUNDLEMONIKER]"/>
+  <String Id="Motto" Value="선, 텍스트 편집기, 10분의 시간만 있으면 됩니다.\n\n준비되셨나요? 시작합니다!"/>
+  <String Id="ConfirmCancelMessage" Value="취소하시겠습니까?"/>
   <String Id="ExecuteUpgradeRelatedBundleMessage">이전 버전</String>
   <String Id="HelpHeader">설치 도움말</String>
-  <String Id="HelpText">/install | /repair | /uninstall | /layout [directory] - 디렉터리에 번들의 전체 로컬 복사본을 설치, 복구, 제거 또는
-   작성합니다. 설치가 기본값입니다.
-
-/passive | /quiet -  프롬프트 없이 최소 UI를 표시하거나 UI 및
-   프롬프트를 표시하지 않습니다. 기본적으로 UI와 모든 프롬프트가 표시됩니다.
-
-/norestart   - 다시 시작하지 않게 합니다. 기본적으로 UI에서는 다시 시작하기 전에 묻는 메시지를 표시합니다.
-/log log.txt - 특정 파일에 기록합니다. 기본적으로 로그 파일은 %TEMP%에 만들어집니다.</String>
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [directory] - 디렉터리에 번들의 전체 로컬 복사본을 설치, 복구, 제거 또는 작성합니다. 설치가 기본값입니다.\n\n/passive | /quiet -  프롬프트 없이 최소 UI를 표시하거나 UI 및 프롬프트를 표시하지 않습니다. 기본적으로 UI와 모든 프롬프트가 표시됩니다.\n\n/norestart   - 다시 시작하지 않게 합니다. 기본적으로 UI에서는 다시 시작하기 전에 묻는 메시지를 표시합니다.\n/log log.txt - 특정 파일에 기록합니다. 기본적으로 로그 파일은 %TEMP%에 만들어집니다."/>
   <String Id="HelpCloseButton">닫기(&amp;C)</String>
   <String Id="InstallAcceptCheckbox">동의함(&amp;A)</String>
   <String Id="InstallOptionsButton">옵션(&amp;O)</String>
@@ -65,7 +56,7 @@
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">리소스</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;설명서&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;릴리스 정보&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;릴리스 정보&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;자습서&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;.NET Core 원격 분석&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;개인정보처리방침&lt;/A&gt;</String>

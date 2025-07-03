@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="Caption">Instalador de [WixBundleName]</String>
-  <String Id="Title">[BUNDLEMONIKER]</String>
-  <String Id="Motto">Solo necesita un shell, un editor de texto y 10 minutos.
-
-¿Preparados? ¿Listos? ¡Ya!</String>
-  <String Id="ConfirmCancelMessage">¿Está seguro de que desea cancelar?</String>
+<WixLocalization Culture="es-ES" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+  <String Id="Caption" Value="Instalador de [WixBundleName]"/>
+  <String Id="Title" Value="[BUNDLEMONIKER]"/>
+  <String Id="Motto" Value="Solo necesita un shell, un editor de texto y 10 minutos.\n\n¿Preparados? ¿Listos? ¡Ya!"/>
+  <String Id="ConfirmCancelMessage" Value="¿Está seguro de que desea cancelar?"/>
   <String Id="ExecuteUpgradeRelatedBundleMessage">Versión anterior</String>
   <String Id="HelpHeader">Ayuda de configuración</String>
-  <String Id="HelpText">/install | /repair | /uninstall | /layout [directory] - instala, repara, desinstala o
-   crea una copia local completa del paquete en el directorio. Install es la opción predeterminada.
-
-/passive | /quiet -  muestra una IU mínima sin peticiones, o bien no muestra la IU 
-  ni las peticiones. De forma predeterminada, se muestran la IU y todas las peticiones.
-
-/norestart   - suprime los intentos de reiniciar. De forma predeterminada, la IU preguntará antes de reiniciar.
-/log log.txt - se registra en un archivo específico. De forma predeterminada, se crea un archivo de registro en %TEMP%.</String>
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [directory] - instala, repara, desinstala o crea una copia local completa del paquete en el directorio. Install es la opción predeterminada.\n\n/passive | /quiet -  muestra una IU mínima sin peticiones, o bien no muestra la IU ni las peticiones. De forma predeterminada, se muestran la IU y todas las peticiones.\n\n/norestart   - suprime los intentos de reiniciar. De forma predeterminada, la IU preguntará antes de reiniciar.\n/log log.txt - se registra en un archivo específico. De forma predeterminada, se crea un archivo de registro en %TEMP%."/>
   <String Id="HelpCloseButton">&amp;Cerrar</String>
   <String Id="InstallAcceptCheckbox">&amp;Acepto los términos y condiciones de licencia</String>
   <String Id="InstallOptionsButton">&amp;Opciones</String>
@@ -65,7 +56,7 @@
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">Recursos</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;Documentación&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notas de la versión&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notas de la versión&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Tutoriales&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;Telemetría de .NET Core&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Declaración de privacidad&lt;/A&gt;</String>

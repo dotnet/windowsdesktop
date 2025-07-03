@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+<WixLocalization Culture="fr-FR" xmlns="http://wixtoolset.org/schemas/v4/localization">
   <String Id="Caption">Programme d'installation de [WixBundleName]</String>
   <String Id="Title">[BUNDLEMONIKER]</String>
   <String Id="Motto">Vous avez juste besoin d'un interpréteur de commandes, d'un éditeur de texte et de 10 minutes.
@@ -65,7 +65,7 @@
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">Ressources</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;Documentation&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notes de publication&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notes de publication&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Tutoriels&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;Télémétrie .NET Core&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Déclaration de confidentialité&lt;/A&gt;</String>

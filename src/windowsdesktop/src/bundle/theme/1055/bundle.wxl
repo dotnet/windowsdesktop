@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="Caption">[WixBundleName] Yükleyicisi</String>
-  <String Id="Title">[BUNDLEMONIKER]</String>
-  <String Id="Motto">Yalnızca bir kabuğa, bir metin düzenleyicisine ve 10 dakikalık bir zamana ihtiyacınız var.
-
-Hazır mısınız? Haydi başlayalım!</String>
-  <String Id="ConfirmCancelMessage">İptal etmek istediğinizden emin misiniz?</String>
+<WixLocalization Culture="tr-TR" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+  <String Id="Caption" Value="[WixBundleName] Yükleyicisi"/>
+  <String Id="Title" Value="[BUNDLEMONIKER]"/>
+  <String Id="Motto" Value="Yalnızca bir kabuğa, bir metin düzenleyicisine ve 10 dakikalık bir zamana ihtiyacınız var.\n\nHazır mısınız? Haydi başlayalım!"/>
+  <String Id="ConfirmCancelMessage" Value="İptal etmek istediğinizden emin misiniz?"/>
   <String Id="ExecuteUpgradeRelatedBundleMessage">Önceki sürüm</String>
   <String Id="HelpHeader">Kurulum Yardımı</String>
-  <String Id="HelpText">/install | /repair | /uninstall | /layout [dizin] - yükler, onarır, kaldırır ya da
-   dizindeki paketin tam bir yerel kopyasını oluşturur. Varsayılan install değeridir.
-
-/passive | /quiet -  en az düzeyde istemsiz UI gösterir ya da hiç UI göstermez ve
-   istem yoktur. Varsayılan olarak UI ve tüm istemler görüntülenir.
-
-/norestart   - yeniden başlama denemelerini engeller. Varsayılan olarak UI yeniden başlatılmadan önce sorar.
-/log log.txt - belirli bir günlük dosyası tutar. Varsayılan olarak %TEMP% içinde bir günlük dosyası oluşturulur.</String>
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [dizin] - yükler, onarır, kaldırır ya da dizindeki paketin tam bir yerel kopyasını oluşturur. Varsayılan install değeridir.\n\n/passive | /quiet -  en az düzeyde istemsiz UI gösterir ya da hiç UI göstermez ve istem yoktur. Varsayılan olarak UI ve tüm istemler görüntülenir.\n\n/norestart   - yeniden başlama denemelerini engeller. Varsayılan olarak UI yeniden başlatılmadan önce sorar.\n/log log.txt - belirli bir günlük dosyası tutar. Varsayılan olarak %TEMP% içinde bir günlük dosyası oluşturulur."/>
   <String Id="HelpCloseButton">&amp;Kapat</String>
   <String Id="InstallAcceptCheckbox">Lisans &amp;hüküm ve koşullarını kabul ediyorum</String>
   <String Id="InstallOptionsButton">&amp;Seçenekler</String>
@@ -65,7 +56,7 @@ Hazır mısınız? Haydi başlayalım!</String>
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">Kaynaklar</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;Belgeler&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Sürüm Notları&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Sürüm Notları&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Öğreticiler&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;.NET Core Telemetrisi&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Gizlilik Bildirimi&lt;/A&gt;</String>

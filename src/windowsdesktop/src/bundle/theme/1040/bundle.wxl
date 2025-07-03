@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+<WixLocalization Culture="it-IT" xmlns="http://wixtoolset.org/schemas/v4/localization">
   <String Id="Caption">Programma di installazione di [WixBundleName]</String>
   <String Id="Title">[BUNDLEMONIKER]</String>
   <String Id="Motto">Bastano solo una shell, un editor di testo e 10 minuti di tempo.
@@ -65,7 +65,7 @@ Pronti per iniziare?</String>
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">Risorse</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;Documentazione&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Note sulla versione&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Note sulla versione&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Esercitazioni&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;Telemetria di .NET Core&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Informativa sulla privacy&lt;/A&gt;</String>

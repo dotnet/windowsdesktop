@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="Caption">Instalador do [WixBundleName]</String>
-  <String Id="Title">[BUNDLEMONIKER]</String>
-  <String Id="Motto">Você só precisa de um shell, um editor de texto e 10 minutos de seu tempo.
-
-Tudo pronto? Então, vamos nessa!</String>
-  <String Id="ConfirmCancelMessage">Tem certeza de que deseja cancelar?</String>
+<WixLocalization Culture="pt-BR" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+  <String Id="Caption" Value="Instalador do [WixBundleName]"/>
+  <String Id="Title" Value="[BUNDLEMONIKER]"/>
+  <String Id="Motto" Value="Você só precisa de um shell, um editor de texto e 10 minutos de seu tempo.\n\nTudo pronto? Então, vamos nessa!"/>
+  <String Id="ConfirmCancelMessage" Value="Tem certeza de que deseja cancelar?"/>
   <String Id="ExecuteUpgradeRelatedBundleMessage">Versão anterior</String>
   <String Id="HelpHeader">Ajuda de Instalação</String>
-  <String Id="HelpText">/install | /repair | /uninstall | /layout [diretório] - instala, repara, desinstala ou
-   cria uma cópia local completa do pacote no diretório. Install é o padrão
-
-/passive | /quiet -  exibe a interface do usuário mínima sem nenhum prompt ou não exibe nenhuma interface do usuário e
-   nenhum prompt. Por padrão, a interface do usuário e todos os prompts são exibidos.
-
-/norestart   - suprime qualquer tentativa de reiniciar. Por padrão, a interface do usuário perguntará antes de reiniciar.
-/log log.txt - registra em um arquivo específico. Por padrão, um arquivo de log é criado em %TEMP%.</String>
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [diretório] - instala, repara, desinstala ou cria uma cópia local completa do pacote no diretório. Install é o padrão\n\n/passive | /quiet -  exibe a interface do usuário mínima sem nenhum prompt ou não exibe nenhuma interface do usuário e nenhum prompt. Por padrão, a interface do usuário e todos os prompts são exibidos.\n\n/norestart   - suprime qualquer tentativa de reiniciar. Por padrão, a interface do usuário perguntará antes de reiniciar.\n/log log.txt - registra em um arquivo específico. Por padrão, um arquivo de log é criado em %TEMP%."/>
   <String Id="HelpCloseButton">&amp;Fechar</String>
   <String Id="InstallAcceptCheckbox">&amp;Concordo com os termos e condições da licença</String>
   <String Id="InstallOptionsButton">&amp;Opções</String>
@@ -65,7 +56,7 @@ Tudo pronto? Então, vamos nessa!</String>
   <String Id="SuccessInstallProductName"> - [BUNDLEMONIKER] </String>
   <String Id="ResourcesHeader">Recursos</String>
   <String Id="DocumentationLink">&lt;A HREF="https://aka.ms/dotnet-docs"&gt;Documentação&lt;/A&gt;</String>
-  <String Id="RelaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notas sobre a Versão&lt;/A&gt;</String>
+  <String Id="ReleaseNotesLink">&lt;A HREF="https://aka.ms/20-p2-rel-notes"&gt;Notas sobre a Versão&lt;/A&gt;</String>
   <String Id="TutorialLink">&lt;A HREF="https://aka.ms/dotnet-tutorials"&gt;Tutoriais&lt;/A&gt;</String>
   <String Id="TelemetryLink">&lt;A HREF="https://aka.ms/dotnet-cli-telemetry"&gt;Telemetria do .NET Core&lt;/A&gt;</String>
   <String Id="PrivacyStatementLink">&lt;A HREF="https://aka.ms/dev-privacy"&gt;Política de Privacidade&lt;/A&gt;</String>

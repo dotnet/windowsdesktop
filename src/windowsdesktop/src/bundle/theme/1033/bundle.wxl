@@ -1,5 +1,6 @@
+
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-US" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+<WixLocalizationFragment Culture="en-US" xmlns="http://wixtoolset.org/schemas/v4/localization">
 
 <!-- Removed old multiline String elements now replaced by Value attributes below -->
   <String Id="Caption" Value="[WixBundleName] Installer"/>
@@ -65,4 +66,4 @@
   <String Id="EulaLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-license-windows\"&gt;Licensing Information for .NET&lt;/A&gt;"/>
   <String Id="LicenseAssent" Value="By clicking Install, you agree to the following terms."/>
   
-</WixLocalization>
+</WixLocalizationFragment>

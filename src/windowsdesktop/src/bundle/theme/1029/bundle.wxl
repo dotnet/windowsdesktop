@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WixLocalization Culture="cs-CZ" xmlns="http://wixtoolset.org/schemas/v4/localization">
-  <String Id="Caption">Instalační program pro [WixBundleName]</String>
-  <String Id="Title">[BUNDLEMONIKER]</String>
-  <String Id="Motto">Potřebujete jenom prostředí, textový editor a 10 minut času.
-
-Jste připraveni? Dejme se tedy do toho!</String>
-  <String Id="ConfirmCancelMessage">Opravdu chcete akci zrušit?</String>
-  <String Id="ExecuteUpgradeRelatedBundleMessage">Předchozí verze</String>
-  <String Id="HelpHeader">Nápověda k instalaci</String>
-  <String Id="HelpText">/install | /repair | /uninstall | /layout [adresář] – Nainstaluje, opraví, odinstaluje nebo
-   vytvoří úplnou místní kopii svazku v adresáři. Výchozí možností je instalace.
-
-/passive | /quiet –  Zobrazí minimální uživatelské rozhraní bez výzev nebo nezobrazí žádné uživatelské rozhraní a
-   žádné výzvy. Výchozí možností je zobrazení uživatelského rozhraní a všech výzev.
-
-/norestart   – potlačí všechny pokusy o restartování. Ve výchozím nastavení uživatelské rozhraní před restartováním zobrazí výzvu.
-/log log.txt – Uloží protokol do konkrétního souboru. Ve výchozím nastavení bude soubor protokolu vytvořen v adresáři %TEMP%.</String>
+  <String Id="Caption" Value="Instalační program pro [WixBundleName]"/>
+  <String Id="Title" Value="[BUNDLEMONIKER]"/>
+  <String Id="Motto" Value="Potřebujete jenom prostředí, textový editor a 10 minut času.\n\nJste připraveni? Dejme se tedy do toho!"/>
+  <String Id="ConfirmCancelMessage" Value="Opravdu chcete akci zrušit?"/>
+  <String Id="ExecuteUpgradeRelatedBundleMessage" Value="Předchozí verze"/>
+  <String Id="HelpHeader" Value="Nápověda k instalaci"/>
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [adresář] – Nainstaluje, opraví, odinstaluje nebo vytvoří úplnou místní kopii svazku v adresáři. Výchozí možností je instalace.\n\n/passive | /quiet –  Zobrazí minimální uživatelské rozhraní bez výzev nebo nezobrazí žádné uživatelské rozhraní a žádné výzvy. Výchozí možností je zobrazení uživatelského rozhraní a všech výzev.\n\n/norestart   – potlačí všechny pokusy o restartování. Ve výchozím nastavení uživatelské rozhraní před restartováním zobrazí výzvu.\n/log log.txt – Uloží protokol do konkrétního souboru. Ve výchozím nastavení bude soubor protokolu vytvořen v adresáři %TEMP%."/>
   <String Id="HelpCloseButton">&amp;Zavřít</String>
   <String Id="InstallAcceptCheckbox">Souhl&amp;asím s licenčními podmínkami.</String>
   <String Id="InstallOptionsButton">M&amp;ožnosti</String>

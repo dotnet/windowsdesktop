@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalizationFragment Culture="tr-TR" xmlns="http://wixtoolset.org/schemas/v4/localization">
+<WixLocalization Culture="tr-TR" xmlns="http://wixtoolset.org/schemas/v4/wxl">
   <String Id="Caption" Value="[WixBundleName] Yükleyicisi"/>
   <String Id="Title" Value="[BUNDLEMONIKER]"/>
   <String Id="Motto" Value="Yalnızca bir kabuğa, bir metin düzenleyicisine ve 10 dakikalık bir zamana ihtiyacınız var.\n\nHazır mısınız? Haydi başlayalım!"/>
@@ -37,7 +37,7 @@
   <String Id="FailureInstallHeader" Value="Kurulum Başarısız"/>
   <String Id="FailureUninstallHeader" Value="Yükleme Başarısız"/>
   <String Id="FailureRepairHeader" Value="Onarım Başarısız"/>
-  <String Id="FailureHyperlinkLogText" Value="En az bir sorun nedeniyle kurulum başarısız oldu. Lütfen bu sorunları düzeltin ve kurulumu yeniden deneyin. Daha fazla bilgi için &lt;a href=\"#\"&gt;günlük dosyasına&lt;/a&gt; bakın."/>
+  <String Id="FailureHyperlinkLogText" Value="En az bir sorun nedeniyle kurulum başarısız oldu. Lütfen bu sorunları düzeltin ve kurulumu yeniden deneyin. Daha fazla bilgi için &lt;a href=&quot;file://log&quot;&gt;günlük dosyasına&lt;/a&gt; bakın."/>
   <String Id="FailureRestartText" Value="Yazılımın geri alınmasını tamamlamak için bilgisayarınızı yeniden başlatmanız gerekiyor."/>
   <String Id="FailureRestartButton" Value="Yeniden &amp;Başlat"/>
   <String Id="FailureCloseButton" Value="&amp;Kapat"/>
@@ -55,12 +55,14 @@
   <String Id="SuccessInstallLocation" Value="Aşağıdakiler [DOTNETHOME] konumunda yüklendi"/>
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] "/>
   <String Id="ResourcesHeader" Value="Kaynaklar"/>
-  <String Id="DocumentationLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-docs\"&gt;Belgeler&lt;/A&gt;"/>
-  <String Id="ReleaseNotesLink" Value="&lt;A HREF=\"https://aka.ms/20-p2-rel-notes\"&gt;Sürüm Notları&lt;/A&gt;"/>
-  <String Id="TutorialLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-tutorials\"&gt;Öğreticiler&lt;/A&gt;"/>
-  <String Id="TelemetryLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-cli-telemetry\"&gt;.NET Core Telemetrisi&lt;/A&gt;"/>
-  <String Id="PrivacyStatementLink" Value="&lt;A HREF=\"https://aka.ms/dev-privacy\"&gt;Gizlilik Bildirimi&lt;/A&gt;"/>
-  <String Id="EulaLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-license-windows\"&gt;.NET için Lisans Bilgileri&lt;/A&gt;"/>
+  <String Id="DocumentationLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-docs&quot;&gt;Belgeler&lt;/A&gt;"/>
+  <String Id="ReleaseNotesLink" Value="&lt;A HREF=&quot;aka.ms/20-p2-rel-notes&quot;&gt;Sürüm Notları&lt;/A&gt;"/>
+  <String Id="TutorialLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-tutorials&quot;&gt;Öğreticiler&lt;/A&gt;"/>
+  <String Id="TelemetryLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-cli-telemetry&quot;&gt;.NET Core Telemetrisi&lt;/A&gt;"/>
+  <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;aka.ms/dev-privacy&quot;&gt;Gizlilik Bildirimi&lt;/A&gt;"/>
+  <String Id="EulaLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-license-windows&quot;&gt;.NET için Lisans Bilgileri&lt;/A&gt;"/>
   <String Id="LicenseAssent" Value="Yükle'ye tıklayarak aşağıdaki koşulları kabul etmiş olursunuz."/>
   
-</WixLocalizationFragment>
+</WixLocalization>
+
+

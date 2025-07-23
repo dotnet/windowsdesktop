@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalizationFragment Culture="es-ES" xmlns="http://wixtoolset.org/schemas/v4/localization">
+<WixLocalization Culture="es-ES" xmlns="http://wixtoolset.org/schemas/v4/wxl">
   <String Id="Caption" Value="Instalador de [WixBundleName]"/>
   <String Id="Title" Value="[BUNDLEMONIKER]"/>
   <String Id="Motto" Value="Solo necesita un shell, un editor de texto y 10 minutos.\n\n¿Preparados? ¿Listos? ¡Ya!"/>
@@ -37,7 +37,7 @@
   <String Id="FailureInstallHeader" Value="No se pudo instalar"/>
   <String Id="FailureUninstallHeader" Value="No se pudo desinstalar"/>
   <String Id="FailureRepairHeader" Value="No se pudo reparar"/>
-  <String Id="FailureHyperlinkLogText" Value="Error de instalación debido a uno o varios problemas. Corrija los problemas e intente de nuevo la instalación. Para obtener más información, consulte el &lt;a href=\"#\"&gt;archivo de registro&lt;/a&gt;."/>
+  <String Id="FailureHyperlinkLogText" Value="Error de instalación debido a uno o varios problemas. Corrija los problemas e intente de nuevo la instalación. Para obtener más información, consulte el &lt;a href=&quot;file://log&quot;&gt;archivo de registro&lt;/a&gt;."/>
   <String Id="FailureRestartText" Value="Debe reiniciar el equipo para completar la reversión del software."/>
   <String Id="FailureRestartButton" Value="&amp;Reiniciar"/>
   <String Id="FailureCloseButton" Value="&amp;Cerrar"/>
@@ -55,12 +55,15 @@
   <String Id="SuccessInstallLocation" Value="Lo siguiente se instaló en [DOTNETHOME]"/>
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] "/>
   <String Id="ResourcesHeader" Value="Recursos"/>
-  <String Id="DocumentationLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-docs\"&gt;Documentación&lt;/A&gt;"/>
-  <String Id="ReleaseNotesLink" Value="&lt;A HREF=\"https://aka.ms/20-p2-rel-notes\"&gt;Notas de la versión&lt;/A&gt;"/>
-  <String Id="TutorialLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-tutorials\"&gt;Tutoriales&lt;/A&gt;"/>
-  <String Id="TelemetryLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-cli-telemetry\"&gt;Telemetría de .NET Core&lt;/A&gt;"/>
-  <String Id="PrivacyStatementLink" Value="&lt;A HREF=\"https://aka.ms/dev-privacy\"&gt;Declaración de privacidad&lt;/A&gt;"/>
-  <String Id="EulaLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-license-windows\"&gt;Información de licencias de .NET&lt;/A&gt;"/>
+  <String Id="DocumentationLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-docs&quot;&gt;Documentación&lt;/A&gt;"/>
+  <String Id="ReleaseNotesLink" Value="&lt;A HREF=&quot;aka.ms/20-p2-rel-notes&quot;&gt;Notas de la versión&lt;/A&gt;"/>
+  <String Id="TutorialLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-tutorials&quot;&gt;Tutoriales&lt;/A&gt;"/>
+  <String Id="TelemetryLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-cli-telemetry&quot;&gt;Telemetría de .NET Core&lt;/A&gt;"/>
+  <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;aka.ms/dev-privacy&quot;&gt;Declaración de privacidad&lt;/A&gt;"/>
+  <String Id="EulaLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-license-windows&quot;&gt;Información de licencias de .NET&lt;/A&gt;"/>
   <String Id="LicenseAssent" Value="Al hacer clic en Instalar, acepta los términos siguientes."/>
   
-</WixLocalizationFragment>
+</WixLocalization>
+
+
+

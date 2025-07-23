@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalizationFragment Culture="zh-CN" xmlns="http://wixtoolset.org/schemas/v4/localization">
+<WixLocalization Culture="zh-CN" xmlns="http://wixtoolset.org/schemas/v4/wxl">
   <String Id="Caption" Value="[WixBundleName] 安装程序"/>
   <String Id="Title" Value="[BUNDLEMONIKER]"/>
   <String Id="Motto" Value="你只需要一个 shell、一个文本编辑器，还需花 10 分钟即可。\n\n准备好了吗? 要设置? 让我们开始吧!"/>
@@ -37,7 +37,7 @@
   <String Id="FailureInstallHeader" Value="安装失败"/>
   <String Id="FailureUninstallHeader" Value="卸载失败"/>
   <String Id="FailureRepairHeader" Value="修复失败"/>
-  <String Id="FailureHyperlinkLogText" Value="一个或多个问题导致了安装失败。请修复这些问题，然后重试安装。有关详细信息，请参阅&lt;a href=\"#\"&gt;日志文件&lt;/a&gt;。"/>
+  <String Id="FailureHyperlinkLogText" Value="一个或多个问题导致了安装失败。请修复这些问题，然后重试安装。有关详细信息，请参阅&lt;a href=&quot;file://log&quot;&gt;日志文件&lt;/a&gt;。"/>
   <String Id="FailureRestartText" Value="必须重新启动计算机才能完成软件回退。"/>
   <String Id="FailureRestartButton" Value="重新启动(&amp;R)"/>
   <String Id="FailureCloseButton" Value="关闭(&amp;C)"/>
@@ -55,12 +55,15 @@
   <String Id="SuccessInstallLocation" Value="以下项已安装到 [DOTNETHOME]"/>
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] "/>
   <String Id="ResourcesHeader" Value="资源"/>
-  <String Id="DocumentationLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-docs\"&gt;文档&lt;/A&gt;"/>
-  <String Id="ReleaseNotesLink" Value="&lt;A HREF=\"https://aka.ms/20-p2-rel-notes\"&gt;发行说明&lt;/A&gt;"/>
-  <String Id="TutorialLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-tutorials\"&gt;教程&lt;/A&gt;"/>
-  <String Id="TelemetryLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-cli-telemetry\"&gt;.NET Core 遥测&lt;/A&gt;"/>
-  <String Id="PrivacyStatementLink" Value="&lt;A HREF=\"https://aka.ms/dev-privacy\"&gt;隐私声明&lt;/A&gt;"/>
-  <String Id="EulaLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-license-windows\"&gt;.NET 的许可信息&lt;/A&gt;"/>
+  <String Id="DocumentationLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-docs&quot;&gt;文档&lt;/A&gt;"/>
+  <String Id="ReleaseNotesLink" Value="&lt;A HREF=&quot;aka.ms/20-p2-rel-notes&quot;&gt;发行说明&lt;/A&gt;"/>
+  <String Id="TutorialLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-tutorials&quot;&gt;教程&lt;/A&gt;"/>
+  <String Id="TelemetryLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-cli-telemetry&quot;&gt;.NET Core 遥测&lt;/A&gt;"/>
+  <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;aka.ms/dev-privacy&quot;&gt;隐私声明&lt;/A&gt;"/>
+  <String Id="EulaLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-license-windows&quot;&gt;.NET 的许可信息&lt;/A&gt;"/>
   <String Id="LicenseAssent" Value="单击“安装”即表示你同意以下条款。"/>
   
-</WixLocalizationFragment>
+</WixLocalization>
+
+
+

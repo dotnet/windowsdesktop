@@ -4,7 +4,6 @@
      xmlns:swid="http://schemas.microsoft.com/wix/TagExtension"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
-  <?include "..\variables.wxi" ?>
 
   <Bundle
     Name="$(var.ProductName)"

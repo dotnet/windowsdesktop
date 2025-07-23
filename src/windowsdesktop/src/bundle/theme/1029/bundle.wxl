@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalizationFragment Culture="cs-CZ" xmlns="http://wixtoolset.org/schemas/v4/localization">
+<WixLocalization Culture="cs-CZ" xmlns="http://wixtoolset.org/schemas/v4/wxl">
   <String Id="Caption" Value="Instalační program pro [WixBundleName]"/>
   <String Id="Title" Value="[BUNDLEMONIKER]"/>
   <String Id="Motto" Value="Potřebujete jenom prostředí, textový editor a 10 minut času.\n\nJste připraveni? Dejme se tedy do toho!"/>
@@ -37,7 +37,7 @@
   <String Id="FailureInstallHeader" Value="Instalace se nepovedla."/>
   <String Id="FailureUninstallHeader" Value="Odinstalace se nepovedla."/>
   <String Id="FailureRepairHeader" Value="Oprava se nepovedla."/>
-  <String Id="FailureHyperlinkLogText" Value="Instalace se nepovedla kvůli jednomu nebo více problémům. Opravte prosím tyto problémy a zkuste software nainstalovat znovu. Další informace najdete v &lt;a href=\"#\"&gt;souboru protokolu&lt;/a&gt;."/>
+  <String Id="FailureHyperlinkLogText" Value="Instalace se nepovedla kvůli jednomu nebo více problémům. Opravte prosím tyto problémy a zkuste software nainstalovat znovu. Další informace najdete v &lt;a href=&quot;file://log&quot;&gt;souboru protokolu&lt;/a&gt;."/>
   <String Id="FailureRestartText" Value="Pro dokončení vrácení změn tohoto softwaru je potřeba restartovat počítač."/>
   <String Id="FailureRestartButton" Value="&amp;Restartovat"/>
   <String Id="FailureCloseButton" Value="&amp;Zavřít"/>
@@ -55,12 +55,14 @@
   <String Id="SuccessInstallLocation" Value="Do [DOTNETHOME] se nainstalovaly následující položky."/>
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] "/>
   <String Id="ResourcesHeader" Value="Prostředky"/>
-  <String Id="DocumentationLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-docs\"&gt;Dokumentace&lt;/A&gt;"/>
-  <String Id="ReleaseNotesLink" Value="&lt;A HREF=\"https://aka.ms/20-p2-rel-notes\"&gt;Zpráva k vydání verze&lt;/A&gt;"/>
-  <String Id="TutorialLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-tutorials\"&gt;Kurzy&lt;/A&gt;"/>
-  <String Id="TelemetryLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-cli-telemetry\"&gt;Telemetrie pro platformu .NET Core&lt;/A&gt;"/>
-  <String Id="PrivacyStatementLink" Value="&lt;A HREF=\"https://aka.ms/dev-privacy\"&gt;Prohlášení o zásadách ochrany osobních údajů&lt;/A&gt;"/>
-  <String Id="EulaLink" Value="&lt;A HREF=\"https://aka.ms/dotnet-license-windows\"&gt;Informace o licencování pro .NET&lt;/A&gt;"/>
+  <String Id="DocumentationLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-docs&quot;&gt;Dokumentace&lt;/A&gt;"/>
+  <String Id="ReleaseNotesLink" Value="&lt;A HREF=&quot;aka.ms/20-p2-rel-notes&quot;&gt;Zpráva k vydání verze&lt;/A&gt;"/>
+  <String Id="TutorialLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-tutorials&quot;&gt;Kurzy&lt;/A&gt;"/>
+  <String Id="TelemetryLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-cli-telemetry&quot;&gt;Telemetrie pro platformu .NET Core&lt;/A&gt;"/>
+  <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;aka.ms/dev-privacy&quot;&gt;Prohlášení o zásadách ochrany osobních údajů&lt;/A&gt;"/>
+  <String Id="EulaLink" Value="&lt;A HREF=&quot;aka.ms/dotnet-license-windows&quot;&gt;Informace o licencování pro .NET&lt;/A&gt;"/>
   <String Id="LicenseAssent" Value="Kliknutím na Nainstalovat vyjadřujete souhlas s následujícími podmínkami."/>
 
-</WixLocalizationFragment>
+</WixLocalization>
+
+

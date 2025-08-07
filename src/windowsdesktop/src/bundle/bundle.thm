@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Theme xmlns="http://wixtoolset.org/schemas/thmutil/2010">
+<Theme xmlns="http://wixtoolset.org/schemas/v4/thmutil">
   <Window Width="660" Height="468" HexStyle="100a0000" FontId="0">#(loc.Caption)</Window>
     <Font Id="0" Height="-12" Weight="500" Foreground="000000" Background="FFFFFF">Segoe UI</Font>
     <Font Id="1" Height="-24" Weight="900" Foreground="FFFFFF" Background="D42B51">Segoe UI</Font>
@@ -90,7 +90,7 @@
          <Text Name="SuccessInstallProductName" X="185" Y="155" Width="400" Height="30" FontId="3" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.SuccessInstallProductName)</Text>
          <Text Name="SuccessInstallResourcesHeader" X="160" Y="195" Width="400" Height="30" FontId="2" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.ResourcesHeader)</Text>
          <Hypertext Name="DocumentationLink" X="185" Y="238" Width="400" Height="22" FontId="3" TabStop="yes" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.DocumentationLink)</Hypertext>
-         <Hypertext Name="RelaseNotesLink" X="185" Y="259" Width="400" Height="22" FontId="3" TabStop="yes" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.RelaseNotesLink)</Hypertext>
+         <Hypertext Name="ReleaseNotesLink" X="185" Y="259" Width="400" Height="22" FontId="3" TabStop="yes" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.ReleaseNotesLink)</Hypertext>
          <Hypertext Name="TutorialLink" X="185" Y="280" Width="400" Height="22" FontId="3" TabStop="yes" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.TutorialLink)</Hypertext>
          <Hypertext Name="TelemetryLink" X="185" Y="301" Width="400" Height="22" FontId="3" TabStop="yes" HideWhenDisabled="yes" DisablePrefix="yes">#(loc.TelemetryLink)</Hypertext>
         

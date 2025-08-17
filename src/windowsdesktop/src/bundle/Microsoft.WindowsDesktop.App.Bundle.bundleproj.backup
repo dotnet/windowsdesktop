@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.DotNet.Arcade.Sdk">
+  <PropertyGroup>
+    <OutputType>Bundle</OutputType>
+    <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm64</RuntimeIdentifiers>
+    <InstallerName>windowsdesktop-runtime</InstallerName>
+    <BundleNameSuffix>Runtime</BundleNameSuffix>
+    <UseWix5>true</UseWix5>
+    <Cultures>en-US</Cultures>
+    <DefaultItemExcludes>$(DefaultItemExcludes);theme\**\*</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" />
+    <PackageReference Include="Microsoft.WixToolset.Util.wixext" />
+    <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" />
+    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Installers" GeneratePathProperty="true"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\bundle.wxs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BundleComponentReference Include="../sfx/Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
+  </ItemGroup>
+
+  <!-- Obtain the .NET Core Runtime installers from the VS insertion packages. -->
+  <Target Name="CollectVSInsertionPackageDownloads"
+          BeforeTargets="CollectPackageReferences">
+    <ItemGroup>
+      <_RuntimeIdentifierForNETCoreMsiRestore Include="$(RuntimeIdentifiers)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <InsertionPackageRID
+        Include="@(_RuntimeIdentifierForNETCoreMsiRestore)"
+        Condition="'$(RuntimeIdentifier)' == '%(Identity)'"
+        Arch="$([System.String]::new('%(Identity)').Replace('win-', ''))" />
+
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="runtime" InsertionName="SharedFramework" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="hostfxr" InsertionName="HostFXR" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" Name="host" InsertionName="SharedHost" />
+
+      <NETCoreAppInstallerMsiRID
+        Id="VS.Redist.Common.NetCore.%(InsertionName).%(Arch).10.0"
+        Version="$(MicrosoftNETCorePlatformsVersion)"
+        MsiFileName="dotnet-%(Name)-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+
+      <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
+  <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          DependsOnTargets="CollectVSInsertionPackageDownloads"
+          BeforeTargets="_GetBundledComponentInstallers">
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID
+        CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
+
+      <_BundledComponents
+        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')"
+        Condition="'$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+  </Target>
+</Project>
+

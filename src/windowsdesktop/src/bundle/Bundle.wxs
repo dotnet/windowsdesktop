@@ -1,0 +1,33 @@
+<?xml version="1.0" encod      <Payload Name="DotNetLogo_124x.bmp" Compressed="yes" SourceFile="theme\DotNetLogo_124x.bmp" />ng="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+
+  <Bundle Name="!(loc.Title)"
+          Version="$(var.BundleVersion)"
+          Manufacturer="!(loc.Manufacturer)"
+          UpgradeCode="$(var.BundleUpgradeCode)">
+
+     <BootstrapperApplication>
+  <bal:WixStandardBootstrapperApplication LicenseFile="..\..\dummyeula.rtf"
+                  LocalizationFile="theme\1033\bundle.wxl"
+                                              ShowVersion="yes"
+                                              SuppressDowngradeFailure="yes"
+                                              SuppressOptionsUI="yes"
+                                              Theme="rtfLicense"
+                                              ThemeFile="bundle.thm" />
+
+  <!-- Default (1033) and additional localizations placed under theme/<LCID>/bundle.wxl. Name must match the relative path used by LocalizationFile. -->
+  <Payload Compressed="yes" Name="theme\1033\bundle.wxl" SourceFile="theme\1033\bundle.wxl" />
+
+  <?foreach LCID in 1028;1029;1031;1036;1040;1041;1042;1045;1049;1055;2052;3082?>
+  <Payload Compressed="yes" Name="theme\$(LCID)\bundle.wxl" SourceFile="theme\$(LCID)\bundle.wxl" />
+  <?endforeach?>
+      
+  <Payload Name="DotNetLogo_124x.png" Compressed="yes" SourceFile="theme\DotNetLogo_124x.png" />
+      <Payload Name="dotnet.ico" Compressed="yes" SourceFile="..\..\dotnet.ico" />
+    </BootstrapperApplication>
+    <Chain>
+      <!-- The Arcade build process will automatically populate the MSI packages here. -->
+    </Chain>
+  </Bundle>
+</Wix>

@@ -1,5 +1,9 @@
 <Project>
 
+  <PropertyGroup>
+    <ArcadeSdkPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\arcade\artifacts\bin\Microsoft.DotNet.Arcade.Sdk\Release\net10.0\publish\'))</ArcadeSdkPath>
+  </PropertyGroup>
+
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
@@ -28,5 +32,4 @@
     <!-- Builds are portable by default -->
     <PortableBuild Condition="'$(PortableBuild)' != 'false'">true</PortableBuild>
   </PropertyGroup>
-
 </Project>

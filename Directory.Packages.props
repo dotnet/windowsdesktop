@@ -1,28 +1,24 @@
 <Project>
-
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <!-- Using multiple feeds isn't supported by Maestro: https://github.com/dotnet/arcade/issues/14155. -->
     <NoWarn>$(NoWarn);NU1507</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Arcade dependencies -->
     <PackageVersion Include="Microsoft.DotNet.Build.Tasks.Archives" Version="$(MicrosoftDotNetBuildTasksArchivesVersion)" />
     <PackageVersion Include="Microsoft.DotNet.Build.Tasks.Installers" Version="$(MicrosoftDotNetBuildTasksInstallersVersion)" />
     <PackageVersion Include="Microsoft.DotNet.Build.Tasks.Templating" Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)" />
-
     <!-- CoreFx dependencies -->
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="System.Data.DataSetExtensions" Version="$(SystemDataDataSetExtensionsVersion)" />
     <PackageVersion Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />
     <PackageVersion Include="System.Reflection.Emit.ILGeneration" Version="$(SystemReflectionEmitILGenerationVersion)" />
     <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="$(SystemReflectionEmitLightweightVersion)" />
     <PackageVersion Include="System.Reflection.Emit" Version="$(SystemReflectionEmitVersion)" />
-
     <!-- NuGet dependencies -->
     <PackageVersion Include="NuGet.Packaging" Version="$(NuGetPackagingVersion)" />
-
     <!-- Runtime dependencies -->
     <PackageVersion Include="Microsoft.Win32.Registry.AccessControl" Version="$(MicrosoftWin32RegistryAccessControlVersion)" />
     <PackageVersion Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
@@ -57,21 +53,17 @@
     <PackageVersion Include="System.Speech" Version="$(SystemSpeechVersion)" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
     <PackageVersion Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
-
     <!-- WCF dependencies -->
     <PackageVersion Include="System.ServiceModel.Http" Version="$(SystemServiceModelVersion)" />
     <PackageVersion Include="System.ServiceModel.NetTcp" Version="$(SystemServiceModelVersion)" />
     <PackageVersion Include="System.ServiceModel.Primitives" Version="$(SystemServiceModelVersion)" />
     <PackageVersion Include="System.Web.Services.Description" Version="$(SystemServiceModelVersion)" />
-
     <!-- WinForms dependencies -->
     <PackageVersion Include="Microsoft.Private.Winforms" Version="$(MicrosoftPrivateWinformsVersion)" />
     <PackageVersion Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
-
     <!-- WPF dependencies-->
     <PackageVersion Include="Microsoft.DotNet.Wpf.GitHub" Version="$(MicrosoftDotNetWpfGitHubVersion)" />
     <PackageVersion Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="$(MicrosoftInternalRuntimeWindowsDesktopTransportVersion)" />
-
     <!-- WiX v5 dependencies -->
     <PackageVersion Include="Microsoft.Wix" Version="$(MicrosoftWixVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.UI.wixext" Version="$(MicrosoftWixToolsetUIWixextVersion)" />
@@ -80,5 +72,4 @@
     <PackageVersion Include="Microsoft.WixToolset.Bal.wixext" Version="$(MicrosoftWixToolsetBalWixextVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.Heat" Version="$(MicrosoftWixToolsetHeatVersion)" />
   </ItemGroup>
-
 </Project>

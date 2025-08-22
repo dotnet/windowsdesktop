@@ -49,6 +49,7 @@ This file should be imported by eng/Versions.props
     <SystemSpeechPackageVersion>10.0.0-rc.1.25420.121</SystemSpeechPackageVersion>
     <SystemTextEncodingCodePagesPackageVersion>10.0.0-rc.1.25420.121</SystemTextEncodingCodePagesPackageVersion>
     <SystemThreadingAccessControlPackageVersion>10.0.0-rc.1.25420.121</SystemThreadingAccessControlPackageVersion>
+
   </PropertyGroup>
   <!--Property group for alternate package version names-->
   <PropertyGroup>

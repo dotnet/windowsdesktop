@@ -7,19 +7,7 @@
     <InstallerName>windowsdesktop-runtime</InstallerName>
     <VSInsertionShortComponentName>WindowsDesktop.SharedFramework</VSInsertionShortComponentName>
     <RollForward>LatestPatch</RollForward>
-    <UseWix5>true</UseWix5>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!-- Microsoft.Wix is a dotnet tool package, so exclude its assets. -->
-    <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" />
-    <!-- Installers needs the $(PkgMicrosoftWixToolsetUIwixext) property to locate the extension. -->
-    <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Heat" />
-  </ItemGroup>
 
   <!-- Profile is intentionally undefined so that the reference will only be included when no profile is specified i.e. both WPF and WindowsForms are in use https://github.com/dotnet/wpf/blob/bbfc24fd13804a191e20064acd599b0a359092df/packaging/Microsoft.NET.Sdk.WindowsDesktop/targets/Microsoft.NET.Sdk.WindowsDesktop.props#L45-L46 -->
   <ItemGroup>

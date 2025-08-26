@@ -13,6 +13,13 @@
   <PropertyGroup>
     <!-- corefx -->
     <SystemDataDataSetExtensionsVersion>4.5.0</SystemDataDataSetExtensionsVersion>
+    <!-- WiX 5+ dependencies for MSI generation -->
+    <MicrosoftWixVersion>5.0.2-dotnet.2729052</MicrosoftWixVersion>
+    <MicrosoftWixToolsetUIWixextVersion>5.0.2-dotnet.2729052</MicrosoftWixToolsetUIWixextVersion>
+    <MicrosoftWixToolsetDependencyWixextVersion>5.0.2-dotnet.2729052</MicrosoftWixToolsetDependencyWixextVersion>
+    <MicrosoftWixToolsetUtilWixextVersion>5.0.2-dotnet.2729052</MicrosoftWixToolsetUtilWixextVersion>
+    <MicrosoftWixToolsetBalWixextVersion>5.0.2-dotnet.2729052</MicrosoftWixToolsetBalWixextVersion>
+    <MicrosoftWixToolsetHeatVersion>5.0.2-dotnet.2729052</MicrosoftWixToolsetHeatVersion>
     <!-- The SQL team had deprecated System.Data.SqlClient package and replaced it with Microsoft.Data.SqlClient.
      However, windows compatibility package should not include Microsoft.Data.SqlClient since that's not part of .NETFramework surface area.
      The purpose of Microsoft.Windows.Compatibility is to bring assemblies that implement the actual types from .NETFramework

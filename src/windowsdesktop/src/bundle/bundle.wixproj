@@ -4,6 +4,16 @@
     <!-- OutputType determines the extension, .msi, .wixlib, .exe, etc. -->
     <OutputType>Bundle</OutputType>
     
+    <!-- Version information for the bundle executable -->
+    <AssemblyTitle>Microsoft Windows Desktop Runtime Installer</AssemblyTitle>
+    <AssemblyDescription>Microsoft Windows Desktop Runtime $(Version) Installer</AssemblyDescription>
+    <AssemblyCompany>Microsoft Corporation</AssemblyCompany>
+    <AssemblyProduct>Microsoft Windows Desktop Runtime</AssemblyProduct>
+    <AssemblyCopyright>© Microsoft Corporation. All rights reserved.</AssemblyCopyright>
+    <AssemblyInformationalVersion>$(Version)</AssemblyInformationalVersion>
+    <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    
     <!-- Fix WiX v5 pdbType issue - try multiple approaches -->
     <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
     <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>

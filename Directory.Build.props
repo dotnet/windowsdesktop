@@ -3,6 +3,13 @@
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
+    <!-- WiX v5 Configuration -->
+    <UseWixV5>true</UseWixV5>
+    
+    <!-- WiX v5 PDB Type Fix -->
+    <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>

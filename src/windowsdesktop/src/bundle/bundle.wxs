@@ -152,8 +152,34 @@
     <Variable Name="MINIMUMVSVERSION" Type="string" Value="$(MinimumVSVersion)" bal:Overridable="no" />
 
     <Chain DisableSystemRestore="yes" ParallelCache="yes">
-      <!-- .NET Runtime must be installed first as it's a prerequisite for Windows Desktop Runtime -->
-      <!-- Only include .NET Runtime MSI if it exists (it's built in a separate repo) -->
+      <!-- .NET Core components must be installed in dependency order -->
+      <!-- Host is the base component that everything else depends on -->
+      <?if $(DotNetHostMsiExists) = true ?>
+      <MsiPackage 
+        Id="DotNetHost"
+        SourceFile="$(DotNetHostMsiPath)"
+        Vital="yes"
+        Cache="keep"
+        DisplayName="Microsoft .NET Host">
+        <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
+        <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
+      </MsiPackage>
+      <?endif ?>
+      
+      <!-- HostFxr depends on Host -->
+      <?if $(DotNetHostFxrMsiExists) = true ?>
+      <MsiPackage 
+        Id="DotNetHostFxr"
+        SourceFile="$(DotNetHostFxrMsiPath)"
+        Vital="yes"
+        Cache="keep"
+        DisplayName="Microsoft .NET Host FX Resolver">
+        <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
+        <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
+      </MsiPackage>
+      <?endif ?>
+      
+      <!-- Runtime depends on Host and HostFxr -->
       <?if $(DotNetRuntimeMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetRuntime"
@@ -166,9 +192,7 @@
       </MsiPackage>
       <?endif ?>
       
-      <!-- Windows Desktop Runtime Bundle: wraps the MSI with themed UI -->
-      
-      <!-- Reference the Windows Desktop Runtime MSI built by the sfx project -->
+      <!-- Windows Desktop Runtime depends on all the above .NET Core components -->
       <MsiPackage 
         Id="WindowsDesktopRuntime"
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"

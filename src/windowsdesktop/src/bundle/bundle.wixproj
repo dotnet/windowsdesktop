@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.WixToolset.Sdk">
+
+  <PropertyGroup>
+    <!-- OutputType determines the extension, .msi, .wixlib, .exe, etc. -->
+    <OutputType>Bundle</OutputType>
+    
+    <!-- Fix WiX v5 pdbType issue - try multiple approaches -->
+    <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
+    <PdbType>full</PdbType>
+    <WixPdbType>full</WixPdbType>
+    
+    <!-- Suppress WiX warning about pdbType -->
+    <NoWarn>$(NoWarn);WIX1098</NoWarn>
+
+    <!-- Globbing will automatically find any .wxl relative to the project file. Since we're simshipping localized content for
+         the bundle UI, we either need to exclude the .wxl files or place them in a directory outside of the project. For simshipping
+         we only need to ensure the files are pulled in as additional payloads into the UX container. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
+
+    <!-- Workload manifests will be included only if the source fragment was generated. -->
+    <Compile Include="$(WorkloadManifestsWxsPath)" Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" />
+    <PackageReference Include="Microsoft.WixToolset.Util.wixext" />
+    <PackageReference Include="Microsoft.WixToolset.UI.wixext" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Ensure the Windows Desktop Runtime is built before this bundle -->
+    <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
+  </ItemGroup>
+
+  <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <!-- Core version information -->
+      <DefineConstants>$(DefineConstants);MajorVersion=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinorVersion=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);PatchVersion=$(PatchVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
+      
+      <!-- Bundle metadata -->
+      <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
+      <DefineConstants>$(DefineConstants);UpgradeCode={39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}</DefineConstants>
+      <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
+      
+      <!-- Architecture definitions -->
+      <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_x64=x64</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_arm64=arm64</DefineConstants>
+
+      <!-- Product and version related preprocessor definitions. -->
+      <DefineConstants>$(DefineConstants);ProductName=$(SdkBrandName) ($(TargetArchitecture))</DefineConstants>
+      <DefineConstants>$(DefineConstants);WinFormsAndWpfVersion=$(WinFormsAndWpfVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
+
+      <!-- PlatformToken is used to generate a generate a WiX variable name using a preprocessor variable so casing matters. -->
+      <DefineConstants>$(DefineConstants);PlatformToken=$(TargetArchitecture.ToUpper())</DefineConstants>
+
+      <!-- Source path for the Windows Desktop Runtime MSI -->
+      <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</DefineConstants>
+
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Copy bundle.exe to shipping directory after build -->
+  <Target Name="CopyBundleToShipping" AfterTargets="Build">
+    <PropertyGroup>
+      <BundleShippingName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
+      <BundleShippingPath>$(ArtifactsPackagesDir)Shipping\$(BundleShippingName)</BundleShippingPath>
+    </PropertyGroup>
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
+    <Message Text="Copied bundle to shipping directory: $(BundleShippingPath)" Importance="high" />
+  </Target>
+
+</Project>

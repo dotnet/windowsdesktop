@@ -88,6 +88,15 @@
       <!-- Source path for the Windows Desktop Runtime MSI -->
       <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</DefineConstants>
 
+      <!-- Source path for the .NET Runtime MSI (from dotnet/dotnet repo) -->
+      <!-- This MSI may not be available when building standalone Windows Desktop Runtime -->
+      <DefineConstants>$(DefineConstants);DotNetRuntimeMsiPath=$(ArtifactsPackagesDir)Shipping\dotnet-runtime-$(Version)-win-$(TargetArchitecture).msi</DefineConstants>
+      
+      <!-- Check if .NET Runtime MSI exists and set a flag -->
+      <DotNetRuntimeMsiExists>false</DotNetRuntimeMsiExists>
+      <DotNetRuntimeMsiExists Condition="Exists('$(ArtifactsPackagesDir)Shipping\dotnet-runtime-$(Version)-win-$(TargetArchitecture).msi')">true</DotNetRuntimeMsiExists>
+      <DefineConstants>$(DefineConstants);DotNetRuntimeMsiExists=$(DotNetRuntimeMsiExists)</DefineConstants>
+
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
     </PropertyGroup>

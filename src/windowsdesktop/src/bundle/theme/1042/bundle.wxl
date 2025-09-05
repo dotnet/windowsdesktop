@@ -72,4 +72,24 @@
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;.NET에 대한 라이선스 정보&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="[설치]를 클릭하면 다음 사용 약관에 동의하는 것입니다." />`n  <String Id="VisualStudioWarning" Value="If you plan to use .NET [VERSIONMAJOR].[VERSIONMINOR] with Visual Studio, Visual Studio 2022 [MINIMUMVSVERSION] or newer is required. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Learn more&lt;/A&gt;." />
   
+
+  <!-- Success page strings -->
+  <String Id="FirstTimeWelcomeMessage" Value="Thank you for installing [BUNDLEMONIKER]! You can now run applications that require the .NET Windows Desktop Runtime." />
+  <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;.NET Documentation&lt;/A&gt;" />
+  <String Id="WindowsDesktopDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-desktop-docs&quot;&gt;Windows Desktop Documentation&lt;/A&gt;" />
+  <String Id="ReleaseNotesLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Release Notes&lt;/A&gt;" />
+  <String Id="TutorialsLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-tutorials&quot;&gt;.NET Tutorials&lt;/A&gt;" />
+  
+  <!-- Additional success headers -->
+  <String Id="SuccessLayoutHeader" Value="Layout Successfully Completed" />
+  <String Id="SuccessUnsafeUninstallHeader" Value="Unsafe Uninstall Successfully Completed" />
+  <String Id="SuccessCacheHeader" Value="Cache Successfully Completed" />
+  <String Id="SuccessModifyHeader" Value="Modification Successfully Completed" />
+  <String Id="SuccessUninstallRestartText" Value="You must restart your computer to complete the uninstallation." />
+  
+  <!-- Additional failure headers -->
+  <String Id="FailureLayoutHeader" Value="Layout Failed" />
+  <String Id="FailureUnsafeUninstallHeader" Value="Unsafe Uninstall Failed" />
+  <String Id="FailureCacheHeader" Value="Cache Failed" />
+  <String Id="FailureModifyHeader" Value="Modification Failed" />
 </WixLocalization>

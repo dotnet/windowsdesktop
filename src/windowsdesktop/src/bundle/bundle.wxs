@@ -1,5 +1,5 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
-  <Bundle Name="$(ProductName)" Manufacturer="$(Manufacturer)" Version="$(BundleVersion)" UpgradeCode="$(UpgradeCode)" AboutUrl="https://aka.ms/netcorehelp/"
+  <Bundle Name="$(SdkBrandName) $(Version) ($(TargetArchitecture))" Manufacturer="$(Manufacturer)" Version="$(BundleVersion)" UpgradeCode="$(UpgradeCode)" AboutUrl="https://aka.ms/netcorehelp/"
           Compressed="yes">
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />

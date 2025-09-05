@@ -50,6 +50,7 @@
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);UpgradeCode={39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
+      <DefineConstants>$(DefineConstants);BUNDLEMONIKER=Microsoft Windows Desktop Runtime $(Version)</DefineConstants>
       
       <!-- Architecture definitions -->
       <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
@@ -62,6 +63,14 @@
       <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
+
+      <!-- Additional variables for localization -->
+      <DefineConstants>$(DefineConstants);VERSIONMAJOR=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);VERSIONMINOR=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MINIMUMVSVERSION=$(MinimumVSVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);PRODUCT_NAME=$(SdkBrandName)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DOTNETHOME=[ProgramFiles6432Folder]dotnet</DefineConstants>
+      <DefineConstants>$(DefineConstants);LINK_PREREQ_PAGE=https://aka.ms/dotnet-requirements</DefineConstants>
 
       <!-- PlatformToken is used to generate a generate a WiX variable name using a preprocessor variable so casing matters. -->
       <DefineConstants>$(DefineConstants);PlatformToken=$(TargetArchitecture.ToUpper())</DefineConstants>

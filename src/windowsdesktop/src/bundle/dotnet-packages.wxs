@@ -1,0 +1,15 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <PackageGroup Id="PG_DotNet">
+      <!-- Windows Desktop Runtime MSI package -->
+      <MsiPackage 
+        Id="WindowsDesktopRuntime"
+        SourceFile="..\..\windowsdesktop-runtime\windowsdesktop-runtime.msi"
+        Visible="no"
+        Cache="keep">
+        <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
+        <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
+      </MsiPackage>
+    </PackageGroup>
+  </Fragment>
+</Wix>

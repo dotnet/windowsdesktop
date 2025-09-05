@@ -152,6 +152,20 @@
     <Variable Name="MINIMUMVSVERSION" Type="string" Value="$(MinimumVSVersion)" bal:Overridable="no" />
 
     <Chain DisableSystemRestore="yes" ParallelCache="yes">
+      <!-- .NET Runtime must be installed first as it's a prerequisite for Windows Desktop Runtime -->
+      <!-- Only include .NET Runtime MSI if it exists (it's built in a separate repo) -->
+      <?if $(DotNetRuntimeMsiExists) = true ?>
+      <MsiPackage 
+        Id="DotNetRuntime"
+        SourceFile="$(DotNetRuntimeMsiPath)"
+        Vital="yes"
+        Cache="keep"
+        DisplayName="Microsoft .NET Runtime">
+        <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
+        <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
+      </MsiPackage>
+      <?endif ?>
+      
       <!-- Windows Desktop Runtime Bundle: wraps the MSI with themed UI -->
       
       <!-- Reference the Windows Desktop Runtime MSI built by the sfx project -->

@@ -182,4 +182,10 @@
     <Message Text="Copied bundle to shipping directory: $(BundleShippingPath)" Importance="high" />
   </Target>
 
+  <!-- Pack target - required for CI build system compatibility -->
+  <!-- WiX bundles don't create packages, but CI expects this target to exist -->
+  <Target Name="Pack" DependsOnTargets="Build;CopyBundleToShipping">
+    <Message Text="Pack target completed for bundle project. Bundle copied to shipping directory." Importance="high" />
+  </Target>
+
 </Project>

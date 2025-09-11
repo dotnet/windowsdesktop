@@ -22,9 +22,8 @@
     <PackageThirdPartyNoticesFile>$(MSBuildThisFileDirectory)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799421</PackageReleaseNotes>
 
-    <!-- Disable Windows PDBs-->
-    <PublishWindowsPdb>false</PublishWindowsPdb>
-    
+
+
     <!-- Set up handling of build warnings -->
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

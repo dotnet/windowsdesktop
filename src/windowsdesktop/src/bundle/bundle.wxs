@@ -1,6 +1,11 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
-  <Bundle Name="$(SdkBrandName) $(Version) ($(TargetArchitecture))" Manufacturer="$(Manufacturer)" Version="$(BundleVersion)" UpgradeCode="$(UpgradeCode)" AboutUrl="https://aka.ms/netcorehelp/"
-          Compressed="yes" IconSourceFile="dotnet.ico">
+  <Bundle Name="$(SdkBrandName) $(Version) ($(TargetArchitecture))" 
+          Manufacturer="$(Manufacturer)" 
+          Version="$(BundleVersion)" 
+          UpgradeCode="$(UpgradeCode)" 
+          AboutUrl="https://aka.ms/dotnet-windows-desktop"
+          Compressed="yes" 
+          IconSourceFile="dotnet.ico">
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 
@@ -152,6 +157,9 @@
     <Variable Name="MINIMUMVSVERSION" Type="string" Value="$(MinimumVSVersion)" bal:Overridable="no" />
 
     <Chain DisableSystemRestore="yes" ParallelCache="yes">
+      <!-- Rollback boundary ensures transaction safety for all MSI packages -->
+      <RollbackBoundary Id="WindowsDesktopBoundary" />
+      
       <!-- .NET Core components must be installed in dependency order -->
       <!-- Host is the base component that everything else depends on -->
       <?if $(DotNetHostMsiExists) = true ?>

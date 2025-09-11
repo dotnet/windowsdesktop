@@ -32,5 +32,7 @@
     <SystemSecurityPrincipalWindowsVersion>5.0.0</SystemSecurityPrincipalWindowsVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>8.1.2</SystemServiceModelVersion>
+    <!-- wix -->
+    <MicrosoftWixToolsetSdkVersion>5.0.2-dotnet.2737382</MicrosoftWixToolsetSdkVersion>
   </PropertyGroup>
 </Project>

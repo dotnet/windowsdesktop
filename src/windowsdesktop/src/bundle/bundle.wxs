@@ -209,6 +209,7 @@
         DisplayName="Microsoft Windows Desktop Runtime">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
+        <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="0" />
       </MsiPackage>
     </Chain>
   </Bundle>

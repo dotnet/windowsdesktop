@@ -3,6 +3,13 @@
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
+    <!-- WiX v5 Configuration -->
+    <UseWixV5>true</UseWixV5>
+    
+    <!-- WiX v5 PDB Type Fix -->
+    <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>
@@ -15,12 +22,16 @@
     <PackageThirdPartyNoticesFile>$(MSBuildThisFileDirectory)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799421</PackageReleaseNotes>
 
+
+
     <!-- Set up handling of build warnings -->
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
     <!-- Platform detection -->
-    <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
+    <!-- Map Platform property to TargetArchitecture -->
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != ''">$(Platform)</TargetArchitecture>
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
 
     <!-- Only upgrade NuGetAudit warnings to errors for official builds. -->
     <WarningsNotAsErrors Condition="'$(OfficialBuild)' != 'true'">$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>

@@ -88,8 +88,11 @@
       <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);BundleVersion=$(Version)</DefineConstants>
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
-      <DefineConstants>$(DefineConstants);UpgradeCode={39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
+      
+      <!-- Generate architecture-specific UpgradeCodes from seed to allow side-by-side installation -->
+      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
+      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture)</UpgradeCodeSeedWithArch>
       
       <!-- Architecture and platform -->
       <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
@@ -138,6 +141,20 @@
     </PropertyGroup>
     <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
     <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
+  </Target>
+
+  <!-- Generate deterministic UpgradeCode from seed -->
+  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
+    <!-- Use Microsoft.DotNet.Build.Tasks.Installers task to generate GUID from seed -->
+    <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
+      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
+    </GenerateGuidFromName>
+    
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
+    </PropertyGroup>
+    
+    <Message Text="Generated UpgradeCode for $(TargetArchitecture): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
   </Target>
 
   <!-- Pack target for CI compatibility -->

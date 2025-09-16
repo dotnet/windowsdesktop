@@ -4,6 +4,9 @@
     <!-- OutputType determines the extension, .msi, .wixlib, .exe, etc. -->
     <OutputType>Bundle</OutputType>
     
+    <!-- Enable WiX v5 features (following reference repo pattern) -->
+    <UseWix5>true</UseWix5>
+    
     <!-- Runtime identifiers for multi-architecture support -->
     <RuntimeIdentifiers>win-x64;win-x86;win-arm64</RuntimeIdentifiers>
     
@@ -36,9 +39,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" />
-    <PackageReference Include="Microsoft.WixToolset.Util.wixext" />
-    <PackageReference Include="Microsoft.WixToolset.UI.wixext" />
+    <!-- Microsoft.Wix is a dotnet tool package, so exclude its assets (following reference repo pattern) -->
+    <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" />
+    <!-- WiX extension packages with GeneratePathProperty for installers -->
+    <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Heat" />
   </ItemGroup>
 
   <ItemGroup>

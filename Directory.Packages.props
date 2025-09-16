@@ -79,6 +79,17 @@
     <PackageVersion Include="Microsoft.WixToolset.Heat" Version="$(MicrosoftWixToolsetHeatVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.UI.wixext" Version="$(MicrosoftWixToolsetUIWixextVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.Util.wixext" Version="$(MicrosoftWixToolsetUtilWixextVersion)" />
+
+    <!-- .NET runtime transport packages for WiX bundle -->
+    <PackageVersion Include="vs.redist.common.netcore.sharedhost.x64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.sharedhost.x86.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.sharedhost.arm64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.hostfxr.x64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.hostfxr.x86.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.hostfxr.arm64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.sharedframework.x64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.sharedframework.x86.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
+    <PackageVersion Include="vs.redist.common.netcore.sharedframework.arm64.10.0" Version="$(MicrosoftNETCoreAppRefVersion)" />
   </ItemGroup>
 
 </Project>

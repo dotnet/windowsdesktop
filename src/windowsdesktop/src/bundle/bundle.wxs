@@ -162,7 +162,7 @@
       
       <!-- .NET Core components must be installed in dependency order -->
       <!-- Host is the base component that everything else depends on -->
-      <?if $(DotNetHostMsiExists) = true ?>
+      <?if $(DotNetHostMsiExists) = True ?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(DotNetHostMsiPath)"
@@ -175,7 +175,7 @@
       <?endif ?>
       
       <!-- HostFxr depends on Host -->
-      <?if $(DotNetHostFxrMsiExists) = true ?>
+      <?if $(DotNetHostFxrMsiExists) = True ?>
       <MsiPackage 
         Id="DotNetHostFxr"
         SourceFile="$(DotNetHostFxrMsiPath)"
@@ -188,7 +188,7 @@
       <?endif ?>
       
       <!-- Runtime depends on Host and HostFxr -->
-      <?if $(DotNetRuntimeMsiExists) = true ?>
+      <?if $(DotNetRuntimeMsiExists) = True ?>
       <MsiPackage 
         Id="DotNetRuntime"
         SourceFile="$(DotNetRuntimeMsiPath)"

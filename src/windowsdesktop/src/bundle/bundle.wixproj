@@ -47,6 +47,37 @@
     <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.WixToolset.Heat" />
+    
+    <!-- Transport packages containing .NET runtime MSI files for bundle inclusion -->
+    <PackageReference Include="vs.redist.common.netcore.sharedhost.x64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x64'" />
+    <PackageReference Include="vs.redist.common.netcore.sharedhost.x86.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x86'" />
+    <PackageReference Include="vs.redist.common.netcore.sharedhost.arm64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'arm64'" />
+                      
+    <PackageReference Include="vs.redist.common.netcore.hostfxr.x64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x64'" />
+    <PackageReference Include="vs.redist.common.netcore.hostfxr.x86.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x86'" />
+    <PackageReference Include="vs.redist.common.netcore.hostfxr.arm64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'arm64'" />
+                      
+    <PackageReference Include="vs.redist.common.netcore.sharedframework.x64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x64'" />
+    <PackageReference Include="vs.redist.common.netcore.sharedframework.x86.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'x86'" />
+    <PackageReference Include="vs.redist.common.netcore.sharedframework.arm64.10.0" 
+                      GeneratePathProperty="true" 
+                      Condition="'$(TargetArchitecture)' == 'arm64'" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,24 +86,36 @@
   </ItemGroup>
 
   <!-- Collect VS insertion packages for .NET Core runtime components -->
-  <!-- Unified runtime component resolution following ASP.NET Core patterns -->
-  <!-- Simple MSI Resolution (ASP.NET Core Style) -->
+  <!-- Use PackageReference-generated path properties for reliable CI/local build compatibility -->
   <Target Name="GetBundledNETCoreRuntimeMsiFiles" BeforeTargets="SetInstallerInfo">
-    <PropertyGroup>
-      <_CurrentArch>$(RuntimeIdentifier.Replace('win-', ''))</_CurrentArch>
+    <!-- Use PackageReference-generated path properties (generated automatically with GeneratePathProperty="true") -->
+    <PropertyGroup Condition="'$(TargetArchitecture)' == 'x64'">
+      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_x64_10_0)</_HostPackagePath>
+      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_x64_10_0)</_HostFxrPackagePath>
+      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_x64_10_0)</_RuntimePackagePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(TargetArchitecture)' == 'x86'">
+      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_x86_10_0)</_HostPackagePath>
+      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_x86_10_0)</_HostFxrPackagePath>
+      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_x86_10_0)</_RuntimePackagePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(TargetArchitecture)' == 'arm64'">
+      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_arm64_10_0)</_HostPackagePath>
+      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_arm64_10_0)</_HostFxrPackagePath>
+      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_arm64_10_0)</_RuntimePackagePath>
     </PropertyGroup>
 
-    <!-- Look for runtime MSI files in typical locations (like ASP.NET Core does) -->
+    <!-- Find MSI files within the PackageReference-resolved paths -->
     <ItemGroup>
-      <!-- Local build artifacts -->
-      <DotNetHostMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-host-*-win-$(TargetArchitecture).msi" />
-      <DotNetHostFxrMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" />
-      <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" />
+      <!-- Look for MSI files in transport packages first, then fallback to local build artifacts -->
+      <DotNetHostMsiCandidate Include="$(_HostPackagePath)\**\*.msi" Condition="'$(_HostPackagePath)' != ''" />
+      <DotNetHostFxrMsiCandidate Include="$(_HostFxrPackagePath)\**\*.msi" Condition="'$(_HostFxrPackagePath)' != ''" />
+      <DotNetRuntimeMsiCandidate Include="$(_RuntimePackagePath)\**\*.msi" Condition="'$(_RuntimePackagePath)' != ''" />
       
-      <!-- Transport packages -->
-      <DotNetHostMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedhost.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
-      <DotNetHostFxrMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.hostfxr.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
-      <DotNetRuntimeMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedframework.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
+      <!-- Fallback to local build artifacts if transport packages not available -->
+      <DotNetHostMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_HostPackagePath)' == ''" />
+      <DotNetHostFxrMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_HostFxrPackagePath)' == ''" />
+      <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_RuntimePackagePath)' == ''" />
     </ItemGroup>
 
     <!-- Select first available MSI from each group -->

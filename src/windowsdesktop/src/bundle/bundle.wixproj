@@ -62,9 +62,9 @@
       <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" />
       
       <!-- Transport packages -->
-      <DotNetHostMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedhost.$(_CurrentArch).10.0\**\*.msi" />
-      <DotNetHostFxrMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.hostfxr.$(_CurrentArch).10.0\**\*.msi" />
-      <DotNetRuntimeMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedframework.$(_CurrentArch).10.0\**\*.msi" />
+      <DotNetHostMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedhost.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
+      <DotNetHostFxrMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.hostfxr.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
+      <DotNetRuntimeMsiCandidate Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedframework.$(_CurrentArch).$(MajorVersion).$(MinorVersion)\**\*.msi" />
     </ItemGroup>
 
     <!-- Select first available MSI from each group -->

@@ -141,10 +141,9 @@
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
       
-      <!-- Generate UpgradeCodes with major version for proper upgrade behavior -->
-      <!-- In-place upgrades within major.minor versions, SxS across major versions -->
-      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
-      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
+      <!-- Generate UpgradeCodes to match RC1 - use standard Arcade approach -->
+      <!-- Same base seed as RC1 for upgrade compatibility -->
+      <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
       
       <!-- Architecture and platform -->
       <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
@@ -195,9 +194,14 @@
     <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
   </Target>
 
-  <!-- Generate deterministic UpgradeCode from seed -->
+  <!-- Generate deterministic UpgradeCode using same seed as RC1 -->
   <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
-    <!-- Use Microsoft.DotNet.Build.Tasks.Installers task to generate GUID from seed -->
+    <!-- Generate upgrade code using same approach as RC1 but for WiX v5 -->
+    <!-- Use the exact same base seed as RC1 with architecture and version -->
+    <PropertyGroup>
+      <UpgradeCodeSeedWithArch>$(BundleInstallerUpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
+    </PropertyGroup>
+    
     <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
       <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
     </GenerateGuidFromName>

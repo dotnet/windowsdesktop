@@ -27,6 +27,9 @@
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />
     </BootstrapperApplication>
 
+    <!-- Explicitly define upgrade relationship with RC1 bundle -->
+    <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
+
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 
     <!-- Search references for upgrade policy keys -->

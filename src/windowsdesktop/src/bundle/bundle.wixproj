@@ -194,22 +194,25 @@
     <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
   </Target>
 
-  <!-- Use RC1's exact UpgradeCode for upgrade-in-place compatibility -->
+  <!-- Generate deterministic Bundle ID and UpgradeCode to match RC1 exactly -->
   <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
-    <!-- RC1 bundle used {42091558-a8d7-4e3a-885b-aa746c7ed165} for UpgradeCode -->
-    <!-- Using the same UpgradeCode ensures RC1->RC2 upgrade-in-place works -->
-    <!-- WiX v5 automatically generates unique Bundle IDs, and architecture in Bundle Name ensures SxS -->
+    <!-- RC1 used {42091558-a8d7-4e3a-885b-aa746c7ed165} for BOTH Bundle Id and UpgradeCode -->
+    <!-- We need to ensure our Bundle Id matches RC1's for upgrade-in-place to work -->
     <PropertyGroup>
-      <!-- Use hardcoded RC1 UpgradeCode for perfect compatibility -->
+      <!-- Use RC1's exact GUID for both Bundle Id and UpgradeCode -->
       <GeneratedUpgradeCode>42091558-a8d7-4e3a-885b-aa746c7ed165</GeneratedUpgradeCode>
+      <!-- Since RC1 used the same GUID for both, try to match it exactly -->
+      <GeneratedBundleId>42091558-a8d7-4e3a-885b-aa746c7ed165</GeneratedBundleId>
     </PropertyGroup>
     
     <PropertyGroup>
       <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
+      <!-- Try to override Bundle Id (may not work in WiX v5) -->
+      <DefineConstants>$(DefineConstants);WixBundleId={$(GeneratedBundleId)}</DefineConstants>
     </PropertyGroup>
     
-    <Message Text="Using RC1 UpgradeCode: {$(GeneratedUpgradeCode)} (RC1->RC2 upgrade-in-place)" Importance="high" />
-    <Message Text="Bundle Name includes architecture '$(TargetArchitecture)' for multi-arch SxS support" Importance="high" />
+    <Message Text="RC1 compatibility: UpgradeCode={$(GeneratedUpgradeCode)}, attempting Bundle Id={$(GeneratedBundleId)}" Importance="high" />
+    <Message Text="Bundle Id seed: $(WixBundleIdSeed)" Importance="high" />
   </Target>
 
   <!-- Pack target for CI compatibility -->

@@ -141,9 +141,10 @@
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
       
-      <!-- Generate architecture-specific UpgradeCodes from seed to allow side-by-side installation -->
+      <!-- Generate UpgradeCodes with major version for proper upgrade behavior -->
+      <!-- In-place upgrades within major.minor versions, SxS across major versions -->
       <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
-      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture)</UpgradeCodeSeedWithArch>
+      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
       
       <!-- Architecture and platform -->
       <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
@@ -205,7 +206,7 @@
       <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
     </PropertyGroup>
     
-    <Message Text="Generated UpgradeCode for $(TargetArchitecture): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
+    <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
   </Target>
 
   <!-- Pack target for CI compatibility -->

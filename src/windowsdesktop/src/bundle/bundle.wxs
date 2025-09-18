@@ -5,7 +5,8 @@
           UpgradeCode="$(UpgradeCode)" 
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes" 
-          IconSourceFile="dotnet.ico">
+          IconSourceFile="dotnet.ico"
+          Tag="WindowsDesktopRuntime.$(TargetArchitecture).$(MajorVersion).$(MinorVersion)">
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 
@@ -27,8 +28,15 @@
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />
     </BootstrapperApplication>
 
-    <!-- Explicitly define upgrade relationship with RC1 bundle -->
-    <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
+    <!-- Search for RC1 bundle to enable upgrade behavior -->
+    <util:RegistrySearch Id="RC1BundleSearch"
+                         Root="HKLM"
+                         Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{42091558-a8d7-4e3a-885b-aa746c7ed165}"
+                         Value="DisplayName"
+                         Variable="RC1BundleInstalled"
+                         Result="exists" />
+
+  <!-- Removed explicit RelatedBundle; consistent UpgradeCode drives upgrade detection. -->
 
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 

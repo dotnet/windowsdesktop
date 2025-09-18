@@ -29,6 +29,11 @@
          the bundle UI, we either need to exclude the .wxl files or place them in a directory outside of the project. For simshipping
          we only need to ensure the files are pulled in as additional payloads into the UX container. -->
     <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
+    
+    <!-- Force the bundle UpgradeCode to match RC1 exactly so Burn detects prior versions for upgrade.
+      RC1 used the same GUID for both Bundle Id and UpgradeCode; matching the UpgradeCode is sufficient
+      for upgrade behavior. Bundle Id itself will remain uniquely generated per build. -->
+    <WixBundleUpgradeCode>42091558-a8d7-4e3a-885b-aa746c7ed165</WixBundleUpgradeCode>
   </PropertyGroup>
 
   <ItemGroup>
@@ -161,6 +166,9 @@
       <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
 
+  <!-- Provide UpgradeCode constant expected by bundle.wxs -->
+  <DefineConstants>$(DefineConstants);UpgradeCode={$(WixBundleUpgradeCode)}</DefineConstants>
+
       <!-- Windows Desktop Runtime MSI (always from local build) -->
       <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
       
@@ -182,6 +190,7 @@
     <Message Text=".NET Host: $(DotNetHostMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostMsiPath)')))" Importance="high" />
     <Message Text=".NET HostFxr: $(DotNetHostFxrMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)')))" Importance="high" />
     <Message Text=".NET Runtime: $(DotNetRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)')))" Importance="high" />
+      <Message Text="Bundle UpgradeCode: {$(WixBundleUpgradeCode)}" Importance="high" />
   </Target>
 
   <!-- Bundle publication to shipping directory -->
@@ -194,26 +203,7 @@
     <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
   </Target>
 
-  <!-- Generate deterministic Bundle ID and UpgradeCode to match RC1 exactly -->
-  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
-    <!-- RC1 used {42091558-a8d7-4e3a-885b-aa746c7ed165} for BOTH Bundle Id and UpgradeCode -->
-    <!-- We need to ensure our Bundle Id matches RC1's for upgrade-in-place to work -->
-    <PropertyGroup>
-      <!-- Use RC1's exact GUID for both Bundle Id and UpgradeCode -->
-      <GeneratedUpgradeCode>42091558-a8d7-4e3a-885b-aa746c7ed165</GeneratedUpgradeCode>
-      <!-- Since RC1 used the same GUID for both, try to match it exactly -->
-      <GeneratedBundleId>42091558-a8d7-4e3a-885b-aa746c7ed165</GeneratedBundleId>
-    </PropertyGroup>
-    
-    <PropertyGroup>
-      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
-      <!-- Try to override Bundle Id (may not work in WiX v5) -->
-      <DefineConstants>$(DefineConstants);WixBundleId={$(GeneratedBundleId)}</DefineConstants>
-    </PropertyGroup>
-    
-    <Message Text="RC1 compatibility: UpgradeCode={$(GeneratedUpgradeCode)}, attempting Bundle Id={$(GeneratedBundleId)}" Importance="high" />
-    <Message Text="Bundle Id seed: $(WixBundleIdSeed)" Importance="high" />
-  </Target>
+  <!-- Removed late UpgradeCode override target. Setting WixBundleUpgradeCode property early ensures Candle picks it up. -->
 
   <!-- Pack target for CI compatibility -->
   <Target Name="Pack" DependsOnTargets="Build;PublishBundle">

@@ -1,7 +1,7 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
-  <Bundle Name="$(SdkBrandName) $(Version) ($(TargetArchitecture))" 
-          Manufacturer="$(Manufacturer)" 
-          Version="$(BundleVersion)" 
+  <Bundle Name="$(SdkBrandName) $(BundleDisplayVersion) ($(TargetArchitecture))" 
+    Manufacturer="$(Manufacturer)" 
+    Version="$(BundleNumericVersion)" 
           UpgradeCode="$(UpgradeCode)" 
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes" 

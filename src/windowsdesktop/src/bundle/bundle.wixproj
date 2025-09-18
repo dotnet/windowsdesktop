@@ -31,9 +31,9 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
     
     <!-- Force the bundle UpgradeCode to match RC1 exactly so Burn detects prior versions for upgrade.
-      RC1 used the same GUID for both Bundle Id and UpgradeCode; matching the UpgradeCode is sufficient
-      for upgrade behavior. Bundle Id itself will remain uniquely generated per build. -->
-    <WixBundleUpgradeCode>42091558-a8d7-4e3a-885b-aa746c7ed165</WixBundleUpgradeCode>
+      RC1 manifest shows UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} (distinct from Bundle/Provider key {42091558-a8d7-4e3a-885b-aa746c7ed165}).
+      Preserve this UpgradeCode for all subsequent 10.0.x releases to ensure in-place upgrade behavior. -->
+    <WixBundleUpgradeCode>55414577-5A99-7937-6951-9CCC4BE8857E</WixBundleUpgradeCode>
   </PropertyGroup>
 
   <ItemGroup>

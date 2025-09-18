@@ -1,12 +1,24 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
-  <Bundle Name="$(SdkBrandName) $(BundleDisplayVersion) ($(TargetArchitecture))" 
-    Manufacturer="$(Manufacturer)" 
-    Version="$(BundleVersion)" 
-          UpgradeCode="$(UpgradeCode)" 
+  <Bundle Name="$(SdkBrandName) $(Version) ($(TargetArchitecture))" 
+          Manufacturer="$(Manufacturer)" 
+          Version="$(BundleVersion)" 
+          UpgradeCode="$(UpgradeCode)"
+          ProviderKey="$(UpgradeCode)"
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes" 
-          IconSourceFile="dotnet.ico"
-          Tag="WindowsDesktopRuntime.$(TargetArchitecture).$(MajorVersion).$(MinorVersion)">
+          IconSourceFile="dotnet.ico">
+
+    <!-- Related bundle for upgrade scenarios -->
+    <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />
+    
+    <!-- Upgrade previous test bundle that was installed -->
+    <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
+    
+    <!-- Upgrade RC1 bundle for in-place RC1→RC2 upgrade -->
+    <RelatedBundle Id="{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}" Action="Upgrade" />
+    
+    <!-- Upgrade Preview bundle for in-place PreviewN→RC2 upgrade -->
+    <RelatedBundle Id="{55414577-5A99-7937-6951-9CCC4BE8857E}" Action="Upgrade" />
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 
@@ -27,8 +39,6 @@
       <Payload Name="DotNetLogo_256x.png" Compressed="yes" SourceFile="DotNetLogo_256x.png" />
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />
     </BootstrapperApplication>
-
-  <!-- Upgrade detection relies solely on consistent UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} established in RC1. -->
 
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 
@@ -137,6 +147,44 @@
               Path="[ProgramFiles64Folder]dotnet"/>
     <?endif?>
 
+    <!-- Registry searches for WindowsDesktop framework detection -->
+    <util:RegistrySearch Id="WindowsDesktopFrameworkInstalled"
+                         Key="SOFTWARE\dotnet\Setup\InstalledVersions\$(TargetArchitecture)\sharedframework\Microsoft.WindowsDesktop.App"
+                         Result="exists"
+                         Root="HKLM"
+                         Value="10.0.0"
+                         Variable="WindowsDesktopFrameworkExists" />
+
+    <util:RegistrySearch After="WindowsDesktopFrameworkInstalled"
+                         Condition="WindowsDesktopFrameworkExists"
+                         Id="WindowsDesktopFrameworkVersion"
+                         Key="SOFTWARE\dotnet\Setup\InstalledVersions\$(TargetArchitecture)\sharedframework\Microsoft.WindowsDesktop.App"
+                         Result="value"
+                         Root="HKLM"
+                         Value="10.0.0"
+                         Variable="WindowsDesktopFrameworkInstalledVersion" />
+
+    <!-- Registry search for RC1 bundle detection -->
+    <util:RegistrySearch Id="WindowsDesktopRC1BundleInstalled"
+                         Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}"
+                         Result="exists"
+                         Root="HKLM"
+                         Variable="WindowsDesktopRC1BundleExists" />
+
+    <!-- Registry search for Preview 5 bundle detection -->
+    <util:RegistrySearch Id="WindowsDesktopPreview5BundleInstalled"
+                         Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{55414577-5A99-7937-6951-9CCC4BE8857E}"
+                         Result="exists"
+                         Root="HKLM"
+                         Variable="WindowsDesktopPreview5BundleExists" />
+
+    <!-- Registry search for current bundle family detection -->
+    <util:RegistrySearch Id="WindowsDesktopCurrentBundleInstalled"
+                         Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(UpgradeCode)"
+                         Result="exists"
+                         Root="HKLM"
+                         Variable="WindowsDesktopCurrentBundleExists" />
+
     <!--
         When installing the SDK bundle to a custom location using the commandline parameters, it is intended, not mandatory, that
         both "DOTNETHOME_X86" and "DOTNETHOME_X64" should be used on the commandline and should take this convention:
@@ -159,45 +207,55 @@
     <Variable Name="VERSIONMINOR" Type="string" Value="$(MinorVersion)" bal:Overridable="no" />
     <Variable Name="MINIMUMVSVERSION" Type="string" Value="$(MinimumVSVersion)" bal:Overridable="no" />
 
+    <!-- Upgrade policy variables following reference PR patterns -->
+    <Variable Name="RemovePreviousVersions" Type="numeric" Value="1" bal:Overridable="yes" />
+    <Variable Name="RemoveSpecificPreviousVersion" Type="string" Value="" bal:Overridable="yes" />
+
     <Chain DisableSystemRestore="yes" ParallelCache="yes">
       <!-- Rollback boundary ensures transaction safety for all MSI packages -->
       <RollbackBoundary Id="WindowsDesktopBoundary" />
       
       <!-- .NET Core components must be installed in dependency order -->
       <!-- Host is the base component that everything else depends on -->
-      <?if $(DotNetHostMsiExists) = True ?>
+      <?if $(DotNetHostMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(DotNetHostMsiPath)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Host">
+        DisplayName="Microsoft .NET Host"
+        DetectCondition="DotNetHostInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
+        InstallCondition="NOT DotNetHostInstalledVersion$(PlatformToken) OR DotNetHostInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
       <?endif ?>
       
       <!-- HostFxr depends on Host -->
-      <?if $(DotNetHostFxrMsiExists) = True ?>
+      <?if $(DotNetHostFxrMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetHostFxr"
         SourceFile="$(DotNetHostFxrMsiPath)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Host FX Resolver">
+        DisplayName="Microsoft .NET Host FX Resolver"
+        DetectCondition="DotNetHostFxrInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
+        InstallCondition="NOT DotNetHostFxrInstalledVersion$(PlatformToken) OR DotNetHostFxrInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
       <?endif ?>
       
       <!-- Runtime depends on Host and HostFxr -->
-      <?if $(DotNetRuntimeMsiExists) = True ?>
+      <?if $(DotNetRuntimeMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetRuntime"
         SourceFile="$(DotNetRuntimeMsiPath)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Runtime">
+        DisplayName="Microsoft .NET Runtime"
+        DetectCondition="DotNetRuntimeInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
+        InstallCondition="NOT DotNetRuntimeInstalledVersion$(PlatformToken) OR DotNetRuntimeInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
@@ -209,7 +267,8 @@
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft Windows Desktop Runtime">
+        DisplayName="Microsoft Windows Desktop Runtime"
+        InstallCondition="NOT WindowsDesktopRuntimeInstalledVersion OR WindowsDesktopRuntimeInstalledVersion &lt; v$(Version)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="0" />

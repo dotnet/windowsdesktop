@@ -30,11 +30,8 @@
 
     <!-- Platform detection -->
     <!-- Map Platform property to TargetArchitecture -->
-    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != '' AND '$(Platform)' != 'AnyCPU'">$(Platform)</TargetArchitecture>
-    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' OR '$(TargetArchitecture)' == 'AnyCPU'">x64</TargetArchitecture>
-    
-    <!-- Set RuntimeIdentifiers for multi-architecture builds -->
-    <RuntimeIdentifiers Condition="'$(RuntimeIdentifiers)' == ''">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != ''">$(Platform)</TargetArchitecture>
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
 
     <!-- Only upgrade NuGetAudit warnings to errors for official builds. -->
     <WarningsNotAsErrors Condition="'$(OfficialBuild)' != 'true'">$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>

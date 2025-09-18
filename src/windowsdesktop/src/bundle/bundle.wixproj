@@ -36,6 +36,8 @@
     <!-- Human friendly display version including pre-release token (e.g. 10.0.0 RC 2) -->
     <BundleDisplayVersion Condition="'$(PreReleaseVersionLabel)' != ''">$(MajorVersion).$(MinorVersion).$(PatchVersion) $([System.String]::Copy('$(PreReleaseVersionLabel)').ToUpper()) $(PreReleaseVersionIteration)</BundleDisplayVersion>
     <BundleDisplayVersion Condition="'$(PreReleaseVersionLabel)' == ''">$(MajorVersion).$(MinorVersion).$(PatchVersion)</BundleDisplayVersion>
+    <!-- NOTE: In WiX authoring we expose BundleVersion (numeric) + BundleDisplayVersion (friendly). BundleVersion naming mirrors
+      the .NET 9 WindowsDesktop bundleproj approach so ecosystem tooling remains consistent. -->
 
     <!-- Force the bundle UpgradeCode to match RC1 exactly so Burn detects prior versions for upgrade.
       RC1 manifest shows UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} (distinct from Bundle/Provider key {42091558-a8d7-4e3a-885b-aa746c7ed165}).
@@ -149,7 +151,9 @@
     <PropertyGroup>
       <!-- Essential bundle metadata -->
       <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
-  <DefineConstants>$(DefineConstants);BundleVersion=$(Version)</DefineConstants>
+      <!-- Align with .NET 9 convention: use a single BundleVersion constant for the Burn numeric file version.
+           (Display-only pre-release text remains in BundleDisplayVersion.) -->
+  <DefineConstants>$(DefineConstants);BundleVersion=$(BundleNumericVersion)</DefineConstants>
   <DefineConstants>$(DefineConstants);BundleNumericVersion=$(BundleNumericVersion)</DefineConstants>
   <DefineConstants>$(DefineConstants);BundleDisplayVersion=$(BundleDisplayVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>

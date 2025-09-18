@@ -28,15 +28,7 @@
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />
     </BootstrapperApplication>
 
-    <!-- Search for RC1 bundle to enable upgrade behavior -->
-    <util:RegistrySearch Id="RC1BundleSearch"
-                         Root="HKLM"
-                         Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{42091558-a8d7-4e3a-885b-aa746c7ed165}"
-                         Value="DisplayName"
-                         Variable="RC1BundleInstalled"
-                         Result="exists" />
-
-  <!-- Removed explicit RelatedBundle; consistent UpgradeCode drives upgrade detection. -->
+  <!-- Upgrade detection relies solely on consistent UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} established in RC1. -->
 
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 

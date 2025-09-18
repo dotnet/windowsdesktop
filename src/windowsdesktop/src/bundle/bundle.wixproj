@@ -7,8 +7,16 @@
     <!-- Enable WiX v5 features (following reference repo pattern) -->
     <UseWix5>true</UseWix5>
     
-    <!-- Runtime identifiers for multi-architecture support -->
-    <RuntimeIdentifiers>win-x64;win-x86;win-arm64</RuntimeIdentifiers>
+    <!-- WiX v5 build configuration -->
+    <WixBuildExecutablesFolder>$(PkgMicrosoft_Wix)\tools\net6.0\</WixBuildExecutablesFolder>
+    <WixExtensionDirectory>$(PkgMicrosoft_Wix)\tools\net6.0\</WixExtensionDirectory>
+    
+    <!-- Bundle platform configuration -->
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'x86'">x86</BundlePlatform>
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'x64'">x64</BundlePlatform>
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'arm64'">arm64</BundlePlatform>
+    
+    <!-- InstallerPlatform will be set by updated Arcade -->
     
     <!-- Version information for the bundle executable -->
     <AssemblyTitle>Microsoft Windows Desktop Runtime Installer</AssemblyTitle>
@@ -29,24 +37,11 @@
          the bundle UI, we either need to exclude the .wxl files or place them in a directory outside of the project. For simshipping
          we only need to ensure the files are pulled in as additional payloads into the UX container. -->
     <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
-    
-    <!-- Numeric bundle versioning for Burn upgrade comparisons -->
-    <BundleRevision>36000</BundleRevision>
-    <BundleNumericVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion).$(BundleRevision)</BundleNumericVersion>
-    <!-- Human friendly display version including pre-release token (e.g. 10.0.0 RC 2) -->
-    <BundleDisplayVersion Condition="'$(PreReleaseVersionLabel)' != ''">$(MajorVersion).$(MinorVersion).$(PatchVersion) $([System.String]::Copy('$(PreReleaseVersionLabel)').ToUpper()) $(PreReleaseVersionIteration)</BundleDisplayVersion>
-    <BundleDisplayVersion Condition="'$(PreReleaseVersionLabel)' == ''">$(MajorVersion).$(MinorVersion).$(PatchVersion)</BundleDisplayVersion>
-    <!-- NOTE: In WiX authoring we expose BundleVersion (numeric) + BundleDisplayVersion (friendly). BundleVersion naming mirrors
-      the .NET 9 WindowsDesktop bundleproj approach so ecosystem tooling remains consistent. -->
-
-    <!-- Force the bundle UpgradeCode to match RC1 exactly so Burn detects prior versions for upgrade.
-      RC1 manifest shows UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} (distinct from Bundle/Provider key {42091558-a8d7-4e3a-885b-aa746c7ed165}).
-      Preserve this UpgradeCode for all subsequent 10.0.x releases to ensure in-place upgrade behavior. -->
-    <WixBundleUpgradeCode>55414577-5A99-7937-6951-9CCC4BE8857E</WixBundleUpgradeCode>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
+    <Compile Include="dotnet-packages.wxs" />
 
     <!-- Workload manifests will be included only if the source fragment was generated. -->
     <Compile Include="$(WorkloadManifestsWxsPath)" Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')" />
@@ -62,36 +57,9 @@
     <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.WixToolset.Heat" />
     
-    <!-- Transport packages containing .NET runtime MSI files for bundle inclusion -->
-    <PackageReference Include="vs.redist.common.netcore.sharedhost.x64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x64'" />
-    <PackageReference Include="vs.redist.common.netcore.sharedhost.x86.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x86'" />
-    <PackageReference Include="vs.redist.common.netcore.sharedhost.arm64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'arm64'" />
-                      
-    <PackageReference Include="vs.redist.common.netcore.hostfxr.x64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x64'" />
-    <PackageReference Include="vs.redist.common.netcore.hostfxr.x86.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x86'" />
-    <PackageReference Include="vs.redist.common.netcore.hostfxr.arm64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'arm64'" />
-                      
-    <PackageReference Include="vs.redist.common.netcore.sharedframework.x64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x64'" />
-    <PackageReference Include="vs.redist.common.netcore.sharedframework.x86.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'x86'" />
-    <PackageReference Include="vs.redist.common.netcore.sharedframework.arm64.10.0" 
-                      GeneratePathProperty="true" 
-                      Condition="'$(TargetArchitecture)' == 'arm64'" />
+    <!-- WindowsDesktop transport package containing runtime MSI components -->
+    <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
+                      GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
@@ -99,44 +67,30 @@
     <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
   </ItemGroup>
 
-  <!-- Collect VS insertion packages for .NET Core runtime components -->
-  <!-- Use PackageReference-generated path properties for reliable CI/local build compatibility -->
+  <!-- Collect .NET Core runtime components from transport packages and local build artifacts -->
   <Target Name="GetBundledNETCoreRuntimeMsiFiles" BeforeTargets="SetInstallerInfo">
-    <!-- Use PackageReference-generated path properties (generated automatically with GeneratePathProperty="true") -->
-    <PropertyGroup Condition="'$(TargetArchitecture)' == 'x64'">
-      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_x64_10_0)</_HostPackagePath>
-      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_x64_10_0)</_HostFxrPackagePath>
-      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_x64_10_0)</_RuntimePackagePath>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(TargetArchitecture)' == 'x86'">
-      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_x86_10_0)</_HostPackagePath>
-      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_x86_10_0)</_HostFxrPackagePath>
-      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_x86_10_0)</_RuntimePackagePath>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(TargetArchitecture)' == 'arm64'">
-      <_HostPackagePath>$(Pkgvs_redist_common_netcore_sharedhost_arm64_10_0)</_HostPackagePath>
-      <_HostFxrPackagePath>$(Pkgvs_redist_common_netcore_hostfxr_arm64_10_0)</_HostFxrPackagePath>
-      <_RuntimePackagePath>$(Pkgvs_redist_common_netcore_sharedframework_arm64_10_0)</_RuntimePackagePath>
+    <!-- Use transport package first (for CI), then fallback to local artifacts -->
+    <PropertyGroup>
+      <_TransportPackagePath>$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)</_TransportPackagePath>
     </PropertyGroup>
 
-    <!-- Find MSI files within the PackageReference-resolved paths -->
     <ItemGroup>
-      <!-- Look for MSI files in transport packages first, then fallback to local build artifacts -->
-      <DotNetHostMsiCandidate Include="$(_HostPackagePath)\**\*.msi" Condition="'$(_HostPackagePath)' != ''" />
-      <DotNetHostFxrMsiCandidate Include="$(_HostFxrPackagePath)\**\*.msi" Condition="'$(_HostFxrPackagePath)' != ''" />
-      <DotNetRuntimeMsiCandidate Include="$(_RuntimePackagePath)\**\*.msi" Condition="'$(_RuntimePackagePath)' != ''" />
+      <!-- Look for .NET runtime component MSI files in transport package first -->
+      <DotNetHostMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
+      <DotNetHostFxrMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
+      <DotNetRuntimeMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
       
-      <!-- Fallback to local build artifacts if transport packages not available -->
-      <DotNetHostMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_HostPackagePath)' == ''" />
-      <DotNetHostFxrMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_HostFxrPackagePath)' == ''" />
-      <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_RuntimePackagePath)' == ''" />
+      <!-- Fallback to local build artifacts if transport package not available -->
+      <DotNetHostMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
+      <DotNetHostFxrMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
+      <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
     </ItemGroup>
 
     <!-- Select first available MSI from each group -->
     <PropertyGroup>
-      <DotNetHostMsiPath>@(DotNetHostMsiCandidate, ';')</DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath>@(DotNetHostFxrMsiCandidate, ';')</DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath>@(DotNetRuntimeMsiCandidate, ';')</DotNetRuntimeMsiPath>
+      <DotNetHostMsiPath>@(DotNetHostMsiCandidate -> '%(FullPath)', ';')</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath>@(DotNetHostFxrMsiCandidate -> '%(FullPath)', ';')</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath>@(DotNetRuntimeMsiCandidate -> '%(FullPath)', ';')</DotNetRuntimeMsiPath>
     </PropertyGroup>
 
     <!-- Take first item from semicolon-separated list -->
@@ -151,17 +105,17 @@
     <PropertyGroup>
       <!-- Essential bundle metadata -->
       <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
-      <!-- Align with .NET 9 convention: use a single BundleVersion constant for the Burn numeric file version.
-           (Display-only pre-release text remains in BundleDisplayVersion.) -->
-  <DefineConstants>$(DefineConstants);BundleVersion=$(BundleNumericVersion)</DefineConstants>
-  <DefineConstants>$(DefineConstants);BundleNumericVersion=$(BundleNumericVersion)</DefineConstants>
-  <DefineConstants>$(DefineConstants);BundleDisplayVersion=$(BundleDisplayVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);BundleVersion=$(Version)</DefineConstants>
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
       
-      <!-- Generate UpgradeCodes to match RC1 - use standard Arcade approach -->
-      <!-- Same base seed as RC1 for upgrade compatibility -->
-      <BundleInstallerUpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</BundleInstallerUpgradeCodeSeed>
+      <!-- Generate UpgradeCodes with major version for proper upgrade behavior -->
+      <!-- In-place upgrades within major.minor versions, SxS across major versions -->
+      <!-- IMPORTANT: RC1 used UpgradeCode {39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE} - seed should generate this -->
+      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
+      <!-- WiX v5 generates different GUIDs than WiX v3 - can't match RC1 exactly -->
+      <!-- Use consistent seed for WiX v5 going forward with arch for SxS support -->
+      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
       
       <!-- Architecture and platform -->
       <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
@@ -178,9 +132,6 @@
       <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
       <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
-
-  <!-- Provide UpgradeCode constant expected by bundle.wxs -->
-  <DefineConstants>$(DefineConstants);UpgradeCode={$(WixBundleUpgradeCode)}</DefineConstants>
 
       <!-- Windows Desktop Runtime MSI (always from local build) -->
       <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
@@ -203,7 +154,6 @@
     <Message Text=".NET Host: $(DotNetHostMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostMsiPath)')))" Importance="high" />
     <Message Text=".NET HostFxr: $(DotNetHostFxrMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)')))" Importance="high" />
     <Message Text=".NET Runtime: $(DotNetRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)')))" Importance="high" />
-      <Message Text="Bundle UpgradeCode: {$(WixBundleUpgradeCode)}" Importance="high" />
   </Target>
 
   <!-- Bundle publication to shipping directory -->
@@ -216,7 +166,19 @@
     <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
   </Target>
 
-  <!-- Removed late UpgradeCode override target. Setting WixBundleUpgradeCode property early ensures Candle picks it up. -->
+  <!-- Generate deterministic UpgradeCode from seed -->
+  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
+    <!-- Use Microsoft.DotNet.Build.Tasks.Installers task to generate GUID from seed -->
+    <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
+      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
+    </GenerateGuidFromName>
+    
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
+    </PropertyGroup>
+    
+    <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
+  </Target>
 
   <!-- Pack target for CI compatibility -->
   <Target Name="Pack" DependsOnTargets="Build;PublishBundle">
@@ -224,3 +186,38 @@
   </Target>
 
 </Project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

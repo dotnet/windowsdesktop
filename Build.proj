@@ -7,22 +7,14 @@
   <ItemGroup>
     <!-- Microsoft.WindowsDesktop.App shared framework -->
     <ProjectReference Include="src\windowsdesktop\src\sfx\**\*.sfxproj" />
+        <!-- Windows Desktop Runtime Bundle -->
+    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x86" />
+    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x64" />
+    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-arm64" />
     <ProjectReference Include="src\windowsdesktop\tests\**\*.Tests.csproj" />
 
     <!-- Microsoft.Windows.Compatibility nuget meta package -->
     <ProjectReference Include="src\Microsoft.Windows.Compatibility\src\Microsoft.Windows.Compatibility.csproj" />
-  </ItemGroup>
-
-  <!-- Windows Desktop Runtime Bundle - build for all architectures when no specific platform is specified AND not in CI -->
-  <ItemGroup Condition="('$(Platform)' == '' OR '$(Platform)' == 'AnyCPU') AND '$(TargetArchitecture)' == '' AND '$(CI)' != 'true' AND '$(TF_BUILD)' != 'True'">
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x86" />
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x64" />
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-arm64" />
-  </ItemGroup>
-  
-  <!-- Windows Desktop Runtime Bundle - build for specific architecture when platform is specified OR in CI -->
-  <ItemGroup Condition="'$(Platform)' != '' OR '$(TargetArchitecture)' != '' OR '$(CI)' == 'true' OR '$(TF_BUILD)' == 'True'">
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" />
   </ItemGroup>
 
   <!-- Build the stub windowsdesktop targeting pack on non-Windows as its shipping version number gets used in sdk

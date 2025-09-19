@@ -10,6 +10,16 @@
     <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
     <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
     
+    <!-- WiX parallelism settings to prevent file locking issues in CI builds -->
+    <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
+    <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
+    
+    <!-- MSBuild parallelism settings for installer builds to reduce file contention -->
+    <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>
+    
+    <!-- Installer infrastructure settings to prevent heat.exe file conflicts -->
+    <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>

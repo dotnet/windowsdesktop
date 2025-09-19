@@ -216,45 +216,40 @@
       <RollbackBoundary Id="WindowsDesktopBoundary" />
       
       <!-- .NET Core components must be installed in dependency order -->
+      <!-- These are conditionally included only if the MSI files exist -->
+      
       <!-- Host is the base component that everything else depends on -->
-      <?if $(DotNetHostMsiExists) = true ?>
+      <?if $(var.IncludeRuntimeMSIs) = true ?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(DotNetHostMsiPath)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Host"
-        DetectCondition="DotNetHostInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
         InstallCondition="NOT DotNetHostInstalledVersion$(PlatformToken) OR DotNetHostInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
-      <?endif ?>
       
       <!-- HostFxr depends on Host -->
-      <?if $(DotNetHostFxrMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetHostFxr"
         SourceFile="$(DotNetHostFxrMsiPath)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Host FX Resolver"
-        DetectCondition="DotNetHostFxrInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
         InstallCondition="NOT DotNetHostFxrInstalledVersion$(PlatformToken) OR DotNetHostFxrInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
-      <?endif ?>
       
       <!-- Runtime depends on Host and HostFxr -->
-      <?if $(DotNetRuntimeMsiExists) = true ?>
       <MsiPackage 
         Id="DotNetRuntime"
         SourceFile="$(DotNetRuntimeMsiPath)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Runtime"
-        DetectCondition="DotNetRuntimeInstalledVersion$(PlatformToken) &gt;= v$(DotNetRuntimeVersion)"
         InstallCondition="NOT DotNetRuntimeInstalledVersion$(PlatformToken) OR DotNetRuntimeInstalledVersion$(PlatformToken) &lt; v$(DotNetRuntimeVersion)">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />

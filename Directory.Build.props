@@ -28,6 +28,11 @@
     <!-- Disable parallel builds entirely for RuntimePack to prevent all file conflicts -->
     <ContinueOnError Condition="'$(PlatformPackageType)' == 'RuntimePack'">false</ContinueOnError>
     
+    <!-- NuGet packing settings to prevent file locking during multi-arch builds -->
+    <PackTaskMaxParallelism Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</PackTaskMaxParallelism>
+    <NuGetBuildTasksPackMaxParallelism Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</NuGetBuildTasksPackMaxParallelism>
+    <NuGetPackageCompressionLevel Condition="'$(PlatformPackageType)' == 'RuntimePack'">Normal</NuGetPackageCompressionLevel>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>

@@ -14,11 +14,6 @@
     <PublishReadyToRun>true</PublishReadyToRun>
     <CrossGen2Parallelism>1</CrossGen2Parallelism>
     <BuildInParallel>false</BuildInParallel>
-    
-    <!-- NuGet packaging settings to prevent file locking in multi-arch builds -->
-    <PackInParallel>false</PackInParallel>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <!-- Profile is intentionally undefined so that the reference will only be included when no profile is specified i.e. both WPF and WindowsForms are in use https://github.com/dotnet/wpf/blob/bbfc24fd13804a191e20064acd599b0a359092df/packaging/Microsoft.NET.Sdk.WindowsDesktop/targets/Microsoft.NET.Sdk.WindowsDesktop.props#L45-L46 -->
@@ -53,16 +48,8 @@
 
   <!-- WPF specific references -->
   <ItemGroup>
-    <!-- Main WPF assemblies that need to be included for R2R compilation -->
-    <FrameworkListFileClass Include="WindowsBase.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="PresentationCore.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="PresentationFramework.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="System.Xaml.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="UIAutomationClient.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="UIAutomationProvider.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="UIAutomationTypes.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="System.Windows.Controls.Ribbon.dll" Profile="WPF" />
-    <FrameworkListFileClass Include="ReachFramework.dll" Profile="WPF" />
+    <!-- Main WPF assemblies are already included in Directory.Build.props -->
+    <!-- Only include assemblies that are NOT in Directory.Build.props -->
     
     <!-- WPF native and support libraries -->
     <FrameworkListFileClass Condition="'$(PlatformTarget)' != 'ARM64'" Include="D3DCompiler_47_cor3.dll" Profile="WPF" />

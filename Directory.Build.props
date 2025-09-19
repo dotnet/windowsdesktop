@@ -20,6 +20,14 @@
     <!-- Installer infrastructure settings to prevent heat.exe file conflicts -->
     <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>
     
+    <!-- CrossGen2/ReadyToRun settings to prevent R2R compilation file conflicts -->
+    <CrossGenThreads Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</CrossGenThreads>
+    <CrossGen2Parallelism Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</CrossGen2Parallelism>
+    <ReadyToRunUseCrossgen2 Condition="'$(PlatformPackageType)' == 'RuntimePack'">true</ReadyToRunUseCrossgen2>
+    
+    <!-- Disable parallel builds entirely for RuntimePack to prevent all file conflicts -->
+    <ContinueOnError Condition="'$(PlatformPackageType)' == 'RuntimePack'">false</ContinueOnError>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>

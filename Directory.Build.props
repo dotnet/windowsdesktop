@@ -1,6 +1,18 @@
 <Project>
-
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+    <!-- WiX v5 parallelism controls to prevent cabinet and object file locking issues -->
+    <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
+    <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
+    
+    <!-- Comprehensive MSBuild parallelism controls for installer builds -->
+    <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>
+    <MaxCpuCount Condition="'$(BuildingInstallers)' == 'true'">1</MaxCpuCount>
+    
+    <!-- Additional WiX process controls to prevent file conflicts -->
+    <WixParallelism>1</WixParallelism>
+    <WixMaxThreads>1</WixMaxThreads>
+    
+    <!-- Installer infrastructure settings to prevent heat.exe file conflicts -->
+    <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>t Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
     <!-- WiX v5 Configuration -->

@@ -1,18 +1,5 @@
 <Project>
-    <!-- WiX v5 parallelism controls to prevent cabinet and object file locking issues -->
-    <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
-    <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
-    
-    <!-- Comprehensive MSBuild parallelism controls for installer builds -->
-    <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>
-    <MaxCpuCount Condition="'$(BuildingInstallers)' == 'true'">1</MaxCpuCount>
-    
-    <!-- Additional WiX process controls to prevent file conflicts -->
-    <WixParallelism>1</WixParallelism>
-    <WixMaxThreads>1</WixMaxThreads>
-    
-    <!-- Installer infrastructure settings to prevent heat.exe file conflicts -->
-    <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>t Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
     <!-- WiX v5 Configuration -->
@@ -22,15 +9,14 @@
     <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
     <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
     
-    <!-- WiX parallelism settings to prevent file locking issues in CI builds -->
-    <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
-    <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
-    
-    <!-- MSBuild parallelism settings for installer builds to reduce file contention -->
+    <!-- MSBuild parallelism settings to prevent WiX file locking issues -->
     <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>
-    
-    <!-- Installer infrastructure settings to prevent heat.exe file conflicts -->
+    <MaxCpuCount Condition="'$(BuildingInstallers)' == 'true'">1</MaxCpuCount>
     <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>
+    
+    <!-- Additional CI build stability measures -->
+    <BuildInParallel Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">false</BuildInParallel>
+    <MaxCpuCount Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">1</MaxCpuCount>
     
     <!-- WindowsDesktop uses transport packages with pre-compiled R2R assemblies -->
     <!-- Local CrossGen2 compilation settings removed - rely on transport packages -->
@@ -57,8 +43,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
     <!-- Platform detection -->
-    <!-- Map Platform property to TargetArchitecture -->
-    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != ''">$(Platform)</TargetArchitecture>
+    <!-- Map Platform property to TargetArchitecture, but skip AnyCPU which is not valid for WiX -->
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != '' AND '$(Platform)' != 'AnyCPU'">$(Platform)</TargetArchitecture>
     <TargetArchitecture Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
 
     <!-- Only upgrade NuGetAudit warnings to errors for official builds. -->

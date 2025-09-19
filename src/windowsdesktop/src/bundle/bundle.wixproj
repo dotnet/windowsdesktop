@@ -114,7 +114,11 @@
     <PropertyGroup>
       <!-- Essential bundle metadata -->
       <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);BundleVersion=$(Version)</DefineConstants>
+      <!-- BundleVersion must be purely numeric for proper version comparison during upgrades -->
+      <!-- Use VersionSuffixDateStamp (e.g., 25467) if available, otherwise use default build number -->
+      <!-- This ensures RC2 build number is higher than RC1 (10.0.0.35301) -->
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
       

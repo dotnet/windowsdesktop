@@ -69,6 +69,8 @@
     <!-- WindowsDesktop transport package containing runtime MSI components -->
     <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
                       GeneratePathProperty="true" />
+    
+    <!-- VS.Redist.Common.NetCore packages will be added via PackageDownload in CollectVSInsertionPackageDownloads target -->
   </ItemGroup>
 
   <ItemGroup>
@@ -76,38 +78,90 @@
     <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
   </ItemGroup>
 
-  <!-- Collect .NET Core runtime components from transport packages and local build artifacts -->
-  <Target Name="GetBundledNETCoreRuntimeMsiFiles" BeforeTargets="SetInstallerInfo">
-    <!-- Use transport package first (for CI), then fallback to local artifacts -->
-    <PropertyGroup>
-      <_TransportPackagePath>$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)</_TransportPackagePath>
-    </PropertyGroup>
-
+  <!-- Obtain the .NET Core Runtime installers from the VS insertion packages -->
+  <Target Name="CollectVSInsertionPackageDownloads"
+          BeforeTargets="CollectPackageReferences">
     <ItemGroup>
-      <!-- Look for .NET runtime component MSI files in transport package first -->
-      <DotNetHostMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
-      <DotNetHostFxrMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
-      <DotNetRuntimeMsiCandidate Include="$(_TransportPackagePath)\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' != ''" />
-      
-      <!-- Fallback to local build artifacts if transport package not available -->
-      <DotNetHostMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
-      <DotNetHostFxrMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
-      <DotNetRuntimeMsiCandidate Include="$(ArtifactsPackagesDir)Shipping\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(_TransportPackagePath)' == ''" />
+      <!-- Use the current RuntimeIdentifier directly -->
+      <InsertionPackageRID
+        Include="$(RuntimeIdentifier)"
+        Condition="'$(RuntimeIdentifier)' != ''"
+        Arch="$([System.String]::new('$(RuntimeIdentifier)').Replace('win-', ''))" />
     </ItemGroup>
 
-    <!-- Select first available MSI from each group -->
-    <PropertyGroup>
-      <DotNetHostMsiPath>@(DotNetHostMsiCandidate -> '%(FullPath)', ';')</DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath>@(DotNetHostFxrMsiCandidate -> '%(FullPath)', ';')</DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath>@(DotNetRuntimeMsiCandidate -> '%(FullPath)', ';')</DotNetRuntimeMsiPath>
-    </PropertyGroup>
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="runtime" 
+                                 InsertionName="SharedFramework"
+                                 Id="VS.Redist.Common.NetCore.SharedFramework.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-runtime-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="hostfxr" 
+                                 InsertionName="HostFXR"
+                                 Id="VS.Redist.Common.NetCore.HostFXR.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-hostfxr-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="host" 
+                                 InsertionName="SharedHost"
+                                 Id="VS.Redist.Common.NetCore.SharedHost.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-host-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
 
-    <!-- Take first item from semicolon-separated list -->
+      <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+    </ItemGroup>
+    
+
+  </Target>
+
+  <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
+  <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          DependsOnTargets="CollectVSInsertionPackageDownloads"
+          BeforeTargets="_GetBundledComponentInstallers">
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID
+        CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
+
+      <_BundledComponents
+        Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')"
+        Condition="'$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+    
+    <!-- Check if all required MSI files exist in the cache -->
+    <ItemGroup>
+      <RequiredMsiFiles Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                        Condition="'$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+    
+    <!-- Set specific paths for each component type -->
+    <ItemGroup>
+      <_HostMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                    Condition="'%(Name)' == 'host' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+      <_HostFxrMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                       Condition="'%(Name)' == 'hostfxr' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+      <_RuntimeMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                       Condition="'%(Name)' == 'runtime' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+    
+    <!-- Set MSI path properties from the filtered paths -->
     <PropertyGroup>
-      <DotNetHostMsiPath Condition="$(DotNetHostMsiPath.Contains(';'))">$(DotNetHostMsiPath.Split(';')[0])</DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath Condition="$(DotNetHostFxrMsiPath.Contains(';'))">$(DotNetHostFxrMsiPath.Split(';')[0])</DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath Condition="$(DotNetRuntimeMsiPath.Contains(';'))">$(DotNetRuntimeMsiPath.Split(';')[0])</DotNetRuntimeMsiPath>
+      <DotNetHostMsiPath>@(_HostMsiPath)</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath>@(_HostFxrMsiPath)</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath>@(_RuntimeMsiPath)</DotNetRuntimeMsiPath>
     </PropertyGroup>
+    
+    <!-- Check if all MSI files exist and enable runtime MSIs accordingly -->
+    <PropertyGroup>
+      <_HostExists>$([System.IO.File]::Exists('$(DotNetHostMsiPath)'))</_HostExists>
+      <_HostFxrExists>$([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)'))</_HostFxrExists>
+      <_RuntimeExists>$([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)'))</_RuntimeExists>
+      <IncludeRuntimeMSIs Condition="'$(_HostExists)' == 'true' AND '$(_HostFxrExists)' == 'true' AND '$(_RuntimeExists)' == 'true'">true</IncludeRuntimeMSIs>
+      <IncludeRuntimeMSIs Condition="'$(IncludeRuntimeMSIs)' != 'true'">false</IncludeRuntimeMSIs>
+      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
+    </PropertyGroup>
+    
+    <Message Text="IncludeRuntimeMSIs: $(IncludeRuntimeMSIs) (VS.Redist packages available: $(_HostExists) AND $(_HostFxrExists) AND $(_RuntimeExists))" Importance="high" />
   </Target>
 
   <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile" DependsOnTargets="GetBundledNETCoreRuntimeMsiFiles">
@@ -149,24 +203,24 @@
       <!-- Windows Desktop Runtime MSI (always from local build) -->
       <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
       
-      <!-- Set MSI existence flags (simple ASP.NET Core style) -->
+      <!-- .NET Runtime prerequisite MSI paths are set by GetBundledNETCoreRuntimeMsiFiles target -->
+      
+      <!-- Set MSI paths for all bundle components -->
       <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(WindowsDesktopRuntimeMsiPath)</DefineConstants>
       <DefineConstants>$(DefineConstants);DotNetHostMsiPath=$(DotNetHostMsiPath)</DefineConstants>
       <DefineConstants>$(DefineConstants);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath)</DefineConstants>
       <DefineConstants>$(DefineConstants);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetHostMsiExists=$([System.IO.File]::Exists('$(DotNetHostMsiPath)'))</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetHostFxrMsiExists=$([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)'))</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetRuntimeMsiExists=$([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)'))</DefineConstants>
 
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
     </PropertyGroup>
     
-    <!-- Simple logging -->
-    <Message Text="Windows Desktop Runtime: $(WindowsDesktopRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(WindowsDesktopRuntimeMsiPath)')))" Importance="high" />
-    <Message Text=".NET Host: $(DotNetHostMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostMsiPath)')))" Importance="high" />
-    <Message Text=".NET HostFxr: $(DotNetHostFxrMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)')))" Importance="high" />
-    <Message Text=".NET Runtime: $(DotNetRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)')))" Importance="high" />
+    <!-- MSI path logging -->
+    <Message Text="Bundle MSI Components:" Importance="high" />
+    <Message Text="  Windows Desktop Runtime: $(WindowsDesktopRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(WindowsDesktopRuntimeMsiPath)')))" Importance="high" />
+    <Message Text="  .NET Host: $(DotNetHostMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostMsiPath)')))" Importance="high" />
+    <Message Text="  .NET HostFxr: $(DotNetHostFxrMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)')))" Importance="high" />
+    <Message Text="  .NET Runtime: $(DotNetRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)')))" Importance="high" />
   </Target>
 
   <!-- Bundle publication to shipping directory -->

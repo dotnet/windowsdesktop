@@ -11,6 +11,10 @@
     <WixBuildExecutablesFolder>$(PkgMicrosoft_Wix)\tools\net6.0\</WixBuildExecutablesFolder>
     <WixExtensionDirectory>$(PkgMicrosoft_Wix)\tools\net6.0\</WixExtensionDirectory>
     
+    <!-- WiX v5 parallelism and concurrency settings to prevent file locking issues -->
+    <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
+    <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
+    
     <!-- Bundle platform configuration -->
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x86'">x86</BundlePlatform>
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x64'">x64</BundlePlatform>

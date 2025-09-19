@@ -5,6 +5,7 @@
     <PlatformPackageType>RuntimePack</PlatformPackageType>
     <ArchiveName>windowsdesktop-runtime</ArchiveName>
     <InstallerName>windowsdesktop-runtime</InstallerName>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm64</RuntimeIdentifiers>
     <InstallerRuntimeIdentifiers>win-x64;win-x86;win-arm64</InstallerRuntimeIdentifiers>
     <VSInsertionShortComponentName>WindowsDesktop.SharedFramework</VSInsertionShortComponentName>
     <RollForward>LatestPatch</RollForward>

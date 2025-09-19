@@ -79,6 +79,11 @@
     <PackageVersion Include="Microsoft.WixToolset.Heat" Version="$(MicrosoftWixToolsetHeatVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.UI.wixext" Version="$(MicrosoftWixToolsetUIWixextVersion)" />
     <PackageVersion Include="Microsoft.WixToolset.Util.wixext" Version="$(MicrosoftWixToolsetUtilWixextVersion)" />
+    
+    <!-- VS.Redist transport packages for .NET runtime prerequisites -->
+    <PackageVersion Include="VS.Redist.Common.NetCore.SharedFramework" Version="$(MicrosoftNETCorePlatformsVersion)" />
+    <PackageVersion Include="VS.Redist.Common.NetCore.HostFXR" Version="$(MicrosoftNETCorePlatformsVersion)" />
+    <PackageVersion Include="VS.Redist.Common.NetCore.SharedHost" Version="$(MicrosoftNETCorePlatformsVersion)" />
   </ItemGroup>
 
 </Project>

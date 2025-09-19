@@ -16,7 +16,8 @@
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x64'">x64</BundlePlatform>
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'arm64'">arm64</BundlePlatform>
     
-    <!-- InstallerPlatform will be set by updated Arcade -->
+    <!-- Set InstallerPlatform to match TargetArchitecture if not already set -->
+    <InstallerPlatform Condition="'$(InstallerPlatform)' == ''">$(TargetArchitecture)</InstallerPlatform>
     
     <!-- Version information for the bundle executable -->
     <AssemblyTitle>Microsoft Windows Desktop Runtime Installer</AssemblyTitle>

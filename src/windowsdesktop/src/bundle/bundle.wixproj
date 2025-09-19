@@ -161,6 +161,11 @@
       <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
     </PropertyGroup>
     
+    <!-- Add as WiX Variable for runtime evaluation -->
+    <ItemGroup>
+      <WixVariable Include="IncludeRuntimeMSIs" Value="$(IncludeRuntimeMSIs)" />
+    </ItemGroup>
+    
     <Message Text="IncludeRuntimeMSIs: $(IncludeRuntimeMSIs) (VS.Redist packages available: $(_HostExists) AND $(_HostFxrExists) AND $(_RuntimeExists))" Importance="high" />
   </Target>
 

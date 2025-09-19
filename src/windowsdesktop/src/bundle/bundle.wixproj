@@ -14,6 +14,10 @@
     <!-- WiX v5 parallelism and concurrency settings to prevent file locking issues -->
     <WixToolsetCompilerMaxParallelism>1</WixToolsetCompilerMaxParallelism>
     <WixToolsetLinkerMaxParallelism>1</WixToolsetLinkerMaxParallelism>
+    <BuildInParallel>false</BuildInParallel>
+    <MaxCpuCount>1</MaxCpuCount>
+    <WixParallelism>1</WixParallelism>
+    <WixMaxThreads>1</WixMaxThreads>
     
     <!-- Bundle platform configuration -->
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x86'">x86</BundlePlatform>

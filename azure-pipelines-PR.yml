@@ -36,7 +36,7 @@ stages:
   jobs:
   - template: eng/pipelines/jobs/windows-build-PR.yml
     parameters:
-      name: windowsdesktop_pr_build
+      name: windowsdesktop-pr
       displayName: WindowsDesktop PR Build
       jobStrategy:
         matrix:

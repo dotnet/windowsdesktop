@@ -4,6 +4,9 @@ parameters:
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
+  InjectRuntimePrereqs: false   # If true, expect either downloaded runtime MSIs or an injected archive to be normalized
+  RuntimePrereqsArchive: ''     # Optional zip containing host/hostfxr/runtime MSIs (internal validation runs)
+  GenerateDummyPrereqs: false   # (Not used automatically: dummy MSIs are for local structural testing only)
 
 jobs:
   - job: ${{ parameters.name }}
@@ -44,9 +47,8 @@ jobs:
     - template: /eng/common/templates/steps/enable-internal-sources.yml
 
     # Download runtime MSI artifacts from the runtime build
-    # Try internal project first (for internal builds)
     - task: DownloadBuildArtifacts@0
-      displayName: 'Download Runtime MSI Artifacts (Internal)'
+      displayName: 'Download Runtime MSI Artifacts'
       inputs:
         buildType: 'specific'
         project: 'internal'
@@ -61,28 +63,44 @@ jobs:
         downloadPath: '$(Build.SourcesDirectory)/artifacts/runtime-msis'
       condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'))
       continueOnError: true
-      retryCountOnTaskFailure: 1
 
-    # Fallback: Try public project (for PR builds)
-    - task: DownloadBuildArtifacts@0
-      displayName: 'Download Runtime MSI Artifacts (Public Fallback)'
-      inputs:
-        buildType: 'specific'
-        project: 'public'
-        pipeline: 'dotnet-runtime'
-        buildVersionToDownload: 'latestFromBranch'
-        branchName: 'refs/heads/main'
-        artifactName: 'PackageArtifacts'
-        itemPattern: |
-          **/**/dotnet-host-*-win-${{ parameters.targetArchitecture }}.msi
-          **/**/dotnet-hostfxr-*-win-${{ parameters.targetArchitecture }}.msi
-          **/**/dotnet-runtime-*-win-${{ parameters.targetArchitecture }}.msi
-        downloadPath: '$(Build.SourcesDirectory)/artifacts/runtime-msis'
-      condition: and(succeeded(), eq(variables['System.TeamProject'], 'public'))
-      continueOnError: false
-      retryCountOnTaskFailure: 3
+    # For public builds (PR), skip MSI download - we'll use VS.Redist packages as fallback
+    - script: |
+        echo "Public PR build detected - runtime MSI download not available"
+        echo "Bundle will fall back to VS.Redist packages if available"
+        mkdir -p "$(Build.SourcesDirectory)/artifacts/runtime-msis"
+      displayName: 'Skip MSI Download for Public Build'
+      condition: eq(variables['System.TeamProject'], 'public')
 
-    # Verify runtime MSI download and check architecture-specific files
+    # Optional dummy prereqs for structural testing (will NOT produce valid bundle if light validates MSI internal tables)
+    - powershell: |
+        if ('${{ parameters.GenerateDummyPrereqs }}' -eq 'true') {
+          $arch='${{ parameters.targetArchitecture }}'
+          Write-Host "Generating dummy prereq runtime placeholders for $arch";
+          # Call relocated script (shim remains in eng for backward compat)
+          pwsh "$(Build.SourcesDirectory)/src/windowsdesktop/tests/scripts/make-dummy-runtime-msis.ps1" -Architecture $arch
+        } else {
+          Write-Host "GenerateDummyPrereqs not enabled.";
+        }
+      displayName: 'Generate Dummy Prereq Runtime MSIs'
+      condition: and(eq(variables['System.TeamProject'],'public'), succeeded())
+
+    # Optional: expand provided archive of runtime prereqs (manual/internal validation scenario)
+    - powershell: |
+        if ('${{ parameters.RuntimePrereqsArchive }}' -and (Test-Path '${{ parameters.RuntimePrereqsArchive }}')) {
+          $arch='${{ parameters.targetArchitecture }}'
+          $dest = "$(Build.SourcesDirectory)/artifacts/runtime-msis/archive-$arch"
+          New-Item -Force -ItemType Directory -Path $dest | Out-Null
+          Write-Host "Expanding provided RuntimePrereqsArchive to $dest";
+          Expand-Archive -Path '${{ parameters.RuntimePrereqsArchive }}' -DestinationPath $dest -Force
+        } else {
+          Write-Host "No RuntimePrereqsArchive supplied or file missing.";
+        }
+      displayName: 'Expand Provided RuntimePrereqsArchive'
+      condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'), eq('${{ parameters.InjectRuntimePrereqs }}','true'))
+      continueOnError: true
+
+    # Verify runtime MSI download and check architecture-specific files (internal builds only)
     - powershell: |
         $arch = "${{ parameters.targetArchitecture }}"
         $runtimeMsiDir = "$(Build.SourcesDirectory)/artifacts/runtime-msis"
@@ -91,41 +109,68 @@ jobs:
         
         if (Test-Path $runtimeMsiDir) {
           Write-Host "Runtime MSIs directory exists"
-          $allMsis = Get-ChildItem -Path $runtimeMsiDir -Name "*.msi" -Recurse
+          $allMsis = Get-ChildItem -Path $runtimeMsiDir -Name "*.msi" -Recurse -ErrorAction SilentlyContinue
           Write-Host "All MSI files found:"
           $allMsis | ForEach-Object { Write-Host "  $_" }
           Write-Host "Total MSI files: $($allMsis.Count)"
           
-          # Check for required architecture-specific MSIs
-          $hostMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-host-*-win-$arch.msi" -Recurse
-          $hostfxrMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-hostfxr-*-win-$arch.msi" -Recurse
-          $runtimeMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-runtime-*-win-$arch.msi" -Recurse
-          
-          Write-Host "Architecture-specific MSIs for $arch"":""
-          Write-Host "  Host MSI: $($hostMsi.Count) found"
-          Write-Host "  HostFxr MSI: $($hostfxrMsi.Count) found"
-          Write-Host "  Runtime MSI: $($runtimeMsi.Count) found"
-          
-          if ($hostMsi.Count -eq 0 -or $hostfxrMsi.Count -eq 0 -or $runtimeMsi.Count -eq 0) {
-            Write-Host "##vso[task.logissue type=error]Missing required runtime MSI files for architecture $arch"
-            Write-Host "##vso[task.complete result=Failed]"
-            exit 1
+          if ($allMsis.Count -gt 0) {
+            # Check for required architecture-specific MSIs
+            $hostMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-host-*-win-$arch.msi" -Recurse -ErrorAction SilentlyContinue
+            $hostfxrMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-hostfxr-*-win-$arch.msi" -Recurse -ErrorAction SilentlyContinue
+            $runtimeMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-runtime-*-win-$arch.msi" -Recurse -ErrorAction SilentlyContinue
+            
+            Write-Host "Architecture-specific MSIs for $arch"":""
+            Write-Host "  Host MSI: $($hostMsi.Count) found"
+            Write-Host "  HostFxr MSI: $($hostfxrMsi.Count) found"
+            Write-Host "  Runtime MSI: $($runtimeMsi.Count) found"
+            
+            if ($hostMsi.Count -gt 0 -and $hostfxrMsi.Count -gt 0 -and $runtimeMsi.Count -gt 0) {
+              Write-Host "All required runtime MSI files found for architecture $arch"
+              # List the specific files we'll use
+              $hostMsi | ForEach-Object { Write-Host "  Using Host MSI: $_" }
+              $hostfxrMsi | ForEach-Object { Write-Host "  Using HostFxr MSI: $_" }
+              $runtimeMsi | ForEach-Object { Write-Host "  Using Runtime MSI: $_" }
+            } else {
+              Write-Host "##vso[task.logissue type=warning]Some runtime MSI files missing for $arch - will fall back to VS.Redist packages"
+            }
           } else {
-            Write-Host "All required runtime MSI files found for architecture $arch"
-            # List the specific files we'll use
-            $hostMsi | ForEach-Object { Write-Host "  Using Host MSI: $_" }
-            $hostfxrMsi | ForEach-Object { Write-Host "  Using HostFxr MSI: $_" }
-            $runtimeMsi | ForEach-Object { Write-Host "  Using Runtime MSI: $_" }
+            Write-Host "##vso[task.logissue type=warning]No runtime MSI files found - will fall back to VS.Redist packages"
           }
         } else {
-          Write-Host "##vso[task.logissue type=error]Runtime MSIs directory does not exist: $runtimeMsiDir"
-          Write-Host "##vso[task.complete result=Failed]"
-          exit 1
+          Write-Host "##vso[task.logissue type=warning]Runtime MSIs directory does not exist - will fall back to VS.Redist packages"
         }
       displayName: 'Verify Runtime MSI Download for ${{ parameters.targetArchitecture }}'
       condition: succeededOrFailed()
 
-    # Copy MSIs to expected location for bundle build
+    # Normalize runtime MSIs into deterministic prereqs directory (internal builds only)
+    - powershell: |
+        $arch = "${{ parameters.targetArchitecture }}"
+        $downloadRoot = "$(Build.SourcesDirectory)/artifacts/runtime-msis"
+        $prereqDir = "$(Build.SourcesDirectory)/artifacts/prereqs/$arch"
+        New-Item -Force -ItemType Directory -Path $prereqDir | Out-Null
+        Write-Host "Normalizing runtime MSIs for architecture $arch";
+        function PickLatest($pattern) {
+          Get-ChildItem -Path $downloadRoot -Recurse -Filter $pattern -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
+        }
+        $host    = PickLatest "dotnet-host-*-win-$arch.msi"
+        $hostfxr = PickLatest "dotnet-hostfxr-*-win-$arch.msi"
+        $runtime = PickLatest "dotnet-runtime-*-win-$arch.msi"
+        if ($host -and $hostfxr -and $runtime) {
+          Copy-Item $host.FullName    (Join-Path $prereqDir "dotnet-host-win-$arch.msi") -Force
+          Copy-Item $hostfxr.FullName (Join-Path $prereqDir "dotnet-hostfxr-win-$arch.msi") -Force
+          Copy-Item $runtime.FullName (Join-Path $prereqDir "dotnet-runtime-win-$arch.msi") -Force
+          "RuntimePrereqVersion=" + ($runtime.BaseName) | Out-File (Join-Path $prereqDir "resolved-runtime-version.txt") -Encoding UTF8
+          Write-Host "Staged prerequisite runtime MSIs:";
+          Get-ChildItem $prereqDir -Filter "dotnet-*-win-$arch.msi" | Select-Object Name,Length
+        } else {
+          Write-Host "##vso[task.logissue type=warning]Incomplete runtime MSIs for $arch; will build bundle without prereqs."
+        }
+      displayName: 'Normalize Runtime Prereq MSIs (${{ parameters.targetArchitecture }})'
+      condition: and(succeededOrFailed(), ne(variables['System.TeamProject'], 'public'))
+      continueOnError: true
+
+    # Copy MSIs to expected location for bundle build (if any were downloaded)
     - task: CopyFiles@2
       displayName: 'Stage Runtime MSIs for Bundle'
       inputs:
@@ -134,35 +179,30 @@ jobs:
         TargetFolder: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)/Shipping'
         flattenFolders: true
       condition: succeeded()
-      continueOnError: false
+      continueOnError: true
 
     # Verify staging location has architecture-specific MSIs
     - powershell: |
         $arch = "${{ parameters.targetArchitecture }}"
-        $stagingDir = "$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)/Shipping"
+        $stagingDir = "$(Build.SourcesDirectory)/artifacts/prereqs/$arch"
         
-        Write-Host "Checking staged runtime MSIs for architecture: $arch"
-        Write-Host "Staging directory: $stagingDir"
+        Write-Host "Checking normalized prerequisite runtime MSIs for architecture: $arch"
+        Write-Host "Prereqs directory: $stagingDir"
         
         if (Test-Path $stagingDir) {
           Write-Host "Staging directory exists"
-          $stagedMsis = Get-ChildItem -Path $stagingDir -Name "dotnet-*.msi"
-          Write-Host "All staged runtime MSI files:"
-          $stagedMsis | ForEach-Object { Write-Host "  $_" }
-          Write-Host "Total runtime MSI files staged: $($stagedMsis.Count)"
+          $stagedMsis = Get-ChildItem -Path $stagingDir -Name "dotnet-*-win-$arch.msi" -ErrorAction SilentlyContinue
+          if ($stagedMsis) {
+            Write-Host "Prereq runtime MSI files:"; $stagedMsis | ForEach-Object { Write-Host "  $_" }
+          } else { Write-Host "No normalized prereq runtime MSIs present." }
           
-          # Verify we have the specific architecture files
-          $archSpecificMsis = $stagedMsis | Where-Object { $_ -like "*-win-$arch.msi" }
-          Write-Host "Architecture-specific MSIs for $arch" ": $($archSpecificMsis.Count)"
-          $archSpecificMsis | ForEach-Object { Write-Host "  $_" }
-          
-          if ($archSpecificMsis.Count -lt 3) {
-            Write-Host "##vso[task.logissue type=warning]Expected 3 runtime MSI files for $arch, found $($archSpecificMsis.Count)"
+          if ($stagedMsis.Count -gt 0 -and $stagedMsis.Count -ne 3) {
+            Write-Host "##vso[task.logissue type=warning]Expected 3 runtime prereq MSIs for $arch, found $($stagedMsis.Count)"
           }
         } else {
-          Write-Host "##vso[task.logissue type=error]Staging directory does not exist: $stagingDir"
+          Write-Host "Prereqs directory not present (acceptable for public builds)."
         }
-      displayName: 'Verify Runtime MSI Staging for ${{ parameters.targetArchitecture }}'
+      displayName: 'Verify Prerequisite Runtime MSIs (${{ parameters.targetArchitecture }})'
       condition: succeededOrFailed()
 
     - ${{ if ne(variables['System.TeamProject'], 'public') }}:

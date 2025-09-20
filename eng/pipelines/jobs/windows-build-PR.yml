@@ -233,22 +233,8 @@ jobs:
         continueOnError: true
         condition: always()
 
-    - task: CopyFiles@2
-      displayName: Prepare BuildLogs staging directory
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)'
-        Contents: |
-          **/*.log
-          **/*.binlog
-        TargetFolder: '$(Build.StagingDirectory)/BuildLogs'
-        CleanTargetFolder: true
-      continueOnError: true
-      condition: succeededOrFailed()
-
-    - task: PublishBuildArtifacts@1
-      displayName: Publish BuildLogs
-      inputs:
-        PathtoPublish: '$(Build.StagingDirectory)/BuildLogs'
-        ArtifactName: Logs-${{ parameters.name }}-$(_BuildConfig)
-      continueOnError: true
-      condition: succeededOrFailed()
+    # Arcade-aligned log collection & publishing
+    - template: /eng/common/core-templates/steps/publish-logs.yml
+      parameters:
+        StageLabel: PR
+        JobLabel: ${{ parameters.name }}-$(_BuildConfig)

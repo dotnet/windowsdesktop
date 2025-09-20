@@ -1,0 +1,347 @@
+<Project Sdk="Microsoft.WixToolset.Sdk">
+
+  <PropertyGroup>
+    <!-- OutputType determines the extension, .msi, .wixlib, .exe, etc. -->
+    <OutputType>Bundle</OutputType>
+    
+    <!-- Enable WiX v5 features (following reference repo pattern) -->
+    <UseWix5>true</UseWix5>
+    
+    <!-- WiX v5 build configuration -->
+    <WixBuildExecutablesFolder>$(PkgMicrosoft_Wix)\tools\net6.0\</WixBuildExecutablesFolder>
+    <WixExtensionDirectory>$(PkgMicrosoft_Wix)\tools\net6.0\</WixExtensionDirectory>
+    
+    <!-- MSBuild parallelism settings to prevent WiX file locking issues -->
+    <BuildInParallel>false</BuildInParallel>
+    <MaxCpuCount>1</MaxCpuCount>
+    
+    <!-- CI-specific build stability measures -->
+    <DisableWixCreateLightCommandPackageDrop Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">true</DisableWixCreateLightCommandPackageDrop>
+    <WixCreateWixPackOutput Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">false</WixCreateWixPackOutput>
+    
+    <!-- Bundle platform configuration -->
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'x86'">x86</BundlePlatform>
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'x64'">x64</BundlePlatform>
+    <BundlePlatform Condition="'$(TargetArchitecture)' == 'arm64'">arm64</BundlePlatform>
+    
+    <!-- Set InstallerPlatform to match TargetArchitecture if not already set -->
+    <InstallerPlatform Condition="'$(InstallerPlatform)' == ''">$(TargetArchitecture)</InstallerPlatform>
+    
+    <!-- Version information for the bundle executable -->
+    <AssemblyTitle>Microsoft Windows Desktop Runtime Installer</AssemblyTitle>
+    <AssemblyDescription>Microsoft Windows Desktop Runtime $(Version) Installer</AssemblyDescription>
+    <AssemblyCompany>Microsoft Corporation</AssemblyCompany>
+    <AssemblyProduct>Microsoft Windows Desktop Runtime</AssemblyProduct>
+    <AssemblyCopyright>© Microsoft Corporation. All rights reserved.</AssemblyCopyright>
+    <AssemblyInformationalVersion>$(Version)</AssemblyInformationalVersion>
+    <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    
+    <!-- WiX v5 PDB configuration - bundles don't publish PDBs -->
+    <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <PublishWindowsPdb>false</PublishWindowsPdb>
+    <NoWarn>$(NoWarn);WIX1098</NoWarn>
+
+    <!-- Globbing will automatically find any .wxl relative to the project file. Since we're simshipping localized content for
+         the bundle UI, we either need to exclude the .wxl files or place them in a directory outside of the project. For simshipping
+         we only need to ensure the files are pulled in as additional payloads into the UX container. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Use the working wix5 path - the new wix path has namespace issues -->
+    <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
+    <Compile Include="dotnet-packages.wxs" />
+
+    <!-- Workload manifests will be included only if the source fragment was generated. -->
+    <Compile Include="$(WorkloadManifestsWxsPath)" Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Microsoft.Wix is a dotnet tool package, so exclude its assets (following reference repo pattern) -->
+    <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" />
+    <!-- WiX extension packages with GeneratePathProperty for installers -->
+    <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.WixToolset.Heat" />
+    
+    <!-- WindowsDesktop transport package containing runtime MSI components -->
+    <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
+                      GeneratePathProperty="true" />
+    
+    <!-- VS.Redist.Common.NetCore packages will be added via PackageDownload in CollectVSInsertionPackageDownloads target -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Ensure the Windows Desktop Runtime is built before this bundle -->
+    <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
+  </ItemGroup>
+
+  <!-- Obtain the .NET Core Runtime installers from the VS insertion packages -->
+  <!-- Skip VS.Redist package downloads in CI builds - we use pipeline artifacts instead -->
+  <Target Name="CollectVSInsertionPackageDownloads"
+          BeforeTargets="CollectPackageReferences"
+          Condition="'$(ContinuousIntegrationBuild)' != 'true'">
+    
+    <!-- This target should NOT run in CI builds -->
+    <Message Importance="high" Text="[VS.Redist Priority 2] CollectVSInsertionPackageDownloads running - ContinuousIntegrationBuild=$(ContinuousIntegrationBuild)" />
+    
+    <ItemGroup>
+      <!-- Use the current RuntimeIdentifier directly -->
+      <InsertionPackageRID
+        Include="$(RuntimeIdentifier)"
+        Condition="'$(RuntimeIdentifier)' != ''"
+        Arch="$([System.String]::new('$(RuntimeIdentifier)').Replace('win-', ''))" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="runtime" 
+                                 InsertionName="SharedFramework"
+                                 Id="VS.Redist.Common.NetCore.SharedFramework.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-runtime-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="hostfxr" 
+                                 InsertionName="HostFXR"
+                                 Id="VS.Redist.Common.NetCore.HostFXR.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-hostfxr-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+      <NETCoreAppInstallerMsiRID Include="@(InsertionPackageRID)" 
+                                 Name="host" 
+                                 InsertionName="SharedHost"
+                                 Id="VS.Redist.Common.NetCore.SharedHost.%(Arch).10.0"
+                                 Version="$(MicrosoftNETCorePlatformsVersion)"
+                                 MsiFileName="dotnet-host-$(MicrosoftNETCoreAppRefVersion)-%(Identity).msi" />
+
+      <PackageDownload Include="@(NETCoreAppInstallerMsiRID -> '%(Id)')" Version="[%(Version)]" />
+    </ItemGroup>
+    
+
+  </Target>
+
+  <!-- Bundle the .NET Core Runtime MSIs. This order puts them before the WindowsDesktop MSIs. -->
+  <Target Name="GetBundledNETCoreRuntimeMsiFiles"
+          DependsOnTargets="CollectVSInsertionPackageDownloads"
+          BeforeTargets="_GetBundledComponentInstallers">
+    
+    <!-- Priority 1: CI builds - use staged runtime MSIs from pipeline artifacts -->
+    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+      <_CIRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\</_CIRuntimeMsiPath>
+      <_CIRuntimeMsiPath Condition="!$(_CIRuntimeMsiPath.EndsWith('\'))">$(_CIRuntimeMsiPath)\</_CIRuntimeMsiPath>
+    </PropertyGroup>
+    
+    <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+      <!-- Find MSI files by pattern (allows for version flexibility) -->
+      <_AvailableHostMsis Include="$(_CIRuntimeMsiPath)dotnet-host-*-win-$(TargetArchitecture).msi" />
+      <_AvailableHostFxrMsis Include="$(_CIRuntimeMsiPath)dotnet-hostfxr-*-win-$(TargetArchitecture).msi" />
+      <_AvailableRuntimeMsis Include="$(_CIRuntimeMsiPath)dotnet-runtime-*-win-$(TargetArchitecture).msi" />
+    </ItemGroup>
+    
+    <!-- Debug: Show what we're looking for in CI builds -->
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] ContinuousIntegrationBuild = $(ContinuousIntegrationBuild)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] ArtifactsPackagesDir = $(ArtifactsPackagesDir)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Searching for runtime MSIs in: $(_CIRuntimeMsiPath)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Target architecture: $(TargetArchitecture)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] RuntimeIdentifier: $(RuntimeIdentifier)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Host pattern: $(_CIRuntimeMsiPath)dotnet-host-*-win-$(TargetArchitecture).msi" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableHostMsis->Count()) host MSIs: @(_AvailableHostMsis, ', ')" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableHostFxrMsis->Count()) hostfxr MSIs: @(_AvailableHostFxrMsis, ', ')" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableRuntimeMsis->Count()) runtime MSIs: @(_AvailableRuntimeMsis, ', ')" />
+    
+    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+      <!-- Take the first match for each type -->
+      <DotNetHostMsiPath>@(_AvailableHostMsis->'%(FullPath)', '')</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath>@(_AvailableHostFxrMsis->'%(FullPath)', '')</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath>@(_AvailableRuntimeMsis->'%(FullPath)', '')</DotNetRuntimeMsiPath>
+      
+      <!-- Extract just the first item if multiple matches -->
+      <DotNetHostMsiPath Condition="$(DotNetHostMsiPath.Contains(';'))">$(DotNetHostMsiPath.Split(';')[0])</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath Condition="$(DotNetHostFxrMsiPath.Contains(';'))">$(DotNetHostFxrMsiPath.Split(';')[0])</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath Condition="$(DotNetRuntimeMsiPath.Contains(';'))">$(DotNetRuntimeMsiPath.Split(';')[0])</DotNetRuntimeMsiPath>
+      
+      <!-- Clear paths if no files found -->
+      <DotNetHostMsiPath Condition="'@(_AvailableHostMsis)' == ''"></DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath Condition="'@(_AvailableHostFxrMsis)' == ''"></DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath Condition="'@(_AvailableRuntimeMsis)' == ''"></DotNetRuntimeMsiPath>
+    </PropertyGroup>
+    
+    <!-- Priority 2: Local builds - use VS.Redist packages (existing logic) -->
+    <ItemGroup Condition="'$(DotNetHostMsiPath)' == ''">
+      <NETCoreAppInstallerMsiRID
+        CacheDir="$(NuGetPackageRoot)$([System.String]::new('%(Id)').ToLowerInvariant())\%(Version)\" />
+      
+      <!-- Set specific paths for each component type -->
+      <_HostMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                    Condition="'%(Name)' == 'host' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+      <_HostFxrMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                       Condition="'%(Name)' == 'hostfxr' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+      <_RuntimeMsiPath Include="@(NETCoreAppInstallerMsiRID -> '%(CacheDir)%(MsiFileName)')" 
+                       Condition="'%(Name)' == 'runtime' AND '$(RuntimeIdentifier)' == '%(Identity)'" />
+    </ItemGroup>
+    
+    <!-- Set MSI path properties from the filtered paths (for local builds) -->
+    <PropertyGroup Condition="'$(DotNetHostMsiPath)' == ''">
+      <DotNetHostMsiPath>@(_HostMsiPath)</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath>@(_HostFxrMsiPath)</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath>@(_RuntimeMsiPath)</DotNetRuntimeMsiPath>
+    </PropertyGroup>
+
+    <!-- Set IncludeRuntimeMSIs based on availability -->
+    <PropertyGroup>
+      <_AllRuntimeMsisExist Condition="'$(DotNetHostMsiPath)' != '' AND '$(DotNetHostFxrMsiPath)' != '' AND '$(DotNetRuntimeMsiPath)' != ''">true</_AllRuntimeMsisExist>
+      <_AllRuntimeMsisExist Condition="'$(_AllRuntimeMsisExist)' == ''">false</_AllRuntimeMsisExist>
+      
+      <IncludeRuntimeMSIs>$(_AllRuntimeMsisExist)</IncludeRuntimeMSIs>
+      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
+    </PropertyGroup>
+    
+    <!-- Add as WiX Variable for runtime evaluation -->
+    <ItemGroup>
+      <WixVariable Include="IncludeRuntimeMSIs" Value="$(IncludeRuntimeMSIs)" />
+    </ItemGroup>
+
+    <!-- Logging for debugging -->
+    <Message Importance="high" Text="IncludeRuntimeMSIs: $(IncludeRuntimeMSIs) (CI=$(ContinuousIntegrationBuild))" />
+    <Message Importance="high" Condition="'$(IncludeRuntimeMSIs)' == 'true'" Text="  Host: $(DotNetHostMsiPath)" />
+    <Message Importance="high" Condition="'$(IncludeRuntimeMSIs)' == 'true'" Text="  HostFxr: $(DotNetHostFxrMsiPath)" />
+    <Message Importance="high" Condition="'$(IncludeRuntimeMSIs)' == 'true'" Text="  Runtime: $(DotNetRuntimeMsiPath)" />
+    
+    <!-- CI builds must have runtime MSIs -->
+    <Error Condition="'$(ContinuousIntegrationBuild)' == 'true' AND '$(IncludeRuntimeMSIs)' != 'true'" 
+           Text="Runtime MSIs not found in CI build. Check that runtime artifacts were downloaded correctly." />
+  </Target>
+
+  <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile" DependsOnTargets="GetBundledNETCoreRuntimeMsiFiles">
+    <PropertyGroup>
+      <!-- Essential bundle metadata -->
+      <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
+      <!-- BundleVersion must be purely numeric for proper version comparison during upgrades -->
+      <!-- Use VersionSuffixDateStamp (e.g., 25467) if available, otherwise use default build number -->
+      <!-- This ensures RC2 build number is higher than RC1 (10.0.0.35301) -->
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
+      <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
+      <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
+      
+      <!-- Generate UpgradeCodes with major version for proper upgrade behavior -->
+      <!-- In-place upgrades within major.minor versions, SxS across major versions -->
+      <!-- IMPORTANT: RC1 used UpgradeCode {39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE} - seed should generate this -->
+      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
+      <!-- WiX v5 generates different GUIDs than WiX v3 - can't match RC1 exactly -->
+      <!-- Use consistent seed for WiX v5 going forward with arch for SxS support -->
+      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
+      
+      <!-- Architecture and platform -->
+      <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
+      <DefineConstants>$(DefineConstants);PlatformToken=$(TargetArchitecture.ToUpper())</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_x64=x64</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_arm64=arm64</DefineConstants>
+
+      <!-- Version information -->
+      <DefineConstants>$(DefineConstants);MajorVersion=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinorVersion=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);VERSIONMAJOR=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);VERSIONMINOR=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);WinFormsAndWpfVersion=$(WinFormsAndWpfVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
+
+      <!-- Windows Desktop Runtime MSI (always from local build) -->
+      <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
+      
+      <!-- .NET Runtime prerequisite MSI paths are set by GetBundledNETCoreRuntimeMsiFiles target -->
+      
+      <!-- Set MSI paths for all bundle components -->
+      <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(WindowsDesktopRuntimeMsiPath)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetHostMsiPath=$(DotNetHostMsiPath)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
+
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
+    </PropertyGroup>
+    
+    <!-- MSI path logging for WindowsDesktop MSI -->
+    <Message Text="Bundle MSI Components:" Importance="high" />
+    <Message Text="  Windows Desktop Runtime: $(WindowsDesktopRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(WindowsDesktopRuntimeMsiPath)')))" Importance="high" />
+    <!-- Runtime MSI logging is handled in GetBundledNETCoreRuntimeMsiFiles target -->
+  </Target>
+
+  <!-- Bundle publication to shipping directory -->
+  <Target Name="PublishBundle" AfterTargets="Build">
+    <PropertyGroup>
+      <BundleShippingName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
+      <BundleShippingPath>$(ArtifactsPackagesDir)Shipping\$(BundleShippingName)</BundleShippingPath>
+    </PropertyGroup>
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
+    <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
+  </Target>
+
+  <!-- Generate deterministic UpgradeCode from seed -->
+  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
+    <!-- Use Microsoft.DotNet.Build.Tasks.Installers task to generate GUID from seed -->
+    <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
+      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
+    </GenerateGuidFromName>
+    
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
+    </PropertyGroup>
+    
+    <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
+  </Target>
+
+  <!-- Pack target for CI compatibility -->
+  <Target Name="Pack" DependsOnTargets="Build;PublishBundle">
+    <Message Text="Bundle pack completed" Importance="high" />
+  </Target>
+
+</Project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

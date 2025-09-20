@@ -34,24 +34,16 @@ variables:
 stages:
 - stage: Build
   jobs:
-
-  # Windows x64
-  - template: /eng/pipelines/jobs/windows-build-PR.yml
+  - template: eng/pipelines/jobs/windows-build-PR.yml
     parameters:
-      name: win_x64
-      displayName: win-x64
-      targetArchitecture: x64
-
-  # Windows x86
-  - template: /eng/pipelines/jobs/windows-build-PR.yml
-    parameters:
-      name: win_x86
-      displayName: win-x86
-      targetArchitecture: x86
-
-  # Windows arm64
-  - template: /eng/pipelines/jobs/windows-build-PR.yml
-    parameters:
-      name: win_arm64
-      displayName: win-arm64
-      targetArchitecture: arm64
+      name: windowsdesktop_pr_build
+      displayName: WindowsDesktop PR Build
+      strategy:
+        matrix:
+          win_x64:
+            _targetArchitecture: x64
+          win_x86:
+            _targetArchitecture: x86
+          win_arm64:
+            _targetArchitecture: arm64
+      targetArchitecture: $(_targetArchitecture)

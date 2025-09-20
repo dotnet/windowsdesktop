@@ -80,8 +80,14 @@
   </ItemGroup>
 
   <!-- Obtain the .NET Core Runtime installers from the VS insertion packages -->
+  <!-- Skip VS.Redist package downloads in CI builds - we use pipeline artifacts instead -->
   <Target Name="CollectVSInsertionPackageDownloads"
-          BeforeTargets="CollectPackageReferences">
+          BeforeTargets="CollectPackageReferences"
+          Condition="'$(ContinuousIntegrationBuild)' != 'true'">
+    
+    <!-- This target should NOT run in CI builds -->
+    <Message Importance="high" Text="[VS.Redist Priority 2] CollectVSInsertionPackageDownloads running - ContinuousIntegrationBuild=$(ContinuousIntegrationBuild)" />
+    
     <ItemGroup>
       <!-- Use the current RuntimeIdentifier directly -->
       <InsertionPackageRID
@@ -124,6 +130,7 @@
     <!-- Priority 1: CI builds - use staged runtime MSIs from pipeline artifacts -->
     <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
       <_CIRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\</_CIRuntimeMsiPath>
+      <_CIRuntimeMsiPath Condition="!$(_CIRuntimeMsiPath.EndsWith('\'))">$(_CIRuntimeMsiPath)\</_CIRuntimeMsiPath>
     </PropertyGroup>
     
     <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
@@ -132,6 +139,26 @@
       <_AvailableHostFxrMsis Include="$(_CIRuntimeMsiPath)dotnet-hostfxr-*-win-$(TargetArchitecture).msi" />
       <_AvailableRuntimeMsis Include="$(_CIRuntimeMsiPath)dotnet-runtime-*-win-$(TargetArchitecture).msi" />
     </ItemGroup>
+    
+    <!-- Debug: Show what we're looking for in CI builds -->
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] ContinuousIntegrationBuild = $(ContinuousIntegrationBuild)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] ArtifactsPackagesDir = $(ArtifactsPackagesDir)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Searching for runtime MSIs in: $(_CIRuntimeMsiPath)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Target architecture: $(TargetArchitecture)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] RuntimeIdentifier: $(RuntimeIdentifier)" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Host pattern: $(_CIRuntimeMsiPath)dotnet-host-*-win-$(TargetArchitecture).msi" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableHostMsis->Count()) host MSIs: @(_AvailableHostMsis, ', ')" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableHostFxrMsis->Count()) hostfxr MSIs: @(_AvailableHostFxrMsis, ', ')" />
+    <Message Condition="'$(ContinuousIntegrationBuild)' == 'true'" Importance="high" 
+             Text="[CI Priority 1] Found @(_AvailableRuntimeMsis->Count()) runtime MSIs: @(_AvailableRuntimeMsis, ', ')" />
     
     <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
       <!-- Take the first match for each type -->

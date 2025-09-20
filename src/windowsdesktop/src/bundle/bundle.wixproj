@@ -49,6 +49,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Use the working wix5 path - the new wix path has namespace issues -->
     <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
     <Compile Include="dotnet-packages.wxs" />
 
@@ -122,22 +123,31 @@
     
     <!-- Priority 1: CI builds - use staged runtime MSIs from pipeline artifacts -->
     <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
-      <_RuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\</_RuntimeMsiPath>
+      <_CIRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\</_CIRuntimeMsiPath>
+    </PropertyGroup>
+    
+    <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+      <!-- Find MSI files by pattern (allows for version flexibility) -->
+      <_AvailableHostMsis Include="$(_CIRuntimeMsiPath)dotnet-host-*-win-$(TargetArchitecture).msi" />
+      <_AvailableHostFxrMsis Include="$(_CIRuntimeMsiPath)dotnet-hostfxr-*-win-$(TargetArchitecture).msi" />
+      <_AvailableRuntimeMsis Include="$(_CIRuntimeMsiPath)dotnet-runtime-*-win-$(TargetArchitecture).msi" />
+    </ItemGroup>
+    
+    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+      <!-- Take the first match for each type -->
+      <DotNetHostMsiPath>@(_AvailableHostMsis->'%(FullPath)', '')</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath>@(_AvailableHostFxrMsis->'%(FullPath)', '')</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath>@(_AvailableRuntimeMsis->'%(FullPath)', '')</DotNetRuntimeMsiPath>
       
-      <!-- Look for MSIs with the exact version -->
-      <DotNetHostMsiPath>$(_RuntimeMsiPath)dotnet-host-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath>$(_RuntimeMsiPath)dotnet-hostfxr-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath>$(_RuntimeMsiPath)dotnet-runtime-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</DotNetRuntimeMsiPath>
+      <!-- Extract just the first item if multiple matches -->
+      <DotNetHostMsiPath Condition="$(DotNetHostMsiPath.Contains(';'))">$(DotNetHostMsiPath.Split(';')[0])</DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath Condition="$(DotNetHostFxrMsiPath.Contains(';'))">$(DotNetHostFxrMsiPath.Split(';')[0])</DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath Condition="$(DotNetRuntimeMsiPath.Contains(';'))">$(DotNetRuntimeMsiPath.Split(';')[0])</DotNetRuntimeMsiPath>
       
-      <!-- Check existence -->
-      <_CIHostExists>$([System.IO.File]::Exists('$(DotNetHostMsiPath)'))</_CIHostExists>
-      <_CIHostFxrExists>$([System.IO.File]::Exists('$(DotNetHostFxrMsiPath)'))</_CIHostFxrExists>
-      <_CIRuntimeExists>$([System.IO.File]::Exists('$(DotNetRuntimeMsiPath)'))</_CIRuntimeExists>
-      
-      <!-- Clear paths if files don't exist -->
-      <DotNetHostMsiPath Condition="'$(_CIHostExists)' != 'true'"></DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath Condition="'$(_CIHostFxrExists)' != 'true'"></DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath Condition="'$(_CIRuntimeExists)' != 'true'"></DotNetRuntimeMsiPath>
+      <!-- Clear paths if no files found -->
+      <DotNetHostMsiPath Condition="'@(_AvailableHostMsis)' == ''"></DotNetHostMsiPath>
+      <DotNetHostFxrMsiPath Condition="'@(_AvailableHostFxrMsis)' == ''"></DotNetHostFxrMsiPath>
+      <DotNetRuntimeMsiPath Condition="'@(_AvailableRuntimeMsis)' == ''"></DotNetRuntimeMsiPath>
     </PropertyGroup>
     
     <!-- Priority 2: Local builds - use VS.Redist packages (existing logic) -->

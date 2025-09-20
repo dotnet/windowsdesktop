@@ -233,27 +233,34 @@ jobs:
         continueOnError: true
         condition: always()
 
-    # Arcade-aligned log collection & publishing
-    - powershell: |
-        $cfg = "$(_BuildConfig)"
-        $root = "$(Build.SourcesDirectory)/artifacts/log"
-        $debugDir = Join-Path $root 'Debug'
-        if (-not (Test-Path $debugDir)) { New-Item -ItemType Directory -Path $debugDir | Out-Null }
-        $sourceDir = Join-Path $root $cfg
-        if (Test-Path $sourceDir) {
-          Write-Host "Normalizing logs from $sourceDir -> $debugDir"
-          Get-ChildItem $sourceDir -File -Recurse -Include *.log,*.binlog | ForEach-Object {
-            $target = Join-Path $debugDir $_.Name
-            if (-not (Test-Path $target)) { Copy-Item $_.FullName $target -Force }
-          }
-        } else {
-          Write-Host "No log directory for config $cfg at $sourceDir (may be early failure)."
-        }
-        Write-Host "Normalized Debug log directory contents:"; Get-ChildItem $debugDir -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "  $($_.Name)" }
-      displayName: 'Normalize logs for Arcade template'
+    - task: PowerShell@2
+      displayName: 'Gather and upload logs'
       condition: always()
       continueOnError: true
-    - template: /eng/common/core-templates/steps/publish-logs.yml
-      parameters:
-        StageLabel: PR
-        JobLabel: ${{ parameters.name }}-$(_BuildConfig)
+      script: |
+        $logDirectories = @(
+            "$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)",
+            "$(Build.sourcesdirectory)/artifacts/TestResults/$(_BuildConfig)"
+        )
+
+        $stagingDirectory = "$(Build.ArtifactStagingDirectory)/Logs-$(_BuildConfig)"
+        New-Item -ItemType Directory -Path $stagingDirectory -Force
+
+        foreach ($dir in $logDirectories) {
+            if (Test-Path $dir) {
+                Write-Host "Copying logs from $dir"
+                Copy-Item -Path "$dir/*" -Destination $stagingDirectory -Recurse -Force -ErrorAction SilentlyContinue
+            } else {
+                Write-Host "Log directory not found (this is okay if no tests ran or build failed early): $dir"
+            }
+        }
+        Write-Host "Staged logs in $stagingDirectory"
+        Get-ChildItem $stagingDirectory -Recurse | Select-Object FullName
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Logs ($(_BuildConfig))'
+      condition: always()
+      continueOnError: true
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Logs-$(_BuildConfig)'
+        ArtifactName: 'Logs_${{ parameters.name }}_$(_BuildConfig)'

@@ -38,12 +38,23 @@ stages:
     parameters:
       name: windowsdesktop_pr_build
       displayName: WindowsDesktop PR Build
-      strategy:
+      jobStrategy:
         matrix:
-          win_x64:
-            _targetArchitecture: x64
-          win_x86:
-            _targetArchitecture: x86
-          win_arm64:
-            _targetArchitecture: arm64
-      targetArchitecture: $(_targetArchitecture)
+          win_x64_Debug:
+            _BuildConfig: Debug
+            TargetArchitecture: x64
+          win_x64_Release:
+            _BuildConfig: Release
+            TargetArchitecture: x64
+          win_x86_Debug:
+            _BuildConfig: Debug
+            TargetArchitecture: x86
+          win_x86_Release:
+            _BuildConfig: Release
+            TargetArchitecture: x86
+          win_arm64_Debug:
+            _BuildConfig: Debug
+            TargetArchitecture: arm64
+          win_arm64_Release:
+            _BuildConfig: Release
+            TargetArchitecture: arm64

@@ -7,6 +7,7 @@ parameters:
   InjectRuntimePrereqs: false   # If true, expect either downloaded runtime MSIs or an injected archive to be normalized
   RuntimePrereqsArchive: ''     # Optional zip containing host/hostfxr/runtime MSIs (internal validation runs)
   GenerateDummyPrereqs: false   # (Not used automatically: dummy MSIs are for local structural testing only)
+  jobStrategy: null
 
 jobs:
   - job: ${{ parameters.name }}
@@ -19,23 +20,33 @@ jobs:
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
         name: NetCore1ESPool-Internal
         demands: ImageOverride -equals windows.vs2019.amd64
-    strategy:
-      matrix: 
-        Debug:
-          _BuildConfig: Debug
-        Release:
-          _BuildConfig: Release
+
+    # Allow caller to override the job strategy (e.g. to add an architecture matrix).
+    ${{ if ne(parameters.jobStrategy, null) }}:
+      strategy: ${{ parameters.jobStrategy }}
+    ${{ else }}:
+      strategy:
+        matrix: 
+          Debug:
+            _BuildConfig: Debug
+          Release:
+            _BuildConfig: Release
+
     workspace:
       clean: all
     variables: 
       - name: CommonMSBuildArgs
         value: >-
           -c $(_BuildConfig)
-          /p:TargetArchitecture=${{ parameters.targetArchitecture }}
+          /p:TargetArchitecture=$(TargetArchitecture)
           /p:SkipTests=${{ parameters.skipTests }}
           /p:ContinuousIntegrationBuild=true
-      - name: TargetArchitecture
-        value: ${{ parameters.targetArchitecture }}
+      - ${{ if ne(parameters.targetArchitecture, null) }}:
+        - name: TargetArchitecture
+          value: ${{ parameters.targetArchitecture }}
+      - ${{ if eq(parameters.targetArchitecture, null) }}:
+        - name: TargetArchitecture
+          value: $(TargetArchitecture)
       - ${{ if eq(variables['System.TeamProject'], 'public') }}:
         - name: MsbuildSigningArguments
           value: /p:DotNetSignType=Test
@@ -75,7 +86,7 @@ jobs:
     # Optional dummy prereqs for structural testing (will NOT produce valid bundle if light validates MSI internal tables)
     - powershell: |
         if ('${{ parameters.GenerateDummyPrereqs }}' -eq 'true') {
-          $arch='${{ parameters.targetArchitecture }}'
+          $arch='$(TargetArchitecture)'
           Write-Host "Generating dummy prereq runtime placeholders for $arch";
           # Call relocated script (shim remains in eng for backward compat)
           pwsh "$(Build.SourcesDirectory)/src/windowsdesktop/tests/scripts/make-dummy-runtime-msis.ps1" -Architecture $arch
@@ -88,7 +99,7 @@ jobs:
     # Optional: expand provided archive of runtime prereqs (manual/internal validation scenario)
     - powershell: |
         if ('${{ parameters.RuntimePrereqsArchive }}' -and (Test-Path '${{ parameters.RuntimePrereqsArchive }}')) {
-          $arch='${{ parameters.targetArchitecture }}'
+          $arch='$(TargetArchitecture)'
           $dest = "$(Build.SourcesDirectory)/artifacts/runtime-msis/archive-$arch"
           New-Item -Force -ItemType Directory -Path $dest | Out-Null
           Write-Host "Expanding provided RuntimePrereqsArchive to $dest";
@@ -102,7 +113,7 @@ jobs:
 
     # Verify runtime MSI download and check architecture-specific files (internal builds only)
     - powershell: |
-        $arch = "${{ parameters.targetArchitecture }}"
+        $arch = "$(TargetArchitecture)"
         $runtimeMsiDir = "$(Build.SourcesDirectory)/artifacts/runtime-msis"
         
         Write-Host "Checking runtime MSI download results for architecture: $arch"
@@ -120,7 +131,7 @@ jobs:
             $hostfxrMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-hostfxr-*-win-$arch.msi" -Recurse -ErrorAction SilentlyContinue
             $runtimeMsi = Get-ChildItem -Path $runtimeMsiDir -Name "dotnet-runtime-*-win-$arch.msi" -Recurse -ErrorAction SilentlyContinue
             
-            Write-Host "Architecture-specific MSIs for $arch"":""
+            Write-Host "Architecture-specific MSIs for $arch":""
             Write-Host "  Host MSI: $($hostMsi.Count) found"
             Write-Host "  HostFxr MSI: $($hostfxrMsi.Count) found"
             Write-Host "  Runtime MSI: $($runtimeMsi.Count) found"
@@ -140,12 +151,12 @@ jobs:
         } else {
           Write-Host "##vso[task.logissue type=warning]Runtime MSIs directory does not exist - will fall back to VS.Redist packages"
         }
-      displayName: 'Verify Runtime MSI Download for ${{ parameters.targetArchitecture }}'
+      displayName: 'Verify Runtime MSI Download for $(TargetArchitecture)'
       condition: succeededOrFailed()
 
     # Normalize runtime MSIs into deterministic prereqs directory (internal builds only)
     - powershell: |
-        $arch = "${{ parameters.targetArchitecture }}"
+        $arch = "$(TargetArchitecture)"
         $downloadRoot = "$(Build.SourcesDirectory)/artifacts/runtime-msis"
         $prereqDir = "$(Build.SourcesDirectory)/artifacts/prereqs/$arch"
         New-Item -Force -ItemType Directory -Path $prereqDir | Out-Null
@@ -166,7 +177,7 @@ jobs:
         } else {
           Write-Host "##vso[task.logissue type=warning]Incomplete runtime MSIs for $arch; will build bundle without prereqs."
         }
-      displayName: 'Normalize Runtime Prereq MSIs (${{ parameters.targetArchitecture }})'
+      displayName: 'Normalize Runtime Prereq MSIs ($(TargetArchitecture))'
       condition: and(succeededOrFailed(), ne(variables['System.TeamProject'], 'public'))
       continueOnError: true
 
@@ -183,7 +194,7 @@ jobs:
 
     # Verify staging location has architecture-specific MSIs
     - powershell: |
-        $arch = "${{ parameters.targetArchitecture }}"
+        $arch = "$(TargetArchitecture)"
         $stagingDir = "$(Build.SourcesDirectory)/artifacts/prereqs/$arch"
         
         Write-Host "Checking normalized prerequisite runtime MSIs for architecture: $arch"
@@ -202,7 +213,7 @@ jobs:
         } else {
           Write-Host "Prereqs directory not present (acceptable for public builds)."
         }
-      displayName: 'Verify Prerequisite Runtime MSIs (${{ parameters.targetArchitecture }})'
+      displayName: 'Verify Prerequisite Runtime MSIs ($(TargetArchitecture))'
       condition: succeededOrFailed()
 
     - ${{ if ne(variables['System.TeamProject'], 'public') }}:

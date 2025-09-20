@@ -42,6 +42,33 @@ jobs:
     steps:
     - template: /eng/common/templates/steps/enable-internal-sources.yml
 
+    # Download runtime MSI artifacts from the runtime build
+    - task: DownloadBuildArtifacts@0
+      displayName: 'Download Runtime MSI Artifacts'
+      inputs:
+        buildType: 'specific'
+        project: 'internal'
+        pipeline: 'dotnet-runtime-official'
+        buildVersionToDownload: 'latestFromBranch'
+        branchName: 'refs/heads/main'
+        artifactName: 'PackageArtifacts'
+        itemPattern: |
+          **/**/dotnet-host-*-win-${{ parameters.targetArchitecture }}.msi
+          **/**/dotnet-hostfxr-*-win-${{ parameters.targetArchitecture }}.msi
+          **/**/dotnet-runtime-*-win-${{ parameters.targetArchitecture }}.msi
+        downloadPath: '$(Build.SourcesDirectory)/artifacts/runtime-msis'
+      condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'))
+
+    # Copy MSIs to expected location for bundle build
+    - task: CopyFiles@2
+      displayName: 'Stage Runtime MSIs for Bundle'
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/artifacts/runtime-msis'
+        Contents: '**/*.msi'
+        TargetFolder: '$(Build.SourcesDirectory)/artifacts/packages/$(_BuildConfig)/Shipping'
+        flattenFolders: true
+      condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'))
+
     - ${{ if ne(variables['System.TeamProject'], 'public') }}:
       - task: MicroBuildSigningPlugin@4
         displayName: Install MicroBuild plugin for Signing

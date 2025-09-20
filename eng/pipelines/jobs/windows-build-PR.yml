@@ -234,6 +234,25 @@ jobs:
         condition: always()
 
     # Arcade-aligned log collection & publishing
+    - powershell: |
+        $cfg = "$(_BuildConfig)"
+        $root = "$(Build.SourcesDirectory)/artifacts/log"
+        $debugDir = Join-Path $root 'Debug'
+        if (-not (Test-Path $debugDir)) { New-Item -ItemType Directory -Path $debugDir | Out-Null }
+        $sourceDir = Join-Path $root $cfg
+        if (Test-Path $sourceDir) {
+          Write-Host "Normalizing logs from $sourceDir -> $debugDir"
+          Get-ChildItem $sourceDir -File -Recurse -Include *.log,*.binlog | ForEach-Object {
+            $target = Join-Path $debugDir $_.Name
+            if (-not (Test-Path $target)) { Copy-Item $_.FullName $target -Force }
+          }
+        } else {
+          Write-Host "No log directory for config $cfg at $sourceDir (may be early failure)."
+        }
+        Write-Host "Normalized Debug log directory contents:"; Get-ChildItem $debugDir -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "  $($_.Name)" }
+      displayName: 'Normalize logs for Arcade template'
+      condition: always()
+      continueOnError: true
     - template: /eng/common/core-templates/steps/publish-logs.yml
       parameters:
         StageLabel: PR

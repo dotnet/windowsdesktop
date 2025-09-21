@@ -39,6 +39,7 @@
     
     <!-- WiX v5 PDB configuration - bundles don't publish PDBs -->
     <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <PdbType>full</PdbType>
     <PublishWindowsPdb>false</PublishWindowsPdb>
     <NoWarn>$(NoWarn);WIX1098</NoWarn>
 

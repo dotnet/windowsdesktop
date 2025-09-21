@@ -34,7 +34,7 @@ variables:
 stages:
 - stage: Build
   jobs:
-  - template: eng/pipelines/jobs/windows-build-PR.yml
+  - template: /eng/pipelines/jobs/windows-build-PR.yml
     parameters:
       name: windowsdesktop-pr
       displayName: WindowsDesktop PR Build

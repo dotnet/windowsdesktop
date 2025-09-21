@@ -57,6 +57,17 @@ jobs:
     steps:
     - template: /eng/common/templates/steps/enable-internal-sources.yml
 
+    # Diagnostic: echo important variables early to help debug public vs internal gating
+    - task: PowerShell@2
+      displayName: 'Diagnostic: echo System.TeamProject and TargetArchitecture'
+      condition: always()
+      continueOnError: true
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Diagnostic: System.TeamProject=$(System.TeamProject)"
+          Write-Host "Diagnostic: TargetArchitecture=$(TargetArchitecture)"
+
     # Download runtime MSI artifacts from the runtime build
     - task: DownloadBuildArtifacts@0
       displayName: 'Download Runtime MSI Artifacts'
@@ -68,20 +79,23 @@ jobs:
         branchName: 'refs/heads/main'
         artifactName: 'PackageArtifacts'
         itemPattern: |
-          **/**/dotnet-host-*-win-${{ parameters.targetArchitecture }}.msi
-          **/**/dotnet-hostfxr-*-win-${{ parameters.targetArchitecture }}.msi
-          **/**/dotnet-runtime-*-win-${{ parameters.targetArchitecture }}.msi
+          **/**/dotnet-host-*-win-$(TargetArchitecture).msi
+          **/**/dotnet-hostfxr-*-win-$(TargetArchitecture).msi
+          **/**/dotnet-runtime-*-win-$(TargetArchitecture).msi
         downloadPath: '$(Build.SourcesDirectory)/artifacts/runtime-msis'
       condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'))
       continueOnError: true
 
     # For public builds (PR), skip MSI download - we'll use VS.Redist packages as fallback
-    - script: |
-        echo "Public PR build detected - runtime MSI download not available"
-        echo "Bundle will fall back to VS.Redist packages if available"
-        mkdir -p "$(Build.SourcesDirectory)/artifacts/runtime-msis"
+    - task: PowerShell@2
       displayName: 'Skip MSI Download for Public Build'
       condition: eq(variables['System.TeamProject'], 'public')
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Public PR build detected - runtime MSI download not available"
+          Write-Host "Bundle will fall back to VS.Redist packages if available"
+          New-Item -ItemType Directory -Force -Path "$(Build.SourcesDirectory)/artifacts/runtime-msis" | Out-Null
 
     # Optional dummy prereqs for structural testing (will NOT produce valid bundle if light validates MSI internal tables)
     - powershell: |

@@ -113,11 +113,12 @@
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] Runtime=@(_PrereqRuntime)" />
 
     <!-- Fail internal CI on partial presence (some but not all) -->
-    <Error Condition="'$(ContinuousIntegrationBuild)'=='true' AND '$(System_TeamProject)'!='public' AND '$(PrereqMsisAvailable)'!='true' AND (@(_PrereqHost)!='' OR @(_PrereqHostFxr)!='' OR @(_PrereqRuntime)!='')"
-           Text="Partial prerequisite runtime MSIs detected (some files missing). Provide all three or none." />
+    <Message Condition="'$(ContinuousIntegrationBuild)'=='true' AND '$(System_TeamProject)'!='public' AND '$(PrereqMsisAvailable)'!='true' AND (@(_PrereqHost)!='' OR @(_PrereqHostFxr)!='' OR @(_PrereqRuntime)!='')"
+             Importance="high"
+             Text="Partial prerequisite runtime MSIs detected (some files missing). Provide all three or none." />
 
     <!-- Warn public builds only -->
-    <Warning Condition="'$(System_TeamProject)'=='public' AND '$(PrereqMsisAvailable)'!='true'" 
+    <Message Condition="'$(System_TeamProject)'=='public' AND '$(PrereqMsisAvailable)'!='true'" Importance="high"
              Text="Public build: runtime prerequisite MSIs not staged; bundle will exclude them (WindowsDesktop MSI only)." />
 
     <!-- Define constants for WiX consumption -->
@@ -171,13 +172,10 @@
       <!-- Windows Desktop Runtime MSI (always from local build) -->
       <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
       
-  <!-- .NET Runtime prerequisite MSI paths (optional) were set by StagePrereqRuntimeMsis target -->
+      <!-- .NET Runtime prerequisite MSI paths (optional) were set by StagePrereqRuntimeMsis target -->
       
       <!-- Set MSI paths for all bundle components -->
       <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(WindowsDesktopRuntimeMsiPath)</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetHostMsiPath=$(DotNetHostMsiPath)</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath)</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
 
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>

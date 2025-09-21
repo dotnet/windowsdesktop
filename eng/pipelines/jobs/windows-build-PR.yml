@@ -4,7 +4,6 @@ parameters:
   skipTests: $(SkipTests)
   targetArchitecture: null
   timeoutInMinutes: 120
-  jobStrategy: null
 
 jobs:
   - job: ${{ parameters.name }}
@@ -17,33 +16,22 @@ jobs:
       ${{ if ne(variables['System.TeamProject'], 'public') }}:
         name: NetCore1ESPool-Internal
         demands: ImageOverride -equals windows.vs2019.amd64
-
-    # Allow caller to override the job strategy (e.g. to add an architecture matrix).
-    ${{ if ne(parameters.jobStrategy, null) }}:
-      strategy: ${{ parameters.jobStrategy }}
-    ${{ else }}:
-      strategy:
-        matrix: 
-          Debug:
-            _BuildConfig: Debug
-          Release:
-            _BuildConfig: Release
-
+    strategy:
+      matrix: 
+        Debug:
+          _BuildConfig: Debug
+        Release:
+          _BuildConfig: Release
     workspace:
       clean: all
     variables: 
       - name: CommonMSBuildArgs
         value: >-
           -c $(_BuildConfig)
-          /p:TargetArchitecture=$(TargetArchitecture)
+          /p:TargetArchitecture=${{ parameters.targetArchitecture }}
           /p:SkipTests=${{ parameters.skipTests }}
-          /p:ContinuousIntegrationBuild=true
-      - ${{ if ne(parameters.targetArchitecture, null) }}:
-        - name: TargetArchitecture
-          value: ${{ parameters.targetArchitecture }}
-      - ${{ if eq(parameters.targetArchitecture, null) }}:
-        - name: TargetArchitecture
-          value: $(TargetArchitecture)
+      - name: TargetArchitecture
+        value: ${{ parameters.targetArchitecture }}
       - ${{ if eq(variables['System.TeamProject'], 'public') }}:
         - name: MsbuildSigningArguments
           value: /p:DotNetSignType=Test
@@ -54,21 +42,16 @@ jobs:
     steps:
     - template: /eng/common/templates/steps/enable-internal-sources.yml
 
-    # Diagnostic: echo important variables early to help debug public vs internal gating
-    - task: PowerShell@2
-      displayName: 'Diagnostic: echo System.TeamProject and TargetArchitecture'
-      condition: always()
-      continueOnError: true
-      inputs:
-        targetType: 'inline'
-        script: |
-          Write-Host "Diagnostic: System.TeamProject=$(System.TeamProject)"
-          Write-Host "Diagnostic: TargetArchitecture=$(TargetArchitecture)"
+    - ${{ if ne(variables['System.TeamProject'], 'public') }}:
+      - task: MicroBuildSigningPlugin@4
+        displayName: Install MicroBuild plugin for Signing
+        inputs:
+          signType: $(SignType)
+          zipSources: false
+          feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
+        continueOnError: false
+        condition: and(succeeded(), in(variables['SignType'], 'real', 'test'))
 
-    # Runtime prerequisite logic removed to match .NET 9 behavior. If/when needed,
-    # prereq downloading/normalization can be reintroduced here.
-
-    # Build the project
     - script: >-
         eng/common/cibuild.cmd
         $(CommonMSBuildArgs)
@@ -87,34 +70,22 @@ jobs:
         continueOnError: true
         condition: always()
 
-    - task: PowerShell@2
-      displayName: 'Gather and upload logs'
-      condition: always()
+    - task: CopyFiles@2
+      displayName: Prepare BuildLogs staging directory
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          **/*.log
+          **/*.binlog
+        TargetFolder: '$(Build.StagingDirectory)/BuildLogs'
+        CleanTargetFolder: true
       continueOnError: true
-      script: |
-        $logDirectories = @(
-            "$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)",
-            "$(Build.sourcesdirectory)/artifacts/TestResults/$(_BuildConfig)"
-        )
-
-        $stagingDirectory = "$(Build.ArtifactStagingDirectory)/Logs-$(_BuildConfig)"
-        New-Item -ItemType Directory -Path $stagingDirectory -Force
-
-        foreach ($dir in $logDirectories) {
-            if (Test-Path $dir) {
-                Write-Host "Copying logs from $dir"
-                Copy-Item -Path "$dir/*" -Destination $stagingDirectory -Recurse -Force -ErrorAction SilentlyContinue
-            } else {
-                Write-Host "Log directory not found (this is okay if no tests ran or build failed early): $dir"
-            }
-        }
-        Write-Host "Staged logs in $stagingDirectory"
-        Get-ChildItem $stagingDirectory -Recurse | Select-Object FullName
+      condition: succeededOrFailed()
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Logs ($(_BuildConfig))'
-      condition: always()
-      continueOnError: true
+      displayName: Publish BuildLogs
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Logs-$(_BuildConfig)'
-        ArtifactName: 'Logs_${{ parameters.name }}_$(_BuildConfig)'
+        PathtoPublish: '$(Build.StagingDirectory)/BuildLogs'
+        ArtifactName: Logs-${{ parameters.name }}-$(_BuildConfig)
+      continueOnError: true
+      condition: succeededOrFailed()

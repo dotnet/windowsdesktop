@@ -1,8 +1,29 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
+    <!-- WiX v5 Configuration -->
+    <UseWixV5>true</UseWixV5>
+    
+    <!-- WiX v5 PDB Type Fix -->
+    <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
+    <WixToolsetLinkerPdbType>full</WixToolsetLinkerPdbType>
+    
+    <!-- MSBuild parallelism settings to prevent WiX file locking issues -->
+    <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>
+    <MaxCpuCount Condition="'$(BuildingInstallers)' == 'true'">1</MaxCpuCount>
+    <MaxCpuCount Condition="'$(PlatformPackageType)' == 'RuntimePack'">1</MaxCpuCount>
+    
+    <!-- Additional CI build stability measures -->
+    <BuildInParallel Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">false</BuildInParallel>
+    <MaxCpuCount Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">1</MaxCpuCount>
+    
+    <!-- WindowsDesktop uses transport packages with pre-compiled R2R assemblies -->
+    <!-- Local CrossGen2 compilation settings removed - rely on transport packages -->
+    
+    <!-- Disable parallel builds entirely for RuntimePack to prevent all file conflicts -->
+    <ContinueOnError Condition="'$(PlatformPackageType)' == 'RuntimePack'">false</ContinueOnError>
+    
     <!-- Packaging properties -->
     <RepositoryUrl>https://github.com/dotnet/windowsdesktop</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>
@@ -15,12 +36,16 @@
     <PackageThirdPartyNoticesFile>$(MSBuildThisFileDirectory)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799421</PackageReleaseNotes>
 
+
+
     <!-- Set up handling of build warnings -->
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
     <!-- Platform detection -->
-    <TargetArchitecture  Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
+    <!-- Map Platform property to TargetArchitecture, but skip AnyCPU which is not valid for WiX -->
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == '' AND '$(Platform)' != '' AND '$(Platform)' != 'AnyCPU'">$(Platform)</TargetArchitecture>
+    <TargetArchitecture Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
 
     <!-- Only upgrade NuGetAudit warnings to errors for official builds. -->
     <WarningsNotAsErrors Condition="'$(OfficialBuild)' != 'true'">$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>

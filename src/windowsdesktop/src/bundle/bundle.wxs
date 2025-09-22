@@ -42,11 +42,6 @@
 
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 
-    <!-- Search references for upgrade policy keys -->
-    <util:RegistrySearchRef Id="RemovePreviousVersionRegistryKeySearch"/>
-    <util:RegistrySearchRef Id="RemoveSpecificPreviousVersionRegistryKeyExistsSearch"/>
-    <util:RegistrySearchRef Id="RemoveSpecificPreviousVersionRegistryKeySearch"/>
-
     <!-- MSI installers always write search keys to the 32-bit hive. -->
     <util:RegistrySearch Id="CheckDotnetInstallLocation_x86"
                          Key="SOFTWARE\dotnet\Setup\InstalledVersions\x86"
@@ -206,10 +201,6 @@
     <Variable Name="VERSIONMAJOR" Type="string" Value="$(MajorVersion)" bal:Overridable="no" />
     <Variable Name="VERSIONMINOR" Type="string" Value="$(MinorVersion)" bal:Overridable="no" />
     <Variable Name="MINIMUMVSVERSION" Type="string" Value="$(MinimumVSVersion)" bal:Overridable="no" />
-
-    <!-- Upgrade policy variables following reference PR patterns -->
-    <Variable Name="RemovePreviousVersions" Type="numeric" Value="1" bal:Overridable="yes" />
-    <Variable Name="RemoveSpecificPreviousVersion" Type="string" Value="" bal:Overridable="yes" />
 
     <Chain DisableSystemRestore="yes" ParallelCache="yes">
       <!-- Rollback boundary ensures transaction safety for all MSI packages -->

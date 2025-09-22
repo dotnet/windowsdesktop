@@ -176,4 +176,9 @@ internal class NuGetArtifactTester : IDisposable
     {
         return XDocument.Parse(ReadEntryContent(entry));
     }
+
+    // dummy change to run code mirror pipeline
+    private static void foo()
+    {
+    }
 }

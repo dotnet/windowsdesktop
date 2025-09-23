@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.WixToolset.Sdk">
 
+  <Import Project="Wix.props" />
+
   <PropertyGroup>
     <!-- OutputType determines the extension, .msi, .wixlib, .exe, etc. -->
     <OutputType>Bundle</OutputType>
@@ -39,7 +41,6 @@
     
     <!-- WiX v5 PDB configuration - bundles don't publish PDBs -->
     <WixToolsetCompilerPdbType>full</WixToolsetCompilerPdbType>
-    <PdbType>full</PdbType>
     <PublishWindowsPdb>false</PublishWindowsPdb>
     <NoWarn>$(NoWarn);WIX1098</NoWarn>
 
@@ -80,141 +81,8 @@
     <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
   </ItemGroup>
 
-
-  <!-- Deterministic prerequisite runtime MSI staging.
-       Contract: If (and only if) all three canonical prerequisite MSI files exist under
-         artifacts/prereqs/<arch>/ : dotnet-host-win-<arch>.msi
-                                       dotnet-hostfxr-win-<arch>.msi
-                                       dotnet-runtime-win-<arch>.msi
-       then IncludeRuntimeMSIs=true and the bundle embeds them. Otherwise they are omitted.
-       No probing of VS.Redist packages or partial inclusion attempts. -->
-  <Target Name="StagePrereqRuntimeMsis" BeforeTargets="_GetBundledComponentInstallers">
-    <!-- Directory where prereq MSIs are expected if provided -->
-    <PropertyGroup>
-      <PrereqRuntimeMsisDir>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</PrereqRuntimeMsisDir>
-      <!-- Fallback if ArtifactsRoot not defined: derive from project location -->
-      <PrereqRuntimeMsisDir Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\prereqs\$(TargetArchitecture)\</PrereqRuntimeMsisDir>
-    </PropertyGroup>
-
-    <ItemGroup Condition="Exists('$(PrereqRuntimeMsisDir)')">
-      <_PrereqHost Include="$(PrereqRuntimeMsisDir)dotnet-host-win-$(TargetArchitecture).msi" Condition="Exists('$(PrereqRuntimeMsisDir)dotnet-host-win-$(TargetArchitecture).msi')" />
-      <_PrereqHostFxr Include="$(PrereqRuntimeMsisDir)dotnet-hostfxr-win-$(TargetArchitecture).msi" Condition="Exists('$(PrereqRuntimeMsisDir)dotnet-hostfxr-win-$(TargetArchitecture).msi')" />
-      <_PrereqRuntime Include="$(PrereqRuntimeMsisDir)dotnet-runtime-win-$(TargetArchitecture).msi" Condition="Exists('$(PrereqRuntimeMsisDir)dotnet-runtime-win-$(TargetArchitecture).msi')" />
-    </ItemGroup>
-
-    <PropertyGroup>
-      <PrereqMsisAvailable Condition="'@(_PrereqHost)' != '' AND '@(_PrereqHostFxr)' != '' AND '@(_PrereqRuntime)' != ''">true</PrereqMsisAvailable>
-      <PrereqMsisAvailable Condition="'$(PrereqMsisAvailable)'==''">false</PrereqMsisAvailable>
-    </PropertyGroup>
-
-    <Message Importance="high" Text="[PrereqRuntime] Dir=$(PrereqRuntimeMsisDir) Available=$(PrereqMsisAvailable)" />
-    <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] Host=@(_PrereqHost)" />
-    <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] HostFxr=@(_PrereqHostFxr)" />
-    <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] Runtime=@(_PrereqRuntime)" />
-
-    <!-- Fail internal CI on partial presence (some but not all) -->
-    <Message Condition="'$(ContinuousIntegrationBuild)'=='true' AND '$(System_TeamProject)'!='public' AND '$(PrereqMsisAvailable)'!='true' AND (@(_PrereqHost)!='' OR @(_PrereqHostFxr)!='' OR @(_PrereqRuntime)!='')"
-             Importance="high"
-             Text="Partial prerequisite runtime MSIs detected (some files missing). Provide all three or none." />
-
-    <!-- Warn public builds only -->
-    <Message Condition="'$(System_TeamProject)'=='public' AND '$(PrereqMsisAvailable)'!='true'" Importance="high"
-             Text="Public build: runtime prerequisite MSIs not staged; bundle will exclude them (WindowsDesktop MSI only)." />
-
-    <!-- Define constants for WiX consumption -->
-    <PropertyGroup Condition="'$(PrereqMsisAvailable)'=='true'">
-      <DotNetHostMsiPath>@(_PrereqHost)</DotNetHostMsiPath>
-      <DotNetHostFxrMsiPath>@(_PrereqHostFxr)</DotNetHostFxrMsiPath>
-      <DotNetRuntimeMsiPath>@(_PrereqRuntime)</DotNetRuntimeMsiPath>
-      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=true;DotNetHostMsiPath=$(DotNetHostMsiPath);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(PrereqMsisAvailable)'!='true'">
-      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=false</DefineConstants>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile" DependsOnTargets="StagePrereqRuntimeMsis">
-    <PropertyGroup>
-      <!-- Essential bundle metadata -->
-      <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
-      <!-- BundleVersion must be purely numeric for proper version comparison during upgrades -->
-      <!-- Use VersionSuffixDateStamp (e.g., 25467) if available, otherwise use default build number -->
-      <!-- This ensures RC2 build number is higher than RC1 (10.0.0.35301) -->
-      <DefineConstants Condition="'$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
-      <DefineConstants Condition="'$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
-      <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
-      <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
-      
-      <!-- Generate UpgradeCodes with major version for proper upgrade behavior -->
-      <!-- In-place upgrades within major.minor versions, SxS across major versions -->
-      <!-- IMPORTANT: RC1 used UpgradeCode {39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE} - seed should generate this -->
-      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
-      <!-- WiX v5 generates different GUIDs than WiX v3 - can't match RC1 exactly -->
-      <!-- Use consistent seed for WiX v5 going forward with arch for SxS support -->
-      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
-      
-      <!-- Architecture and platform -->
-      <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
-      <DefineConstants>$(DefineConstants);PlatformToken=$(TargetArchitecture.ToUpper())</DefineConstants>
-      <DefineConstants>$(DefineConstants);NativeMachine_x64=x64</DefineConstants>
-      <DefineConstants>$(DefineConstants);NativeMachine_arm64=arm64</DefineConstants>
-
-      <!-- Version information -->
-      <DefineConstants>$(DefineConstants);MajorVersion=$(MajorVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);MinorVersion=$(MinorVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);VERSIONMAJOR=$(MajorVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);VERSIONMINOR=$(MinorVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);WinFormsAndWpfVersion=$(WinFormsAndWpfVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
-      <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
-
-      <!-- Windows Desktop Runtime MSI (always from local build) -->
-      <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
-      
-      <!-- .NET Runtime prerequisite MSI paths (optional) were set by StagePrereqRuntimeMsis target -->
-      
-      <!-- Set MSI paths for all bundle components -->
-      <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(WindowsDesktopRuntimeMsiPath)</DefineConstants>
-
-      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
-      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
-    </PropertyGroup>
-    
-    <!-- MSI path logging for WindowsDesktop MSI -->
-    <Message Text="Bundle MSI Components:" Importance="high" />
-    <Message Text="  Windows Desktop Runtime: $(WindowsDesktopRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(WindowsDesktopRuntimeMsiPath)')))" Importance="high" />
-    <!-- Runtime MSI logging already emitted in StagePrereqRuntimeMsis target -->
-  </Target>
-
-  <!-- Bundle publication to shipping directory -->
-  <Target Name="PublishBundle" AfterTargets="Build">
-    <PropertyGroup>
-      <BundleShippingName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
-      <BundleShippingPath>$(ArtifactsPackagesDir)Shipping\$(BundleShippingName)</BundleShippingPath>
-    </PropertyGroup>
-    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
-    <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
-  </Target>
-
-  <!-- Generate deterministic UpgradeCode from seed -->
-  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
-    <!-- Use Microsoft.DotNet.Build.Tasks.Installers task to generate GUID from seed -->
-    <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
-      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
-    </GenerateGuidFromName>
-    
-    <PropertyGroup>
-      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
-    </PropertyGroup>
-    
-    <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
-  </Target>
-
-  <!-- Pack target for CI compatibility -->
-  <Target Name="Pack" DependsOnTargets="Build;PublishBundle">
-    <Message Text="Bundle pack completed" Importance="high" />
-  </Target>
+  <!-- Import extracted WiX build targets -->
+  <Import Project="Wix.targets" />
 
 </Project>
 

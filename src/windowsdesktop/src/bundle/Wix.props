@@ -34,26 +34,4 @@
     <!-- Directory for the zipped up wixpack command package -->
     <WixCommandPackagesDir>$(InstallersOutputPath)</WixCommandPackagesDir>
   </PropertyGroup>
-
-  <!-- Runtime transport packages for .NET Host, HostFxr, and Shared Framework MSIs -->
-  <!-- These are available from internal feeds when SetupNugetSources script adds internal-transport feeds -->
-  <!-- Microsoft.Internal.Runtime.WindowsDesktop.Transport provides Windows Desktop libraries (handled in bundle.wixproj) -->
-  <!-- Enable via property: dotnet build -p:EnableRuntimeTransportPackages=true -->
-  <PropertyGroup>
-    <EnableRuntimeTransportPackages Condition="'$(EnableRuntimeTransportPackages)' == '' AND '$(ContinuousIntegrationBuild)' == 'true' AND '$(System_TeamProject)' != 'public'">true</EnableRuntimeTransportPackages>
-    <EnableRuntimeTransportPackages Condition="'$(EnableRuntimeTransportPackages)' == ''">false</EnableRuntimeTransportPackages>
-  </PropertyGroup>
-  
-  <ItemGroup Condition="'$(EnableRuntimeTransportPackages)' == 'true'">
-    <!-- Runtime MSI transport packages from internal feeds (will fail if internal feeds not available) -->
-    <PackageReference Include="VS.Redist.Common.NetCore.SharedHost" 
-                      GeneratePathProperty="true" 
-                      PrivateAssets="all" />
-    <PackageReference Include="VS.Redist.Common.NetCore.HostFXR" 
-                      GeneratePathProperty="true" 
-                      PrivateAssets="all" />
-    <PackageReference Include="VS.Redist.Common.NetCore.SharedFramework" 
-                      GeneratePathProperty="true" 
-                      PrivateAssets="all" />
-  </ItemGroup>
 </Project>

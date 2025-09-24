@@ -93,12 +93,13 @@
     <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
   </Target>
 
-  <Target Name="Pack" DependsOnTargets="Build;PublishBundle">
+  <Target Name="Pack" DependsOnTargets="Build;PublishBundle;GenerateWixpackPackage">
     <Message Text="Bundle pack completed" Importance="high" />
   </Target>
 
   <!-- Generate a wixpack using the Wix toolset task (pattern aligned with aspnetcore). -->
-  <Target Name="GenerateWixpackPackage" AfterTargets="CoreCompile" Condition="'$(WixCreateWixPackOutput)'=='true'">
+  <!-- Run after Build to ensure all artifacts are ready, but before Pack -->
+  <Target Name="GenerateWixpackPackage" AfterTargets="Build" BeforeTargets="Pack" Condition="'$(OutputType)'=='Bundle' AND '$(WixCreateWixPackOutput)'=='true' AND '$(RunWixpackTargets)'=='true'">
     <PropertyGroup>
       <WixpackWorkingDir>$(IntermediateOutputPath)wixpack</WixpackWorkingDir>
       <!-- Ensure WixCommandPackagesDir has a default value -->
@@ -109,6 +110,7 @@
       <!-- PDB name follows Wix default: TargetName + .wixpdb -->
       <_BundlePdbFile>$(TargetDir)$(TargetName).wixpdb</_BundlePdbFile>
     </PropertyGroup>
+    <Message Text="[Wixpack] RunWixpackTargets=$(RunWixpackTargets), WixCreateWixPackOutput=$(WixCreateWixPackOutput)" Importance="high" />
     <Message Text="[Wixpack] WixpackOutputDir=$(WixpackOutputDir)" Importance="high" />
     <Message Text="[Wixpack] Existing wixpack detected at $(ExpectedBundleWixpackFile); skipping custom generation" Importance="high" Condition="Exists('$(ExpectedBundleWixpackFile)')" />
     <CreateWixBuildWixpack

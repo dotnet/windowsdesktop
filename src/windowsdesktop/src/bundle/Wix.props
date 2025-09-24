@@ -34,4 +34,5 @@
     <!-- Directory for the zipped up wixpack command package -->
     <WixCommandPackagesDir>$(InstallersOutputPath)</WixCommandPackagesDir>
   </PropertyGroup>
+
 </Project>

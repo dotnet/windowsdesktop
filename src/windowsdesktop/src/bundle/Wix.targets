@@ -1,62 +1,6 @@
 <Project>
   <!-- Extracted WiX build targets for Windows Desktop Runtime bundle -->
 
-  <!-- Transport package extraction (ASP.NET Core pattern) -->
-  <Target Name="ExtractRuntimeTransportPackages" 
-          BeforeTargets="StagePrereqRuntimeMsis"
-          Condition="'$(SkipRuntimeTransportExtraction)' != 'true'">
-    
-    <PropertyGroup>
-      <!-- Use the primary prereqs path that StagePrereqRuntimeMsis expects -->
-      <_RuntimeTransportDir>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</_RuntimeTransportDir>
-      <_RuntimeTransportDir Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\prereqs\$(TargetArchitecture)\</_RuntimeTransportDir>
-    </PropertyGroup>
-
-    <!-- Create prereqs directory -->
-    <MakeDir Directories="$(_RuntimeTransportDir)" />
-
-    <!-- Extract runtime MSIs from VS.Redist transport packages (available in internal feeds) -->
-    <ItemGroup>
-      <!-- Primary source: VS.Redist transport packages for runtime MSIs -->
-      <_HostTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedHost)\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_SharedHost)' != ''" />
-      <_HostFxrTransportFiles Include="$(PkgVS_Redist_Common_NetCore_HostFXR)\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_HostFXR)' != ''" />
-      <_RuntimeTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedFramework)\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_SharedFramework)' != ''" />
-      
-      <!-- Fallback: Look in NuGet cache -->
-      <_HostTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedhost\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'@(_HostTransportFiles)' == ''" />
-      <_HostFxrTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.hostfxr\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'@(_HostFxrTransportFiles)' == ''" />
-      <_RuntimeTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedframework\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'@(_RuntimeTransportFiles)' == ''" />
-    </ItemGroup>
-
-    <Message Text="[Transport] VS.Redist SharedHost: $(PkgVS_Redist_Common_NetCore_SharedHost)" Importance="high" />
-    <Message Text="[Transport] VS.Redist HostFXR: $(PkgVS_Redist_Common_NetCore_HostFXR)" Importance="high" />
-    <Message Text="[Transport] VS.Redist SharedFramework: $(PkgVS_Redist_Common_NetCore_SharedFramework)" Importance="high" />
-    <Message Text="[Transport] TargetArchitecture: $(TargetArchitecture), DotNetRuntimeVersion: $(DotNetRuntimeVersion)" Importance="high" />
-    <Message Text="[Transport] Host MSIs found: @(_HostTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_HostTransportFiles)' != ''" />
-    <Message Text="[Transport] HostFxr MSIs found: @(_HostFxrTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_HostFxrTransportFiles)' != ''" />
-    <Message Text="[Transport] Runtime MSIs found: @(_RuntimeTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_RuntimeTransportFiles)' != ''" />
-    <Message Text="[Transport] No runtime MSI transport packages found - continuing with Windows Desktop Runtime-only bundle" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
-    <Message Text="[Transport] Note: VS.Redist.Common.NetCore.* packages require internal feeds configured via SetupNugetSources script" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
-
-    <!-- Copy and rename to expected filenames (remove version from filename) -->
-    <Copy SourceFiles="@(_HostTransportFiles)" 
-          DestinationFiles="$(_RuntimeTransportDir)dotnet-host-win-$(TargetArchitecture).msi" 
-          SkipUnchangedFiles="true" 
-          Condition="'@(_HostTransportFiles)' != ''" />
-          
-    <Copy SourceFiles="@(_HostFxrTransportFiles)" 
-          DestinationFiles="$(_RuntimeTransportDir)dotnet-hostfxr-win-$(TargetArchitecture).msi" 
-          SkipUnchangedFiles="true" 
-          Condition="'@(_HostFxrTransportFiles)' != ''" />
-          
-    <Copy SourceFiles="@(_RuntimeTransportFiles)" 
-          DestinationFiles="$(_RuntimeTransportDir)dotnet-runtime-win-$(TargetArchitecture).msi" 
-          SkipUnchangedFiles="true" 
-          Condition="'@(_RuntimeTransportFiles)' != ''" />
-
-    <Message Text="[Transport] Extraction complete. Staged MSIs in: $(_RuntimeTransportDir)" Importance="high" />
-  </Target>
-
   <!-- Flexible prerequisite runtime MSI staging with robust discovery -->
   <Target Name="StagePrereqRuntimeMsis" BeforeTargets="_GetBundledComponentInstallers">
     <!-- Define multiple search paths for runtime prerequisite MSIs -->
@@ -103,7 +47,9 @@
     </PropertyGroup>
 
     <!-- Enhanced diagnostic logging -->
-    <Message Importance="high" Text="[PrereqRuntime] Architecture=$(TargetArchitecture) Available=$(PrereqMsisAvailable)" />
+  <Message Importance="high" Text="[PrereqRuntime] Architecture=$(TargetArchitecture) Available=$(PrereqMsisAvailable)" />
+  <Message Importance="high" Text="[PrereqRuntime] Note: Runtime MSIs must be staged from dotnet/runtime build outputs or local scripts (no transport packages available)." />
+  <Message Importance="high" Text="[PrereqRuntime] To stage locally, run: pwsh src/windowsdesktop/tests/scripts/acquire-runtime-msis.ps1" />
     <Message Importance="low" Text="[PrereqRuntime] Search paths tested:" />
     <Message Importance="low" Text="  1. $(_PrereqSearchPath1) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath1)')))" />
     <Message Importance="low" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />

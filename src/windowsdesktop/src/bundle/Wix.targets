@@ -113,11 +113,11 @@
 
     <!-- Enhanced diagnostic logging -->
     <Message Importance="high" Text="[PrereqRuntime] Architecture=$(TargetArchitecture) Available=$(PrereqMsisAvailable)" />
-    <Message Importance="high" Text="[PrereqRuntime] Search paths tested:" />
-    <Message Importance="high" Text="  1. $(_PrereqSearchPath1) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath1)')))" />
-    <Message Importance="high" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />
-    <Message Importance="high" Text="  3. $(_PrereqSearchPath3) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath3)')))" />
-    <Message Importance="high" Text="  4. $(_PrereqSearchPath4) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath4)')))" />
+    <Message Importance="low" Text="[PrereqRuntime] Search paths tested:" />
+    <Message Importance="low" Text="  1. $(_PrereqSearchPath1) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath1)')))" />
+    <Message Importance="low" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />
+    <Message Importance="low" Text="  3. $(_PrereqSearchPath3) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath3)')))" />
+    <Message Importance="low" Text="  4. $(_PrereqSearchPath4) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath4)')))" />
     
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] Found MSIs:" />
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="  Host: @(_PrereqHost)" />
@@ -126,9 +126,12 @@
 
     <!-- Enhanced error reporting -->
     <Message Condition="'$(PrereqMsisAvailable)'!='true'" Importance="high" Text="[PrereqRuntime] MSI discovery status ($(TargetArchitecture)):" />
-    <Message Condition="'$(PrereqMsisAvailable)'!='true'" Importance="high" Text="  dotnet-host-win-$(TargetArchitecture).msi: $([System.Convert]::ToString('@(_PrereqHost)' != '').ToUpper())" />
-    <Message Condition="'$(PrereqMsisAvailable)'!='true'" Importance="high" Text="  dotnet-hostfxr-win-$(TargetArchitecture).msi: $([System.Convert]::ToString('@(_PrereqHostFxr)' != '').ToUpper())" />
-    <Message Condition="'$(PrereqMsisAvailable)'!='true'" Importance="high" Text="  dotnet-runtime-win-$(TargetArchitecture).msi: $([System.Convert]::ToString('@(_PrereqRuntime)' != '').ToUpper())" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqHost) != ''" Importance="high" Text="  dotnet-host-win-$(TargetArchitecture).msi: Found" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqHost) == ''" Importance="high" Text="  dotnet-host-win-$(TargetArchitecture).msi: Missing" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqHostFxr) != ''" Importance="high" Text="  dotnet-hostfxr-win-$(TargetArchitecture).msi: Found" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqHostFxr) == ''" Importance="high" Text="  dotnet-hostfxr-win-$(TargetArchitecture).msi: Missing" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqRuntime) != ''" Importance="high" Text="  dotnet-runtime-win-$(TargetArchitecture).msi: Found" />
+    <Message Condition="'$(PrereqMsisAvailable)'!='true' and @(_PrereqRuntime) == ''" Importance="high" Text="  dotnet-runtime-win-$(TargetArchitecture).msi: Missing" />
 
     <Message Condition="'$(ContinuousIntegrationBuild)'=='true' AND '$(System_TeamProject)'!='public' AND '$(PrereqMsisAvailable)'!='true' AND (@(_PrereqHost)!='' OR @(_PrereqHostFxr)!='' OR @(_PrereqRuntime)!='')" Importance="high" Text="Partial prerequisite runtime MSIs detected (some files missing). Provide all three or none." />
     <Message Condition="'$(System_TeamProject)'=='public' AND '$(PrereqMsisAvailable)'!='true'" Importance="high" Text="Public build: runtime prerequisite MSIs not staged; bundle will exclude them (WindowsDesktop MSI only)." />

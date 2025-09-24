@@ -75,7 +75,6 @@
     <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
                       GeneratePathProperty="true" />
     
-    <!-- VS.Redist.Common.NetCore packages will be added via PackageDownload in CollectVSInsertionPackageDownloads target -->
   </ItemGroup>
 
   <ItemGroup>

@@ -15,37 +15,28 @@
     <!-- Create prereqs directory -->
     <MakeDir Directories="$(_RuntimeTransportDir)" />
 
-    <!-- Transport packages follow VS naming convention -->
+    <!-- Extract runtime MSIs from VS.Redist transport packages (available in internal feeds) -->
     <ItemGroup>
-      <!-- First try: Look for the WindowsDesktop transport package (already referenced in bundle.wixproj) -->
-      <_HostTransportFiles Include="$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)\content\MSI\$(TargetArchitecture)\dotnet-host-*-win-$(TargetArchitecture).msi" />
-      <_HostFxrTransportFiles Include="$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)\content\MSI\$(TargetArchitecture)\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" />
-      <_RuntimeTransportFiles Include="$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)\content\MSI\$(TargetArchitecture)\dotnet-runtime-*-win-$(TargetArchitecture).msi" />
+      <!-- Primary source: VS.Redist transport packages for runtime MSIs -->
+      <_HostTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedHost)\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_SharedHost)' != ''" />
+      <_HostFxrTransportFiles Include="$(PkgVS_Redist_Common_NetCore_HostFXR)\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_HostFXR)' != ''" />
+      <_RuntimeTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedFramework)\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'$(PkgVS_Redist_Common_NetCore_SharedFramework)' != ''" />
       
-      <!-- Second try: Look for VS.Redist transport packages using generated path properties -->
-      <_HostTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedHost)\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'@(_HostTransportFiles)' == '' AND '$(PkgVS_Redist_Common_NetCore_SharedHost)' != ''" />
-      <_HostFxrTransportFiles Include="$(PkgVS_Redist_Common_NetCore_HostFXR)\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'@(_HostFxrTransportFiles)' == '' AND '$(PkgVS_Redist_Common_NetCore_HostFXR)' != ''" />
-      <_RuntimeTransportFiles Include="$(PkgVS_Redist_Common_NetCore_SharedFramework)\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'@(_RuntimeTransportFiles)' == '' AND '$(PkgVS_Redist_Common_NetCore_SharedFramework)' != ''" />
-      
-      <!-- Third try: Look for VS.Redist transport packages in NuGet cache -->
+      <!-- Fallback: Look in NuGet cache -->
       <_HostTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedhost\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'@(_HostTransportFiles)' == ''" />
       <_HostFxrTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.hostfxr\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'@(_HostFxrTransportFiles)' == ''" />
       <_RuntimeTransportFiles Include="$(NuGetPackageRoot)vs.redist.common.netcore.sharedframework\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'@(_RuntimeTransportFiles)' == ''" />
-      
-      <!-- Fourth try: Look in artifacts packages directory -->
-      <_HostTransportFiles Include="$(ArtifactsPackagesDir)**/VS.Redist.Common.NetCore.SharedHost.*\**\dotnet-host-*-win-$(TargetArchitecture).msi" Condition="'@(_HostTransportFiles)' == ''" />
-      <_HostFxrTransportFiles Include="$(ArtifactsPackagesDir)**/VS.Redist.Common.NetCore.HostFXR.*\**\dotnet-hostfxr-*-win-$(TargetArchitecture).msi" Condition="'@(_HostFxrTransportFiles)' == ''" />
-      <_RuntimeTransportFiles Include="$(ArtifactsPackagesDir)**/VS.Redist.Common.NetCore.SharedFramework.*\**\dotnet-runtime-*-win-$(TargetArchitecture).msi" Condition="'@(_RuntimeTransportFiles)' == ''" />
     </ItemGroup>
 
-    <Message Text="[Transport] Looking for transport packages in: $(NuGetPackageRoot)" Importance="high" />
-    <Message Text="[Transport] WindowsDesktop transport: $(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)" Importance="high" />
+    <Message Text="[Transport] VS.Redist SharedHost: $(PkgVS_Redist_Common_NetCore_SharedHost)" Importance="high" />
+    <Message Text="[Transport] VS.Redist HostFXR: $(PkgVS_Redist_Common_NetCore_HostFXR)" Importance="high" />
+    <Message Text="[Transport] VS.Redist SharedFramework: $(PkgVS_Redist_Common_NetCore_SharedFramework)" Importance="high" />
     <Message Text="[Transport] TargetArchitecture: $(TargetArchitecture), DotNetRuntimeVersion: $(DotNetRuntimeVersion)" Importance="high" />
     <Message Text="[Transport] Host MSIs found: @(_HostTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_HostTransportFiles)' != ''" />
     <Message Text="[Transport] HostFxr MSIs found: @(_HostFxrTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_HostFxrTransportFiles)' != ''" />
     <Message Text="[Transport] Runtime MSIs found: @(_RuntimeTransportFiles->'%(RecursiveDir)%(Filename)%(Extension)', ', ')" Importance="high" Condition="'@(_RuntimeTransportFiles)' != ''" />
-    <Message Text="[Transport] No transport packages found - continuing with Windows Desktop Runtime-only bundle" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
-    <Message Text="[Transport] Note: Runtime transport packages are only available in internal CI builds" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
+    <Message Text="[Transport] No runtime MSI transport packages found - continuing with Windows Desktop Runtime-only bundle" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
+    <Message Text="[Transport] Note: VS.Redist.Common.NetCore.* packages require internal feeds configured via SetupNugetSources script" Importance="high" Condition="'@(_HostTransportFiles)' == '' AND '@(_HostFxrTransportFiles)' == '' AND '@(_RuntimeTransportFiles)' == ''" />
 
     <!-- Copy and rename to expected filenames (remove version from filename) -->
     <Copy SourceFiles="@(_HostTransportFiles)" 

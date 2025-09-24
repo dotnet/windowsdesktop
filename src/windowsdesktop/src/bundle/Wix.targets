@@ -49,7 +49,7 @@
     <!-- Enhanced diagnostic logging -->
   <Message Importance="high" Text="[PrereqRuntime] Architecture=$(TargetArchitecture) Available=$(PrereqMsisAvailable)" />
   <Message Importance="high" Text="[PrereqRuntime] Note: Runtime MSIs must be staged from dotnet/runtime build outputs or local scripts (no transport packages available)." />
-  <Message Importance="high" Text="[PrereqRuntime] To stage locally, run: pwsh src/windowsdesktop/tests/scripts/acquire-runtime-msis.ps1" />
+  <Message Importance="high" Text="[PrereqRuntime] To stage locally, copy the required runtime MSIs (dotnet-host, dotnet-hostfxr, dotnet-runtime) for $(TargetArchitecture) into the prereqs folder. See documentation for details." />
     <Message Importance="low" Text="[PrereqRuntime] Search paths tested:" />
     <Message Importance="low" Text="  1. $(_PrereqSearchPath1) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath1)')))" />
     <Message Importance="low" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />

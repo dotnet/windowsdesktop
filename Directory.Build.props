@@ -18,6 +18,15 @@
     <MSBuildDisableNodeReuse>true</MSBuildDisableNodeReuse>
     <UseSharedCompilation>false</UseSharedCompilation>
     
+    <!-- Ensure Wixpack generation is enabled for all build types -->
+    <WixCreateWixPackOutput Condition="'$(OutputType)' == 'Bundle'">true</WixCreateWixPackOutput>
+    <!-- Disable automatic Light command drops to prevent file conflicts -->
+    <DisableWixCreateLightCommandPackageDrop Condition="'$(OutputType)' != 'Bundle'">true</DisableWixCreateLightCommandPackageDrop>
+    
+    <!-- Ensure Wixpack targets run in CI/PR builds -->
+    <RunWixpackTargets Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true' OR '$(ContinuousIntegrationBuild)' == 'true'">true</RunWixpackTargets>
+    <RunWixpackTargets Condition="'$(RunWixpackTargets)' == ''">true</RunWixpackTargets>
+    
     <!-- Project-level parallelism controls -->
     <BuildProjectReferences>true</BuildProjectReferences>
     <BuildInParallel Condition="'$(BuildingInstallers)' == 'true'">false</BuildInParallel>

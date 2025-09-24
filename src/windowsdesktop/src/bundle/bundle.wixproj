@@ -17,9 +17,11 @@
     <BuildInParallel>false</BuildInParallel>
     <MaxCpuCount>1</MaxCpuCount>
     
-    <!-- CI-specific build stability measures -->
-    <DisableWixCreateLightCommandPackageDrop Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">true</DisableWixCreateLightCommandPackageDrop>
-    <WixCreateWixPackOutput Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">false</WixCreateWixPackOutput>
+    <!-- Enable Wixpack generation for all build types (PR, CI, local) -->
+    <!-- Disable the automatic Light command package drop to prevent conflicts -->
+    <DisableWixCreateLightCommandPackageDrop>true</DisableWixCreateLightCommandPackageDrop>
+    <!-- Enable explicit Wixpack generation through our custom target -->
+    <WixCreateWixPackOutput>true</WixCreateWixPackOutput>
     
     <!-- Bundle platform configuration -->
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x86'">x86</BundlePlatform>

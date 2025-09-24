@@ -27,6 +27,12 @@ jobs:
     value: /p:DotNetSignType=$(SignType)
   - name: TargetArchitecture
     value: ${{ parameters.targetArchitecture }}
+  - name: InternalRuntimeDownloadArgs
+    value: >-
+      -RuntimeSourceFeed https://ci.dot.net/internal
+      -RuntimeSourceFeedKey $(dotnetbuilds-internal-container-read-token-base64)
+      /p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal
+      /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64)
 
   templateContext:
     outputs:
@@ -37,6 +43,7 @@ jobs:
       artifactName: Logs-${{ parameters.name }}-$(_BuildConfig)
   steps:
   - template: /eng/common/templates-official/steps/enable-internal-sources.yml
+  - template: /eng/common/templates-official/steps/enable-internal-runtimes.yml
 
   - task: MicroBuildSigningPlugin@4
     displayName: Install MicroBuild plugin for Signing
@@ -51,6 +58,7 @@ jobs:
       eng/common/cibuild.cmd
       $(CommonMSBuildArgs)
       $(MsbuildSigningArguments)
+      $(InternalRuntimeDownloadArgs)
     displayName: Build
 
     # Generate SBOM

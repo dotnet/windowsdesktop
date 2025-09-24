@@ -20,10 +20,10 @@
     
     <!-- Ensure Wixpack generation is enabled for all build types -->
     <WixCreateWixPackOutput Condition="'$(OutputType)' == 'Bundle'">true</WixCreateWixPackOutput>
-    <!-- Disable automatic Light command drops to prevent file conflicts -->
-    <DisableWixCreateLightCommandPackageDrop Condition="'$(OutputType)' != 'Bundle'">true</DisableWixCreateLightCommandPackageDrop>
+    <!-- Disable automatic Light command drops to prevent file conflicts for Bundle projects -->
+    <DisableWixCreateLightCommandPackageDrop Condition="'$(OutputType)' == 'Bundle'">true</DisableWixCreateLightCommandPackageDrop>
     
-    <!-- Ensure Wixpack targets run in CI/PR builds -->
+    <!-- Ensure Wixpack targets run in CI/PR builds and local builds -->
     <RunWixpackTargets Condition="'$(TF_BUILD)' == 'true' OR '$(CI)' == 'true' OR '$(ContinuousIntegrationBuild)' == 'true'">true</RunWixpackTargets>
     <RunWixpackTargets Condition="'$(RunWixpackTargets)' == ''">true</RunWixpackTargets>
     

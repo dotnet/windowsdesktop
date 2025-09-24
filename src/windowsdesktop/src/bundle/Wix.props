@@ -34,4 +34,20 @@
     <!-- Directory for the zipped up wixpack command package -->
     <WixCommandPackagesDir>$(InstallersOutputPath)</WixCommandPackagesDir>
   </PropertyGroup>
+
+  <!-- Transport packages for runtime prerequisites (ASP.NET Core pattern) -->
+  <!-- Note: VS.Redist.Common.NetCore transport packages are only available in internal Microsoft feeds -->
+  <!-- They will be automatically included in CI builds when internal feeds are configured -->
+  <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' AND '$(System_TeamProject)' != 'public'">
+    <!-- Transport packages using central package management -->
+    <PackageReference Include="VS.Redist.Common.NetCore.SharedHost" 
+                      GeneratePathProperty="true" 
+                      PrivateAssets="all" />
+    <PackageReference Include="VS.Redist.Common.NetCore.HostFXR" 
+                      GeneratePathProperty="true" 
+                      PrivateAssets="all" />
+    <PackageReference Include="VS.Redist.Common.NetCore.SharedFramework" 
+                      GeneratePathProperty="true" 
+                      PrivateAssets="all" />
+  </ItemGroup>
 </Project>

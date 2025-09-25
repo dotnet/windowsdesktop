@@ -1,8 +1,121 @@
 <Project>
   <!-- Extracted WiX build targets for Windows Desktop Runtime bundle -->
 
+  <Target Name="CollectRuntimePrereqDependencies" Condition="'$(RestoreRuntimePrereqs)'!='false' AND '$(TargetArchitecture)'!=''">
+    <PropertyGroup>
+      <RuntimePrereqStageDirectory>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>
+      <RuntimePrereqStageDirectory Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>
+      <RuntimePrereqDownloadDirectory>$(BaseIntermediateOutputPath)runtime-prereqs\$(TargetArchitecture)\</RuntimePrereqDownloadDirectory>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <RemoteAsset Include="$(MicrosoftInternalRuntimeWindowsDesktopTransportVersion)/dotnet-host-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi">
+        <TargetFilename>dotnet-host-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</TargetFilename>
+        <StageFilename>dotnet-host-win-$(TargetArchitecture).msi</StageFilename>
+        <AssetKind>Host</AssetKind>
+        <DownloadDestination>$(RuntimePrereqDownloadDirectory)%(TargetFilename)</DownloadDestination>
+        <StageDestination>$(RuntimePrereqStageDirectory)%(StageFilename)</StageDestination>
+      </RemoteAsset>
+      <RemoteAsset Include="$(MicrosoftInternalRuntimeWindowsDesktopTransportVersion)/dotnet-hostfxr-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi">
+        <TargetFilename>dotnet-hostfxr-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</TargetFilename>
+        <StageFilename>dotnet-hostfxr-win-$(TargetArchitecture).msi</StageFilename>
+        <AssetKind>HostFxr</AssetKind>
+        <DownloadDestination>$(RuntimePrereqDownloadDirectory)%(TargetFilename)</DownloadDestination>
+        <StageDestination>$(RuntimePrereqStageDirectory)%(StageFilename)</StageDestination>
+      </RemoteAsset>
+      <RemoteAsset Include="$(MicrosoftInternalRuntimeWindowsDesktopTransportVersion)/dotnet-runtime-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi">
+        <TargetFilename>dotnet-runtime-$(MicrosoftNETCoreAppRefVersion)-win-$(TargetArchitecture).msi</TargetFilename>
+        <StageFilename>dotnet-runtime-win-$(TargetArchitecture).msi</StageFilename>
+        <AssetKind>Runtime</AssetKind>
+        <DownloadDestination>$(RuntimePrereqDownloadDirectory)%(TargetFilename)</DownloadDestination>
+        <StageDestination>$(RuntimePrereqStageDirectory)%(StageFilename)</StageDestination>
+      </RemoteAsset>
+    </ItemGroup>
+
+    <MakeDir Directories="$(RuntimePrereqStageDirectory)" />
+    <MakeDir Directories="$(RuntimePrereqDownloadDirectory)" />
+  </Target>
+
+  <Target Name="FetchRuntimePrereqDependencies"
+          DependsOnTargets="CollectRuntimePrereqDependencies"
+          Condition="'$(RestoreRuntimePrereqs)'!='false' AND '$(TargetArchitecture)'!=''"
+          Outputs="$(BaseIntermediateOutputPath)runtime-prereqs\$(TargetArchitecture)\%(RemoteAsset.TargetFilename)">
+    <PropertyGroup>
+      <_CurrentRemoteAsset>%(RemoteAsset.Identity)</_CurrentRemoteAsset>
+      <_CurrentDestination>%(RemoteAsset.DownloadDestination)</_CurrentDestination>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_RuntimeUris Remove="@(_RuntimeUris)" />
+      <_RuntimeUris Include="@(RemoteAssetBaseURL->'%(Identity)Runtime/$(_CurrentRemoteAsset)')" />
+    </ItemGroup>
+
+    <DownloadFile Condition="'%(RemoteAsset.Identity)'!='' AND '@(RemoteAssetBaseURL)'!='' AND !Exists('$(_CurrentDestination)')"
+                  Uris="@(_RuntimeUris)"
+                  DestinationPath="$(_CurrentDestination)" />
+  </Target>
+
   <!-- Flexible prerequisite runtime MSI staging with robust discovery -->
-  <Target Name="StagePrereqRuntimeMsis" BeforeTargets="_GetBundledComponentInstallers">
+  <Target Name="RestoreRuntimePrereqs"
+          DependsOnTargets="Restore;CollectRuntimePrereqDependencies;FetchRuntimePrereqDependencies"
+          Condition="'$(RestoreRuntimePrereqs)'!='false' AND '$(TargetArchitecture)'!=''">
+    <PropertyGroup>
+      <RuntimePrereqStageDirectory>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>
+      <RuntimePrereqStageDirectory Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>
+      <RuntimePrereqDownloadDirectory>$(BaseIntermediateOutputPath)runtime-prereqs\$(TargetArchitecture)\</RuntimePrereqDownloadDirectory>
+      <_TransportPackageRoot>$(PkgMicrosoft_Internal_Runtime_WindowsDesktop_Transport)</_TransportPackageRoot>
+    </PropertyGroup>
+
+    <Message Importance="low" Condition="'$(_TransportPackageRoot)'!=''" Text="[RestoreRuntimePrereqs] PackageRoot=$(_TransportPackageRoot)" />
+
+    <ItemGroup>
+      <_DownloadedRuntime Include="@(RemoteAsset)" Condition="Exists('%(DownloadDestination)')">
+        <ResolvedSource>%(DownloadDestination)</ResolvedSource>
+      </_DownloadedRuntime>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(_TransportPackageRoot)'!='' AND Exists('$(_TransportPackageRoot)')">
+      <_TransportAsset Include="@(RemoteAsset->'$(_TransportPackageRoot)**\%(TargetFilename)')">
+        <AssetKind>%(RemoteAsset.AssetKind)</AssetKind>
+        <StageDestination>%(RemoteAsset.StageDestination)</StageDestination>
+        <DownloadDestination>%(RemoteAsset.DownloadDestination)</DownloadDestination>
+        <ResolvedSource>%(FullPath)</ResolvedSource>
+      </_TransportAsset>
+      <_TransportAsset Remove="@(_TransportAsset)" Condition="!Exists('%(ResolvedSource)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_RuntimeSource Include="@(_DownloadedRuntime)" />
+      <_RuntimeSource Include="@(_TransportAsset)" Condition="!Exists('%(DownloadDestination)')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(_RuntimeSource->'%(ResolvedSource)')"
+          DestinationFiles="@(_RuntimeSource->'%(StageDestination)')"
+          SkipUnchangedFiles="true"
+          Condition="@(_RuntimeSource)!=''" />
+
+    <ItemGroup>
+      <_StagedHost Include="$(RuntimePrereqStageDirectory)dotnet-host-win-$(TargetArchitecture).msi" Condition="Exists('$(RuntimePrereqStageDirectory)dotnet-host-win-$(TargetArchitecture).msi')" />
+      <_StagedHostFxr Include="$(RuntimePrereqStageDirectory)dotnet-hostfxr-win-$(TargetArchitecture).msi" Condition="Exists('$(RuntimePrereqStageDirectory)dotnet-hostfxr-win-$(TargetArchitecture).msi')" />
+      <_StagedRuntime Include="$(RuntimePrereqStageDirectory)dotnet-runtime-win-$(TargetArchitecture).msi" Condition="Exists('$(RuntimePrereqStageDirectory)dotnet-runtime-win-$(TargetArchitecture).msi')" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(RuntimePrereqStageDirectory)resolved-runtime-version.txt"
+                      Lines="RuntimePrereqVersion=$(MicrosoftNETCoreAppRefVersion)"
+                      Overwrite="true"
+                      Condition="'$(MicrosoftNETCoreAppRefVersion)'!='' AND (@(_StagedHost)!='' OR @(_StagedHostFxr)!='' OR @(_StagedRuntime)!='')" />
+
+  <Message Importance="high" Condition="'@(_StagedHost)'!='' AND '@(_StagedHostFxr)'!='' AND '@(_StagedRuntime)'!=''" Text="[RestoreRuntimePrereqs] Staged runtime MSIs for $(TargetArchitecture)." />
+  <Message Importance="high" Condition="'@(_StagedRuntime)'!=''" Text="[RestoreRuntimePrereqs] Runtime source: @(_StagedRuntime)" />
+  <Message Importance="high" Condition="'@(_StagedHost)'!=''" Text="[RestoreRuntimePrereqs] Host source: @(_StagedHost)" />
+  <Message Importance="high" Condition="'@(_StagedHostFxr)'!=''" Text="[RestoreRuntimePrereqs] HostFxr source: @(_StagedHostFxr)" />
+  <Message Importance="high" Condition="'@(_StagedRuntime)'==''" Text="[RestoreRuntimePrereqs] Unable to locate runtime MSI for $(TargetArchitecture)." />
+  <Message Importance="high" Condition="'@(_StagedHost)'==''" Text="[RestoreRuntimePrereqs] Unable to locate host MSI for $(TargetArchitecture)." />
+  <Message Importance="high" Condition="'@(_StagedHostFxr)'==''" Text="[RestoreRuntimePrereqs] Unable to locate hostfxr MSI for $(TargetArchitecture)." />
+    <Message Condition="'$(_TransportPackageRoot)'=='' AND @(_DownloadedRuntime)==''" Importance="high" Text="[RestoreRuntimePrereqs] Transport package not restored and remote download unavailable; prerequisite MSIs will not be bundled." />
+  </Target>
+
+  <Target Name="StagePrereqRuntimeMsis" BeforeTargets="_GetBundledComponentInstallers" DependsOnTargets="RestoreRuntimePrereqs">
     <!-- Define multiple search paths for runtime prerequisite MSIs -->
     <PropertyGroup>
       <!-- Primary: Explicit prereqs subfolder -->
@@ -48,8 +161,8 @@
 
     <!-- Enhanced diagnostic logging -->
   <Message Importance="high" Text="[PrereqRuntime] Architecture=$(TargetArchitecture) Available=$(PrereqMsisAvailable)" />
-  <Message Importance="high" Text="[PrereqRuntime] Note: Runtime MSIs must be staged from dotnet/runtime build outputs or local scripts (no transport packages available)." />
-  <Message Importance="high" Text="[PrereqRuntime] To stage locally, copy the required runtime MSIs (dotnet-host, dotnet-hostfxr, dotnet-runtime) for $(TargetArchitecture) into the prereqs folder. See documentation for details." />
+  <Message Importance="high" Text="[PrereqRuntime] Note: Runtime MSIs are automatically staged from Microsoft.Internal.Runtime.WindowsDesktop.Transport when available." />
+  <Message Importance="high" Text="[PrereqRuntime] To override, populate artifacts\prereqs\$(TargetArchitecture) manually or set RestoreRuntimePrereqs=false." />
     <Message Importance="low" Text="[PrereqRuntime] Search paths tested:" />
     <Message Importance="low" Text="  1. $(_PrereqSearchPath1) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath1)')))" />
     <Message Importance="low" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />

@@ -18,9 +18,6 @@
     <MaxCpuCount>1</MaxCpuCount>
     
     <!-- Enable Wixpack generation for all build types (PR, CI, local) -->
-    <!-- Disable the automatic Light command package drop to prevent conflicts -->
-    <DisableWixCreateLightCommandPackageDrop>true</DisableWixCreateLightCommandPackageDrop>
-    <!-- Enable explicit Wixpack generation through our custom target -->
     <WixCreateWixPackOutput>true</WixCreateWixPackOutput>
     
     <!-- Bundle platform configuration -->
@@ -62,19 +59,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Microsoft.Wix is a dotnet tool package, so exclude its assets (following reference repo pattern) -->
-    <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" />
-    <!-- WiX extension packages with GeneratePathProperty for installers -->
-    <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
-    <PackageReference Include="Microsoft.WixToolset.Heat" />
-    
     <!-- WindowsDesktop transport package containing runtime MSI components -->
     <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
                       GeneratePathProperty="true" />
-    
   </ItemGroup>
 
   <ItemGroup>

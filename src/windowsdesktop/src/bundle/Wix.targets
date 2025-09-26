@@ -86,6 +86,11 @@
 
   <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile" DependsOnTargets="StagePrereqRuntimeMsis">
     <PropertyGroup>
+      <BundleBaseName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture)</BundleBaseName>
+      <OutputName>$(BundleBaseName)</OutputName>
+      <TargetName>$(BundleBaseName)</TargetName>
+      <TargetFileName>$(TargetName)$(TargetExt)</TargetFileName>
+      <TargetPath>$(TargetDir)$(TargetFileName)</TargetPath>
       <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
       <DefineConstants Condition="'$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
       <DefineConstants Condition="'$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
@@ -122,7 +127,7 @@
 
   <Target Name="PublishBundle" AfterTargets="Build">
     <PropertyGroup>
-      <BundleShippingName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
+      <BundleShippingName>$(OutputName).exe</BundleShippingName>
       <BundleShippingPath>$(ArtifactsPackagesDir)Shipping\$(BundleShippingName)</BundleShippingPath>
     </PropertyGroup>
     <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
@@ -152,7 +157,7 @@
   <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
   <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
   <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
-  <BundleShippingName Condition="'$(BundleShippingName)'==''">windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
+  <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
   <!-- Expected wixpack file should match the bundle executable name -->
   <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
       <!-- PDB name follows Wix default: TargetName + .wixpdb -->

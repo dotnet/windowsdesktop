@@ -5,8 +5,7 @@
           UpgradeCode="$(UpgradeCode)"
           ProviderKey="$(UpgradeCode)"
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
-          Compressed="yes" 
-          IconSourceFile="dotnet.ico">
+          Compressed="yes">
 
     <!-- Related bundle for upgrade scenarios -->
     <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />

@@ -35,6 +35,10 @@
                                               Theme="rtfLicense"
                                               ThemeFile="bundle.thm" />
 
+      <?foreach lcid in 2052;1028;1029;1031;3082;1033;1036;1040;1041;1042;1045;1046;1049;1055?>
+      <Payload Id="PL_bundle_$(lcid)" SourceFile="theme\$(lcid)\bundle.wxl" Name="$(lcid)\bundle.wxl" Compressed="yes" />
+      <?endforeach?>
+
       <Payload Name="DotNetLogo_256x.png" Compressed="yes" SourceFile="DotNetLogo_256x.png" />
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />
     </BootstrapperApplication>

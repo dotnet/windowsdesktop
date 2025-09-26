@@ -149,13 +149,17 @@
     <PropertyGroup>
       <WixpackWorkingDir>$(IntermediateOutputPath)wixpack</WixpackWorkingDir>
       <!-- Ensure WixCommandPackagesDir has a default value -->
-      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
-      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)Debug\NonShipping</WixpackOutputDir>
-      <!-- Expected wixpack file name produced by CreateWixBuildWixpack (avoid duplicate creation if Light already produced one) -->
-      <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</ExpectedBundleWixpackFile>
+  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
+  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
+  <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
+  <BundleShippingName Condition="'$(BundleShippingName)'==''">windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).exe</BundleShippingName>
+  <!-- Expected wixpack file should match the bundle executable name -->
+  <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
       <!-- PDB name follows Wix default: TargetName + .wixpdb -->
       <_BundlePdbFile>$(TargetDir)$(TargetName).wixpdb</_BundlePdbFile>
     </PropertyGroup>
+    <Move Condition="'$(DefaultBundleWixpackFile)' != '' AND '$(ExpectedBundleWixpackFile)' != '' AND '$(DefaultBundleWixpackFile)' != '$(ExpectedBundleWixpackFile)' AND Exists('$(DefaultBundleWixpackFile)')"
+      SourceFiles="$(DefaultBundleWixpackFile)" DestinationFiles="$(ExpectedBundleWixpackFile)" OverwriteReadOnlyFiles="true" />
     <Message Text="[Wixpack] RunWixpackTargets=$(RunWixpackTargets), WixCreateWixPackOutput=$(WixCreateWixPackOutput)" Importance="high" />
     <Message Text="[Wixpack] WixpackOutputDir=$(WixpackOutputDir)" Importance="high" />
     <Message Text="[Wixpack] Existing wixpack detected at $(ExpectedBundleWixpackFile); skipping custom generation" Importance="high" Condition="Exists('$(ExpectedBundleWixpackFile)')" />
@@ -176,6 +180,11 @@
         DefineConstants="$(DefineConstants)">
       <Output TaskParameter="OutputFile" PropertyName="_WixBuildCommandPackageNameOutput" />
     </CreateWixBuildWixpack>
+    <Move Condition="'$(_WixBuildCommandPackageNameOutput)' != '' AND '$(ExpectedBundleWixpackFile)' != '' AND '$(_WixBuildCommandPackageNameOutput)' != '$(ExpectedBundleWixpackFile)' AND Exists('$(_WixBuildCommandPackageNameOutput)')"
+      SourceFiles="$(_WixBuildCommandPackageNameOutput)" DestinationFiles="$(ExpectedBundleWixpackFile)" OverwriteReadOnlyFiles="true" />
+    <PropertyGroup>
+      <_WixBuildCommandPackageNameOutput Condition="'$(_WixBuildCommandPackageNameOutput)' != '' AND '$(ExpectedBundleWixpackFile)' != ''">$(ExpectedBundleWixpackFile)</_WixBuildCommandPackageNameOutput>
+    </PropertyGroup>
     <Message Text="[Wixpack] Generated: $(_WixBuildCommandPackageNameOutput)" Importance="high" Condition="'$(_WixBuildCommandPackageNameOutput)'!=''" />
   </Target>
 </Project>

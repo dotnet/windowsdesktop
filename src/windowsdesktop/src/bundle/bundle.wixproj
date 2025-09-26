@@ -64,10 +64,11 @@
                       GeneratePathProperty="true" />
   </ItemGroup>
 
-  <ItemGroup>
+  <Target Name="BuildDependentProject" BeforeTargets="Build">
     <!-- Ensure the Windows Desktop Runtime is built before this bundle -->
-    <ProjectReference Include="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj" />
-  </ItemGroup>
+    <MSBuild Projects="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj"
+             Targets="Build" />
+  </Target>
 
   <!-- Import extracted WiX build targets -->
   <Import Project="Wix.targets" />

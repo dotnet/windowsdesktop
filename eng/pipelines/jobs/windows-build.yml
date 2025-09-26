@@ -24,7 +24,7 @@ jobs:
       /p:TargetArchitecture=${{ parameters.targetArchitecture }}
       /p:SkipTests=${{ parameters.skipTests }}
   - name: MsbuildSigningArguments
-    value: /p:DotNetSignType=$(SignType)
+    value: /p:DotNetSignType=$(_SignType)
   - name: TargetArchitecture
     value: ${{ parameters.targetArchitecture }}
   - name: InternalRuntimeDownloadArgs
@@ -54,6 +54,12 @@ jobs:
     continueOnError: false
     condition: and(succeeded(), in(variables['SignType'], 'real', 'test'))
 
+  - template: /eng/common/core-templates/steps/install-microbuild.yml
+    parameters:
+      enableMicrobuild: true
+      microbuildUseESRP: true
+      continueOnError: false
+  
   - script: >-
       eng/common/cibuild.cmd
       $(CommonMSBuildArgs)

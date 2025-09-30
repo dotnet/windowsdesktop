@@ -25,8 +25,8 @@
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'x64'">x64</BundlePlatform>
     <BundlePlatform Condition="'$(TargetArchitecture)' == 'arm64'">arm64</BundlePlatform>
     
-    <!-- Set InstallerPlatform to match TargetArchitecture if not already set -->
-    <InstallerPlatform Condition="'$(InstallerPlatform)' == ''">$(TargetArchitecture)</InstallerPlatform>
+    <!-- For bundles InstallerPlatform should always be set to x86. -->
+    <InstallerPlatform>x86</InstallerPlatform>
     
     <!-- Version information for the bundle executable -->
     <AssemblyTitle>Microsoft Windows Desktop Runtime Installer</AssemblyTitle>

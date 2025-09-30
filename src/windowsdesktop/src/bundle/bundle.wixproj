@@ -49,6 +49,8 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);LCID\**\*;theme\**\*</DefaultItemExcludes>
   </PropertyGroup>
 
+  <Import Project="Product.targets" />
+
   <ItemGroup>
     <!-- Use the working wix5 path - the new wix path has namespace issues -->
     <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
@@ -56,12 +58,6 @@
 
     <!-- Workload manifests will be included only if the source fragment was generated. -->
     <Compile Include="$(WorkloadManifestsWxsPath)" Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- WindowsDesktop transport package containing runtime MSI components -->
-    <PackageReference Include="Microsoft.Internal.Runtime.WindowsDesktop.Transport" 
-                      GeneratePathProperty="true" />
   </ItemGroup>
 
   <Target Name="BuildDependentProject" BeforeTargets="Build">

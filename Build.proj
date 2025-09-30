@@ -8,9 +8,7 @@
     <!-- Microsoft.WindowsDesktop.App shared framework -->
     <ProjectReference Include="src\windowsdesktop\src\sfx\**\*.sfxproj" />
         <!-- Windows Desktop Runtime Bundle -->
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x86" />
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-x64" />
-    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" AdditionalProperties="RuntimeIdentifier=win-arm64" />
+    <ProjectReference Include="src\windowsdesktop\src\bundle\**\*.wixproj" />
     <ProjectReference Include="src\windowsdesktop\tests\**\*.Tests.csproj" />
 
     <!-- Microsoft.Windows.Compatibility nuget meta package -->

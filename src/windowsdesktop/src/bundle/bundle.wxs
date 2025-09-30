@@ -216,7 +216,7 @@
       <?if $(var.IncludeRuntimeMSIs) = true ?>
       <MsiPackage 
         Id="DotNetHost"
-        SourceFile="$(var.DotNetHostMsiPath)"
+        SourceFile="$(var.DotNetRedistHostInstaller)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Host"
@@ -228,7 +228,7 @@
       <!-- HostFxr depends on Host -->
       <MsiPackage 
         Id="DotNetHostFxr"
-        SourceFile="$(var.DotNetHostFxrMsiPath)"
+        SourceFile="$(var.DotNetRedistHostfxrInstaller)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Host FX Resolver"
@@ -240,7 +240,7 @@
       <!-- Runtime depends on Host and HostFxr -->
       <MsiPackage 
         Id="DotNetRuntime"
-        SourceFile="$(var.DotNetRuntimeMsiPath)"
+        SourceFile="$(var.DotNetRedistLtsInstaller)"
         Vital="yes"
         Cache="keep"
         DisplayName="Microsoft .NET Runtime"

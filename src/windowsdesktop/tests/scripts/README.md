@@ -4,6 +4,26 @@ This directory contains helper scripts used to stage (or simulate) the .NET runt
 
 ## Scripts
 
+### eng/scripts/runtime-prereqs/restore-runtime-prereqs.ps1
+
+Stages the runtime MSI triad directly from the `Microsoft.Internal.Runtime.WindowsDesktop.Transport` package by invoking the WiX bundle project’s new `RestoreRuntimePrereqs` target. The script is used by CI and can be invoked locally to mirror the automated behavior.
+
+Parameters:
+
+- `-Architectures <string[]>` optional; defaults to `x64,x86,arm64`
+- `-Configuration <string>` optional MSBuild configuration override
+- `-MsbuildArgs <string[]>` optional passthrough arguments to `msbuild`
+- `-CI` switch to mirror pipeline defaults (disables node reuse, etc.)
+- `-VerboseLogging` switch for normal MSBuild verbosity
+
+Example (single architecture):
+
+```powershell
+pwsh eng/scripts/runtime-prereqs/restore-runtime-prereqs.ps1 -Architectures x64 -VerboseLogging
+```
+
+The script writes staged MSIs into `artifacts/prereqs/<arch>` and echoes the detected runtime version.
+
 ### acquire-runtime-msis.ps1
 
 Acquires real runtime MSIs (host, hostfxr, runtime) from either a build artifact drop folder or an expanded runtime build ZIP, then normalizes them into the deterministic staging contract:
@@ -57,10 +77,10 @@ Caveats:
 
 ## Build Integration
 
-The WiX project (`bundle.wixproj`) uses a deterministic staging contract. If (and only if) the three normalized MSI files are present in `artifacts/prereqs/<arch>` when `StagePrereqRuntimeMsis` runs, the bundle defines `IncludeRuntimeMSIs=true` and embeds them; otherwise it proceeds without them.
+The WiX project (`bundle.wixproj`) now exposes a `RestoreRuntimePrereqs` target that unpacks the transport package into `artifacts/prereqs/<arch>` and runs automatically before `StagePrereqRuntimeMsis`. If (and only if) the three normalized MSI files are present when `StagePrereqRuntimeMsis` runs, the bundle defines `IncludeRuntimeMSIs=true` and embeds them; otherwise it proceeds without them.
 
-Internal CI: missing or partial triad triggers a build warning or error per policy.
-Public PR builds: typically do not supply real MSIs; the bundle is produced without runtime prereqs unless explicitly staged.
+Internal CI: the Windows build pipeline calls `eng/scripts/runtime-prereqs/restore-runtime-prereqs.ps1` before `cibuild`, ensuring the normalized triad is available. Missing or partial triad triggers a build warning or error per policy.
+Public PR builds: typically do not supply real MSIs; the bundle is produced without runtime prereqs unless explicitly staged (either via the script above or manual copying).
 
 ## Typical Workflows
 

@@ -7,17 +7,14 @@
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes">
 
-    <!-- Related bundle for upgrade scenarios -->
-    <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />
-    
-    <!-- Upgrade previous test bundle that was installed -->
-    <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
-    
-    <!-- Upgrade RC1 bundle for in-place RC1→RC2 upgrade -->
-    <RelatedBundle Id="{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}" Action="Upgrade" />
-    
-    <!-- Upgrade Preview bundle for in-place PreviewN→RC2 upgrade -->
-    <RelatedBundle Id="{55414577-5A99-7937-6951-9CCC4BE8857E}" Action="Upgrade" />
+  <!-- Related bundle for upgrade scenarios -->
+  <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />
+
+  <!-- Legacy bundles authored before the deterministic UpgradeCode seed.
+    Keep these explicit IDs so RC1/preview installers are replaced instead of installing SxS. -->
+  <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
+  <RelatedBundle Id="{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}" Action="Upgrade" />
+  <RelatedBundle Id="{55414577-5A99-7937-6951-9CCC4BE8857E}" Action="Upgrade" />
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 

@@ -1,0 +1,112 @@
+<Project>
+  <!-- Extracted WiX build targets for Windows Desktop Runtime bundle -->
+
+  <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <BundleBaseName>windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture)</BundleBaseName>
+      <OutputName>$(BundleBaseName)</OutputName>
+      <TargetName>$(BundleBaseName)</TargetName>
+      <TargetFileName>$(TargetName)$(TargetExt)</TargetFileName>
+      <TargetPath>$(TargetDir)$(TargetFileName)</TargetPath>
+      <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
+      <DefineConstants Condition="'$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
+      <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
+      <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
+
+      <UpgradeCodeSeed>Windows Desktop Shared Framework Bundle Installer</UpgradeCodeSeed>
+      <UpgradeCodeSeedWithArch>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</UpgradeCodeSeedWithArch>
+
+      <DefineConstants>$(DefineConstants);TargetArchitecture=$(TargetArchitecture)</DefineConstants>
+      <DefineConstants>$(DefineConstants);PlatformToken=$(TargetArchitecture.ToUpper())</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_x64=x64</DefineConstants>
+      <DefineConstants>$(DefineConstants);NativeMachine_arm64=arm64</DefineConstants>
+
+      <DefineConstants>$(DefineConstants);MajorVersion=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinorVersion=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);VERSIONMAJOR=$(MajorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);VERSIONMINOR=$(MinorVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);WinFormsAndWpfVersion=$(WinFormsAndWpfVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetRuntimeVersion=$(DotNetRuntimeVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);AspNetCoreVersion=$(AspNetCoreVersion)</DefineConstants>
+      <DefineConstants>$(DefineConstants);MinimumVSVersion=$(MinimumVSVersion)</DefineConstants>
+
+      <WindowsDesktopRuntimeMsiPath>$(ArtifactsPackagesDir)Shipping\windowsdesktop-runtime-$(Version)-win-$(TargetArchitecture).msi</WindowsDesktopRuntimeMsiPath>
+      <DefineConstants>$(DefineConstants);WindowsDesktopRuntimeMsiPath=$(WindowsDesktopRuntimeMsiPath)</DefineConstants>
+
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
+      <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
+    </PropertyGroup>
+
+    <Message Text="Bundle MSI Components:" Importance="high" />
+    <Message Text="  Windows Desktop Runtime: $(WindowsDesktopRuntimeMsiPath) (Exists: $([System.IO.File]::Exists('$(WindowsDesktopRuntimeMsiPath)')))" Importance="high" />
+  </Target>
+
+  <Target Name="PublishBundle" AfterTargets="Build">
+    <PropertyGroup>
+      <BundleShippingName>$(OutputName).exe</BundleShippingName>
+      <BundleShippingPath>$(ArtifactsPackagesDir)Shipping\$(BundleShippingName)</BundleShippingPath>
+    </PropertyGroup>
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFiles="$(BundleShippingPath)" />
+    <Message Text="Published bundle: $(BundleShippingPath)" Importance="high" />
+  </Target>
+
+  <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
+    <GenerateGuidFromName Name="$(UpgradeCodeSeedWithArch)">
+      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode" />
+    </GenerateGuidFromName>
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
+    </PropertyGroup>
+    <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
+  </Target>
+
+  <Target Name="Pack" DependsOnTargets="Build;PublishBundle;GenerateWixpackPackage">
+    <Message Text="Bundle pack completed" Importance="high" />
+  </Target>
+
+  <!-- Generate a wixpack using the Wix toolset task (pattern aligned with aspnetcore). -->
+  <!-- Run after Build to ensure all artifacts are ready, but before Pack -->
+  <Target Name="GenerateWixpackPackage" AfterTargets="Build" BeforeTargets="Pack" Condition="'$(OutputType)'=='Bundle' AND '$(WixCreateWixPackOutput)'=='true' AND '$(RunWixpackTargets)'=='true'">
+    <PropertyGroup>
+      <WixpackWorkingDir>$(IntermediateOutputPath)wixpack</WixpackWorkingDir>
+      <!-- Ensure WixCommandPackagesDir has a default value -->
+  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
+  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
+  <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
+  <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
+  <!-- Expected wixpack file should match the bundle executable name -->
+  <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
+      <!-- PDB name follows Wix default: TargetName + .wixpdb -->
+      <_BundlePdbFile>$(TargetDir)$(TargetName).wixpdb</_BundlePdbFile>
+    </PropertyGroup>
+    <Move Condition="'$(DefaultBundleWixpackFile)' != '' AND '$(ExpectedBundleWixpackFile)' != '' AND '$(DefaultBundleWixpackFile)' != '$(ExpectedBundleWixpackFile)' AND Exists('$(DefaultBundleWixpackFile)')"
+      SourceFiles="$(DefaultBundleWixpackFile)" DestinationFiles="$(ExpectedBundleWixpackFile)" OverwriteReadOnlyFiles="true" />
+    <Message Text="[Wixpack] RunWixpackTargets=$(RunWixpackTargets), WixCreateWixPackOutput=$(WixCreateWixPackOutput)" Importance="high" />
+    <Message Text="[Wixpack] WixpackOutputDir=$(WixpackOutputDir)" Importance="high" />
+    <Message Text="[Wixpack] Existing wixpack detected at $(ExpectedBundleWixpackFile); skipping custom generation" Importance="high" Condition="Exists('$(ExpectedBundleWixpackFile)')" />
+    <CreateWixBuildWixpack
+        Condition="!Exists('$(ExpectedBundleWixpackFile)') AND '$(WixpackOutputDir)'!=''"
+        InstallerPlatform="$(InstallerPlatform)"
+        InstallerFile="$(TargetPath)"
+        IntermediateDirectory="$(IntermediateOutputPath)"
+        OutputFolder="$(WixpackOutputDir)"
+        OutputType="$(OutputType)"
+        PdbFile="$(_BundlePdbFile)"
+        PdbType="$(DebugType)"
+        SourceFiles="@(Compile)"
+        Extensions="@(_ResolvedWixExtensionPaths)"
+        LocalizationFiles="@(_WixLocalizationFile)"
+        BindPaths="@(BindPath)"
+        WixpackWorkingDir="$(WixpackWorkingDir)"
+        DefineConstants="$(DefineConstants)">
+      <Output TaskParameter="OutputFile" PropertyName="_WixBuildCommandPackageNameOutput" />
+    </CreateWixBuildWixpack>
+    <Move Condition="'$(_WixBuildCommandPackageNameOutput)' != '' AND '$(ExpectedBundleWixpackFile)' != '' AND '$(_WixBuildCommandPackageNameOutput)' != '$(ExpectedBundleWixpackFile)' AND Exists('$(_WixBuildCommandPackageNameOutput)')"
+      SourceFiles="$(_WixBuildCommandPackageNameOutput)" DestinationFiles="$(ExpectedBundleWixpackFile)" OverwriteReadOnlyFiles="true" />
+    <PropertyGroup>
+      <_WixBuildCommandPackageNameOutput Condition="'$(_WixBuildCommandPackageNameOutput)' != '' AND '$(ExpectedBundleWixpackFile)' != ''">$(ExpectedBundleWixpackFile)</_WixBuildCommandPackageNameOutput>
+    </PropertyGroup>
+    <Message Text="[Wixpack] Generated: $(_WixBuildCommandPackageNameOutput)" Importance="high" Condition="'$(_WixBuildCommandPackageNameOutput)'!=''" />
+  </Target>
+</Project>

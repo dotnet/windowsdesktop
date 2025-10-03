@@ -208,13 +208,14 @@
     <Message Condition="'$(System_TeamProject)'=='public' AND '$(PrereqMsisAvailable)'!='true'" Importance="high" Text="Public build: runtime prerequisite MSIs not staged; bundle will exclude them (WindowsDesktop MSI only)." />
 
     <PropertyGroup Condition="'$(PrereqMsisAvailable)'=='true'">
+      <IncludeRuntimeMSIs>true</IncludeRuntimeMSIs>
       <DotNetHostMsiPath>@(_PrereqHost)</DotNetHostMsiPath>
       <DotNetHostFxrMsiPath>@(_PrereqHostFxr)</DotNetHostFxrMsiPath>
       <DotNetRuntimeMsiPath>@(_PrereqRuntime)</DotNetRuntimeMsiPath>
-      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=true;DotNetHostMsiPath=$(DotNetHostMsiPath);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
+      <DefineConstants>$(DefineConstants);DotNetHostMsiPath=$(DotNetHostMsiPath);DotNetHostFxrMsiPath=$(DotNetHostFxrMsiPath);DotNetRuntimeMsiPath=$(DotNetRuntimeMsiPath)</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition="'$(PrereqMsisAvailable)'!='true'">
-      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=false</DefineConstants>
+      <IncludeRuntimeMSIs Condition="'$(IncludeRuntimeMSIs)'==''">false</IncludeRuntimeMSIs>
     </PropertyGroup>
   </Target>
 
@@ -253,6 +254,13 @@
 
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
+
+      <_DefineConstantsSanitized>$([System.String]::Copy($(DefineConstants)).Replace(";IncludeRuntimeMSIs=true",";").Replace(";IncludeRuntimeMSIs=false",";").Replace("IncludeRuntimeMSIs=true;",";").Replace("IncludeRuntimeMSIs=false;",";").Replace("IncludeRuntimeMSIs=true"," ").Replace("IncludeRuntimeMSIs=false"," "))</_DefineConstantsSanitized>
+      <_DefineConstantsSanitized>$([System.String]::Copy($(_DefineConstantsSanitized)).Replace(";;",";").Trim('; '))</_DefineConstantsSanitized>
+      <DefineConstants>$(_DefineConstantsSanitized)</DefineConstants>
+      <IncludeRuntimeMSIs Condition="'$(IncludeRuntimeMSIs)'==''">false</IncludeRuntimeMSIs>
+      <DefineConstants Condition="'$(DefineConstants)'!=''">$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
+      <DefineConstants Condition="'$(DefineConstants)'==''">IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
     </PropertyGroup>
 
     <Message Text="Bundle MSI Components:" Importance="high" />

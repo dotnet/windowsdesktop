@@ -255,12 +255,11 @@
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=true</DefineConstants>
       <DefineConstants Condition="'$(WorkloadManifestsWxsPath)' == '' OR !Exists('$(WorkloadManifestsWxsPath)')">$(DefineConstants);IncludeWorkloadManifests=false</DefineConstants>
 
-      <_DefineConstantsSanitized>$([System.String]::Copy($(DefineConstants)).Replace(";IncludeRuntimeMSIs=true",";").Replace(";IncludeRuntimeMSIs=false",";").Replace("IncludeRuntimeMSIs=true;",";").Replace("IncludeRuntimeMSIs=false;",";").Replace("IncludeRuntimeMSIs=true"," ").Replace("IncludeRuntimeMSIs=false"," "))</_DefineConstantsSanitized>
-      <_DefineConstantsSanitized>$([System.String]::Copy($(_DefineConstantsSanitized)).Replace(";;",";").Trim('; '))</_DefineConstantsSanitized>
-      <DefineConstants>$(_DefineConstantsSanitized)</DefineConstants>
       <IncludeRuntimeMSIs Condition="'$(IncludeRuntimeMSIs)'==''">false</IncludeRuntimeMSIs>
-      <DefineConstants Condition="'$(DefineConstants)'!=''">$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
-      <DefineConstants Condition="'$(DefineConstants)'==''">IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
+  <_HasIncludeRuntimeConstant>$([System.String]::Copy('$(DefineConstants)')).Contains('IncludeRuntimeMSIs=')</_HasIncludeRuntimeConstant>
+  <DefineConstants Condition="'$(_HasIncludeRuntimeConstant)'=='True'">$([System.String]::Copy('$(DefineConstants)').Replace('IncludeRuntimeMSIs=true', 'IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)').Replace('IncludeRuntimeMSIs=false', 'IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)'))</DefineConstants>
+  <DefineConstants Condition="'$(_HasIncludeRuntimeConstant)'!='True' AND '$(DefineConstants)'!=''">$(DefineConstants);IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
+  <DefineConstants Condition="'$(_HasIncludeRuntimeConstant)'!='True' AND '$(DefineConstants)'==''">IncludeRuntimeMSIs=$(IncludeRuntimeMSIs)</DefineConstants>
     </PropertyGroup>
 
     <Message Text="Bundle MSI Components:" Importance="high" />

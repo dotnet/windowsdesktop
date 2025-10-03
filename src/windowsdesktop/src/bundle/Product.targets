@@ -94,7 +94,7 @@
       <DefineConstants>$(DefineConstants);DotNetRedistLtsInstaller=$(DepsPath)$(DotNetRedistLtsInstaller)</DefineConstants>
       <DefineConstants>$(DefineConstants);DotNetRedistHostInstaller=$(DepsPath)$(DotNetRedistHostInstaller)</DefineConstants>
       <DefineConstants>$(DefineConstants);DotNetRedistHostfxrInstaller=$(DepsPath)$(DotNetRedistHostfxrInstaller)</DefineConstants>
-      <DefineConstants>$(DefineConstants);IncludeRuntimeMSIs=true</DefineConstants>
+      <IncludeRuntimeMSIs Condition="'$(IncludeRuntimeMSIs)'==''">true</IncludeRuntimeMSIs>
     </PropertyGroup>
   </Target>
 </Project>

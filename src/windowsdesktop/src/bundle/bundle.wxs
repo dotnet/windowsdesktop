@@ -3,18 +3,12 @@
           Manufacturer="$(Manufacturer)" 
           Version="$(BundleVersion)" 
           UpgradeCode="$(UpgradeCode)"
-          ProviderKey="$(UpgradeCode)"
+          ProviderKey="$(ProviderKey)"
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes">
 
   <!-- Related bundle for upgrade scenarios -->
   <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />
-
-  <!-- Legacy bundles authored before the deterministic UpgradeCode seed.
-    Keep these explicit IDs so RC1/preview installers are replaced instead of installing SxS. -->
-  <RelatedBundle Id="{42091558-a8d7-4e3a-885b-aa746c7ed165}" Action="Upgrade" />
-  <RelatedBundle Id="{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}" Action="Upgrade" />
-  <RelatedBundle Id="{55414577-5A99-7937-6951-9CCC4BE8857E}" Action="Upgrade" />
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 
@@ -42,13 +36,14 @@
 
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles6432Folder]dotnet" />
 
-    <!-- MSI installers always write search keys to the 32-bit hive. -->
+    <!-- Registry searches must be explicit about bitness to ensure the correct hive is checked. -->
     <util:RegistrySearch Id="CheckDotnetInstallLocation_x86"
                          Key="SOFTWARE\dotnet\Setup\InstalledVersions\x86"
                          Result="exists"
                          Root="HKLM"
                          Value="InstallLocation"
-                         Variable="DotnetInstallLocationExists_x86" />
+                         Variable="DotnetInstallLocationExists_x86"
+                         Bitness="always32" />
 
     <util:RegistrySearch After="CheckDotnetInstallLocation_x86"
                          Condition="DotnetInstallLocationExists_x86"
@@ -57,7 +52,8 @@
                          Result="value"
                          Root="HKLM"
                          Key="SOFTWARE\dotnet\Setup\InstalledVersions\x86"
-                         Value="InstallLocation" />
+                         Value="InstallLocation"
+                         Bitness="always32" />
 
     <util:FileSearch Id="DotnetExeSearch_x86"
                      After="DotnetInstallLocation_x86"
@@ -77,7 +73,8 @@
               Result="exists"
               Root="HKLM"
               Key="SOFTWARE\dotnet\Setup\InstalledVersions\x64"
-              Value="InstallLocation" />
+              Value="InstallLocation"
+              Bitness="always64" />
     <util:RegistrySearch Id="DotnetInstallLocation_x64"
               After="CheckDotnetInstallLocation_x64"
               Condition="DotnetInstallLocationExists_x64"
@@ -85,7 +82,8 @@
               Result="value"
               Root="HKLM"
               Key="SOFTWARE\dotnet\Setup\InstalledVersions\x64"
-              Value="InstallLocation" />
+              Value="InstallLocation"
+              Bitness="always64" />
 
     <!-- Check default location when on x64 OS-->
     <util:FileSearch Id="DotnetExeSearch_x64"
@@ -119,7 +117,8 @@
               Result="exists"
               Root="HKLM"
               Key="SOFTWARE\dotnet\Setup\InstalledVersions\arm64"
-              Value="InstallLocation" />
+              Value="InstallLocation"
+              Bitness="always64" />
     <util:RegistrySearch Id="DotnetInstallLocation_arm64"
               After="CheckDotnetInstallLocation_arm64"
               Condition="DotnetInstallLocationExists_arm64"
@@ -127,7 +126,8 @@
               Result="value"
               Root="HKLM"
               Key="SOFTWARE\dotnet\Setup\InstalledVersions\arm64"
-              Value="InstallLocation" />
+              Value="InstallLocation"
+              Bitness="always64" />
 
     <util:FileSearch Id="DotnetExeSearch_arm64"
               After="DotnetInstallLocation_arm64"
@@ -148,7 +148,8 @@
                          Result="exists"
                          Root="HKLM"
                          Value="10.0.0"
-                         Variable="WindowsDesktopFrameworkExists" />
+                         Variable="WindowsDesktopFrameworkExists"
+                         Bitness="always64" />
 
     <util:RegistrySearch After="WindowsDesktopFrameworkInstalled"
                          Condition="WindowsDesktopFrameworkExists"
@@ -157,28 +158,32 @@
                          Result="value"
                          Root="HKLM"
                          Value="10.0.0"
-                         Variable="WindowsDesktopFrameworkInstalledVersion" />
+                         Variable="WindowsDesktopFrameworkInstalledVersion"
+                         Bitness="always64" />
 
     <!-- Registry search for RC1 bundle detection -->
     <util:RegistrySearch Id="WindowsDesktopRC1BundleInstalled"
                          Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{39A4DBC3-2C46-4F31-9C0D-E4B1B4B526DE}"
                          Result="exists"
                          Root="HKLM"
-                         Variable="WindowsDesktopRC1BundleExists" />
+                         Variable="WindowsDesktopRC1BundleExists"
+                         Bitness="always64" />
 
     <!-- Registry search for Preview 5 bundle detection -->
     <util:RegistrySearch Id="WindowsDesktopPreview5BundleInstalled"
                          Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{55414577-5A99-7937-6951-9CCC4BE8857E}"
                          Result="exists"
                          Root="HKLM"
-                         Variable="WindowsDesktopPreview5BundleExists" />
+                         Variable="WindowsDesktopPreview5BundleExists"
+                         Bitness="always64" />
 
     <!-- Registry search for current bundle family detection -->
     <util:RegistrySearch Id="WindowsDesktopCurrentBundleInstalled"
                          Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(UpgradeCode)"
                          Result="exists"
                          Root="HKLM"
-                         Variable="WindowsDesktopCurrentBundleExists" />
+                         Variable="WindowsDesktopCurrentBundleExists"
+                         Bitness="always64" />
 
     <!--
         When installing the SDK bundle to a custom location using the commandline parameters, it is intended, not mandatory, that

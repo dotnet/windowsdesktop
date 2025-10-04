@@ -7,8 +7,15 @@
           AboutUrl="https://aka.ms/dotnet-windows-desktop"
           Compressed="yes">
 
-  <!-- Related bundle for upgrade scenarios -->
+  <!-- Related bundle for upgrade scenarios - upgrade any earlier version with same upgrade code -->
+  <!-- This enables preview -> RC -> GA -> servicing upgrade path -->
+  
+  <!-- Primary upgrade relationship using current deterministic upgrade code (for GA and all servicing) -->
   <RelatedBundle Id="$(UpgradeCode)" Action="Upgrade" />
+  
+  <!-- Secondary: Upgrade bundles that shipped with legacy UpgradeCode (Preview 2 through RC2) -->
+  <!-- This UpgradeCode {55414577-5A99-7937-6951-9CCC4BE8857E} was used before deterministic generation -->
+  <RelatedBundle Id="{55414577-5A99-7937-6951-9CCC4BE8857E}" Action="Upgrade" />
 
     <bal:Condition Message="#(loc.InstallPathx64x86)" Condition="WixBundleInstalled OR (NOT DOTNETHOME_X64 ~= DOTNETHOME_X86) OR DOTNETHOMESIMILARITYCHECKOVERRIDE" />
 

@@ -1,9 +1,5 @@
 <Project>
   <!-- Extracted WiX build targets for Windows Desktop Runtime bundle -->
-
-<<<<<<< HEAD
-  <Target Name="SetInstallerInfo" BeforeTargets="CoreCompile">
-=======
   <Target Name="CollectRuntimePrereqDependencies" Condition="'$(RestoreRuntimePrereqs)'!='false' AND '$(TargetArchitecture)'!=''">
     <PropertyGroup>
       <RuntimePrereqStageDirectory>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>

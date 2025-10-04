@@ -1,5 +1,6 @@
 <Project>
   <!-- Extracted WiX build targets for Windows Desktop Runtime bundle -->
+
   <Target Name="CollectRuntimePrereqDependencies" Condition="'$(RestoreRuntimePrereqs)'!='false' AND '$(TargetArchitecture)'!=''">
     <PropertyGroup>
       <RuntimePrereqStageDirectory>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</RuntimePrereqStageDirectory>
@@ -138,15 +139,15 @@
       <!-- Primary: Explicit prereqs subfolder -->
       <_PrereqSearchPath1>$(ArtifactsRoot)prereqs\$(TargetArchitecture)\</_PrereqSearchPath1>
       <_PrereqSearchPath1 Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\prereqs\$(TargetArchitecture)\</_PrereqSearchPath1>
-      
+
       <!-- Secondary: Packages\Shipping (common CI layout) -->
       <_PrereqSearchPath2>$(ArtifactsPackagesDir)Shipping\</_PrereqSearchPath2>
       <_PrereqSearchPath2 Condition="'$(ArtifactsPackagesDir)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\packages\Shipping\</_PrereqSearchPath2>
-      
+
       <!-- Tertiary: Packages\Debug\Shipping (alternative CI layout) -->
       <_PrereqSearchPath3>$(ArtifactsPackagesDir)Debug\Shipping\</_PrereqSearchPath3>
       <_PrereqSearchPath3 Condition="'$(ArtifactsPackagesDir)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\packages\Debug\Shipping\</_PrereqSearchPath3>
-      
+
       <!-- Quaternary: Artifacts root with architecture suffix -->
       <_PrereqSearchPath4>$(ArtifactsRoot)bin\$(TargetArchitecture)\</_PrereqSearchPath4>
       <_PrereqSearchPath4 Condition="'$(ArtifactsRoot)'==''">$(MSBuildThisFileDirectory)..\..\..\..\artifacts\bin\$(TargetArchitecture)\</_PrereqSearchPath4>
@@ -185,7 +186,7 @@
     <Message Importance="low" Text="  2. $(_PrereqSearchPath2) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath2)')))" />
     <Message Importance="low" Text="  3. $(_PrereqSearchPath3) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath3)')))" />
     <Message Importance="low" Text="  4. $(_PrereqSearchPath4) (Exists: $([System.IO.Directory]::Exists('$(_PrereqSearchPath4)')))" />
-    
+
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="[PrereqRuntime] Found MSIs:" />
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="  Host: @(_PrereqHost)" />
     <Message Importance="high" Condition="'$(PrereqMsisAvailable)'=='true'" Text="  HostFxr: @(_PrereqHostFxr)" />
@@ -302,22 +303,6 @@
     
     <Message Text="Generated ProviderKey (shared): {$(GeneratedProviderKey)} from seed '$(ProviderKeySeed)'" Importance="high" />
     <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
-
-    <!-- Diagnostic: Generate and log UpgradeCodes for all architectures for verification -->
-    <GenerateGuidFromName Name="$(UpgradeCodeSeed) x86 $(MajorVersion).$(MinorVersion)">
-      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode_x86" />
-    </GenerateGuidFromName>
-    <GenerateGuidFromName Name="$(UpgradeCodeSeed) x64 $(MajorVersion).$(MinorVersion)">
-      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode_x64" />
-    </GenerateGuidFromName>
-    <GenerateGuidFromName Name="$(UpgradeCodeSeed) arm64 $(MajorVersion).$(MinorVersion)">
-      <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedUpgradeCode_arm64" />
-    </GenerateGuidFromName>
-
-    <Message Text="[Diagnostic] Expected UpgradeCodes for v$(MajorVersion).$(MinorVersion):" Importance="high" />
-    <Message Text="  x86:   {$(GeneratedUpgradeCode_x86)}" Importance="high" />
-    <Message Text="  x64:   {$(GeneratedUpgradeCode_x64)}" Importance="high" />
-    <Message Text="  arm64: {$(GeneratedUpgradeCode_arm64)}" Importance="high" />
   </Target>
 
   <Target Name="Pack" DependsOnTargets="Build;PublishBundle;GenerateWixpackPackage">
@@ -330,12 +315,12 @@
     <PropertyGroup>
       <WixpackWorkingDir>$(IntermediateOutputPath)wixpack</WixpackWorkingDir>
       <!-- Ensure WixCommandPackagesDir has a default value -->
-  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
-  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
-  <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
-  <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
-  <!-- Expected wixpack file should match the bundle executable name -->
-  <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
+      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
+      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
+      <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
+      <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
+      <!-- Expected wixpack file should match the bundle executable name -->
+      <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
       <!-- PDB name follows Wix default: TargetName + .wixpdb -->
       <_BundlePdbFile>$(TargetDir)$(TargetName).wixpdb</_BundlePdbFile>
     </PropertyGroup>

@@ -42,6 +42,8 @@ jobs:
     steps:
     - template: /eng/common/templates/steps/enable-internal-sources.yml
 
+<<<<<<< HEAD
+=======
     - pwsh: >-
         $(Build.SourcesDirectory)\eng\scripts\runtime-prereqs\restore-runtime-prereqs.ps1
         -Architectures $(TargetArchitecture)
@@ -59,6 +61,7 @@ jobs:
         continueOnError: false
         condition: and(succeeded(), in(variables['SignType'], 'real', 'test'))
 
+>>>>>>> b68bbcd1 (Automate WindowsDesktop runtime prereq restore)
     - script: >-
         eng/common/cibuild.cmd
         $(CommonMSBuildArgs)

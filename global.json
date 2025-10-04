@@ -1,6 +1,10 @@
 {
   "sdk": {
+<<<<<<< HEAD
     "version": "10.0.100-rc.1.25451.107",
+=======
+    "version": "10.0.100-rc.1.25420.111",
+>>>>>>> 0ef2244d (Add WiX v5 SDK support and improve version handling)
     "allowPrerelease": true,
     "rollForward": "latestFeature",
     "paths": [
@@ -10,7 +14,11 @@
     "errorMessage": "The required .NET SDK wasn't found. Please run ./eng/common/dotnet.cmd/sh to install it."
   },
   "tools": {
+<<<<<<< HEAD
     "dotnet": "10.0.100-rc.1.25451.107",
+=======
+    "dotnet": "10.0.100-rc.1.25420.111",
+>>>>>>> 0ef2244d (Add WiX v5 SDK support and improve version handling)
     "runtimes": {
       "dotnet": [
         "$(MicrosoftNETCorePlatformsVersion)"
@@ -18,9 +26,14 @@
     }
   },
   "msbuild-sdks": {
+<<<<<<< HEAD
     "Microsoft.DotNet.Arcade.Sdk": "10.0.0-beta.25479.115",
-    "Microsoft.DotNet.Helix.Sdk": "10.0.0-beta.25479.115",
     "Microsoft.DotNet.SharedFramework.Sdk": "10.0.0-beta.25479.115",
+=======
+    "Microsoft.DotNet.Arcade.Sdk": "11.0.0-beta.25454.102",
+    "Microsoft.DotNet.Helix.Sdk": "11.0.0-beta.25454.102",
+    "Microsoft.DotNet.SharedFramework.Sdk": "11.0.0-beta.25454.102",
+>>>>>>> 0ef2244d (Add WiX v5 SDK support and improve version handling)
     "Microsoft.Build.NoTargets": "3.7.0",
     "Microsoft.Build.Traversal": "3.4.0",
     "Microsoft.WixToolset.Sdk": "5.0.2-dotnet.2737382"

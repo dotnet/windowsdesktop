@@ -57,10 +57,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="dotnet.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="dotnet.ico" />
+    <BundleSigningAsset Include="$(MSBuildThisFileDirectory)dotnet.ico" />
   </ItemGroup>
+
+  <Target Name="CopyBundleSigningAssets" AfterTargets="PublishBundle">
+    <PropertyGroup>
+      <_BundleOutputDir>$(TargetDir)</_BundleOutputDir>
+      <_BundleShippingDir Condition="'$(ArtifactsPackagesDir)' != ''">$(ArtifactsPackagesDir)Shipping\</_BundleShippingDir>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_BundleOutputDir)" Condition="'$(_BundleOutputDir)' != ''" />
+    <MakeDir Directories="$(_BundleShippingDir)" Condition="'$(_BundleShippingDir)' != ''" />
+
+    <Copy SourceFiles="@(BundleSigningAsset)"
+          DestinationFolder="$(_BundleOutputDir)"
+          SkipUnchangedFiles="true"
+          Condition="'$(_BundleOutputDir)' != ''" />
+
+    <Copy SourceFiles="@(BundleSigningAsset)"
+          DestinationFolder="$(_BundleShippingDir)"
+          SkipUnchangedFiles="true"
+          Condition="'$(_BundleShippingDir)' != ''" />
+  </Target>
 
   <Target Name="BuildDependentProject" BeforeTargets="Build">
     <!-- Ensure the Windows Desktop Runtime is built before this bundle -->

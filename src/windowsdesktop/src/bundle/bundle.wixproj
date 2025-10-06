@@ -56,6 +56,12 @@
     <Compile Include="$(WorkloadManifestsWxsPath)" Condition="'$(WorkloadManifestsWxsPath)' != '' AND Exists('$(WorkloadManifestsWxsPath)')" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="dotnet.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="BuildDependentProject" BeforeTargets="Build">
     <!-- Ensure the Windows Desktop Runtime is built before this bundle -->
     <MSBuild Projects="..\sfx\Microsoft.WindowsDesktop.App.Runtime.sfxproj"

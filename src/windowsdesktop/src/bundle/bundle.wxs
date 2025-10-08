@@ -157,6 +157,11 @@
               Path="[ProgramFiles64Folder]dotnet"/>
     <?endif?>
 
+    <!-- References to upgrade policy registry searches defined in upgradePolicies.wxs -->
+    <util:RegistrySearchRef Id="RemovePreviousVersionRegistryKeySearch" />
+    <util:RegistrySearchRef Id="RemoveSpecificPreviousVersionRegistryKeyExistsSearch" />
+    <util:RegistrySearchRef Id="RemoveSpecificPreviousVersionRegistryKeySearch" />
+
     <!--
         When installing the SDK bundle to a custom location using the commandline parameters, it is intended, not mandatory, that
         both "DOTNETHOME_X86" and "DOTNETHOME_X64" should be used on the commandline and should take this convention:
@@ -193,8 +198,7 @@
         SourceFile="$(var.DotNetRedistHostInstaller)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Host"
-        InstallCondition="NOT DotNetHostInstalledVersion$(var.PlatformToken) OR DotNetHostInstalledVersion$(var.PlatformToken) &lt; v$(var.DotNetRuntimeVersion)">
+        DisplayName="Microsoft .NET Host">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
@@ -205,8 +209,7 @@
         SourceFile="$(var.DotNetRedistHostfxrInstaller)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Host FX Resolver"
-        InstallCondition="NOT DotNetHostFxrInstalledVersion$(var.PlatformToken) OR DotNetHostFxrInstalledVersion$(var.PlatformToken) &lt; v$(var.DotNetRuntimeVersion)">
+        DisplayName="Microsoft .NET Host FX Resolver">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
@@ -217,8 +220,7 @@
         SourceFile="$(var.DotNetRedistLtsInstaller)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft .NET Runtime"
-        InstallCondition="NOT DotNetRuntimeInstalledVersion$(var.PlatformToken) OR DotNetRuntimeInstalledVersion$(var.PlatformToken) &lt; v$(var.DotNetRuntimeVersion)">
+        DisplayName="Microsoft .NET Runtime">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
@@ -230,8 +232,7 @@
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"
         Vital="yes"
         Cache="keep"
-        DisplayName="Microsoft Windows Desktop Runtime"
-        InstallCondition="NOT WindowsDesktopRuntimeInstalledVersion OR WindowsDesktopRuntimeInstalledVersion &lt; v$(Version)">
+        DisplayName="Microsoft Windows Desktop Runtime">
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="0" />

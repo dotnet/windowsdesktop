@@ -18,12 +18,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.Installers" />
-  <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
-  <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
-  <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
-  <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
-  <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
-  <PackageReference Include="Microsoft.WixToolset.Heat" GeneratePathProperty="true" Condition="'$(UseWix5)' == 'true'" />
+  <PackageReference Include="Microsoft.Wix" ExcludeAssets="all" GeneratePathProperty="true" />
+  <PackageReference Include="Microsoft.WixToolset.UI.wixext" GeneratePathProperty="true" />
+  <PackageReference Include="Microsoft.WixToolset.Dependency.wixext" GeneratePathProperty="true" />
+  <PackageReference Include="Microsoft.WixToolset.Util.wixext" GeneratePathProperty="true" />
+  <PackageReference Include="Microsoft.WixToolset.Bal.wixext" GeneratePathProperty="true" />
+  <PackageReference Include="Microsoft.WixToolset.Heat" GeneratePathProperty="true" />
   </ItemGroup>
 
 </Project>

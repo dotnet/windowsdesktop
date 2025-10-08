@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <DotNetDarkOutputPath>$(IntermediateOutputPath)d\</DotNetDarkOutputPath>
+    <DotNetDarkOutputPath>$(IntermediateOutputPath)dark\</DotNetDarkOutputPath>
     <DepsPath>$(BaseIntermediateOutputPath)</DepsPath>
     <DefineConstants>$(DefineConstants);DepsPath=$(DepsPath)</DefineConstants>
     <DefineConstants>$(DefineConstants);InstallersOutputPath=$(InstallersOutputPath)</DefineConstants>

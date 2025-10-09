@@ -5,13 +5,13 @@
   <String Id="ConfirmCancelMessage" Value="Вы действительно хотите отменить?"/>
   <String Id="ExecuteUpgradeRelatedBundleMessage" Value="Предыдущая версия"/>
   <String Id="HelpHeader" Value="Справка по установке"/>
-  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [directory] - installs, repairs, uninstalls or creates a complete local copy of the bundle in directory. Install is the default.
+  <String Id="HelpText" Value="/install | /repair | /uninstall | /layout [directory] — устанавливает, исправляет, удаляет пакет или создает полную локальную копию пакета в каталоге. По умолчанию выполняется установка.
 
-/passive | /quiet - displays minimal UI with no prompts or displays no UI and no prompts. By default UI and all prompts are displayed.
+/passive | /quiet — выводит минимальный пользовательский интерфейс без запросов или вообще не выводит пользовательский интерфейс и запросы. По умолчанию отображаются пользовательский интерфейс и все запросы.
 
-/norestart - suppress any attempts to restart. By default UI will prompt before restart.
+/norestart — подавляет все попытки перезапуска. По умолчанию пользовательский интерфейс запрашивает подтверждение перед перезапуском.
 
-/log log.txt - logs to a specific file. By default a log file is created in %TEMP%."/>
+/log log.txt — журналы в определенном файле. По умолчанию файл журнала создается в папке %TEMP%."/>
   <String Id="HelpCloseButton" Value="&amp;Закрыть"/>
   <String Id="InstallAcceptCheckbox" Value="Я &amp;принимаю условия лицензии"/>
   <String Id="InstallOptionsButton" Value="&amp;Параметры"/>
@@ -50,8 +50,8 @@
   <String Id="FilesInUseDontCloseRadioButton" Value="&amp;Не закрывать приложения. Потребуется перезагрузка."/>
   <String Id="FilesInUseRetryButton" Value="&amp;Повторить"/>
   <String Id="FilesInUseCancelButton" Value="&amp;Отмена"/>
-  <String Id="WelcomeHeader" Value="Windows Desktop Runtime"/>
-  <String Id="WelcomeDescription" Value="The .NET Windows Desktop Runtime is used to run Windows Forms and WPF applications on your computer. .NET is open source, cross platform, and supported by Microsoft. We hope you enjoy it!"/>
+  <String Id="WelcomeHeader" Value="Среда выполнения Windows Desktop"/>
+  <String Id="WelcomeDescription" Value="Среда выполнения .NET Windows Desktop используется для запуска приложений Windows Forms и WPF на компьютерах. .NET является открытой, кроссплатформенной средой и поддерживается Майкрософт. Надеемся, что вам понравится!"/>
   <String Id="LearnMoreTitle" Value="Дополнительные сведения о .NET"/>
   <String Id="SuccessInstallLocation" Value="Следующее было установлено в [DOTNETHOME]"/>
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] "/>
@@ -66,22 +66,22 @@
   <String Id="VisualStudioWarning" Value="Если вы планируете использовать .NET [VERSIONMAJOR].[VERSIONMINOR] с Visual Studio, вам потребуется Visual Studio 2022 версии не ниже [MINIMUMVSVERSION]. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Подробнее&lt;/A&gt;."/>
   
   <!-- Success page strings -->
-  <String Id="FirstTimeWelcomeMessage" Value="Thank you for installing [BUNDLEMONIKER]! You can now run applications that require the .NET Windows Desktop Runtime."/>
+  <String Id="FirstTimeWelcomeMessage" Value="Благодарим за установку [BUNDLEMONIKER]! Теперь вы можете запускать приложения, требующие среды выполнения .NET Windows Desktop."/>
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;Документация .NET&lt;/A&gt;"/>
-  <String Id="WindowsDesktopDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-desktop-docs&quot;&gt;Windows Desktop Documentation&lt;/A&gt;"/>
-  <String Id="ReleaseNotesLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Release Notes&lt;/A&gt;"/>
-  <String Id="TutorialsLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-tutorials&quot;&gt;.NET Tutorials&lt;/A&gt;"/>
+  <String Id="WindowsDesktopDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-desktop-docs&quot;&gt;Документация по Windows Desktop&lt;/A&gt;"/>
+  <String Id="ReleaseNotesLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Заметки о выпуске&lt;/A&gt;"/>
+  <String Id="TutorialsLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-tutorials&quot;&gt;Руководства по .NET&lt;/A&gt;"/>
   
   <!-- Additional success headers -->
   <String Id="SuccessLayoutHeader" Value="Компоновка успешно завершена"/>
-  <String Id="SuccessUnsafeUninstallHeader" Value="Unsafe Uninstall Successfully Completed"/>
+  <String Id="SuccessUnsafeUninstallHeader" Value="Небезопасное удаление завершено"/>
   <String Id="SuccessCacheHeader" Value="Кэширование успешно завершено"/>
-  <String Id="SuccessModifyHeader" Value="Modification Successfully Completed"/>
-  <String Id="SuccessUninstallRestartText" Value="You must restart your computer to complete the uninstallation."/>
+  <String Id="SuccessModifyHeader" Value="Изменение завершено"/>
+  <String Id="SuccessUninstallRestartText" Value="Для завершения установки необходимо перезагрузить компьютер."/>
   
   <!-- Additional failure headers -->
   <String Id="FailureLayoutHeader" Value="Сбой макета"/>
-  <String Id="FailureUnsafeUninstallHeader" Value="Unsafe Uninstall Failed"/>
+  <String Id="FailureUnsafeUninstallHeader" Value="Сбой небезопасного удаления"/>
   <String Id="FailureCacheHeader" Value="Сбой кэша"/>
-  <String Id="FailureModifyHeader" Value="Modification Failed"/>
+  <String Id="FailureModifyHeader" Value="Сбой изменения"/>
 </WixLocalization>

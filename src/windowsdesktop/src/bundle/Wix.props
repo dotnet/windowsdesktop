@@ -13,6 +13,8 @@
     <!-- Currently, WiX only supports 'full' for the -pdbType option. This
          affects both bundle and package projects. -->
     <DebugType>full</DebugType>
+    <!-- Use backwards compatible GUID generation for WiX v5 -->
+    <WixBackwardsCompatibleGuidGeneration>true</WixBackwardsCompatibleGuidGeneration>
   </PropertyGroup>
 
   <PropertyGroup>

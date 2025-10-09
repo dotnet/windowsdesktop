@@ -227,17 +227,17 @@
       <TargetName>$(BundleBaseName)</TargetName>
       <TargetFileName>$(TargetName)$(TargetExt)</TargetFileName>
       <TargetPath>$(TargetDir)$(TargetFileName)</TargetPath>
-   <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
-   <_NormalizedPreReleaseLabel>$([System.String]::Copy('$(PreReleaseVersionLabel)').ToLowerInvariant())</_NormalizedPreReleaseLabel>
-   <_IsPreReleaseBuild Condition="'$(_NormalizedPreReleaseLabel)' != '' AND '$(_NormalizedPreReleaseLabel)' != 'rtm'">true</_IsPreReleaseBuild>
-   <_IsPreReleaseBuild Condition="'$(_IsPreReleaseBuild)'==''">false</_IsPreReleaseBuild>
-   <!-- Bundle version uses 4th component for build ordering:
-     - Preview/RC: Use VersionSuffixDateStamp directly (e.g., 10.0.0.35301)
-     - RTM/GA: Use 50000 to ensure it's always > any preview/RC (e.g., 10.0.0.50000)
-     This ensures proper upgrade path: Preview -> RC -> RTM -> Servicing.
-     Treat PreReleaseVersionLabel='rtm' as shipping. -->
-   <DefineConstants Condition="'$(_IsPreReleaseBuild)' == 'true' AND '$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
-   <DefineConstants Condition="'$(_IsPreReleaseBuild)' != 'true' OR '$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
+      <DefineConstants>$(DefineConstants);Version=$(MajorVersion).$(MinorVersion).$(PatchVersion)</DefineConstants>
+      <_NormalizedPreReleaseLabel>$([System.String]::Copy('$(PreReleaseVersionLabel)').ToLowerInvariant())</_NormalizedPreReleaseLabel>
+      <_IsPreReleaseBuild Condition="'$(_NormalizedPreReleaseLabel)' != '' AND '$(_NormalizedPreReleaseLabel)' != 'rtm'">true</_IsPreReleaseBuild>
+      <_IsPreReleaseBuild Condition="'$(_IsPreReleaseBuild)'==''">false</_IsPreReleaseBuild>
+      <!-- Bundle version uses 4th component for build ordering:
+        - Preview/RC: Use VersionSuffixDateStamp directly (e.g., 10.0.0.35301)
+        - RTM/GA: Use 50000 to ensure it's always > any preview/RC (e.g., 10.0.0.50000)
+        This ensures proper upgrade path: Preview -> RC -> RTM -> Servicing.
+        Treat PreReleaseVersionLabel='rtm' as shipping. -->
+      <DefineConstants Condition="'$(_IsPreReleaseBuild)' == 'true' AND '$(VersionSuffixDateStamp)' != ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).$(VersionSuffixDateStamp)</DefineConstants>
+      <DefineConstants Condition="'$(_IsPreReleaseBuild)' != 'true' OR '$(VersionSuffixDateStamp)' == ''">$(DefineConstants);BundleVersion=$(MajorVersion).$(MinorVersion).$(PatchVersion).50000</DefineConstants>
       <DefineConstants>$(DefineConstants);Manufacturer=Microsoft Corporation</DefineConstants>
       <DefineConstants>$(DefineConstants);SdkBrandName=Microsoft Windows Desktop Runtime</DefineConstants>
 
@@ -342,12 +342,12 @@
     <PropertyGroup>
       <WixpackWorkingDir>$(IntermediateOutputPath)wixpack</WixpackWorkingDir>
       <!-- Ensure WixCommandPackagesDir has a default value -->
-  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
-  <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
-  <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
-  <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
-  <!-- Expected wixpack file should match the bundle executable name -->
-  <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
+      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'!=''">$(WixCommandPackagesDir)</WixpackOutputDir>
+      <WixpackOutputDir Condition="'$(WixCommandPackagesDir)'==''">$(ArtifactsPackagesDir)NonShipping</WixpackOutputDir>
+      <DefaultBundleWixpackFile>$(WixpackOutputDir)\$(TargetFileName).wixpack.zip</DefaultBundleWixpackFile>
+      <BundleShippingName Condition="'$(BundleShippingName)'==''">$(OutputName).exe</BundleShippingName>
+      <!-- Expected wixpack file should match the bundle executable name -->
+      <ExpectedBundleWixpackFile>$(WixpackOutputDir)\$(BundleShippingName).wixpack.zip</ExpectedBundleWixpackFile>
       <!-- PDB name follows Wix default: TargetName + .wixpdb -->
       <_BundlePdbFile>$(TargetDir)$(TargetName).wixpdb</_BundlePdbFile>
     </PropertyGroup>
@@ -380,4 +380,5 @@
     </PropertyGroup>
     <Message Text="[Wixpack] Generated: $(_WixBuildCommandPackageNameOutput)" Importance="high" Condition="'$(_WixBuildCommandPackageNameOutput)'!=''" />
   </Target>
+
 </Project>

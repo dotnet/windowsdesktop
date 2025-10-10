@@ -294,9 +294,9 @@
   </Target>
 
   <Target Name="GenerateUpgradeCode" AfterTargets="SetInstallerInfo">
-    <!-- Generate shared ProviderKey (same across architectures for dependency resolution) -->
+    <!-- Generate architecture-specific ProviderKey (different per architecture for SxS installations) -->
     <PropertyGroup>
-      <ProviderKeySeed>$(UpgradeCodeSeed) $(MajorVersion).$(MinorVersion)</ProviderKeySeed>
+      <ProviderKeySeed>$(UpgradeCodeSeed) $(TargetArchitecture) $(MajorVersion).$(MinorVersion)</ProviderKeySeed>
     </PropertyGroup>
     <GenerateGuidFromName Name="$(ProviderKeySeed)">
       <Output TaskParameter="GeneratedGuid" PropertyName="GeneratedProviderKey" />
@@ -312,7 +312,7 @@
       <DefineConstants>$(DefineConstants);UpgradeCode={$(GeneratedUpgradeCode)}</DefineConstants>
     </PropertyGroup>
     
-    <Message Text="Generated ProviderKey (shared): {$(GeneratedProviderKey)} from seed '$(ProviderKeySeed)'" Importance="high" />
+    <Message Text="Generated ProviderKey for $(TargetArchitecture): {$(GeneratedProviderKey)} from seed '$(ProviderKeySeed)'" Importance="high" />
     <Message Text="Generated UpgradeCode for $(TargetArchitecture) v$(MajorVersion).$(MinorVersion): {$(GeneratedUpgradeCode)} from seed '$(UpgradeCodeSeedWithArch)'" Importance="high" />
 
     <!-- Diagnostic: Generate and log UpgradeCodes for all architectures for verification -->

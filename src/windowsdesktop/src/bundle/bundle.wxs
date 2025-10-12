@@ -51,7 +51,7 @@
 
     <!-- Do not use ProgramFiles6432Folder. It defaults to CSIDL_PROGRAM_FILES and will write
          the tag to Program Files when installing the x86 runtime on 64-bit OS. -->
-    <?if $(var.PlatformToken)~=x86?>
+    <?if $(var.PlatformToken)~=X86?>
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFilesFolder]dotnet" />
     <?else?>
     <SoftwareTag Regid="microsoft.com" InstallPath="[ProgramFiles64Folder]dotnet" />
@@ -199,7 +199,7 @@
       
       <!-- Host is the base component that everything else depends on -->
       <?if $(var.IncludeRuntimeMSIs) = true ?>
-      <?if $(var.PlatformToken)~=x86?>
+      <?if $(var.PlatformToken)~=X86?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(var.DotNetRedistHostInstaller)"
@@ -231,7 +231,7 @@
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
-      <?elseif $(var.PlatformToken)~=x64?>
+      <?elseif $(var.PlatformToken)~=X64?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(var.DotNetRedistHostInstaller)"
@@ -263,7 +263,7 @@
         <MsiProperty Name="DOTNETHOME" Value="[DOTNETHOME]" />
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
       </MsiPackage>
-      <?elseif $(var.PlatformToken)~=arm64?>
+      <?elseif $(var.PlatformToken)~=ARM64?>
       <MsiPackage 
         Id="DotNetHost"
         SourceFile="$(var.DotNetRedistHostInstaller)"
@@ -299,7 +299,7 @@
       <?endif ?>
       
       <!-- Windows Desktop Runtime depends on all the above .NET Core components -->
-      <?if $(var.PlatformToken)~=x86?>
+      <?if $(var.PlatformToken)~=X86?>
       <MsiPackage 
         Id="WindowsDesktopRuntime"
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"
@@ -310,7 +310,7 @@
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="0" />
       </MsiPackage>
-      <?elseif $(var.PlatformToken)~=x64?>
+      <?elseif $(var.PlatformToken)~=X64?>
       <MsiPackage 
         Id="WindowsDesktopRuntime"
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"
@@ -321,7 +321,7 @@
         <MsiProperty Name="ALLOWMSIINSTALL" Value="True" />
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="0" />
       </MsiPackage>
-      <?elseif $(var.PlatformToken)~=arm64?>
+      <?elseif $(var.PlatformToken)~=ARM64?>
       <MsiPackage 
         Id="WindowsDesktopRuntime"
         SourceFile="$(WindowsDesktopRuntimeMsiPath)"

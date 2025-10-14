@@ -30,6 +30,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <WixLocalization Include="theme\**\*.wxl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="$(PkgMicrosoft_DotNet_Build_Tasks_Installers)\build\wix5\bundle\upgradePolicies.wxs" />
 
     <!-- Workload manifests will be included only if the source fragment was generated. -->

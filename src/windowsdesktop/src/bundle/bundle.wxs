@@ -11,12 +11,15 @@
 
     <BootstrapperApplication>
       <bal:WixStandardBootstrapperApplication LicenseFile="dummyeula.rtf"
-                                              LocalizationFile="theme\1033\bundle.wxl"
                                               ShowVersion="yes"
                                               SuppressDowngradeFailure="yes"
                                               SuppressOptionsUI="yes"
                                               Theme="rtfLicense"
                                               ThemeFile="bundle.thm" />
+
+      <?foreach lcid in 1033;1028;1029;1031;1036;1040;1041;1042;1045;1046;1049;1055;2052;3082?>
+      <Payload Name="$(lcid)\thm.wxl" Compressed="yes" SourceFile="theme\$(lcid)\bundle.wxl" />
+      <?endforeach?>
 
       <Payload Name="DotNetLogo_256x.png" Compressed="yes" SourceFile="DotNetLogo_256x.png" />
       <Payload Name="dotnet.ico" Compressed="yes" SourceFile="dotnet.ico" />

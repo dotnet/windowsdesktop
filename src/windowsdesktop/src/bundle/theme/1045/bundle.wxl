@@ -45,7 +45,7 @@
   <String Id="FilesInUseRetryButton" Value="&amp;Ponów próbę" />
   <String Id="FilesInUseCancelButton" Value="&amp;Anuluj" />
   <String Id="WelcomeHeader" Value="Windows Desktop Runtime" />
-  <String Id="WelcomeDescription" Value="The .NET Windows Desktop Runtime is used to run Windows Forms and WPF applications on your computer. .NET is open source, cross platform, and supported by Microsoft. We hope you enjoy it!" />
+  <String Id="WelcomeDescription" Value="Środowisko uruchomieniowe platformy .NET dla komputerów z systemem Windows służy do uruchamiania aplikacji Windows Forms i WPF na komputerze. Platforma .NET jest oprogramowaniem typu open source, działa na różnych platformach i jest obsługiwana przez firmę Microsoft. Mamy nadzieję, że Ci się podoba!" />
   <String Id="LearnMoreTitle" Value="Dowiedz się więcej o platformie .NET" />
   <String Id="SuccessInstallLocation" Value="Następujące elementy zainstalowano w [DOTNETHOME]" />
   <String Id="SuccessInstallProductName" Value=" - [BUNDLEMONIKER] " />

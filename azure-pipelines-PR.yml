@@ -16,7 +16,7 @@ variables:
   - name: SkipTests
     value: false
   # Produce test-signed build for PR and Public builds
-  - name: _SignType
+  - name: SignType
     value: test
 
 stages:

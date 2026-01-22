@@ -25,7 +25,7 @@
     <!-- nuget -->
     <NugetPackagingVersion>6.2.4</NugetPackagingVersion>
     <!-- runtime -->
-    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.24-servicing.26063.23</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportVersion>8.0.24-servicing.26070.10</MicrosoftInternalRuntimeWindowsDesktopTransportVersion>
     <MicrosoftNETCoreAppRefVersion>8.0.24</MicrosoftNETCoreAppRefVersion>
     <MicrosoftNETCoreAppRuntimewinx64Version>8.0.24</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftWin32RegistryAccessControlVersion>8.0.0</MicrosoftWin32RegistryAccessControlVersion>
@@ -61,15 +61,15 @@
     <SystemSpeechVersion>8.0.0</SystemSpeechVersion>
     <SystemTextEncodingCodePagesVersion>8.0.0</SystemTextEncodingCodePagesVersion>
     <SystemThreadingAccessControlVersion>8.0.0</SystemThreadingAccessControlVersion>
-    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.24-servicing.26063.23</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
+    <VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>8.0.24-servicing.26070.10</VSRedistCommonNetCoreSharedFrameworkx6480PackageVersion>
     <!-- wcf -->
     <SystemServiceModelVersion>4.10.3</SystemServiceModelVersion>
     <!-- winforms -->
-    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.24-servicing.26063.6</MicrosoftDotnetWinFormsProjectTemplatesVersion>
-    <MicrosoftPrivateWinformsVersion>8.0.24-servicing.26063.6</MicrosoftPrivateWinformsVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesVersion>8.0.24-servicing.26071.2</MicrosoftDotnetWinFormsProjectTemplatesVersion>
+    <MicrosoftPrivateWinformsVersion>8.0.24-servicing.26071.2</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>8.0.24</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>8.0.24-servicing.26064.4</MicrosoftDotNetWpfGitHubVersion>
-    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.24-servicing.26064.4</MicrosoftDotNetWpfProjectTemplatesVersion>
+    <MicrosoftDotNetWpfGitHubVersion>8.0.24-servicing.26072.5</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfProjectTemplatesVersion>8.0.24-servicing.26072.5</MicrosoftDotNetWpfProjectTemplatesVersion>
   </PropertyGroup>
 </Project>

@@ -57,7 +57,7 @@
   <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;https://aka.ms/dev-privacy&quot;&gt;Gizlilik Bildirimi&lt;/A&gt;" />
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;.NET için Lisans Bilgileri&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="Yükle'ye tıklayarak aşağıdaki koşulları kabul etmiş olursunuz." />
-  <String Id="VisualStudioWarning" Value="Visual Studio ile .NET [VERSIONMAJOR].[VERSIONMINOR] kullanmayı planlıyorsanız Visual Studio 2022 [MINIMUMVSVERSION] veya üzeri bir sürüm gerekir. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Daha fazla bilgi edinin&lt;/A&gt;." />
+  <String Id="VisualStudioWarning" Value="Visual Studio ile .NET [VERSIONMAJOR].[VERSIONMINOR] kullanmayı planlıyorsanız Visual Studio 2026 18.0 veya üzeri bir sürüm gerekir. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Daha fazla bilgi edinin&lt;/A&gt;." />
   <!-- Success page strings -->
   <String Id="FirstTimeWelcomeMessage" Value="[BUNDLEMONIKER] uygumalasını yüklediğiniz için teşekkür ederiz! Artık .NET Windows Masaüstü Çalışma Zamanı gerektiren uygulamaları çalıştırabilirsiniz." />
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;.NET Belgeleri&lt;/A&gt;" />

@@ -57,7 +57,7 @@
   <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;https://aka.ms/dev-privacy&quot;&gt;Déclaration de confidentialité&lt;/A&gt;" />
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;Informations de licence pour .NET&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="En cliquant sur Installer, vous acceptez les conditions suivantes." />
-  <String Id="VisualStudioWarning" Value="Si vous envisagez d’utiliser .NET [VERSIONMAJOR].[VERSIONMINOR] avec Visual Studio, Visual Studio 2022 [MINIMUMVSVERSION] ou une version ultérieure est nécessaire. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Découvrez plus d’informations&lt;/A&gt;." />
+  <String Id="VisualStudioWarning" Value="Si vous envisagez d’utiliser .NET [VERSIONMAJOR].[VERSIONMINOR] avec Visual Studio, Visual Studio 2026 18.0 ou une version ultérieure est nécessaire. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;Découvrez plus d’informations&lt;/A&gt;." />
   <!-- Success page strings -->
   <String Id="FirstTimeWelcomeMessage" Value="Thank you for installing [BUNDLEMONIKER]! You can now run applications that require the .NET Windows Desktop Runtime." />
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;Documentation .NET&lt;/A&gt;" />

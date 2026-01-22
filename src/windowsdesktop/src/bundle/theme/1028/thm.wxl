@@ -57,7 +57,7 @@
   <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;https://aka.ms/dev-privacy&quot;&gt;隱私權聲明&lt;/A&gt;" />
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;.NET 授權資訊&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="按一下 [\[]安裝[\[] 即表示您同意下列條款。" />
-  <String Id="VisualStudioWarning" Value="如果計劃使用 .NET [VERSIONMAJOR].[VERSIONMINOR] 搭配 Visual Studio，需要 Visual Studio 2022 [MINIMUMVSVERSION] 或更新版本。&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;深入了解&lt;/A&gt;。" />
+  <String Id="VisualStudioWarning" Value="如果計劃使用 .NET [VERSIONMAJOR].[VERSIONMINOR] 搭配 Visual Studio，需要 Visual Studio 2026 18.0 或更新版本。&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;深入了解&lt;/A&gt;。" />
   <!-- Success page strings -->
   <String Id="FirstTimeWelcomeMessage" Value="感謝您安裝 [BUNDLEMONIKER]!您現在可以執行需要 .NET Windows 桌面執行階段的應用程式。" />
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;.NET 文件&lt;/A&gt;" />

@@ -57,7 +57,7 @@
   <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;https://aka.ms/dev-privacy&quot;&gt;プライバシーに関する声明&lt;/A&gt;" />
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;.NET のライセンス情報&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="インストール をクリックすると、次の条項に同意したものと見なされます。" />
-  <String Id="VisualStudioWarning" Value=".NET [VERSIONMAJOR].[VERSIONMINOR] を Visual Studio と使用する場合は、Visual Studio 2022 [MINIMUMVSVERSION] 以降が必要です。&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;詳細情報&lt;/A&gt;。" />
+  <String Id="VisualStudioWarning" Value=".NET [VERSIONMAJOR].[VERSIONMINOR] を Visual Studio と使用する場合は、Visual Studio 2026 18.0 以降が必要です。&lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;詳細情報&lt;/A&gt;。" />
   <!-- Success page strings -->
   <String Id="FirstTimeWelcomeMessage" Value="Thank you for installing [BUNDLEMONIKER]! You can now run applications that require the .NET Windows Desktop Runtime." />
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;.NET ドキュメント&lt;/A&gt;" />

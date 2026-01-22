@@ -57,7 +57,7 @@
   <String Id="PrivacyStatementLink" Value="&lt;A HREF=&quot;https://aka.ms/dev-privacy&quot;&gt;개인정보처리방침&lt;/A&gt;" />
   <String Id="EulaLink" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-license-windows&quot;&gt;.NET에 대한 라이선싱 정보&lt;/A&gt;" />
   <String Id="LicenseAssent" Value="설치를 클릭하면 다음 사용 약관에 동의하는 것입니다." />
-  <String Id="VisualStudioWarning" Value="Visual Studio에서 .NET [VERSIONMAJOR].[VERSIONMINOR]을(를) 사용하려는 경우 Visual Studio 2022 [MINIMUMVSVERSION] 이상이 필요합니다. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;자세히 알아보세요&lt;/A&gt;." />
+  <String Id="VisualStudioWarning" Value="Visual Studio에서 .NET [VERSIONMAJOR].[VERSIONMINOR]을(를) 사용하려는 경우 Visual Studio 2026 18.0 이상이 필요합니다. &lt;A HREF=&quot;https://aka.ms/dotnet[VERSIONMAJOR]-release-notes&quot;&gt;자세히 알아보세요&lt;/A&gt;." />
   <!-- Success page strings -->
   <String Id="FirstTimeWelcomeMessage" Value="Thank you for installing [BUNDLEMONIKER]! You can now run applications that require the .NET Windows Desktop Runtime." />
   <String Id="NetDocumentationLinkText" Value="&lt;A HREF=&quot;https://aka.ms/dotnet-docs&quot;&gt;.NET 설명서&lt;/A&gt;" />

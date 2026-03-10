@@ -5,21 +5,21 @@ This file should be imported by eng/Versions.props
 -->
 <Project>
   <PropertyGroup>
-    <!-- dotnet/dotnet dependencies -->
-    <MicrosoftDotNetArcadeSdkPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetArcadeSdkPackageVersion>
-    <MicrosoftDotNetBuildTasksArchivesPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksArchivesPackageVersion>
-    <MicrosoftDotNetBuildTasksFeedPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksFeedPackageVersion>
-    <MicrosoftDotNetBuildTasksInstallersPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksInstallersPackageVersion>
-    <MicrosoftDotNetBuildTasksTemplatingPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksTemplatingPackageVersion>
-    <MicrosoftDotNetSharedFrameworkSdkPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetSharedFrameworkSdkPackageVersion>
-    <MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>
-    <MicrosoftDotNetWpfGitHubPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotNetWpfGitHubPackageVersion>
-    <MicrosoftDotNetWpfProjectTemplatesPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotNetWpfProjectTemplatesPackageVersion>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>11.0.0-preview.2.26158.102</MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>
-    <MicrosoftNETSdkWindowsDesktopPackageVersion>11.0.0-preview.2.26158.102</MicrosoftNETSdkWindowsDesktopPackageVersion>
+    <!-- dotnet-dotnet dependencies -->
+    <MicrosoftDotNetArcadeSdkPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetArcadeSdkPackageVersion>
+    <MicrosoftDotNetBuildTasksArchivesPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetBuildTasksArchivesPackageVersion>
+    <MicrosoftDotNetBuildTasksFeedPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetBuildTasksFeedPackageVersion>
+    <MicrosoftDotNetBuildTasksInstallersPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetBuildTasksInstallersPackageVersion>
+    <MicrosoftDotNetBuildTasksTemplatingPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetBuildTasksTemplatingPackageVersion>
+    <MicrosoftDotNetSharedFrameworkSdkPackageVersion>11.0.0-beta.26160.101</MicrosoftDotNetSharedFrameworkSdkPackageVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>11.0.0-preview.2.26160.101</MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>
+    <MicrosoftDotNetWpfGitHubPackageVersion>11.0.0-preview.2.26160.101</MicrosoftDotNetWpfGitHubPackageVersion>
+    <MicrosoftDotNetWpfProjectTemplatesPackageVersion>11.0.0-preview.2.26160.101</MicrosoftDotNetWpfProjectTemplatesPackageVersion>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>11.0.0-preview.2.26160.101</MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>
+    <MicrosoftNETSdkWindowsDesktopPackageVersion>11.0.0-preview.2.26160.101</MicrosoftNETSdkWindowsDesktopPackageVersion>
     <MicrosoftNETCoreAppRefPackageVersion>11.0.0-preview.2.final</MicrosoftNETCoreAppRefPackageVersion>
-    <MicrosoftNETCorePlatformsPackageVersion>11.0.0-preview.2.26158.102</MicrosoftNETCorePlatformsPackageVersion>
-    <MicrosoftPrivateWinformsPackageVersion>11.0.0-preview.2.26158.102</MicrosoftPrivateWinformsPackageVersion>
+    <MicrosoftNETCorePlatformsPackageVersion>11.0.0-preview.2.26160.101</MicrosoftNETCorePlatformsPackageVersion>
+    <MicrosoftPrivateWinformsPackageVersion>11.0.0-preview.2.26160.101</MicrosoftPrivateWinformsPackageVersion>
     <MicrosoftWin32RegistryAccessControlPackageVersion>11.0.0-preview.2.final</MicrosoftWin32RegistryAccessControlPackageVersion>
     <MicrosoftWin32SystemEventsPackageVersion>11.0.0-preview.2.final</MicrosoftWin32SystemEventsPackageVersion>
     <SystemCodeDomPackageVersion>11.0.0-preview.2.final</SystemCodeDomPackageVersion>
@@ -51,7 +51,7 @@ This file should be imported by eng/Versions.props
   </PropertyGroup>
   <!--Property group for alternate package version names-->
   <PropertyGroup>
-    <!-- dotnet/dotnet dependencies -->
+    <!-- dotnet-dotnet dependencies -->
     <MicrosoftDotNetArcadeSdkVersion>$(MicrosoftDotNetArcadeSdkPackageVersion)</MicrosoftDotNetArcadeSdkVersion>
     <MicrosoftDotNetBuildTasksArchivesVersion>$(MicrosoftDotNetBuildTasksArchivesPackageVersion)</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksFeedVersion>$(MicrosoftDotNetBuildTasksFeedPackageVersion)</MicrosoftDotNetBuildTasksFeedVersion>

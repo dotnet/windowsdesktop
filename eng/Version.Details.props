@@ -5,53 +5,53 @@ This file should be imported by eng/Versions.props
 -->
 <Project>
   <PropertyGroup>
-    <!-- dotnet/dotnet dependencies -->
-    <MicrosoftDotNetArcadeSdkPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetArcadeSdkPackageVersion>
-    <MicrosoftDotNetBuildTasksArchivesPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksArchivesPackageVersion>
-    <MicrosoftDotNetBuildTasksFeedPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksFeedPackageVersion>
-    <MicrosoftDotNetBuildTasksInstallersPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksInstallersPackageVersion>
-    <MicrosoftDotNetBuildTasksTemplatingPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetBuildTasksTemplatingPackageVersion>
-    <MicrosoftDotNetSharedFrameworkSdkPackageVersion>11.0.0-beta.26158.102</MicrosoftDotNetSharedFrameworkSdkPackageVersion>
-    <MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>
-    <MicrosoftDotNetWpfGitHubPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotNetWpfGitHubPackageVersion>
-    <MicrosoftDotNetWpfProjectTemplatesPackageVersion>11.0.0-preview.2.26158.102</MicrosoftDotNetWpfProjectTemplatesPackageVersion>
-    <MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>11.0.0-preview.2.26158.102</MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>
-    <MicrosoftNETSdkWindowsDesktopPackageVersion>11.0.0-preview.2.26158.102</MicrosoftNETSdkWindowsDesktopPackageVersion>
-    <MicrosoftNETCoreAppRefPackageVersion>11.0.0-preview.2.final</MicrosoftNETCoreAppRefPackageVersion>
-    <MicrosoftNETCorePlatformsPackageVersion>11.0.0-preview.2.26158.102</MicrosoftNETCorePlatformsPackageVersion>
-    <MicrosoftPrivateWinformsPackageVersion>11.0.0-preview.2.26158.102</MicrosoftPrivateWinformsPackageVersion>
-    <MicrosoftWin32RegistryAccessControlPackageVersion>11.0.0-preview.2.final</MicrosoftWin32RegistryAccessControlPackageVersion>
-    <MicrosoftWin32SystemEventsPackageVersion>11.0.0-preview.2.final</MicrosoftWin32SystemEventsPackageVersion>
-    <SystemCodeDomPackageVersion>11.0.0-preview.2.final</SystemCodeDomPackageVersion>
-    <SystemComponentModelCompositionPackageVersion>11.0.0-preview.2.final</SystemComponentModelCompositionPackageVersion>
-    <SystemComponentModelCompositionRegistrationPackageVersion>11.0.0-preview.2.final</SystemComponentModelCompositionRegistrationPackageVersion>
-    <SystemConfigurationConfigurationManagerPackageVersion>11.0.0-preview.2.final</SystemConfigurationConfigurationManagerPackageVersion>
-    <SystemDataOdbcPackageVersion>11.0.0-preview.2.final</SystemDataOdbcPackageVersion>
-    <SystemDataOleDbPackageVersion>11.0.0-preview.2.final</SystemDataOleDbPackageVersion>
-    <SystemDiagnosticsEventLogPackageVersion>11.0.0-preview.2.final</SystemDiagnosticsEventLogPackageVersion>
-    <SystemDiagnosticsPerformanceCounterPackageVersion>11.0.0-preview.2.final</SystemDiagnosticsPerformanceCounterPackageVersion>
-    <SystemDirectoryServicesPackageVersion>11.0.0-preview.2.final</SystemDirectoryServicesPackageVersion>
-    <SystemDirectoryServicesAccountManagementPackageVersion>11.0.0-preview.2.final</SystemDirectoryServicesAccountManagementPackageVersion>
-    <SystemDirectoryServicesProtocolsPackageVersion>11.0.0-preview.2.final</SystemDirectoryServicesProtocolsPackageVersion>
-    <SystemDrawingCommonPackageVersion>11.0.0-preview.2.final</SystemDrawingCommonPackageVersion>
-    <SystemIOPackagingPackageVersion>11.0.0-preview.2.final</SystemIOPackagingPackageVersion>
-    <SystemIOPortsPackageVersion>11.0.0-preview.2.final</SystemIOPortsPackageVersion>
-    <SystemManagementPackageVersion>11.0.0-preview.2.final</SystemManagementPackageVersion>
-    <SystemReflectionContextPackageVersion>11.0.0-preview.2.final</SystemReflectionContextPackageVersion>
-    <SystemRuntimeCachingPackageVersion>11.0.0-preview.2.final</SystemRuntimeCachingPackageVersion>
-    <SystemSecurityCryptographyPkcsPackageVersion>11.0.0-preview.2.final</SystemSecurityCryptographyPkcsPackageVersion>
-    <SystemSecurityCryptographyProtectedDataPackageVersion>11.0.0-preview.2.final</SystemSecurityCryptographyProtectedDataPackageVersion>
-    <SystemSecurityCryptographyXmlPackageVersion>11.0.0-preview.2.final</SystemSecurityCryptographyXmlPackageVersion>
-    <SystemSecurityPermissionsPackageVersion>11.0.0-preview.2.final</SystemSecurityPermissionsPackageVersion>
-    <SystemServiceModelSyndicationPackageVersion>11.0.0-preview.2.final</SystemServiceModelSyndicationPackageVersion>
-    <SystemServiceProcessServiceControllerPackageVersion>11.0.0-preview.2.final</SystemServiceProcessServiceControllerPackageVersion>
-    <SystemSpeechPackageVersion>11.0.0-preview.2.final</SystemSpeechPackageVersion>
-    <SystemTextEncodingCodePagesPackageVersion>11.0.0-preview.2.final</SystemTextEncodingCodePagesPackageVersion>
-    <SystemThreadingAccessControlPackageVersion>11.0.0-preview.2.final</SystemThreadingAccessControlPackageVersion>
+    <!-- dotnet-dotnet dependencies -->
+    <MicrosoftDotNetArcadeSdkPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetArcadeSdkPackageVersion>
+    <MicrosoftDotNetBuildTasksArchivesPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetBuildTasksArchivesPackageVersion>
+    <MicrosoftDotNetBuildTasksFeedPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetBuildTasksFeedPackageVersion>
+    <MicrosoftDotNetBuildTasksInstallersPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetBuildTasksInstallersPackageVersion>
+    <MicrosoftDotNetBuildTasksTemplatingPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetBuildTasksTemplatingPackageVersion>
+    <MicrosoftDotNetSharedFrameworkSdkPackageVersion>11.0.0-beta.26159.112</MicrosoftDotNetSharedFrameworkSdkPackageVersion>
+    <MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>11.0.0-preview.2.26159.112</MicrosoftDotnetWinFormsProjectTemplatesPackageVersion>
+    <MicrosoftDotNetWpfGitHubPackageVersion>11.0.0-preview.2.26159.112</MicrosoftDotNetWpfGitHubPackageVersion>
+    <MicrosoftDotNetWpfProjectTemplatesPackageVersion>11.0.0-preview.2.26159.112</MicrosoftDotNetWpfProjectTemplatesPackageVersion>
+    <MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>11.0.0-preview.2.26159.112</MicrosoftInternalRuntimeWindowsDesktopTransportPackageVersion>
+    <MicrosoftNETSdkWindowsDesktopPackageVersion>11.0.0-preview.2.26159.112</MicrosoftNETSdkWindowsDesktopPackageVersion>
+    <MicrosoftNETCoreAppRefPackageVersion>11.0.0-preview.2.26159.112</MicrosoftNETCoreAppRefPackageVersion>
+    <MicrosoftNETCorePlatformsPackageVersion>11.0.0-preview.2.26159.112</MicrosoftNETCorePlatformsPackageVersion>
+    <MicrosoftPrivateWinformsPackageVersion>11.0.0-preview.2.26159.112</MicrosoftPrivateWinformsPackageVersion>
+    <MicrosoftWin32RegistryAccessControlPackageVersion>11.0.0-preview.2.26159.112</MicrosoftWin32RegistryAccessControlPackageVersion>
+    <MicrosoftWin32SystemEventsPackageVersion>11.0.0-preview.2.26159.112</MicrosoftWin32SystemEventsPackageVersion>
+    <SystemCodeDomPackageVersion>11.0.0-preview.2.26159.112</SystemCodeDomPackageVersion>
+    <SystemComponentModelCompositionPackageVersion>11.0.0-preview.2.26159.112</SystemComponentModelCompositionPackageVersion>
+    <SystemComponentModelCompositionRegistrationPackageVersion>11.0.0-preview.2.26159.112</SystemComponentModelCompositionRegistrationPackageVersion>
+    <SystemConfigurationConfigurationManagerPackageVersion>11.0.0-preview.2.26159.112</SystemConfigurationConfigurationManagerPackageVersion>
+    <SystemDataOdbcPackageVersion>11.0.0-preview.2.26159.112</SystemDataOdbcPackageVersion>
+    <SystemDataOleDbPackageVersion>11.0.0-preview.2.26159.112</SystemDataOleDbPackageVersion>
+    <SystemDiagnosticsEventLogPackageVersion>11.0.0-preview.2.26159.112</SystemDiagnosticsEventLogPackageVersion>
+    <SystemDiagnosticsPerformanceCounterPackageVersion>11.0.0-preview.2.26159.112</SystemDiagnosticsPerformanceCounterPackageVersion>
+    <SystemDirectoryServicesPackageVersion>11.0.0-preview.2.26159.112</SystemDirectoryServicesPackageVersion>
+    <SystemDirectoryServicesAccountManagementPackageVersion>11.0.0-preview.2.26159.112</SystemDirectoryServicesAccountManagementPackageVersion>
+    <SystemDirectoryServicesProtocolsPackageVersion>11.0.0-preview.2.26159.112</SystemDirectoryServicesProtocolsPackageVersion>
+    <SystemDrawingCommonPackageVersion>11.0.0-preview.2.26159.112</SystemDrawingCommonPackageVersion>
+    <SystemIOPackagingPackageVersion>11.0.0-preview.2.26159.112</SystemIOPackagingPackageVersion>
+    <SystemIOPortsPackageVersion>11.0.0-preview.2.26159.112</SystemIOPortsPackageVersion>
+    <SystemManagementPackageVersion>11.0.0-preview.2.26159.112</SystemManagementPackageVersion>
+    <SystemReflectionContextPackageVersion>11.0.0-preview.2.26159.112</SystemReflectionContextPackageVersion>
+    <SystemRuntimeCachingPackageVersion>11.0.0-preview.2.26159.112</SystemRuntimeCachingPackageVersion>
+    <SystemSecurityCryptographyPkcsPackageVersion>11.0.0-preview.2.26159.112</SystemSecurityCryptographyPkcsPackageVersion>
+    <SystemSecurityCryptographyProtectedDataPackageVersion>11.0.0-preview.2.26159.112</SystemSecurityCryptographyProtectedDataPackageVersion>
+    <SystemSecurityCryptographyXmlPackageVersion>11.0.0-preview.2.26159.112</SystemSecurityCryptographyXmlPackageVersion>
+    <SystemSecurityPermissionsPackageVersion>11.0.0-preview.2.26159.112</SystemSecurityPermissionsPackageVersion>
+    <SystemServiceModelSyndicationPackageVersion>11.0.0-preview.2.26159.112</SystemServiceModelSyndicationPackageVersion>
+    <SystemServiceProcessServiceControllerPackageVersion>11.0.0-preview.2.26159.112</SystemServiceProcessServiceControllerPackageVersion>
+    <SystemSpeechPackageVersion>11.0.0-preview.2.26159.112</SystemSpeechPackageVersion>
+    <SystemTextEncodingCodePagesPackageVersion>11.0.0-preview.2.26159.112</SystemTextEncodingCodePagesPackageVersion>
+    <SystemThreadingAccessControlPackageVersion>11.0.0-preview.2.26159.112</SystemThreadingAccessControlPackageVersion>
   </PropertyGroup>
   <!--Property group for alternate package version names-->
   <PropertyGroup>
-    <!-- dotnet/dotnet dependencies -->
+    <!-- dotnet-dotnet dependencies -->
     <MicrosoftDotNetArcadeSdkVersion>$(MicrosoftDotNetArcadeSdkPackageVersion)</MicrosoftDotNetArcadeSdkVersion>
     <MicrosoftDotNetBuildTasksArchivesVersion>$(MicrosoftDotNetBuildTasksArchivesPackageVersion)</MicrosoftDotNetBuildTasksArchivesVersion>
     <MicrosoftDotNetBuildTasksFeedVersion>$(MicrosoftDotNetBuildTasksFeedPackageVersion)</MicrosoftDotNetBuildTasksFeedVersion>

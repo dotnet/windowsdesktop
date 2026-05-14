@@ -66,6 +66,6 @@
     <MicrosoftPrivateWinformsVersion>9.0.17-servicing.26263.2</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.17</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.17-rtm.26263.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.17-rtm.26264.5</MicrosoftDotNetWpfGitHubVersion>
   </PropertyGroup>
 </Project>

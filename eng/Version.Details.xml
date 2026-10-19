@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
-  <Source Uri="https://github.com/dotnet/dotnet" Mapping="windowsdesktop" Sha="a586537b3872e4e2f69c0b1ce7017a97bc3bcd55" BarId="336753" />
+  <Source Uri="https://github.com/dotnet/dotnet" Mapping="windowsdesktop" Sha="a586537b3872e4e2f69c0b1ce7017a97bc3bcd55" BarId="336755" />
   <ProductDependencies>
-    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.Internal.Runtime.WindowsDesktop.Transport" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Private.Winforms" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.Private.Winforms" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
@@ -22,15 +22,15 @@
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NETCore.Platforms" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.NETCore.Platforms" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="11.0.0-rtm.26514.117">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="11.0.0-rtm.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
@@ -148,27 +148,27 @@
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Feed" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.SharedFramework.Sdk" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.SharedFramework.Sdk" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Templating" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Templating" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Archives" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Archives" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="11.0.0-beta.26514.117">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="11.0.0-beta.26514.118">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>a586537b3872e4e2f69c0b1ce7017a97bc3bcd55</Sha>
     </Dependency>

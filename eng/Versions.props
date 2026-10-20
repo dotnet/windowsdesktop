@@ -4,7 +4,8 @@
     <MinorVersion>0</MinorVersion>
     <PatchVersion>23</PatchVersion>
     <PreReleaseVersionLabel>servicing</PreReleaseVersionLabel>
-    <PreReleaseVersionIteration></PreReleaseVersionIteration>
+    <PreReleaseVersionIteration>
+    </PreReleaseVersionIteration>
     <!-- Enable to remove prerelease label. -->
     <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">true</StabilizePackageVersion>
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
@@ -65,6 +66,6 @@
     <MicrosoftPrivateWinformsVersion>9.0.22-servicing.26519.1</MicrosoftPrivateWinformsVersion>
     <SystemDrawingCommonVersion>9.0.22</SystemDrawingCommonVersion>
     <!-- wpf -->
-    <MicrosoftDotNetWpfGitHubVersion>9.0.22-rtm.26519.2</MicrosoftDotNetWpfGitHubVersion>
+    <MicrosoftDotNetWpfGitHubVersion>9.0.23-rtm.26520.7</MicrosoftDotNetWpfGitHubVersion>
   </PropertyGroup>
 </Project>

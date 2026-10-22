@@ -5,17 +5,17 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
       <Sha>8bd5f4381e72c0a77daa4b619312f1e849854716</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Private.Winforms" Version="8.0.34-servicing.26521.6" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Private.Winforms" Version="8.0.34-servicing.26522.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
-      <Sha>94dd923459058168a871823c18b5a628b8ace842</Sha>
+      <Sha>48e94d429fbbb371a4b05162bfd238bd90c71c3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="8.0.34-servicing.26521.11">
+    <Dependency Name="Microsoft.DotNet.Wpf.GitHub" Version="8.0.34-servicing.26522.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>26bd6690f224b1140d27a6adade311e7dd50e30c</Sha>
+      <Sha>fdf2fe7582596495dffe930330b5bd0a6c319d78</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="8.0.34-servicing.26521.11">
+    <Dependency Name="Microsoft.NET.Sdk.WindowsDesktop" Version="8.0.34-servicing.26522.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>26bd6690f224b1140d27a6adade311e7dd50e30c</Sha>
+      <Sha>fdf2fe7582596495dffe930330b5bd0a6c319d78</Sha>
     </Dependency>
     <Dependency Name="Microsoft.NETCore.App.Ref" Version="8.0.34" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
@@ -29,13 +29,13 @@
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
       <Sha>8bd5f4381e72c0a77daa4b619312f1e849854716</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="8.0.34-servicing.26521.6" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
+    <Dependency Name="Microsoft.Dotnet.WinForms.ProjectTemplates" Version="8.0.34-servicing.26522.1" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
-      <Sha>94dd923459058168a871823c18b5a628b8ace842</Sha>
+      <Sha>48e94d429fbbb371a4b05162bfd238bd90c71c3e</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="8.0.34-servicing.26521.11">
+    <Dependency Name="Microsoft.DotNet.Wpf.ProjectTemplates" Version="8.0.34-servicing.26522.3">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-wpf</Uri>
-      <Sha>26bd6690f224b1140d27a6adade311e7dd50e30c</Sha>
+      <Sha>fdf2fe7582596495dffe930330b5bd0a6c319d78</Sha>
     </Dependency>
     <Dependency Name="Microsoft.Win32.Registry.AccessControl" Version="8.0.0" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
@@ -107,7 +107,7 @@
     </Dependency>
     <Dependency Name="System.Security.Cryptography.Pkcs" Version="8.0.2" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
-      <Sha>fdf28222297a181f627230e942dffff89247130d</Sha>
+      <Sha>b9a49e4a6d3a444a3685e318c74a7892d01873f7</Sha>
     </Dependency>
     <Dependency Name="System.Security.Cryptography.ProtectedData" Version="8.0.0" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
@@ -115,7 +115,7 @@
     </Dependency>
     <Dependency Name="System.Security.Cryptography.Xml" Version="8.0.5" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
-      <Sha>fdf28222297a181f627230e942dffff89247130d</Sha>
+      <Sha>b9a49e4a6d3a444a3685e318c74a7892d01873f7</Sha>
     </Dependency>
     <Dependency Name="System.Security.Permissions" Version="8.0.0" CoherentParentDependency="Microsoft.Private.Winforms">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-runtime</Uri>
@@ -147,7 +147,7 @@
     </Dependency>
     <Dependency Name="System.Drawing.Common" Version="8.0.34" CoherentParentDependency="Microsoft.DotNet.Wpf.GitHub">
       <Uri>https://dev.azure.com/dnceng/internal/_git/dotnet-winforms</Uri>
-      <Sha>94dd923459058168a871823c18b5a628b8ace842</Sha>
+      <Sha>48e94d429fbbb371a4b05162bfd238bd90c71c3e</Sha>
     </Dependency>
   </ProductDependencies>
   <ToolsetDependencies>
